@@ -1,0 +1,74 @@
+@import "_variables.less";
+.modal.hotel-gallery-popup {
+  .modal-dialog {
+    .modal-content {
+      background-color: @black;
+      color: @white;
+      .modal-header {
+        position: relative;
+        .modal-title {
+          font-size: 20px;
+        }
+      }
+      .modal-body {
+        padding: 15px 0;
+        overflow-y: hidden !important;
+      }
+      &.hotel-detail-desktop {
+        .modal-body {
+          padding: 0;
+        }
+        .ngx-gallery-image-wrapper {
+          width: 80%;
+          height: 100%;
+          position: absolute;
+          left: 10%;
+          top: 0px;
+          overflow: hidden;
+          .ngx-gallery-image {
+            height: 80%;
+            top: 10%;
+          }
+          .ngx-gallery-image-text {
+            background: @black;
+          }
+        }
+        
+        .ngx-gallery-thumbnails-wrapper {
+          .ngx-gallery-thumbnail {
+            border: transparent 2px solid;
+            opacity: .5;
+          }
+          .ngx-gallery-active {
+            opacity: 1;
+            border: 2px solid @white;
+          }
+        }
+        .border-close {
+          border: 2px solid #bdbdbd;
+          padding: 8px 2px;
+        }
+      }
+    }
+  }
+  .gray-text {
+    color: @gray-2;
+  }
+  .fac-item-bg {
+    background-color: @green-3;
+    padding: 4px 8px;
+    border-radius: 3px;
+    color: @white;
+  }
+  .custom-icon {
+    height: 36px;
+    width: 36px;
+    &.pre-icon {
+      background-image: url('../../../../assets/images/hotel/desktop/nav-left.svg');
+    }
+    &.next-icon {
+      background-image: url('../../../../assets/images/hotel/desktop/nav-right.svg');
+    }
+  }
+  
+}

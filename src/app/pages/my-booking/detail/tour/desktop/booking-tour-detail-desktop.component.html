@@ -1,0 +1,275 @@
+<div class="booking-tour-detail booking-tour-detail-desktop" *ngIf="!!tour">
+
+  <div class="back row">
+    <div class="col-md-6">
+      <a class="pointer font-medium" (click)="back()">
+        <img class="m-b-none m-t-n-3 size-16x16" cdn-src="assets/images/icon/icon-angle-left.svg" alt="icon" />
+        <span class="m-l-5">Quay lại danh sách</span>
+      </a>
+    </div>
+    <div class="col-md-6 text-right">
+      <div class="continue-pay">
+        <span class="booking-code">Mã đặt chỗ: {{tour.code}}</span>
+        <button class="btn btn-main-v2 font-16 m-t-n-2 m-l-20"
+          *ngIf="tour.status === STATUS.DEPOSIT && !tour.paymentPending"
+          (click)="onContinuedDeposit(tour.code)">
+          Thanh toán tiếp
+        </button>
+        <button class="btn btn-main-v2 font-16 m-t-n-2 m-l-20"
+          *ngIf="utilityHelper.findNotInList(tour.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING]) && tour.paymentPending"
+          (click)="showPopupChangePayment(tour.code)">
+          Đổi thanh toán
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- deposit -->
+  <div class="row" *ngIf="tour.isDeposited">
+    <div class="col-md-12">
+      <app-deposit-progress-bar [data]="tour"></app-deposit-progress-bar>
+    </div>
+  </div>
+  <!-- deposit -->
+
+  <section class="tour-detail m-t-10" *ngIf="!tour.isDeposited && utilityHelper.findNotInList(tour.status, [STATUS.PAID, STATUS.WAITING])">
+    <div class="panel card panel-desktop">
+      <div class="panel-body panel-body">
+        <div class="row" *ngIf="utilityHelper.findInList(tour.status, [STATUS.UNPAID, STATUS.CANCEL, STATUS.PENDING]) && tour.paymentDetail.method != METHOD.STORE">
+          <div class="col-md-12 count-down">
+            Thời hạn thanh toán: <span class="font-23 text-green font-weight-bold"><countdown [time]="tour.holdExpiry" (submit)="onExpired()"></countdown></span>
+            <span> (Hết hạn lúc: {{ tour.holdExpiry | moment:'HH:mm' }}, ngày {{ tour.holdExpiry | moment:'DD/MM' }})</span>
+          </div>
+        </div>
+
+        <!-- HAVE PAYOO -->
+        <div class="row" *ngIf="utilityHelper.findInList(tour.status, [STATUS.UNPAID, STATUS.CANCEL, STATUS.PENDING]) && tour.paymentDetail.method === METHOD.STORE">
+          <div class="col-md-6 count-down b-r">
+            <div>Thời hạn thanh toán:</div>
+            <div>
+              <span class="font-23 text-green font-weight-bold"><countdown [time]="tour.holdExpiry" (submit)="onExpired()"></countdown></span>
+              <span> (Hết hạn lúc: {{ tour.holdExpiry | moment:'HH:mm, DD/MM' }})</span>
+            </div>
+          </div>
+          <div class="col-md-6 p-l-20 p-r-20 count-down">
+            <div>Mã thanh toán Payoo:</div>
+            <div class="font-23 text-green font-weight-bold">
+              {{ tour.paymentDetail.transactionNo }}
+            </div>
+          </div>
+        </div>
+        <!-- /HAVE PAYOO -->
+      </div>
+    </div>
+  </section>
+
+  <section class="m-t-20" *ngIf="tour.isReviewable && !tour.isReviewed">
+    <review-box [categories]="['Khách sạn', 'Nhà hàng', 'Phương tiện', 'Hướng dẫn viên ', 'Chương trình tour']"
+                (submit)="onSubmitReview($event)"></review-box>
+  </section>
+
+  <section class="tour-detail m-t-10">
+    <div class="panel card panel-desktop m-b-15">
+      <div class="panel-body panel-body">
+        <app-booking-tour-basic-detail [tour]="tour" [mode]="0" (submitPopup)="showDetailPricePopup($event)"></app-booking-tour-basic-detail>
+      </div>
+    </div>
+  </section>
+
+  <accordion>
+
+    <!-- payment guide -->
+    <accordion-group panelClass="panel-desktop"
+                     *ngIf="utilityHelper.findNotInList(tour.status, [STATUS.CANCEL, STATUS.PAID, STATUS.WAITING, STATUS.DEPOSIT])">
+      <div class="pointer" accordion-heading>
+        Hướng dẫn thanh toán
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+      <payment-guide-detail [module]="'tour'"
+                            [delay]="500"
+                            [code]="code"></payment-guide-detail>
+    </accordion-group>
+
+    <!-- journey -->
+    <accordion-group panelClass="panel-desktop" (isOpenChange)="onOpenJourney($event)">
+      <div class="pointer" accordion-heading>Lịch trình
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+
+      <loading [title]="'Đang tải dữ liệu'" *ngIf="!journey"></loading>
+      <div *ngIf="!!package">
+        <div class="title">Phương tiện</div>
+        <tour-transport [data]="package"></tour-transport>
+      </div>
+      <div *ngIf="journey">
+        <div class="title m-t-20">Lịch trình</div>
+        <tour-journey [journey]="journey"></tour-journey>
+      </div>
+    </accordion-group>
+
+    <!-- passenger -->
+    <accordion-group class="passenger-box"
+                    panelClass="panel-desktop"
+                     *ngIf="!!tour.passengers.length">
+      <div class="pointer" accordion-heading>
+        Hành khách
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+
+      <ul class="passengers list-group list-group-flush" *ngIf="!tour.isInternational">
+        <li class="list-group-item"
+            *ngFor="let passenger of tour.passengers; trackBy: trackByFn; let i = index">
+          <div class="d-flex align-items-start font-bold">
+            <span>{{ i + 1 }}.</span>
+            <div class="m-l-5">
+              {{ passenger.title }} {{ passenger.lastName }} {{ passenger.firstName }}
+              <div class="font-normal font-12 text-light-gray"
+                   *ngIf="passenger.passengerType !== 'ADT'">
+                Ngày sinh: {{ passenger.dateOfBirth | moment:'DD/MM/YYYY' }}
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="row passenger-info" *ngIf="tour.isInternational">
+        <div class="col-6" *ngFor="let passenger of tour.passengers; trackBy: trackByFn; let i = index">
+          <div class="panel panel-desktop m-t-10">
+            <div class="panel-body card-body p-10">
+              <div class="font-bold font-16 text-black">
+                {{ i+1 }}. {{ passenger.title }} {{ passenger.lastName }} {{ passenger.firstName }}
+              </div>
+              <ul class="m-t-10">
+                <li>Số hộ chiếu: {{ passenger.passportNumber }}</li>
+                <li>Quộc tịch: {{ passenger.passportCountry }}</li>
+                <li>Ngày hết hạn: {{ passenger.passportExpiry | moment:'DD/MM/YYYY' }}</li>
+                <li>Quốc gia: {{ passenger.national }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </accordion-group>
+
+    <!-- term & policy -->
+    <accordion-group panelClass="panel-desktop">
+      <div class="pointer" accordion-heading>
+        Chính sách
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+
+      <!-- new format data -->
+      <div *ngIf="!!tourDetail.policyContent">
+        <div class="include" *ngIf="!!tourDetail.policyContent.include">
+          <div class="title">Giá bao gồm</div>
+          <div class="term-policy custom-inner-html" [innerHTML]="tourDetail.policyContent.include"></div>
+        </div>
+
+        <div class="exclude m-t-31" *ngIf="!!tourDetail.policyContent.exclude">
+          <div class="title">Giá không bao gồm</div>
+          <div class="term-policy custom-inner-html" [innerHTML]="tourDetail.policyContent.exclude"></div>
+        </div>
+
+        <div class="surcharge m-t-31" *ngIf="!!tourDetail.policyContent.surcharges && !!tourDetail.policyContent.surcharges.length">
+          <div class="title">Phụ thu</div>
+          <app-tour-surcharge [data]="tourDetail.policyContent.surcharges"></app-tour-surcharge>
+        </div>
+      </div>
+      <!-- /new format data -->
+
+      <!-- old format data -->
+      <div *ngIf="!tourDetail.policyContent && !!tourDetail.policy">
+        <div class="p-html text-justify" [innerHTML]="tourDetail.policy"></div>
+      </div>
+      <!-- /old format data -->
+    </accordion-group>
+
+    <accordion-group panelClass="panel-desktop" (isOpenChange)="onOpenPolicy($event)">
+      <div class="pointer" accordion-heading>
+        Điều khoản
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse" cdn-src="assets/images/icon/icon-angle-down-green.svg"
+            alt="icon" />
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand" cdn-src="assets/images/icon/icon-angle-up-green.svg"
+            alt="icon" />
+        </span>
+      </div>
+
+      <!-- new format data -->
+      <div *ngIf="!!tourDetail.termsContent">
+        <div class="refurn" *ngIf="!!tourDetail.termsContent.refund">
+          <div class="title">Hoàn huỷ tour</div>
+          <div class="term-policy custom-inner-html" [innerHTML]="tourDetail.termsContent.refund"></div>
+        </div>
+
+        <div class="refurn" *ngIf="!!tourDetail.termsContent.visa">
+          <div class="title m-t-31">Thủ tục xin visa</div>
+          <div class="term-policy custom-inner-html" [innerHTML]="tourDetail.termsContent.visa"></div>
+        </div>
+
+        <div class="refurn" *ngIf="!!tourDetail.termsContent.notes">
+          <div class="title m-t-31">Lưu ý</div>
+          <div class="term-policy custom-inner-html" [innerHTML]="tourDetail.termsContent.notes"></div>
+        </div>
+      </div>
+      <!-- /new format data -->
+
+      <!-- old format data -->
+      <div *ngIf="!tourDetail.termsContent && !!tourDetail.terms">
+        <div class="p-html text-justify" [innerHTML]="tourDetail.terms"></div>
+      </div>
+      <!-- /old format data -->
+    </accordion-group>
+
+  </accordion>
+</div>
+
+<succeed-review-popup></succeed-review-popup>
+
+<app-change-payment-popup
+    *ngIf="!!tour && utilityHelper.findNotInList(tour.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])"
+    [module]="'tour'"
+    [reservationCode]="code"
+    [data]="tour"
+    (submit)="submitChangePayment()"></app-change-payment-popup>
+
+<app-tour-deposit-popup
+    [headerText]="'Thanh toán tiếp'"
+    [data]="tourDepositItems"
+    (submit)="onSubmitDeposit($event)"
+    [tips]="'Bạn có thể thanh toán tại văn phòng với số tiền lớn hoặc nhỏ hơn mức xtrip đề xuất.'">
+</app-tour-deposit-popup>
+
+<!-- detail price popup -->
+<app-price-detail-popup *ngIf="!!tour"
+  [data]="tour"
+  [heading]="!!tour.isDeposited && tour.status != STATUS.WAITING && tour.status != STATUS.PAID ? 'Chi tiết giá' : 'Tổng tiền'">
+</app-price-detail-popup>

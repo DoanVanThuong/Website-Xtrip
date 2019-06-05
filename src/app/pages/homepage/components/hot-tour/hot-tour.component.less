@@ -1,0 +1,19 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.hot-tour {
+  &.hot-tour-mobile {
+    background-image: url('../../../../../assets/images/bg-hot-deal.png');
+    background-color: @white;
+    background-position: center;
+    background-size: cover;
+    margin: -15px;
+    padding: 15px;
+    .owl-carousel {
+      .owl-stage-outer {
+        margin: -15px;
+        padding: 15px;
+      }
+    }
+  }
+}

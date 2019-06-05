@@ -1,0 +1,28 @@
+<div class="empty-screen-product-page" *ngIf="show">
+  <div class="empty-line d-flex">
+    <div class="img">
+      <img class="m-b-none" cdn-src="assets/images/icon/icon-empty-product.svg" alt="img">
+    </div>
+    <div class="text-empty m-l-10 m-t-3">
+      Không tìm thấy vé phù hợp. Hãy thử điều chỉnh lại bộ lọc
+    </div>
+  </div>
+  <ul class="list-tag">
+    <li class="tag-item" *ngIf="!!tagItems.prices">
+      <a class="d-block" (click)="onClickRemoveTag('prices', item)">
+        {{ tagItems.prices[0] | currencyMoney: '' }} - {{ tagItems.prices[1] | currencyMoney: '' }} <span class="text-underline">đ</span>
+        <span><img class="m-b-none m-t-n-2 m-l-3 size-12x12" cdn-src="assets/images/icon/icon-close-green.svg" alt="img" /></span>
+      </a>
+    </li>
+    <li class="tag-item" *ngFor="let item of tagItems.options">
+      <a class="d-block" (click)="onClickRemoveTag('options', item)">
+        {{getNameTag('options', item)}} <span><img class="m-b-none m-t-n-2 size-12x12" cdn-src="assets/images/icon/icon-close-green.svg" alt="img" /></span>
+      </a>
+    </li>
+    <li class="tag-item" *ngFor="let item of tagItems.categories">
+      <a class="d-block" (click)="onClickRemoveTag('categories', item)">
+        {{getNameTag('categories', item)}} <span><img class="m-b-none m-t-n-2 size-12x12" cdn-src="assets/images/icon/icon-close-green.svg" alt="img" /></span>
+      </a>
+    </li>
+  </ul>
+</div>

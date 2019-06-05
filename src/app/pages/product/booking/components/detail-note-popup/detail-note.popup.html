@@ -1,0 +1,21 @@
+<div bsModal #popup="bs-modal" class="modal fade note-detail-popup" role="dialog" (onHidden)="hide()">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="button-group">
+                    {{combo.productName}}
+                </div>
+                <a class="pull-right pointer" (click)="hide()">
+                    <img class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-close-gray.svg" alt="icon" />
+                </a>
+            </div>
+            <div class="modal-body p-20">
+                <ul class="list-unstyled list-detail-info ">
+                    <li *ngFor="let note of notes">
+                        {{note}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

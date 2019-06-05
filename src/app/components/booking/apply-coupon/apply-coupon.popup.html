@@ -1,0 +1,38 @@
+<div bsModal #popup="bs-modal" class="modal fade z-index-2004" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body over-y p-0">
+        <div class="apply-coupon p-20-16">
+          <div class="row">
+            <div class="col-12 title font-18 text-center">
+              Mã khuyến mãi
+            </div>
+          </div>
+          <div class="row m-t-20">
+            <div class="col-12">
+              <div class="form form-mobile">
+                <mat-form-field>
+                  <input type="text"
+                         [(ngModel)]="couponCode"
+                         matInput
+                         placeholder="Nhập mã khuyến mãi"/>
+                  <mat-hint class="text-danger" *ngIf="!!errorMessage">
+                    {{ errorMessage }}
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row m-t-10">
+            <div class="col-6">
+              <button class="btn btn-main-outline btn-block font-bold" (click)="onCancel()">Hủy</button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-main btn-block font-bold" (click)="onSubmit()">Áp dụng</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

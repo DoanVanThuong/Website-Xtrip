@@ -1,0 +1,81 @@
+<div class="flight-detail animated fadeIn"
+     [class.expanded]="collapse"
+     *ngIf="!!flight">
+
+  <div class="row">
+    <div [class.col-7]="isCondition" [class.col-12]="!isCondition">
+      <div class="flight-timeline">
+        <div class="flight-timeline-group"
+             *ngFor="let leg of flight.legs; trackBy: trackByFn">
+          <div class="flight-pending flight-timeline-item"
+               *ngIf="leg.timePending > 0">
+            <div class="flight-location">
+              <div class="stop-step">
+                Quá cảnh tại <strong>{{ getAirportWith(leg.origin, 'shortLocation') }}</strong> trong <strong>
+                {{ utilityHelper.durationTime(leg.timePending) }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="flight-origin flight-timeline-item">
+            <div class="flight-time">
+              <div class="font-bold font-16">{{ leg.departTime | moment: 'HH:mm' }}</div>
+              <div class="font-14">{{ leg.departTime | departDate:false:'DD/MM' }}</div>
+            </div>
+            <div class="flight-location">
+              <div class="font-14">
+                <img class="size-24x24 m-b-none m-t-n-3"
+                     src="{{urlImageLogoCarrier}}{{leg.carrier}}.png"
+                     alt="carrier"/>
+                <div class="m-l-5 font-bold d-inline-block text-black">
+                  {{ getCarrierWith(leg.carrier, 'name') }} - {{leg.flightNumber}} {{ flight.ticketType }}
+                </div>
+              </div>
+              <div class="m-t-5">
+                <div class="font-medium font-16">{{ getAirportWith(leg.origin, 'name') }} ({{ leg.origin }})</div>
+                <div class="font-14 text-black">{{ getAirportWith(leg.origin, 'location') }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="flight-destination flight-timeline-item">
+            <div class="flight-time">
+              <div class="font-bold">{{ leg.landingTime | moment: 'HH:mm' }}</div>
+              <div class="font-14">{{ leg.landingTime | departDate:false:'DD/MM' }}</div>
+            </div>
+            <div class="flight-location">
+              <div class="font-bold font-16">{{ getAirportWith(leg.destination, 'name') }} ({{ leg.destination }})</div>
+              <div class="font-14 text-black">{{ getAirportWith(leg.destination, 'location') }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5" *ngIf="isCondition">
+      <div class="d-flex h-full flex-column">
+        <div class="flight-condition m-b-20 w-full"
+             *ngIf="flight.conditions.length">
+          <strong class="font-16">Chi tiết vé</strong>
+          <ul class="">
+            <li *ngFor="let condition of flight.conditions; trackBy: trackByFn; let i = index">
+              <img class="m-b-none m-t-n-3 m-r-5 size-14x14"
+                   cdn-src="assets/images/icon/icon-checked-circle.svg"
+                   alt="icon"/>
+              {{ condition.content }}
+              <a *ngIf="!!condition.link"
+                 class="pointer text-main"
+                 target="_blank"
+                 [href]="condition.link.value">
+                {{ condition.link.text }}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="flight-point w-full" *ngIf="flight.points && isPoint">
+          <img class="m-b-none m-t-n-3 size-16x16"
+               cdn-src="assets/images/icon/icon-point.svg" alt="icon"/>
+          Nhận được <span class="font-bold">{{ flight.points | currencyMoney:'' }}</span> điểm khi đặt vé
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

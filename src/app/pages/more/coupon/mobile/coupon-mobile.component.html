@@ -1,0 +1,66 @@
+<div class="coupon-mobile-page">
+  <app-header [back]="true" [heading]="'Mã khuyến mãi'" [fixed]="true" [version]="3"></app-header>
+
+  <div class="wrapper" min-height>
+
+    <!-- for mkt -->
+    <h1 class="invisible h-none m-none">Mã khuyến mãi</h1>
+
+    <div class="coupon"
+         infinite-scroll
+         [infiniteScrollDistance]="1"
+         [infiniteScrollThrottle]="150"
+         (scrolled)="onScrollDown()">
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+
+          <app-empty-screen [show]="!coupons.length"
+                            [heading]="'Bạn chưa có mã khuyến mãi'"
+                            [description]="''"
+                            [isRetry]="false"></app-empty-screen>
+
+          <div class="coupon-item"
+               *ngFor="let coupon of coupons; trackBy: trackByFn; let i = index">
+            <div class="coupon-description"
+                 [class.yellow]="coupon.type == 0"
+                 [class.green]="coupon.type == 1"
+                 [class.blue]="coupon.type != 0 && coupon.type != 1">
+              <a [routerLink]="[coupon.code]">
+                <div class="row">
+                  <div class="col-10 coupon-title">{{ coupon.name }}</div>
+                  <div class="col-2 text-right m-t-5 p-l-none">
+                    <span class="coupon-quality" *ngIf="coupon.count > 0">{{ coupon.count }}</span>
+                  </div>
+                </div>
+                <div class="row m-t-10">
+                  <div class="col-12 coupon-summary">
+                    Tối đa <strong>{{coupon.maxDiscount | currencyMoney:'' }}</strong>, {{ coupon.summary }}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="coupon-footer bg-white">
+              <div class="row">
+                <div class="col-7 p-r-none">
+                  <div class="">
+                    <div class="d-inline-block">
+                      Nhập mã: <span class="coupon-code">{{coupon.code}}</span>
+                    </div>
+                    <a class="coupon-copy" ngxClipboard [cbContent]="coupon.code"
+                       (cbOnSuccess)="onClipboardSuccess(coupon.code)">
+                      <img class="m-b-none" cdn-src="assets/images/coupon/copy.svg">
+                    </a>
+                  </div>
+                </div>
+                <div class="col-5 p-l-none text-right">
+                  Thời hạn: <span class="days-left">{{ utilityHelper.countDays(coupon.time) }} ngày</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

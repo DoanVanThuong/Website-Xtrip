@@ -1,0 +1,91 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.passenger-item {
+  &.passenger-item-desktop {
+
+    .note {
+      background-color: @green-15;
+      padding: 5px 20px;
+      font-size: 15px;
+      border-radius: 10px;
+
+      .note-danger {
+        color: @red-4;
+      }
+    }
+
+    .form.form-desktop {
+      .form-group {
+        .form-control {
+          padding-top: 0;
+          height: auto;
+        }
+
+        &.has-icon {
+          .icon-addon {
+            .form-control-icon {
+              top: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .vocatives {
+
+      .btn {
+        margin-right: 10px;
+        border-radius: 25px;
+        padding: 10px 20px;
+        min-width: 90px;
+        font-weight: 500;
+        transition: background .5s linear;
+
+        &:last-child {
+          margin: 0;
+        }
+
+        &.active, &:active, &:hover, &:focus {
+          background-color: @orange-2;
+          background-image: linear-gradient(to right, @orange-4, @orange-2);
+          color: @white;
+        }
+      }
+    }
+
+    .baggage-dropdown, .dropdown-baggage {
+      .btn-baggage {
+        padding: 15px;
+        border-radius: 10px;
+        .box-shadow(0, 0, 1px, rgba(0, 0, 0, .2));
+      }
+
+      .baggage-carrier {
+
+      }
+
+      .baggage-weight {
+        margin-top: 5px;
+        font-size: 20px;
+        font-weight: 700;
+        color: @gray-1;
+      }
+    }
+
+    .dropdown-menu {
+      width: 100%;
+      .border-radiuses(0, 10px, 10px, 0);
+
+      .dropdown-item {
+        color: @gray-1;
+        font-weight: 500;
+
+        &.active, &:active, &:hover, &:focus {
+          color: @gray-2;
+          background-color: @gray-6;
+        }
+      }
+    }
+  }
+}

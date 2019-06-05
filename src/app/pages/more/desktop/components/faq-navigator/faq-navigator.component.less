@@ -1,0 +1,40 @@
+// component css goes here
+@import "_variables.less";
+
+.faq-navigator-page {
+  .shadow {
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1) !important;
+  }
+  .title {
+    color: @gray-2;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .line {
+    height: 1px;
+    background-color: @gray-18;
+    width: 100%;
+  }
+  .item-label {
+    li {
+      color: @gray-2;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 10px 15px;
+      &.active{
+        background-color: @green-2;
+        color: @white;
+      }
+      cursor: pointer;
+      &:hover {
+        background-color: @green-2;
+        color: @white;
+      }
+    }
+  }
+  .activeTab {
+    color: @white;
+    background-color: @green-2;
+    border-radius: 10px;
+  }
+}

@@ -1,0 +1,50 @@
+<div class="tour-info-desktop-wp bg-white">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="title">{{tour.name}}
+      </h1>
+      <!-- <h5 class="journey">{{tour.journey}}</h5> -->
+      <app-tour-highlight [data]="tour.highlights" [length]="" [mode]="'break'"></app-tour-highlight>
+      <ul class="list-unstyled list-detail-info m-t-15">
+        <li>
+          <span class="title-detail">Mã tour: </span>
+          <span class="info">{{tour.code}}</span>
+        </li>
+        <li>
+          <span class="title-detail">Thời gian: </span>
+          <span class="info">{{tour.days}} ngày - {{tour.nights}} đêm</span>
+        </li>
+        <li>
+          <span class="title-detail">Nơi khởi hành: </span>
+          <span class="info">{{tour.departPlace}}</span>
+        </li>
+        <li>
+          <span class="title-detail">Ngày khởi hành: </span>
+          <span class="info">{{tour.departDate | moment: 'DD/MM/YYYY'}}</span>
+        </li>
+      </ul>
+      <div class="coupon" *ngIf="!!tour.coupon && !!tour.coupon.couponCode && !!tour.coupon.available">
+        Nhập mã <span class="code">{{ tour.coupon.couponCode }}</span> giảm
+      
+        <span *ngIf="tour.coupon.usePercentage">
+          <span class="font-weight-bold">{{ tour.coupon.discountPercentage }}%</span>, tối đa
+          <span class="font-weight-bold">{{ tour.coupon.maxDiscount | currencyMoney: '' }} 
+            <span class="text-underline">đ</span>
+          </span>
+        </span>
+      
+        <span *ngIf="!tour.coupon.usePercentage">
+          <span class="font-weight-bold">{{ tour.coupon.discountAmount | currencyMoney: '' }}
+            <span class="text-underline">đ</span>
+          </span>
+        </span>
+      
+        <span ngxClipboard [cbContent]="tour.coupon.couponCode"
+          (cbOnSuccess)="onClipboardSuccess()" class="m-l-5">
+          <img class="m-b-none m-t-n-3 pointer" cdn-src="assets/images/icon/icon-copy2-orange.svg" alt="copy" />
+        </span>
+        <div>Hết hạn: {{ tour.coupon.endDate | moment: 'DD/MM/YYYY' }}</div>
+      </div>
+    </div>
+  </div>
+</div>

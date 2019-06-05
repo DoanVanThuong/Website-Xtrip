@@ -1,0 +1,24 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade popup-error"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row text-center">
+          <div class="container-fluid">
+            <img class="mx-w-150" cdn-src="assets/images/error-payment.png" alt="image"/>
+            <div class="text-center m-t-5">
+              <div class="font-medium">Lưu ý</div>
+              <div class="m-t-10" [innerHTML]="message"></div>
+            </div>
+          </div>
+          <div class="container-fluid text-center m-t-20">
+            <button class="btn btn-main mn-w-130" (click)="hide()">Xong</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

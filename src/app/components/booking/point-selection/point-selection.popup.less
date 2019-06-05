@@ -1,0 +1,68 @@
+@import '_variables.less';
+
+.modal.popup-select-point {
+  &.show {
+    z-index: 3000;
+  }
+  
+  .header {
+    color: @gray-1;
+    background-color: @gray-29;
+  }
+  .p-50-15-5 {
+    padding: 0px 0px 50px;
+  }
+  .w-10-pc {
+    width: 10%;
+  }
+  .w-75-pc {
+    width: 75%;
+  }
+  .slider {
+    .noUi-horizontal {
+      height: 3px;
+    }
+    .noUi-handle {
+      border-radius: 50%;
+    }
+    .noUi-horizontal {
+      .noUi-handle {
+        width: 25px;
+        height: 25px;
+        top: -12px;
+        right: -12px;
+      }
+      .noUi-tooltip {
+        transform: translate(-50%, 0);
+        left: 50%;
+        bottom: -50px;
+      }
+    }
+    .noUi-handle:after,
+    .noUi-handle:before {
+      width: 0px;
+    }
+    .noUi-target {
+      border: 1px solid @orange-2;
+      border-width: 0;
+      box-shadow: none;
+      background: @gray-7;
+      height: 2px;
+    }
+    .noUi-connect {
+      background: @orange-2;
+    }
+    .noUi-tooltip {
+      border: none;
+      color: @orange-2;
+      padding: 0;
+      background: transparent;
+    }
+  }
+  .point-selected {
+    color: @gray-4;
+  }
+  .point-to-money {
+    color: @gray-1;
+  }
+}

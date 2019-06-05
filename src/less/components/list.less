@@ -1,0 +1,42 @@
+.list {
+  .list-item {
+    &.underline {
+      border-bottom: 1px solid @gray-18;
+    }
+    > a {
+      display: block;
+      padding: 10px 15px;
+      font-size: 15px;
+      position: relative;
+      > .icon {
+        margin-bottom: 0;
+        margin-top: -3px;
+        &.pre-icon {
+          margin-right: 20px;
+          width: 30px;
+        }
+        &.suf-icon {
+          float: right;
+          margin-top: 3px;
+          margin-bottom: 0;
+        }
+      }
+      .list-item-label {
+      }
+    }
+    .padding-underline {
+      padding: 5px 15px 5px;
+    }
+    .pos-img {
+      margin-left: -15px;
+      padding-right: 14px;
+    }
+  }
+}
+
+.list-group {
+  > .list-group-item {
+    padding: 15px;
+    border-color: @gray-18;
+  }
+}

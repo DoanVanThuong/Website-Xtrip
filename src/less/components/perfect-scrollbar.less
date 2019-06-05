@@ -1,0 +1,43 @@
+perfect-scrollbar {
+  > .ps {
+
+    &.ps--active-y {
+
+      > .ps__rail-y {
+        z-index: 10;
+        .rgba(@gray-17, .75);
+        cursor: pointer;
+
+        &:hover {
+          width: 10px !important;
+
+          > .ps__thumb-y {
+            width: 6px !important;
+            background-color: @gray-2 !important;
+          }
+        }
+      }
+    }
+
+    &.ps--scrolling-y {
+      &.ps--active-y {
+
+        > .ps__rail-y {
+          .rgba(@gray-17, .75);
+
+          > .ps__thumb-y {
+            background-color: @gray-2 !important;
+          }
+
+          &:hover {
+            // width: 10px !important;
+
+            > .ps__thumb-y {
+              // width: 6px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

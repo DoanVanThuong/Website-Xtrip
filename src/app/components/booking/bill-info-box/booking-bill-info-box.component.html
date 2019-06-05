@@ -1,0 +1,65 @@
+<div class="bill-info bill-info-desktop m-t-20">
+  <h4 class="title">
+    <ui-switch (change)="onChangeSwitchBill($event)"
+               [checked]="isShowVAT"
+               size="medium"
+               defaultBgColor="#bdbdbd"
+               color="#00bf8f"></ui-switch>
+    Xuất hóa đơn
+  </h4>
+  <div class="panel card panel-desktop m-b-none">
+    <div class="panel-body card-body">
+      <div class="note">
+        <span class="note-danger font-bold">Lưu ý quan trọng:</span> Xtrip sẽ xuất cho bạn hoá đơn điện tử ngay sau khi
+        Xtrip xác nhận bạn đã thanh toán thành công đặt chỗ của mình.
+      </div>
+
+      <div *ngIf="isShowVAT">
+        <form class="form form-desktop m-t-10"
+              [formGroup]="form"
+              novalidate>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Tên công ty</label>
+                <input type="text"
+                       class="form-control underline font-normal"
+                       placeholder="Nhập tên công ty"
+                       [formControl]="companyName"/>
+                <div class="error" *ngIf="companyName.dirty">
+                  <span *ngIf="companyName.errors | equalError:'required'">Vui lòng nhập tên công ty</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Mã số thuế</label>
+                <input type="text"
+                       class="form-control underline font-normal"
+                       placeholder="Nhập mã số thuế"
+                       [formControl]="taxIdentificationNo"/>
+                <div class="error" *ngIf="taxIdentificationNo.dirty">
+                  <span *ngIf="taxIdentificationNo.errors | equalError:'required'">Vui lòng nhập mã số thuế</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">Địa chỉ công ty:</label>
+                <input type="text"
+                       class="form-control underline font-normal"
+                       placeholder="Nhập địa chỉ"
+                       [formControl]="companyAddress"/>
+                <div class="error" *ngIf="companyAddress.dirty">
+                  <span *ngIf="companyName.errors | equalError:'required'">Vui lòng nhập địa chỉ công ty</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

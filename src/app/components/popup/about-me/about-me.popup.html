@@ -1,0 +1,34 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade popup-about-me"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center">Về chúng tôi</h4>
+        <button class="close pull-right" (click)="hide()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row text-center m-t-40">
+          <div class="container-fluid">
+            <p>Công ty Cổ phần Du lịch Xtrip.</p>
+            <p>Địa chỉ: 136 Nguyễn Duy Dương, Phường 9, Quận 5, Thành phố Hồ Chí Minh.</p>
+            <p>Số ĐKKD: 0314518113. Ngày cấp: 14/07/2017.</p>
+            <p>Nơi cấp: Phòng đăng ký kinh doanh - Sở Kế hoạch và đầu tư Thành phố Hồ Chí Minh</p>
+          </div>
+        </div>
+        <div class="row m-t-10 m-b-40">
+          <div class="container-fluid text-center">
+            <a href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=44519" target="_blank">
+              <img class="mx-w-150" src="../assets/images/bct.png"/>
+            </a>
+            <!--<a href="http://online.gov.vn/HomePage/CustomAppDisplay.aspx?DocId=318" target="_blank">
+              <img class="mx-w-150" src="../assets/images/bct.png"/>
+            </a>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

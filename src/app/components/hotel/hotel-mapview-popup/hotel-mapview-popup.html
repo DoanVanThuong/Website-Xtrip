@@ -1,0 +1,34 @@
+<div bsModal #popup="bs-modal" class="modal fade hotel-mapview-popup" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content hotel-detail-desktop">
+      <div class="modal-body">
+
+        <div class="row h-100vh m-t-n-5 m-b-n-5 position-relative">
+          <div class="col-12 position-absolute z-index pos-back">
+            <span class="bg-back pointer" (click)="hide()">Quay lại</span>
+          </div>
+          <div class="col-12">
+            <agm-map #gm [ngStyle]="{'height.vh': 100}"
+              [latitude]="hotel.latitude" 
+              [longitude]="hotel.longitude" 
+              [zoom]="16" 
+              [styles]="mapStyles"
+              [disableDefaultUI]="true" 
+              [zoomControl]="false" >
+              <agm-marker 
+                [latitude]="hotel.latitude"
+                [longitude]="hotel.longitude">
+                <agm-info-window>
+                  <strong class="text-black">{{hotel.name}}</strong>
+                </agm-info-window>
+              </agm-marker>
+            </agm-map>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

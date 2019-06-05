@@ -1,0 +1,131 @@
+@import '_variables.less';
+
+.select-option-page {
+  .loading-wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: @white;
+    opacity: .4;
+    top: 0;
+    z-index: 99999;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .product-heading {
+    padding: 12px 10px;
+    background-color: @green-2;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    color: @white;
+    font-size: 20px;
+    position: absolute;
+    &.scroll {
+      background-color: @green-2;
+      position: fixed;
+      -webkit-transition: all .25s ease-in;
+      transition: all .25s ease-in;
+      top: 0;
+    }
+  }
+
+  .main-body {
+    padding-bottom: 70px;
+    margin-top: 60px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    .passenger-content {
+      padding: 0px 10px;
+      + span {
+        font-weight: 800;
+        font-size: 15px;
+        color: @black;
+      }
+      .intro {
+        font-weight: 400;
+        font-size: 13px;
+        color: @gray-1;
+      }
+    }
+    .time-slot-wp {
+      .list-time-slot {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        li {
+          padding: 8px 16px;
+          color: @orange-2;
+          border: 1px solid @orange-2;
+          border-radius: 20px;
+          background: @white;
+          -webkit-transition: all .2s;
+          transition: all .2s;
+          margin-bottom: 10px;
+          -webkit-box-flex: 0;
+          -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+          margin-right: 10px;
+          font-weight: 700;
+          &.active {
+            background: -webkit-gradient(linear, left top, right top, from(@orange-4), to(@orange-2));
+            background: linear-gradient(to right, @orange-4, @orange-2);
+            color: @white;
+          }
+        }
+      }
+    }
+    .options-wp {
+      .content-option {
+        padding: 0px 10px;
+        // box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+      }
+
+    }
+  }
+  .title {
+    font-size: 24px;
+    color: @gray-23;
+    margin-bottom: 10px;
+    font-weight: 900;
+  }
+  .footer-detail-product {
+    .btn-footer {
+      padding: 7px;
+      background-color: @orange-2;
+      width: 150px;
+      text-align: center;
+      &.disabled {
+        opacity: 0.65;
+      }
+    }
+    .price-info {
+      > div {
+        color: @gray-1;
+        font-size: 13px;
+      }
+      .price {
+        font-weight: 700;
+        font-size: 20px;
+        color: @gray-2;
+      }
+    }
+  }
+}

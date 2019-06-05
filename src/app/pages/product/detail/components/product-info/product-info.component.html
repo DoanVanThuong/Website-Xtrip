@@ -1,0 +1,47 @@
+<div class="product-info-wp bg-white">
+    <div class="row">
+        <div class="col-12">
+            <div class="rating-point-wp">
+                <div class="text-white bg-green text-center b-r-5 point">
+                    <span>
+                        <img class="img-fluid m-b-none" cdn-src="assets/images/hotel/desktop/rating.svg">
+                    </span>
+                    {{data.reviewAverageScore}}
+                </div>
+                <div class="rating">
+                        <div *ngIf="data.reviewCount === 0">Chưa có đánh giá nào</div>
+                        <div *ngIf="data.reviewCount > 0"> {{data.reviewCount}} khách đã đánh giá</div>
+                    </div>
+            </div>
+            <div class="font-14 m-t-30">
+                <span>
+                    <img cdn-src="assets/images/hotel/desktop/icon-location.svg" alt="">
+                </span>
+                <span class="font-14">{{data.address}}</span>
+                <span class="m-l-10">
+                    <a class="map-view-link pointer" (click)="viewMap()">Xem bản đồ</a>
+                </span>
+            </div>
+            <h1 class="title">{{data.name}}
+            </h1>
+            <ul class="list-unstyled list-detail-info m-t-15">
+                <li>
+                    <span class="title-detail">Số khách: </span>
+                    <span class="info">ít nhất {{data.minPax}} khách, tối đa {{data.maxPax}} khách</span>
+                </li>
+                <li>
+                    <span class="title-detail">Thời lượng: </span>
+                    <span class="info">{{returnDuration(data.durationDays, data.durationHours,
+                            data.durationMinutes) }}</span>
+                </li>
+                <li>
+                    <span class="title-detail">Giờ mở cửa: </span>
+                    <span class="info">{{!!data.openingHours ? data.openingHours : 'Không có thông tin'}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<full-screen-map-popup *ngIf="!!data.latitude && !!data.longitude" [name]="data.address" [latitude]="data.latitude"
+[longitude]="data.longitude"></full-screen-map-popup>

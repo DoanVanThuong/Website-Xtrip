@@ -1,0 +1,8 @@
+<div class="hotel-instruction animated zoomIn {{ class }}" *ngIf="!!room.instructions">
+  <h4 class="title">Thông tin cần biết</h4>
+  <div class="panel panel-desktop">
+    <div class="panel-body">
+      <div class="custom-inner-html" [innerHTML]="room.instructions | safeHTML"></div>
+    </div>
+  </div>
+</div>

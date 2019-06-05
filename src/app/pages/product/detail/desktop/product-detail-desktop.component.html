@@ -1,0 +1,319 @@
+<div class="product-detail-desktop-page">
+
+  <app-product-search-bar [destination]="productSearch.destination || product.destination"></app-product-search-bar>
+
+  <div class=" main-body">
+    <section class="header-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <app-breadcrumb-desktop [items]="breadcrumbs"></app-breadcrumb-desktop>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-3 col-lg-4 left-section" id="basicHeight">
+            <product-info [data]="product"></product-info>
+          </div>
+          <div class="col-xl-9 col-lg-8 right-section">
+            <loading [show]="!galleryPhotos.length"></loading>
+            <product-carousel *ngIf="!!galleryPhotos.length" [images]="galleryPhotos" [data]="product"
+                              [height]="basicHeight"></product-carousel>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="row">
+        <!-- left section -->
+        <div class="col-lg-8 left-section">
+          <div class="main-content-left">
+            <section class="properties ">
+              <ul class="list-unstyled list-properties ">
+                <li *ngFor="let item of product.properties">
+                  <img class="size-24x24 m-b-none m-t-n-3 img-fix" onerror="this.src='assets/images/no-thumbnail.png'"
+                       [src]="item.icon" [alt]="item.name"/>
+                  <span class="">{{item.name}}</span>
+                </li>
+              </ul>
+            </section>
+
+            <section class="combo m-t-30">
+              <div class="title">Thông tin combo</div>
+              <app-combo-mobile [data]="options" [isShowButton]="isShowButtonCombo"></app-combo-mobile>
+            </section>
+
+            <section class="highlights m-t-30">
+              <div class="title">Nổi bật</div>
+              <list-note [data]="product.highlights"></list-note>
+            </section>
+
+            <section class="services m-t-30">
+              <div class="title">Thông tin dịch vụ</div>
+              <div class="inlude-wp">
+                <div class="sub-title">Bao gồm:</div>
+                <list-note [data]="product.priceIncludes"></list-note>
+              </div>
+              <div class="exclude-wp">
+                <div class="sub-title">Không bao gồm:</div>
+                <list-note [data]="product.priceExcludes"></list-note>
+              </div>
+              <div class="note-wp">
+                <div class="sub-title">Lưu ý:</div>
+                <div [innerHTML]="product.notes | newline" class="text-justify"></div>
+              </div>
+            </section>
+            <section class="description m-t-30" *ngIf="!!product.itinerarys">
+              <div class="title">Lịch trình</div>
+              <div [innerHTML]="product.itinerarys | newline" class="text-justify"></div>
+            </section>
+            <section class="description m-t-30">
+              <div class="title">Mô tả</div>
+              <div [innerHTML]="product.description | newline" class="text-justify"></div>
+            </section>
+
+            <section class="description m-t-30">
+              <div class="title">Hướng dẫn sử dụng</div>
+              <list-note [data]="product.guides"></list-note>
+            </section>
+          </div>
+        </div>
+
+        <!-- right section -->
+        <div class="col-lg-4 right-section m-t-20">
+          <div class="position-relative w-full h-full">
+            <div class="w-content">
+              <div class="bg-white main-content-right">
+                <div class="row ">
+                  <div class="col-12">
+                    <div class="head  d-flex justify-content-between align-items-center">
+                      <div class="title">Chọn ngày</div>
+                    </div>
+                    <div class="content p-20 p-b-none">
+                      <div class="row m-b-20">
+                        <!-- chọn ngày đi -->
+                        <div class="col-6">
+                          <div class="font-medium">Ngày đi</div>
+                          <a class="d-flex justify-content-between align-items-center depart-date pointer"
+                             (click)="dp.toggle()">
+                            <div class="font-13 selected-date" [class.text-black]="!!selectedDate">
+                              {{!!selectedDate ? (selectedDate | moment: 'DD/MM/YYYY') : 'Chọn ngày'}}
+                            </div>
+                            <div>
+                              <img alt="icon" class="m-b-0 size-20x20 icon-calendar"
+                                   cdn-src="assets/images/tour/desktop/icon-calendar-selected.svg">
+                            </div>
+                          </a>
+                          <div class="position-absolute date-picker animated fadeIn">
+                            <input (bsValueChange)="onSelectedDate($event)" type="text" placeholder="Datepicker"
+                                   [bsConfig]="datePickerOptions" #dp="bsDatepicker" class="form-control invisible"
+                                   bsDatepicker>
+                          </div>
+                        </div>
+
+                        <!-- chọn số người -->
+                        <div class="col-6" (clickOutside)="onClickedOutside($event, 'passenger')">
+                          <div class="font-medium">Số người</div>
+                          <a [class.disabled]="!selectedCombo"
+                             class="d-flex justify-content-between align-items-center num-passenger pointer position-relative"
+                             (click)="showDataList('passenger')">
+                            <div class="font-13 m-l-30" [class.text-black]="!!selectedCombo">{{adults + childrens +
+                            seniors + infants}}
+                            </div>
+                            <div>
+                              <i class="fa fa-angle-down fa-lg text-main fa-2x" aria-hidden="true"></i>
+                            </div>
+                            <div class="passenger-list-wrapper bg-white shadow aimated fadeIn"
+                                 *ngIf="!!selectedCombo && isShowPassenger">
+                              <div class="list-group list-group-flush ">
+                                <div class="list-group-item">
+                                  <div class="row">
+                                    <div class="col-7 p-t-5">
+                                      <span class="font-bold">Người lớn</span>
+                                      <span class="intro">({{selectedCombo.minAdultAge}} -
+                                        {{selectedCombo.maxAdultAge}} tuổi)
+                                        </span>
+                                    </div>
+                                    <div class="col-5 text-right">
+                                      <app-counter [min]="selectedCombo.minPax" [max]="selectedCombo.maxPax"
+                                                   [value]="adults"
+                                                   (change)="onPeopleChanges($event, 'adult')"></app-counter>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="list-group-item" *ngIf="selectedCombo.allowChildren">
+                                  <div class="row">
+                                    <div class="col-7 p-t-5">
+                                      <span class="font-bold">Trẻ em</span>
+                                      <span class="intro">({{selectedCombo.minChildAge}} -
+                                        {{selectedCombo.maxChildAge}} tuổi)
+                                        </span>
+                                    </div>
+                                    <div class="col-5 text-right">
+                                      <app-counter [min]="selectedCombo.minChildren" [max]="selectedCombo.maxChildren"
+                                                   [value]="childrens"
+                                                   (change)="onPeopleChanges($event, 'children')"></app-counter>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="list-group-item" *ngIf="selectedCombo.allowSeniors">
+                                  <div class="row">
+                                    <div class="col-7 p-t-5 p-r-none">
+                                      <span class="font-bold">Người cao tuổi</span>
+                                      <span class="intro">({{selectedCombo.minSeniorAge}} -
+                                        {{selectedCombo.maxSeniorAge}} tuổi)
+                                        </span>
+                                    </div>
+                                    <div class="col-5 text-right">
+                                      <app-counter [min]="selectedCombo.minSeniors" [max]="selectedCombo.maxSeniors"
+                                                   (change)="onPeopleChanges($event, 'senior')"
+                                                   [value]="seniors"></app-counter>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="list-group-item" *ngIf="selectedCombo.allowInfant">
+                                  <div class="row">
+                                    <div class="col-7 p-t-5">
+                                      <span class="font-bold">Em bé</span>
+                                      <span class="intro">({{selectedCombo.minInfantAge}} -
+                                        {{selectedCombo.maxInfantAge}} tuổi)
+                                        </span>
+                                    </div>
+                                    <div class="col-5 text-right">
+                                      <app-counter [min]="0" [max]="10" [value]="infants"
+                                                   (change)="onPeopleChanges($event, 'infant')"></app-counter>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <!-- <loading [show]="isLoading"></loading> -->
+
+                      <div class="row m-b-20">
+                        <div class="col-12" (clickOutside)="onClickedOutside($event, 'combo')">
+                          <div class="font-medium">Loại combo</div>
+                          <div class="dropdown" dropdown>
+                            <a [class.disabled]="!combos.length"
+                               class="btn btn-white-outline d-flex justify-content-between align-content-center dropdown-toggle"
+                               dropdownToggle>
+                                <span class="text-truncate mx-w-80-pc">
+                                {{!!selectedCombo ? selectedCombo.title : 'Chọn loại combo'}}
+                                </span>
+                              <i class="fa fa-angle-down fa-lg text-main fa-2x pull-right" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu" *dropdownMenu role="menu">
+                              <li class="dropdown-item" *ngFor="let combo of combos; let i = index">
+                                <a class="pointer" (click)="onSelectCombo(combo)">
+                                  {{combo.title}}
+                                  <span *ngIf="!!combo.sellingPrice">
+                                      -
+                                    <app-price [price]="combo.sellingPrice"></app-price>
+                                    </span>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row m-b-20" *ngIf="!!timeSlots.length">
+                        <div class="col-12" (clickOutside)="onClickedOutside($event, 'timeslot')">
+                          <div class="font-medium">Khung giờ</div>
+                          <div class="dropdown" dropdown>
+                            <a [class.disabled]="!timeSlots.length"
+                               class="btn btn-white-outline d-flex justify-content-between align-content-center dropdown-toggle"
+                               dropdownToggle>
+                                <span class="text-truncate mx-w-80-pc">
+                                {{!!selectedTimeSlot ? selectedTimeSlot.name : 'Chọn khung giờ'}}
+                                </span>
+                              <i class="fa fa-angle-down fa-lg text-main fa-2x pull-right" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu" *dropdownMenu role="menu">
+                              <li class="dropdown-item" *ngFor="let timeslot of timeSlots; let i = index">
+                                <a class="pointer" (click)="selectTimeSlot(timeslot)">
+                                  {{ timeslot.name }}
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row m-b-20" *ngIf="!!perBookings.length && detectType()"
+                           (clickOutside)="onClickedOutside($event, 'addon')">
+                        <div class="col-12">
+                          <div class="font-medium">Dịch vụ cộng thêm</div>
+                          <a [class.disabled]="!perBookings.length"
+                             class="d-flex justify-content-between align-items-center num-passenger pointer position-relative"
+                             (click)="showDataList('addon')" *ngIf="detectType() === 1">
+                            <div class="font-13" [class.text-black]="!!selectedOption.value">{{!!selectedOption.value
+                              ? selectedOption.label : 'Chọn dịch vụ cộng thêm'}}
+                            </div>
+                            <div>
+                              <i class="fa fa-angle-down fa-lg text-main fa-2x" aria-hidden="true"></i>
+                            </div>
+                            <div class="addon-list-wrapper bg-white aimated fadeIn"
+                                 [class.addon-list-abs]="detectType() === 1" *ngIf="!!perBookings && isShowAddon">
+                              <ul class="list-unstyled addon-list">
+                                <li *ngFor="let item of perBookings[0].items" (click)="onSelectOptionTypeOne(item)">
+                                  {{item.label}} <span *ngIf="!!item.price">- {{item.price | currencyMoney: ''}}
+                                  đ</span>
+                                </li>
+                              </ul>
+                            </div>
+                          </a>
+                          <div class="addon-list-wrapper bg-white aimated fadeIn" *ngIf="detectType() !== 1">
+                            <ul class="list-unstyled addon-list-type list-group-flush">
+                              <li *ngFor="let addon of perBookings" class="list-group-item p-l-none p-r-none">
+                                <product-perbooking-item [item]="addon" [options]="perBookings"
+                                                         (onChange)="onChangePerBooking($event)"></product-perbooking-item>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="foot p-20">
+                      <div class="d-flex justify-content-between align-items-center total-price">
+                        <div class="font-medium font-15">Tổng tiền</div>
+                        <div class="font-15">
+                          {{totalPrice | currencyMoney: ''}} <span class="text-underline">đ</span>
+                        </div>
+                      </div>
+                      <div class="btn-book-tour m-t-10">
+                        <button class="btn btn-main-v2 " (click)="onBookProduct()"
+                                [disabled]="!selectedCombo || !totalPrice || (detectType() === 1 && !selectedOption.value)">
+                          Đặt ngay
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="loading-bg" *ngIf="isLoading">
+                    <loading [show]="isLoading"></loading>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <section class="footer-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="footer-content">
+              <div class="title">Bạn có thể quan tâm</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+  </div>
+</div>

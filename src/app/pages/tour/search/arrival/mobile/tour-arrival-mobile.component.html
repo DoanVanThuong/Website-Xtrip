@@ -1,0 +1,33 @@
+<div class="tour-arrival tour-arrival-mobile">
+  <app-header [back]="true"
+              heading="Chọn điểm đến"
+              [version]="3"
+              [fixed]="true"></app-header>
+
+  <div class="wrapper bg-white" min-height>
+    <div class="p-t-10 tour-container container">
+      <loading [show]="isLoading"></loading>
+
+      <div class="row" *ngIf="!!arrivals.length && !isLoading">
+        <div class="col-6"
+             [class.p-r-5]="i%2 === 0"
+             [class.p-l-5]="i%2 !== 0"
+             *ngFor="let arrival of arrivals; trackBy: trackByFn; let i = index">
+          <a class="d-block"
+             [routerLink]="[arrival.href]"
+             [queryParams]="genQueryParams(arrival)">
+            <img class="img-fix w-full h-109 b-r-5"
+                 defaultImage="assets/images/no-thumbnail.png"
+                 [lazyLoad]="arrival.photo.src | size:230"
+                 [offset]="80"
+                 alt="img"
+                 onerror="this.src='assets/images/no-thumbnail.png'"/>
+            <div class="name">
+              {{ arrival.name }}
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

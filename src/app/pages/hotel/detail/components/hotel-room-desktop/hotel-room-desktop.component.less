@@ -1,0 +1,42 @@
+@import "_variables.less";
+
+.hotel-room-desktop {
+  .gray-text {
+    color: @gray-2;
+  }
+  .header {
+    background-color: @gray-17;
+    &.b-r-l-r-10 {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  }
+  .container {
+    background-color: @white;
+    &.b-r-b-r-10 {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    .bo-r {
+      border-right: 1px solid @gray-3;
+    }
+    .mx-h-180 {
+      max-height: 180px;
+    }
+    .fac-item-bg {
+      background-color: @green-3;
+      padding: 4px 8px;
+      border-radius: 3px;
+      color: @white;
+    }
+    .remain-red {
+      color: @c-gg;
+    }
+    .remain-green {
+      color: @green-3;
+    }
+    .w-80-pc {
+      width: 80%;
+    }
+  }
+}

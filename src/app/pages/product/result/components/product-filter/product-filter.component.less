@@ -1,0 +1,103 @@
+// component css goes here
+@import "_variables.less";
+.product-filter-desktop-page {
+  .mn-h-filter-area {
+    min-height: 700px;
+  }
+  .filter-shadow {
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+  }
+  .title {
+    font-size: 16px;
+    font-weight: 700;
+    color: @gray-2;
+  }
+  .reset {
+    color: @orange-2;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+  .line {
+    height: 1px;
+    background-color: @gray-18;
+  }
+  .price-slider {
+    .bg-price-range {
+      font-size: 13px;
+      font-weight: 500;
+      background-color: @gray-13;
+      padding: 4px 10px;
+      border-radius: 50px;
+    }
+    .ng2-nouislider {
+      .noUi-target {
+        height: 2px;
+        .noUi-connect {
+          background: @green-2;
+          height: 3px;
+        }
+        .noUi-handle {
+          -webkit-box-shadow: none;
+          box-shadow: none;
+          border: 2px solid @green-2;
+          width: 16px;
+          height: 16px;
+          top: -7px;
+          right: -8px;
+          cursor: pointer;
+          -webkit-transition: all .25s linear;
+          transition: all .25s linear;
+          &:hover {
+            background: @green-2;
+            -webkit-transition: all .25s linear;
+            transition: all .25s linear;
+          }
+        }
+      }
+    }
+    .p-0-8 {
+      padding: 0 8px;
+    }
+  }
+  .options {
+    li {
+      &.options-item {
+        border: 1px solid;
+        border-color: @gray-3;
+        padding: 10px;
+        border-radius: 5px;
+        margin-right: 10px;
+        -webkit-transition: all .25s linear;
+        transition: all .25s linear;
+        font-weight: 500;
+        color: @gray-2;
+        cursor: pointer;
+        &:hover {
+          border-color: @green-2;
+          color: @green-2;
+        }
+        &.active {
+          background-color: @green-14;
+          background-image: -webkit-gradient(linear, left top, right top, from(@green-14), to(@green-2));
+          background-image: linear-gradient(to right, @green-14, @green-2);
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  .categories {
+    .list-group-item {
+      padding: 11px 0;
+      border-color: transparent;
+      -webkit-transition: all .25s linear;
+      transition: all .25s linear;
+      color:@gray-2;
+      &:hover {
+        color: @green-2;
+        -webkit-transition: all .25s linear;
+        transition: all .25s linear;
+      }
+    }
+  }
+}

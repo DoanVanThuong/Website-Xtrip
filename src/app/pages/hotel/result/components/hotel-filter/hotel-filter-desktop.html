@@ -1,0 +1,73 @@
+<div class="filter bg-white">
+
+  <!-- <div class="row line p-b-10">
+    <div class="col-6 font-18 font-medium">Bộ lọc</div>
+    <div class="col-6 font-16 text-right text-underline reset-btn pointer"><a (click)="onReset()">Đặt lại</a></div>
+  </div> -->
+
+  <div class="row position-relative">
+    <div class="col-12 font-16 font-medium">Khoảng giá</div>
+    <div class="col-12 position-absolute text-right">
+      <span class="bg-price text-center font-13 font-medium">
+        {{labelSlider.price.min | currencyMoney: ''}} 
+        <span *ngIf="labelSlider.price.min > 0" class="text-underline">đ</span> - {{labelSlider.price.max | currencyMoney: ''}} 
+        <span *ngIf="labelSlider.price.max > 0" class="text-underline">đ</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="row slider m-t-10">
+    <div class="col-12">
+      <div class="pos-slider">
+        <nouislider
+          [config]="sliderConfig"
+          (update)="onUpdatePrice($event)"
+          (end)="onSetPrice($event)">
+        </nouislider>
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-t-20 hotel-class">
+    <div class="col-12 font-16 font-medium">
+      <div class="bor-top">
+        <div class="name m-t-20">
+          Hạng khách sạn
+        </div>
+      </div>
+    </div>
+    <div class="col-12 m-t-10">
+      <div class="d-flex">
+        <div class="circle {{isStarSelected(filter.stars, star) ? 'active' : 'unactive'}} pointer m-r-10" *ngFor="let star of filterOption.stars">
+          <a (click)="onSelectStar(star)">{{star}}
+            <span>
+              <img class="m-b-0 m-t-n-5" cdn-src="assets/images/hotel/desktop/{{isStarSelected(filter.stars, star) ? 'active' : 'unactive'}}-star.svg" alt="img" />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 m-t-20" *ngFor="let options of filterOption.options">
+      <div class="font-16 font-medium m-b-10" *ngIf="!!options.values.length">
+        <div class="bor-top">
+          <div class="name m-t-20">
+            {{options.name}}
+          </div>
+        </div>
+      </div>
+      <div class="row pointer" *ngFor="let item of options.values" (click)="onSelect(item, options)">
+        <div class="d-flex col-12">
+          <div class="m-r-10">
+            <img class="m-b-0 m-t-10" cdn-src="assets/images/hotel/desktop/{{isSelected(item, options.code) ? '' : 'un'}}checked.svg" alt="img" /></div>
+          <div>
+            <div class="font-15 p-11-0">{{item.name}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

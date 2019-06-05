@@ -1,0 +1,83 @@
+<div class="passenger-page passenger-desktop">
+
+  <loading [show]="isLoading"
+           [title]="'Đang tải dữ liệu'"
+           [description]="'Vui lòng đợi trong giây lát'"></loading>
+
+  <div class="" *ngIf="!isLoading">
+
+    <section class="animated zoomIn">
+      <div class="panel card panel-desktop" *ngIf="!passengers.length">
+        <div class="panel-body card-body p-30 text-center">
+          <img class="m-b-none m-t-10 mx-w-350" cdn-src="assets/images/bg-passenger.png" alt="image"/>
+          <div class="font-16 m-b-10 m-t-30">
+            <div class="font-medium">Bạn chưa có thông tin hành khách</div>
+            <div class="">Tạo ngay hành khách để đặt chỗ nhanh hơn</div>
+          </div>
+          <a class="btn btn-main-v2 font-bold"
+             [routerLink]="['/account/passenger/add']">Tạo hành khách</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="animated" *ngIf="passengers.length">
+      <h4 class="title m-t-none m-b-15">
+        Danh sách hành khách
+        <a class="pointer btn btn-main-v2 pull-right font-bold"
+           [routerLink]="['/account/passenger/add']">Thêm hành khách</a>
+      </h4>
+
+      <div class="panel card panel-desktop m-b-20">
+        <div class="panel-body card-body p-t-none p-b-none">
+          <ul @list class="passenger-list list-group list-group-flush">
+            <li @item
+                class="list-group-item"
+                *ngFor="let passenger of passengers | slice:0:selectedIndex; let i = index">
+              <div class="row">
+                <div class="col-9">
+                  {{ utilityHelper.getPassengerTitle(passenger.title, passenger.type)}}
+                  {{ passenger.lastName}} {{ passenger.firstName }}
+                </div>
+                <div class="col-3 text-right">
+                  <a class="pointer text-main text-underline m-r-20"
+                     (click)="onSelectEdition(passenger, i)">Sửa</a>
+                  <a class="pointer text-main text-underline"
+                     (click)="onOpenConfirmPopup(passenger)">Xóa</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <passenger-box *ngIf="!!selectedPassenger.id"
+                     [passenger]="selectedPassenger"
+                     (update)="onUpdateSuccess($event)"></passenger-box>
+
+      <div class="panel card panel-desktop">
+        <div class="panel-body card-body p-t-none p-b-none">
+          <ul @list class="passenger-list passenger-list-2 list-group list-group-flush">
+            <li @item class="list-group-item"
+                *ngFor="let passenger of passengers | slice:(selectedIndex + 1):passengers.length; let i = index">
+              <div class="row">
+                <div class="col-9">
+                  {{ utilityHelper.getPassengerTitle(passenger.title,passenger.type)}} {{passenger.lastName}}
+                  {{ passenger.firstName }}
+                </div>
+                <div class="col-3 text-right">
+                  <a class="pointer text-main text-underline m-r-20"
+                     (click)="onSelectEdition(passenger, selectedIndex + 1 + i)">Sửa</a>
+                  <a class="pointer text-main text-underline"
+                     (click)="onOpenConfirmPopup(passenger)">Xóa</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<confirm-popup></confirm-popup>

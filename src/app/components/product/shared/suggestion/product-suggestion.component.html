@@ -1,0 +1,35 @@
+<div class="product-suggestion-page">
+  <!-- Mobile -->
+  <div *ngIf="!!suggestions.length && isMobile">
+    <h4 class="title">
+      {{title}}
+    </h4>
+    <div class="w-full p-14 border-left over-hidden">
+      <owl-carousel *ngIf="!isLoading" [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']" [items]="suggestions"
+        [options]="options">
+        <div class="cheap-tour-item" *ngFor="let suggestion of suggestions; trackBy: trackByFn;">
+          <home-product-item-desktop [product]="suggestion"></home-product-item-desktop>
+        </div>
+      </owl-carousel>
+      <loading [show]="isLoading" [title]="'Đang cập nhật thông tin'" [description]="'Vui lòng đợi trong giây lát'"></loading>
+    </div>
+  </div>
+  <!-- Mobile -->
+
+  <!-- Desktop -->
+  <div *ngIf="!!suggestions.length && isDesktop">
+    <h4 class="title">
+      {{title}}
+    </h4>
+    <div class="panel panel-desktop w-full bg-white b-r-10 p-20 over-hidden m-t-10">
+      <owl-carousel *ngIf="!isLoading" [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']" [items]="suggestions"
+        [options]="options">
+        <div class="cheap-tour-item" *ngFor="let suggestion of suggestions; trackBy: trackByFn;">
+          <home-product-item-desktop [product]="suggestion"></home-product-item-desktop>
+        </div>
+      </owl-carousel>
+      <loading [show]="isLoading" [title]="'Đang cập nhật thông tin'" [description]="'Vui lòng đợi trong giây lát'"></loading>
+    </div>
+  </div>
+  <!-- Desktop -->
+</div>

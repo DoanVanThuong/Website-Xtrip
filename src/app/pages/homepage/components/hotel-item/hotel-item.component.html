@@ -1,0 +1,54 @@
+<!-- desktop -->
+<div class="hotel-item hotel-item-desktop">
+  <a class="pointer" (click)="onSelectHotel(hotel)"
+     [title]="hotel.name"
+     [routerLink]="['/hotel', hotel.code, 'detail']"
+     [queryParams]="generateQueryParameters()">
+    <div class="hotel-image">
+      <img class="img-fix"
+           defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="hotel.photo.src | size:300"
+           [offset]="80"
+           [alt]="hotel.name"
+           [title]="hotel.name"
+           onerror="this.src='assets/images/no-thumbnail.png'"/>
+      <div class="hotel-service" *ngIf="!!hotel.highlight">
+        {{ hotel.highlight }}
+      </div>
+    </div>
+    <div class="hotel-info d-flex justify-content-start flex-column">
+      <div>
+        <div class="hotel-type">
+          <span class="">{{ hotel.type || 'Khách sạn'}}</span>
+        </div>
+        <div class="hotel-name text-truncate-2lines m-t-10">
+          <hotel-star [version]="2" [stars]="hotel.stars"></hotel-star>
+          {{ hotel.name }}
+        </div>
+        <div class="hotel-location m-t-10">
+          <div class="d-flex justify-content-start align-items-start">
+            <div class="text-truncate">
+              <img class="size-16x16 m-t-n-3"
+                   cdn-src="assets/images/icon/icon-location-gray.svg"
+                   alt="icon"/>
+              {{ hotel.address }}
+            </div>
+            <div class="hotel-nearby text-truncate" *ngIf="hotel.nearby">
+              {{ hotel.nearby }}
+            </div>
+          </div>
+        </div>
+        <div class="hotel-facility">
+          <ul class="list-unstyled d-flex justify-content-start align-items-center">
+            <li *ngFor="let facility of hotel.facilities; trackBy: trackByFn">
+              <img class="size-18x18 img-fix" [src]="facility.icon" [alt]="facility.name" [title]="facility.name"/>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="hotel-price mt-auto">
+        <app-price [price]="hotel.price"></app-price>
+      </div>
+    </div>
+  </a>
+</div>

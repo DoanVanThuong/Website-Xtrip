@@ -1,0 +1,50 @@
+@import "_variables.less";
+
+.notification {
+  padding-bottom: 65px;
+  background-color: @white;
+
+  .tab-container {
+    .nav.nav-justified {
+      background-color: @green-2;
+      > .nav-item {
+        > .nav-link {
+          color: @gray-11;
+          font-size: 15px;
+          padding: 10px;
+        }
+        &.active {
+          border-bottom: 2px solid @orange-2;
+          > .nav-link {
+            color: @white;
+          }
+        }
+
+      }
+    }
+  }
+  .notification-list {
+    .notification-item {
+      background-color: @gray-6;
+      color: @gray-1;
+      border-bottom: 1px solid @gray-10;
+
+      > a {
+        display: block;
+        padding: 15px;
+        font-size: 15px;
+      }
+
+      &.read {
+        background-color: @white;
+        border-bottom: 1px solid @gray-10;
+      }
+
+      .time {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+/**---------- inbox detail -----------**/

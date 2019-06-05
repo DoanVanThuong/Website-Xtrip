@@ -1,0 +1,22 @@
+<div class="account account-mobile" *ngIf="isMobile">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="account account-desktop" *ngIf="isDesktop">
+
+  <div class="main-body p-t-20">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3 col-lg-4 left-section">
+          <app-navigator></app-navigator>
+        </div>
+        <div class="col-xl9 col-lg-8 right-section">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+

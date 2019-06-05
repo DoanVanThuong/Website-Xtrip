@@ -1,0 +1,72 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.cheap-flight-search-box {
+
+  min-width: 410px;
+  padding: 20px;
+  background-color: @gray-43;
+  .border-radius(10px);
+  .box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.15));
+
+  .panel.panel-desktop {
+    .panel-body {
+      .btn-switch {
+        z-index: 100;
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .border-radius(50%);
+        .box-shadow(0, 0, 8px, hsla(hue(@green-2), saturation(@green-2), lightness(@green-2), .8));
+      }
+    }
+  }
+
+  .form.form-desktop {
+    color: @gray-2;
+
+    .form-group {
+      margin-bottom: 0;
+
+      .control-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: @gray-1;
+      }
+      .form-control {
+        padding: 0;
+        height: 20px;
+        font-size: 16px;
+        color: @gray-2;
+      }
+    }
+  }
+
+  .search-origin,
+  .search-destination,
+  .passenger-selector {
+    position: relative;
+
+    .result-flight-location, .passenger-box {
+      left: -10px;
+      min-width: 370px;
+      top: 125%;
+
+      .heading {
+        background-color: @gray-13;
+        color: @gray-1;
+        font-size: 14px;
+        padding: 5px 10px;
+      }
+    }
+  }
+
+  .search-destination {
+    .result-flight-location {
+      right: -10px;
+      left: unset;
+    }
+  }
+}

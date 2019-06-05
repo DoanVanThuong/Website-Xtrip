@@ -1,0 +1,52 @@
+// components css goes here
+@import "_variables.less";
+.coupon-desktop-page {
+  .coupon-breadcrumb {
+    color: @gray-2;
+  }
+  .color-gray-23 {
+    color: @gray-23;
+  }
+  .detail-item {
+    .title {
+      color: @gray-2;
+      font-size: 24px;
+    }
+    .tab {
+      color: @green-2;
+      font-weight: 700;
+      border-bottom: 2px solid @green-2;
+      padding-bottom: 6px;
+      margin-right: 25px;
+      &.unactive {
+        font-weight: 400;
+        opacity: .5;
+        border-color: transparent;
+      }
+    }
+    li {
+      list-style-image: url('../../../../../assets/images/more/coupon/gray-li.svg');
+      margin-top: 10px;
+      margin-left: 15px;
+    }
+    .line {
+      border-top: 1px solid @gray-3;
+    }
+    .h-180 {
+      height: 180px;
+    }
+    .pos-close-detail {
+      right: 25px;
+      top: 15px;
+    }
+  }
+  .opacity-50 {
+    opacity: .5;
+  }
+  .selected-shadow {
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  }
+  .m-t-n-36 {
+    margin-top: -36px;
+  }
+}

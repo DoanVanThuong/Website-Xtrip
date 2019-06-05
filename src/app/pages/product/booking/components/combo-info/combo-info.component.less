@@ -1,0 +1,142 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.combo-info {
+  &.combo-info-mobile {
+    color: @gray-2;
+
+    .combo-description {
+      .info-label {
+        color: @gray-1;
+        font-size: 13px;
+      }
+
+      .info-value {
+        color: @black;
+        font-size: 15px;
+      }
+    }
+
+    .line {
+      width: 100%;
+      height: 1px;
+      border-top: 1px solid @gray-7;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn-collapse {
+      display: inline-block;
+
+      .icon-collapse,
+      .icon-expand {
+        width: 24px;
+        height: 24px;
+        border: 1px solid @gray-9;
+        color: @gray-9;
+        font-size: 20px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        border-radius: 5px;
+
+      }
+      .active {
+        display: none;
+      }
+      .unactive {
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+      }
+
+      &.collapsed {
+        .active {
+          display: -webkit-inline-box;
+          display: -ms-inline-flexbox;
+          display: inline-flex;
+        }
+        .unactive {
+          display: none;
+        }
+      }
+    }
+
+    .panel.panel-desktop {
+
+      .panel-footer {
+        border-top: 2px dashed @gray-7;
+        position: relative;
+
+        /*&:before, &:after {
+          content: '';
+          position: absolute;
+          .border-radius(50%);
+          top: 0;
+          .transform(translateY(-50%));
+          background-color: @gray-7;
+        }*/
+
+        /*&:before {
+          left: 0;
+          .transform(translateY(-50%, -50%));
+        }
+        &:after {
+          right: 0;
+          .transform(translateY(-50%, 50%));
+        }*/
+      }
+    }
+  }
+  &.combo-info-desktop{
+    .img-combo{
+      height: 100px;
+    }
+    .combo-name{
+      font-weight: bold;
+      font-size: 16px;
+      color:@gray-2;
+    }
+    .link-view-map{
+      color:@orange-2;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+    .combo-detail-wp{
+      border-bottom: 1px solid @gray-3;
+      .title-detail{
+        font-size: 13px;
+        color: @gray-1;
+        letter-spacing: 0;
+        font-weight: 400;
+      }
+    }
+    .list-detail-info{
+      li{
+        font-size: 15px;
+        font-weight: 400;
+        &:before{
+          content: "";
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: @green-2;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 2px;
+        }
+      }
+    }
+    .view-detail{
+      font-weight: 500;
+      color:@orange-2;
+      font-size: 16px;
+    }
+  }
+}

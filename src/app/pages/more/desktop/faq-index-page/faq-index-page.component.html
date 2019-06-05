@@ -1,0 +1,18 @@
+<!--component html goes here -->
+<div class="faq-index-page">
+
+  <app-faq-banner></app-faq-banner>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <app-faq-navigator [params]="params"></app-faq-navigator>
+      </div>
+      <div class="col-lg-8">
+        <app-request-ticket-desktop
+          [title]="'Gửi yêu cầu hỗ trợ'">
+        </app-request-ticket-desktop>
+      </div>
+    </div>
+
+  </div>
+</div>

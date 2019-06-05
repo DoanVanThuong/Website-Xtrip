@@ -1,0 +1,143 @@
+<div class="hotel-result-desktop bg-white">
+
+  <app-hotel-banner-desktop></app-hotel-banner-desktop>
+
+  <app-hotel-search-bar-desktop></app-hotel-search-bar-desktop>
+
+  <div class="main-body">
+    <div class="container" *ngIf="viewMode === 1"
+         infinite-scroll
+         [infiniteScrollDistance]="0"
+         [infiniteScrollThrottle]="150"
+         (scrolled)="onScrollDown()">
+
+      <div class="row">
+        <div class="col-12 m-t-10 m-b-10">
+          <app-hotel-breadcrumb [params]="params"></app-hotel-breadcrumb>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-xl-3 col-lg-4 left-section">
+          <div class="row">
+
+            <div class="col-12 title-list">
+              Danh sách khách sạn
+            </div>
+
+            <!-- Map/List Switch -->
+            <div class="col-12">
+              <app-hotel-view-mode (submitSwitchBtn)="submitSwitchBtn($event)"></app-hotel-view-mode>
+            </div>
+            <!-- Map/List Switch -->
+
+            <!-- Filter -->
+            <div class="col-12 m-t-20">
+              <app-hotel-filter-desktop *ngIf="!!doneFilter && typeEvent!='onSearch'"
+                                        (submitFilter)="submitFilter($event)"
+                                        [typeEvent]="typeEvent"
+                                        [filterOption]="filterOption"
+                                        [nights]="nights"
+                                        [params]="params">
+              </app-hotel-filter-desktop>
+            </div>
+            <!-- Filter -->
+
+          </div>
+        </div>
+        <div class="col-xl-9 col-lg-8 right-section">
+          <div class="row position-relative">
+
+            <!-- Sort -->
+            <div class="col-12">
+              <div class="hotel-sort">
+                <app-hotel-sort-desktop (submit)="onSubmitSort($event)"
+                                        [data]="filterOption.sorts"
+                                        [params]="params"
+                                        [nights]="nights">
+                </app-hotel-sort-desktop>
+              </div>
+            </div>
+            <!-- Sort -->
+
+            <!-- View Mode -->
+            <div class="position-absolute pos-chang-view">
+              <div class="hotel-view-type d-flex">
+                <img class="m-b-none m-r-20" src="assets/images/icon/icon-list{{isListView ? '-active' : ''}}.svg" alt="img" (click)="isListView = !isListView" />
+                <img class="m-b-none" src="assets/images/icon/icon-grid{{!isListView ? '-active' : ''}}.svg" alt="img" (click)="isListView = !isListView" />
+              </div>
+            </div>
+            <!-- View Mode -->
+
+            <!---- Detail ---->
+            <div class="col-12 m-t-20" *ngIf="!isLoading&&viewMode===1">
+              <ul class="list-unstyled" @list *ngIf="isListView">
+                <li class="hotel-detail" @item [class.m-t-20]="i > 0" *ngFor="let hotel of hotels; trackBy: trackByFn; let i = index">
+                  <app-hotel-detail-item-desktop 
+                    [hotel]="hotel"
+                    [params]="params"
+                    [nights]="nights"
+                    [hotelSearch]="hotelSearch"
+                    [viewMode]="isListView ? 'list' : 'grid'">
+                  </app-hotel-detail-item-desktop>
+                </li>
+              </ul>
+
+              <div class="grid-view" *ngIf="!isListView">
+                <div class="row" @list>
+                  <div class="col-4" @item *ngFor="let hotel of hotels; trackBy: trackByFn; let i = index">
+                    <app-hotel-detail-item-desktop 
+                      [hotel]="hotel"
+                      [params]="params"
+                      [nights]="nights"
+                      [hotelSearch]="hotelSearch"
+                      [viewMode]="isListView ? 'list' : 'grid'">
+                    </app-hotel-detail-item-desktop>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="col-12 text-center">
+              <loading [show]="isLoading"></loading>
+            </div>
+            <div class="col-12 font-18 text-center" *ngIf="!isLoading&&hotels.length === 0">Không có dữ liệu</div>
+            <!---- Detail ---->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container-fluid" *ngIf="viewMode === 2">
+      <div class="row">
+        <div id="filterHeight" class="col-3 p-0">
+          <!-- Filter -->
+          <app-hotel-filter-desktop *ngIf="!!doneFilter&&typeEvent!='onSearch'"
+                                    (submitFilter)="submitFilter($event)"
+                                    [typeEvent]="typeEvent"
+                                    [filterOption]="filterOption"
+                                    [nights]="nights"
+                                    [params]="params"
+                                    [mapView]="true">
+          </app-hotel-filter-desktop>
+          <!-- Filter -->
+        </div>
+        <div class="col-9 p-0">
+          <!-- Map -->
+          <app-hotel-map-view (submitListView)="submitSwitchBtn($event)"
+                              [filterHeight]="filterHeight"
+                              [nights]="nights"
+                              [hotels]="hotels"
+                              [params]="params"
+                              [isLoading]="isLoading">
+          </app-hotel-map-view>
+          <!-- Map -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

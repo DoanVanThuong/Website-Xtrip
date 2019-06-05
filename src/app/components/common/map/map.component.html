@@ -1,0 +1,10 @@
+<div class="map-wrapper" [ngStyle]="{'height.px': height}">
+  <agm-map #gm [latitude]="data.latitude" [longitude]="data.longitude" [zoom]="16" [zoomControl]="false"
+    [streetViewControl]="false" [styles]="mapStyles" [fullscreenControl]="true" (mapClick)="openFullMap()"
+    [gestureHandling]="'greedy'">
+    <agm-marker [latitude]="data.latitude" [longitude]="data.longitude">
+    </agm-marker>
+  </agm-map>
+</div>
+
+<full-screen-map-popup [longitude]="data.longitude" [latitude]="data.latitude" [name]="data.address || data.fullAddress"></full-screen-map-popup>

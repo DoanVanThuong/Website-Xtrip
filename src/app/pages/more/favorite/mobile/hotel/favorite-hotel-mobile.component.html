@@ -1,0 +1,71 @@
+<div class="hotel-favorite-mobile"
+     infinite-scroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="150"
+     (scrolled)="onScrollDown()">
+
+  <div *ngIf="hotels.length > 0">
+
+    <div class="favorite-item" *ngFor="let hotel of hotels; trackBy: trackByFn; let i = index">
+      <div class="favorite-image">
+        <a (click)="onOpenFavoriteItem(hotel)">
+          <img class="img-fix"
+               src="{{hotel.photo.src}}"
+               onerror="this.src='assets/images/no-thumbnail.png'"
+               alt="hotel name"/>
+        </a>
+        <div class="icon-heart">
+          <a (click)="onSelectFavorite(hotel, i)">
+            <i class="fa fa-heart"></i>
+          </a>
+        </div>
+      </div>
+      <div class="favorite-content">
+        <div class="row">
+          <div class="col-12">
+            <a (click)="onOpenFavoriteItem(hotel)">
+              <div class="title text-truncate w-80pc">{{ hotel.name }}</div>
+              <hotel-star class="hotel-stars" [stars]="hotel.stars"></hotel-star>
+              <div class="description">
+                <div class="row">
+                  <div class="col-8 text-truncate">
+                    <img class="m-r-5 size-13x13" cdn-src="assets/images/hotel/des-type-pos.svg" alt="icon"/>
+                    {{ hotel.address }}
+                  </div>
+                  <div class="col-4 text-right">
+                    <div class="d-inline-block m-r-10">
+                      <img class="size-13x13" cdn-src="assets/images/icon/icon-comment.svg" alt="icon"/> {{hotel.reviews}}
+                    </div>
+                    <div class="d-inline-block rating">
+                      <img class="size-13x13" cdn-src="assets/images/icon/icon-review.svg" alt="icon"/> {{hotel.rating}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-empty-screen [show]="!hotels.length"
+                    [heading]="'Chưa có danh sách yêu thích'"
+                    [description]="'Nhiều khách sạn nổi bật đang chờ bạn khám phá'"
+                    [isRetry]="false"></app-empty-screen>
+
+</div>
+
+
+<!--
+<div class="container-data-empty-screen pad-t-30pc" *ngIf="hotels.length === 0">
+  <div class="text-center img">
+    <img class="img-emp-size" cdn-src="assets/images/booked-tour-empty.png">
+  </div>
+  <div class="text-center title pad-t-20">
+    <b>Chưa có danh sách yêu thích </b>
+  </div>
+  <div class="text-center description">
+    Nhiều khách sạn nổi bật đang chờ bạn khám phá
+  </div>
+</div>-->

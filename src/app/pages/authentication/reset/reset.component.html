@@ -1,0 +1,62 @@
+<div class="reset-password">
+  <div class="reset-password-box">
+    <div class="box-body">
+      <div class="logo text-center">
+        <a href="/">
+          <img class="mx-w-200" cdn-src="assets/images/logo.png" alt="Logo"/>
+        </a>
+      </div>
+
+      <div *ngIf="!isReset" class="m-t-100">
+        <div class="text-center error-message">
+          <img class="size-24x24 m-r-5 m-b-none" cdn-src="assets/images/icon/icon-error.svg" alt="icon"/>
+          Liên kết khôi phục mật khẩu không khả dụng
+        </div>
+      </div>
+
+      <div *ngIf="isReset">
+        <form class="form"
+              [formGroup]="form"
+              (submit)="onSubmit(form.value)"
+              novalidate>
+          <div class="form-group"
+               [ngClass]="{'has-error': (!password.valid && (password.dirty || showValid))}">
+            <label class="control-label font-medium">Mật khẩu mới:</label>
+            <input class="form-control"
+                   type="password"
+                   [formControl]="password"
+                   placeholder="Mật khẩu mới"/>
+            <div class="error" *ngIf="password.dirty">
+              <span *ngIf="password.errors | equalError:'required'">Yêu cầu nhập Mật khẩu</span>
+              <span *ngIf="password.errors | equalError:'minlength'">Mật khẩu phải có tối thiểu 6 ký tự</span>
+            </div>
+          </div>
+          <div class="form-group"
+               [ngClass]="{'has-error': (!confirmPassword.valid && (confirmPassword.dirty || showValid))}">
+            <label class="control-label font-medium">Nhập lại mật khẩu:</label>
+            <input class="form-control"
+                   type="password"
+                   [formControl]="confirmPassword"
+                   placeholder="Nhập lại mật khẩu"/>
+            <div class="error" *ngIf="confirmPassword.dirty">
+              <span *ngIf="confirmPassword.errors | equalError:'equalPassword'">Mật khẩu chưa chính xác</span>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <div class="box-footer">
+      <button type="submit"
+              (click)="onSubmit(form.value)"
+              *ngIf="isReset"
+              class="btn btn-green btn-block font-medium"
+              [disabled]="form.invalid">Đổi mật khẩu
+      </button>
+      <a *ngIf="!isReset"
+         href="/home"
+         class="btn btn-green btn-block font-medium">Quay lại trang chủ
+      </a>
+    </div>
+  </div>
+</div>

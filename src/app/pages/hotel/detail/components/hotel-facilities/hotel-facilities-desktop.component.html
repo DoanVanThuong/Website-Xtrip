@@ -1,0 +1,52 @@
+<div class="hotel-facilities-desktop animated fadeIn {{mode === 'intro' ? '' : 'm-t-20'}}" *ngIf="!!mainFacility && !!allFacility">
+  <div class="row shadow b-r-10 m-l-none">
+
+    <div class="col-12 bg-white b-r-10">
+      <div class="p-18-0">
+
+        <section class="row" *ngIf="mode === 'intro'">
+          <div class="col-lg-4 bo-r">
+            <h2 class="title font-24 font-weight-bold">{{TITLE.INTRODUCE}}</h2>
+          </div>
+          <div class="col-lg-8 gray-text text-justify m-t-10 p-l-30 p-r-30 custom-inner-html"
+               [innerHTML]="hotel.description | safeHTML">
+          </div>
+        </section>
+
+        <section class="row m-t-20 p-b-20" *ngIf="mode === 'facilities'">
+          <div class="col-lg-4 bo-r">
+            <h2 class="title font-24 font-weight-bold">{{TITLE.FACILITIES.TEXT}}</h2>
+            <h6 class="text-main font-medium m-t-n-5">* Tiện nghi có thu phí</h6>
+          </div>
+          <div class="col-lg-8 m-t-10 p-l-30 p-r-30">
+            <div class="text-main font-20 font-weight-bold">
+              {{TITLE.FACILITIES.MAIN}}
+            </div>
+            <div class="row m-t-10">
+              <div class="col-lg-9">
+                <ul class="row">
+                  <li class="col-4" *ngFor="let item of mainFacility">
+                    <img class="m-b-0 m-t-n-3 size-16x16" src="{{item.imageHost}}/android/{{item.imagePath}}"
+                         alt="img"/>
+                    <span class="font-medium p-l-4 gray-text">{{item.name}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-3"></div>
+            </div>
+            <div class="text-main font-20 font-weight-bold m-t-30">
+              {{TITLE.FACILITIES.SUB}}
+            </div>
+            <ul class="column-3 m-t-10">
+              <li class="font-medium gray-text list-li m-b-15" *ngFor="let item of allFacility">
+                {{item.name}}
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </div>
+</div>

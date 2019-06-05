@@ -1,0 +1,93 @@
+@import "_variables.less";
+
+.modal {
+  &.question-popup {
+
+    .modal-dialog {
+
+      &.fullscreen {
+
+        .modal-content {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          background-color: @white;
+
+          .modal-header {
+            background-color: @green-2;
+            max-width: 100%;
+            padding: 15px;
+            display: inline-block;
+            color: @white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            .modal-title {
+              font-size: 20px;
+            }
+          }
+
+          .modal-body {
+            margin-top: 60px;
+            marging-bottom: 60px;
+          }
+
+          .modal-footer {
+            border-width: 0;
+            padding: 5px;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+          }
+        }
+
+      }
+
+      .modal-content {
+
+        .modal-body {
+          padding: 0;
+          position: relative;
+          height: 100%;
+          width: 100%;
+
+          .title {
+            padding: 15px;
+          }
+
+          .form {
+            .mat-form-field.input-textarea {
+
+              .mat-input-wrapper {
+                margin-top: 8px;
+
+                .mat-input-infix {
+                  color: @black;
+                }
+
+                .mat-input-placeholder {
+                  &.mat-focused {
+                    color: @green-2;
+                  }
+                }
+
+                .mat-input-underline {
+                  border-width: 2px;
+                  border-color: @green-2;
+                }
+              }
+
+              &.mat-focused, &.ng-dirty {
+                border-width: 3px !important;
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

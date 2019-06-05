@@ -1,0 +1,264 @@
+<!-- desktop -->
+<div class="flight-booked-ticket-detail flight-booked-ticket-detail-desktop" *ngIf="isDesktop">
+
+  <div class="row">
+    <div class="container-fluid">
+      <a class="pointer font-medium" (click)="back()">
+        <img class="m-b-none m-t-n-3 size-16x16"
+             cdn-src="assets/images/icon/icon-angle-left.svg"
+             alt="icon"/>
+        <span class="m-l-5">Quay lại</span>
+      </a>
+    </div>
+  </div>
+
+  <loading [show]="isLoading"></loading>
+
+  <div class="row m-t-15" *ngIf="!isLoading">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="mr-auto font-18 font-bold text-dark-gray">
+          {{ getAirportWith(flight.segments[0].origin, 'location') }}
+          <img class="size-16x16"
+               [src]="flight.segments.length > 1 ? 'assets/images/icon/icon-arrow-round.svg' : 'assets/images/icon/icon-arrow-right.svg'"
+               alt="icon"/>
+          {{ getAirportWith(flight.segments[0].destination, 'location') }}
+        </div>
+        <a class="pointer text-green font-medium"
+           *ngIf="utilityHelper.findInList(flight.status, [STATUS.PAID])"
+           (click)="onOpenRequestEmail()">
+          <img class="size-16x16 m-r-5"
+               cdn-src="assets/images/icon/icon-flight-green.svg"
+               alt="icon"/>
+          Gửi thông tin vé qua mail
+        </a>
+      </div>
+    </div>
+
+    <div class="container-fluid m-t-20">
+      <div class="panel panel-desktop">
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="ticket-pnr container-fluid m-b-20"
+                 *ngIf="utilityHelper.findInList(flight.status, [STATUS.WAITING, STATUS.PAID])">
+              <div class="font-medium text-light-gray font-13">
+                {{ flight.segments.length <= 1 ? 'Mã vé (PNR)' : 'Mã vé chiều đi - về (PNR)' }}
+              </div>
+              <div class="">
+                <span class="font-20 font-bold text-green">{{ flight.pnr | pnr }}</span>&nbsp;
+                <span class="m-l-5 sub-label">(Mã dùng tại sân bay)</span>
+              </div>
+            </div>
+
+            <div class="container-fluid ">
+              <h4 class="title">Thông tin hành khách</h4>
+
+              <div class="p-10">
+                <div class="row">
+                  <div class="col-lg-6"
+                       *ngFor="let passenger of flight.passengers; trackBy: trackByFn; let i = index">
+                    <div class="font-16 font-bold text-black">
+                      {{ i + 1}}. {{ passenger.title }} {{ passenger.lastName }} {{ passenger.firstName }}
+                    </div>
+                    <ul class="passenger-info m-t-10">
+                      <li *ngIf="passenger.passengerType !== 'ADT' ">
+                        Ngày sinh: {{ passenger.dateOfBirth | moment: 'DD/MM/YYYY'}}
+                      </li>
+                      <li class="" *ngIf="!!passenger.departBaggage">
+                        Hành lý chiều đi: <span class="font-medium">{{ passenger.departBaggage}}kg</span>
+                      </li>
+                      <li class="" *ngIf="flight.segments.length > 1 && !!passenger.returnBaggage">
+                        Hành lý chiều về: <span class="font-medium">{{ passenger.returnBaggage }}kg</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container-fluid m-t-10">
+              <h4 class="title">Hành trình chiều đi <span *ngIf="flight.segments.length>1">- về</span></h4>
+
+              <div class="p-10">
+                <div class="row">
+                  <div class="col-lg-6"
+                       *ngFor="let segment of flight.segments; trackBy: trackByFn; let i = index">
+                    <div class="font-medium text-green m-b-10">
+                      Chiều {{ i > 0 ? 'về' : 'đi' }}
+                    </div>
+
+                    <app-flight-detail-desktop [flight]="segment"
+                                               [carriers]="airlines"
+                                               [airports]="airports"
+                                               [point]="false"
+                                               [is-condition]="false"
+                                               [isCollapse]="true"></app-flight-detail-desktop>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- mobile -->
+<div class="flight-booked-ticket-detail flight-booked-ticket-detail-mobile" *ngIf="isMobile">
+
+  <app-header [back]="true"
+              heading='Thông tin vé'
+              [version]="3"
+              [fixed]="true"
+              [filter]="true">
+    <header-filter>
+      <a class="pointer"
+         *ngIf="flight && utilityHelper.findInList(flight.status, [STATUS.PAID])"
+         (click)="onOpenReport()">
+        <img class="size-24x24" cdn-src="assets/images/icon/icon-flight-green.svg" alt="icon"/>
+      </a>
+    </header-filter>
+  </app-header>
+
+  <div class="wrapper p-15" min-height>
+
+    <loading [show]="isLoading"></loading>
+
+    <div class="" *ngIf="!isLoading">
+
+      <div class="ticket-pnr m-b-15"
+           *ngIf="utilityHelper.findInList(flight.status, [STATUS.WAITING, STATUS.PAID])">
+        <div class="panel">
+          <div class="panel-body">
+            <div class="font-12 text-light-gray font-bold">
+              {{ flight.segments.length <= 1 ? 'Mã vé (PNR)' : 'Mã vé chiều đi - về (PNR)' }}
+            </div>
+            <div class="">
+              <span class="font-bold font-20 text-green">{{ flight.pnr | pnr }}</span>
+              <span class="m-l-5 sub-label">(Mã dùng tại sân bay)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- thông tin hành khách -->
+      <div class="flight-passenger">
+        <h4 class="title">Thông tin hành khách</h4>
+
+        <div class="panel">
+          <div class="panel-body p-t-none p-b-none">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"
+                  *ngFor="let passenger of flight.passengers; trackBy: trackByFn; let i = index">
+                <div class="font-16 font-bold text-black">
+                  {{ i + 1}}. {{ passenger.title }} {{ passenger.lastName }} {{ passenger.firstName }}
+                </div>
+                <ul class="passenger-info font-13">
+                  <li class="m-t-10 d-flex justify-content-center" *ngIf="passenger.passengerType !== 'ADT' ">
+                    <div>Ngày sinh:</div>
+                    <span class="ml-auto">{{ passenger.dateOfBirth | moment: 'DD/MM/YYYY'}}</span>
+                  </li>
+                  <li class="m-t-10 d-flex justify-content-center"
+                      *ngIf="passenger.departBaggage">
+                    <div>Hành lý <span class="font-bold">chiều đi</span></div>
+                    <span class="ml-auto">{{ passenger.departBaggage}}kg</span>
+                  </li>
+                  <li class="m-t-10 d-flex justify-content-center"
+                      *ngIf="flight.segments.length > 1 && passenger.returnBaggage">
+                    <div>Hành lý <span class="font-bold">chiều về</span></div>
+                    <span class="ml-auto">{{ passenger.returnBaggage }}kg</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- thông tin vé -->
+      <div class="flight-ticket m-t-15">
+        <h4 class="title">Hành trình chiều đi <span *ngIf="flight.segments.length>1">& về</span></h4>
+
+        <div class="panel"
+             [class.m-t-20]="i > 0"
+             *ngFor="let segment of flight.segments; trackBy: trackByFn; let i = index">
+          <div class="panel-body">
+            <div class="d-flex align-items-start">
+              <div class="mr-auto">
+                <div class="font-16 font-bold">
+                  {{ getAirportWith(segment.origin, 'location')}}
+                  <img class="size-16x16 m-t-n-3"
+                       cdn-src="assets/images/icon/icon-plane-green.svg" alt="logo"/>
+                  {{ getAirportWith(segment.destination, 'location')}}
+                </div>
+                <div class="m-t-10 font-13">Khởi hành: {{segment.departTime | startTime}}</div>
+              </div>
+              <div class="font-13 p-l-none">
+                <div class="text-right">
+                  <img class="m-t-n-3 size-12x12" cdn-src="assets/images/icon/icon-clock.svg"
+                       alt="lock"/>
+                  {{ utilityHelper.convertTime(segment.flightDuration) }},
+                </div>
+                <div class="" [ngSwitch]="segment.legs.length - 1">
+                  <span *ngSwitchCase="0">Bay thẳng</span>
+                  <span *ngSwitchCase="1">1 chặng</span>
+                  <span *ngSwitchDefault>+2 điểm dừng</span>
+                </div>
+
+              </div>
+            </div>
+
+            <div *ngFor="let leg of segment.legs; trackBy: trackByFn">
+              <div class="row" *ngIf="leg.timePending > 0">
+                <div class="col-12 text-center stop-step" [innerHTML]="restTime(leg) | safeHTML"></div>
+              </div>
+
+              <div class="row p-t-10">
+                <div class="col-12 font-13">
+                  <img class="size-16x16 m-t-n-3"
+                       [src]="getAirlineWith(leg.carrier, 'icon')"
+                       alt="carrier"/>
+                  <span class="p-l-5">
+                    {{ getAirlineWith(leg.carrier, 'name') }} - {{ leg.flightNumber }} {{ segment.ticketType }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="m-t-10 row text-dark-gray">
+                <div class="col-3 font-medium">{{leg.departTime | moment: 'HH:mm'}}</div>
+                <div class="col-6 p-t-10 p-l-none p-r-none">
+                  <div class="line-time"></div>
+                </div>
+                <div class="col-3 font-medium text-right">{{leg.landingTime | moment: 'HH:mm'}}</div>
+              </div>
+              <div class="row justify-content-center text-dark-gray">
+                <div class="col-8 text-center m-t-n-24">
+                  <span class="bg-white font-12 p-6">{{ utilityHelper.convertTime(leg.flightDuration) }}</span>
+                </div>
+              </div>
+              <div class="row text-light-gray">
+                <div class="col-6">{{getAirportWith(leg.origin)}}</div>
+                <div class="col-6 text-right">{{getAirportWith(leg.destination)}}</div>
+              </div>
+              <div class="row text-light-gray">
+                <div class="col-6">{{leg.origin}}</div>
+                <div class="col-6 text-right">{{leg.destination}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- report selection -->
+  <booking-report-popup (select)="onSelectReport($event)"></booking-report-popup>
+
+</div>
+
+<!-- report pdf selection -->
+<booking-pdf-report-popup [heading]="isDesktop ? 'Gửi thông tin vé qua mail' : ''"
+                          [module]="MODULE.FLIGHT"
+                          [code]="code"></booking-pdf-report-popup>

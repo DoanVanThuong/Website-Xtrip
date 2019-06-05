@@ -1,0 +1,148 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.hotel-mapview-mode {
+  position: relative;
+  .pos-icon-close {
+    z-index: 1;
+    left: 15px;
+    top: 15px;
+  }
+  .maker-view {
+    .break-point {
+      width: 5px;
+      height: 5px;
+      background-color: @gray-10;
+    }
+    .price {
+      font-size: 12px;
+    }
+    .hotel-price {
+      .circle {
+        width: 5px;
+        height: 5px;
+        background: @gray-10;
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: 50%;
+      }
+    }
+    .hotel-night {
+      font-size: 12px;
+      color: @gray-2;
+    }
+  }
+  .item-maker {
+    background-color: @white;
+    color: @green-2;
+    padding: 4px;
+    border: 1px solid @green-2;
+    min-width: 120px;
+    border-radius: 50px;
+    margin-top: -16px;
+    margin-left: -50px;
+    &:before{
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: ~"calc(50% - 7px)";
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 12px solid @green-2;
+    }
+    &:after{
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: ~"calc(50% - 6px)";
+      border-left: 6px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 12px solid @white;
+    }
+    &.sold-out {
+      background-color: @gray-37;
+      color: @white;
+      border: 1px solid @gray-37;
+    }
+    &.selected {
+      background-color: @green-2;
+      color: @white;
+      border: 1px solid @green-17;
+      position: relative;
+      z-index: 1000;
+      &:after{
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: ~"calc(50% - 7px)";
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 12px solid @green-2;
+      }
+    }
+   }
+
+  .hotel-carousel {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .item {
+      padding: 10px;
+      .h-120 {
+        height: 120px;
+      }
+      .image {
+        width: 34%;
+        img {
+          height: 100%;
+          object-fit: cover;
+          border-radius: 5px;
+        }
+      }
+      .hotel-detail {
+        width: 64%;
+        margin-left: 10px;
+        position: relative;
+        .hotel-name {
+          font-size: 14px;
+          max-height: 42px;
+          .stars  {
+            padding: 1px 6px;
+            background-image: linear-gradient(to right,@green-19, @green-20);
+            color: @white;
+            border-radius: 5px;
+            font-size: 13px;
+            img {
+              display: unset;
+              width: unset;
+            }
+          }
+        }
+        .hotel-address {
+          font-size: 12px;
+          color: @gray-1;
+          margin-top: 4px;
+          display: flex;
+        }
+        .pos-price-coupon {
+          bottom: 0;
+          left: 0;
+          line-height: 1.3;
+          .hotel-price {
+            font-size: 17px;
+            font-weight: 700;
+            color: @green-2;
+          }
+          .hotel-coupon {
+            font-size: 12px;
+          }
+        }
+        
+      }
+    }
+    .h-140 {
+      height: 140px;
+    }
+    
+  }
+}

@@ -1,0 +1,194 @@
+.search-bar {
+
+  .b-left {
+    border-left: 1px solid @gray-14;
+  }
+
+  .b-right {
+    border-right: 1px solid @gray-1;
+  }
+
+  .search-origin, .search-destination, .passenger-selector,
+  .search-arrival, .search-departure, .month-selector,
+  .night-selector, .date-selector {
+    position: relative;
+
+    img {
+      margin-bottom: 0;
+      margin-top: -3px;
+    }
+
+    .mat-form-field {
+      .mat-input-wrapper {
+        margin-bottom: 0;
+
+        .mat-input-element {
+          font-weight: 900;
+          font-size: 16px;
+        }
+
+        .mat-input-placeholder {
+          color: @gray-1;
+          font-size: 16px;
+        }
+      }
+
+      &.no-underline {
+        .mat-input-underline {
+          height: 0;
+          border-width: 0;
+        }
+      }
+    }
+
+    .animated {
+      animation-duration: .5s;
+    }
+  }
+
+
+  .result-flight-location,
+  .result-tour-location,
+  .result-hotel-location {
+    height: 500px;
+    min-width: 600px;
+    position: absolute;
+    background-color: @white;
+    top: 110%;
+    margin-top: 5px;
+    left: -15px;
+    overflow-x: hidden;
+    z-index: 1050;
+    .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+    .border-radiuses(0, 10px, 10px, 0);
+
+    &:before {
+      top: -7px;
+      border-right: 7px solid transparent;
+      border-left: 7px solid transparent;
+      border-bottom: 7px solid #ccc;
+      position: absolute;
+      display: inline-block;
+      content: '';
+    }
+
+    .heading {
+      color: @gray-1;
+      font-size: 16px;
+      background-color: @gray-13;
+      padding: 10px 15px;
+    }
+
+    .data-box {
+      padding: 0 15px;
+
+      .list-group-flush {
+        .list-group-item {
+          &:first-child {
+            border-top-width: 0;
+          }
+        }
+      }
+
+      .list-group-item {
+        color: @black;
+        padding: 10px 0;
+      }
+    }
+  }
+
+  .result-tour-location {
+    height: auto !important;
+    min-height: 250px;
+  }
+
+  .passenger-box {
+    margin-top: 5px;
+    min-height: 100px;
+    min-width: 300px;
+    position: absolute;
+    background-color: @white;
+    top: 100%;
+    left: -15px;
+    overflow-x: hidden;
+    padding: 0 15px;
+    z-index: 1000;
+    .border-radiuses(0, 10px, 10px, 0);
+    .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+
+    .list-group-flush {
+      .list-group-item {
+        &:first-child {
+          // border-width: 0;
+        }
+      }
+    }
+
+    .data-box {
+      padding: 0 15px;
+    }
+
+    .list-group-item {
+      padding-left: 0;
+      padding-right: 0;
+
+      .intro {
+        margin-left: 5px;
+        font-size: 14px;
+        color: @gray-9;
+      }
+    }
+  }
+
+  .month-box, .night-box {
+    margin-top: 5px;
+    height: 300px;
+    min-width: 300px;
+    position: absolute;
+    background-color: @white;
+    top: 100%;
+    left: -15px;
+    overflow-x: hidden;
+    z-index: 1000;
+    .border-radiuses(0, 10px, 10px, 0);
+    .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+
+    .data-box {
+      padding: 0 15px;
+    }
+
+    .list-group-flush {
+      .list-group-item {
+        &:first-child {
+          border-top-width: 0;
+        }
+      }
+    }
+
+    .list-group-item {
+      padding-left: 0;
+      padding-right: 0;
+
+      .intro {
+        font-size: 15px;
+        color: @gray-9;
+      }
+    }
+
+    ul {
+      li {
+        column-count: 3;
+      }
+    }
+  }
+
+  div.form-control {
+    line-height: 1;
+  }
+
+  span.placeholder {
+    color: @gray-37;
+    font-weight: 400;
+    font-size: inherit;
+  }
+}

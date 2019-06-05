@@ -1,0 +1,77 @@
+// component css goes here
+@import "_variables.less";
+
+.coupon-list-desktop {
+  .coupon-item {
+    &.b-r-20{
+      border-radius: 20px;
+    }
+    .bg-item {
+      height: 180px;
+      width: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      &.type-0 {
+        background-image: url('../../../../../../assets/images/more/coupon/type-0.png');
+      }
+      &.type-1 {
+        background-image: url('../../../../../../assets/images/more/coupon/type-1.png');
+      }
+      &.type-2 {
+        background-image: url('../../../../../../assets/images/more/coupon/type-2.png');
+      }
+    }
+    .content-item {
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      .inner-content {
+        height: 56px;
+        margin-bottom: 10px;
+      }
+    }
+    .circle-count {
+      padding: 4px 8px;
+      background-color: @white;
+      border-radius: 10px;
+      color: @orange-2;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .pos-detail-coupon {
+      bottom: 10px;
+      li {
+        list-style-image: url('../../../../../../assets/images/more/coupon/li.svg');
+        font-weight: 600;
+      }
+    }
+  }
+  .gray-color {
+    color: @gray-2;
+  }
+  .coupon-code {
+    font-weight: 900;
+    padding: 2px 8px;
+    color: @green-2;
+    border: 1px dashed @green-2;
+  }
+  .point {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: @gray-6;
+    bottom: 80px;
+    &.left {
+      left: -8px;
+    }
+    &.right {
+      right: -8px;
+    }
+  }
+  .name-area {
+    line-height: 1.25;
+    height: 62px;
+    overflow: hidden;
+  }
+}

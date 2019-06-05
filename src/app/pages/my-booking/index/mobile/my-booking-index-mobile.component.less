@@ -1,0 +1,38 @@
+@import '_variables.less';
+
+.my-booking {
+  &.my-booking-mobile {
+
+    .my-booking-tab {
+
+      > .nav {
+        &.nav-tabs {
+          overflow-x: auto;
+          overflow-y: hidden;
+          display: -webkit-box;
+          display: -moz-box;
+
+          > .nav-item {
+            > .nav-link {
+              padding: 5px 10px;
+              min-width: 100px;
+            }
+          }
+        }
+      }
+
+      &.booked-flight-tab {
+        li {
+          a.active {
+            span {
+              border-bottom: none !important;
+            }
+          }
+          &.active {
+            border-bottom: 2px solid @orange-2;
+          }
+        }
+      }
+    }
+  }
+}

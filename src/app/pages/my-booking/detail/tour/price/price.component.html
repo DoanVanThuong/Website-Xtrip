@@ -1,0 +1,30 @@
+<div class="booking-detail-price justify-content-center"  *ngIf="!!tour">
+    <app-header [heading]="!!params.title ? params.title : 'Tổng tiền'" [back]="true" [version]="3" [fixed]="true"></app-header>
+    <div class="wrapper booking-detail-price-body" min-height>
+      <div class="box-price shadow">
+          <div class="row ">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="row" *ngFor="let item of tour.priceSummary.detailItems; let i = index">
+                    <div class="col-8">
+                      {{ item.title }}
+                    </div>
+                    <div class="col-4 p-l-none text-right">
+                      {{ item.price | currencyMoney:'' }} <span class="text-underline">đ</span>
+                    </div>
+                  </div>
+                  <div class="total-price">
+                    <div class="row">
+                      <div class="col-4">
+                        Tổng tiền
+                      </div>
+                      <div class="col-8 p-l-none text-right">
+                        <span class="price font-weight-bold">{{ totalPrice | currencyMoney:'' }} <span class="text-underline">đ</span></span>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>  
+      </div>
+      
+    </div>
+  </div>

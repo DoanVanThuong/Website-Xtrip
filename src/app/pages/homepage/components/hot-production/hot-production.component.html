@@ -1,0 +1,77 @@
+<div class="block block-product" *ngIf="!!products.length || !!tours.length">
+
+  <div class="hot-production hot-production-desktop" *ngIf="isDesktop">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title ">
+
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="mr-auto text-danger">
+              <img class="size-24x24 m-r-5 m-t-n-3" cdn-src="assets/images/icon/icon-fire-red.svg" alt="icon"/>Hot quá mua
+              ngay
+            </div>
+            <div class="product-type">
+              <ul>
+
+                <li *ngFor="let item of types; trackBy: trackByFn;">
+                  <a class="pointer" [class.active]="item.type === selectedType.type"
+                     (click)="onSelectProductType(item)">{{ item.name}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </h3>
+        <div class="block-body">
+          <div class="panel panel-desktop">
+            <div class="panel-body p-none">
+              <div class="d-flex justify-content-start align-items-start">
+                <div class="p-20 product-favorite-destination">
+                  <h3 class="font-16 font-bold m-none">Điểm đến yêu thích</h3>
+                  <ul class="m-t-10">
+                    <li *ngFor="let location of locations; trackBy: trackByFn">
+                      <a class="pointer" [title]="location.name" [routerLink]="['/product/result']"
+                         [queryParams]="generateLocationParams(location)"
+                         (click)="onSelectDestination(location)">
+                        {{ location.name }}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="w-full p-20 border-left over-hidden">
+                  <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']" *ngIf="!isLoading"
+                                [items]="products" [options]="carouselOptions">
+                    <div class="cheap-tour-item" *ngFor="let product of products; trackBy: trackByFn">
+                      <home-product-item-desktop [product]="product"></home-product-item-desktop>
+                    </div>
+                  </owl-carousel>
+
+                  <loading [show]="isLoading" [title]="'Đang cập nhật thông tin'"
+                           [description]="'Vui lòng đợi trong giây lát'"></loading>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hot-production hot-production-mobile m-b-15" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title text-white">
+          <img class="size-24x24 m-r-5 m-t-n-3" cdn-src="assets/images/icon/icon-fire-red.svg" alt="icon"/>Tour khuyến mãi
+        </h3>
+        <div class="block-body">
+          <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']" [items]="tours"
+                        [options]="carouselOptions">
+            <div class="product-item" *ngFor="let tour of tours; trackBy: trackByFn">
+              <home-tour-item [tour]="tour"></home-tour-item>
+            </div>
+          </owl-carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

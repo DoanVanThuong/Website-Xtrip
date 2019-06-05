@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>53CD2721-6D06-432D-9DE3-998FBB2D6DF8</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ios_marker-default">
+            <g id="marker-copy-24">
+                <rect id="Rectangle-10" x="0" y="0" width="32" height="32"></rect>
+                <path d="M15.4751429,31.4658148 C15.4751429,30.4980648 12.0912286,23.0712244 9.12657143,19.9606451 C7.35604286,18.0988479 5,15.1690008 5,11.2156458 C5,5.03101827 9.93428571,0 16,0 C22.0657143,0 27,5.03101827 27,11.2156458 C27,14.5889916 25.3489,17.7848098 22.226,20.4552551 C18.5069,23.6393769 16.5237571,30.4669814 16.5237571,31.4646932 C16.5225,31.759825 16.2882,31.998558 15.9989,32 C15.7097571,32 15.4751429,31.7596647 15.4751429,31.4658148 Z" id="Fill-1" fill="#00BF8F"></path>
+                <path d="M16,17 C12.6912732,17 10,14.3087268 10,11 C10,7.69127322 12.6912732,5 16,5 C19.3087268,5 22,7.69127322 22,11 C22,14.3087268 19.3087268,17 16,17" id="Path" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

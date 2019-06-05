@@ -1,0 +1,93 @@
+{
+  "errors": [],
+  "code": "Success",
+  "data": {
+    "title": "Tour đề xuất",
+    "items": [
+      {
+        "id": "5cd29e06a27c0e7a34f5907f",
+        "code": "DL",
+        "name": "Đài Loan",
+        "priceFrom": "8 triệu",
+        "photo": {
+          "name": "Dailoan",
+          "src": "http://devmedia.xtrip.vn/Tour/Recommend/Dailoan.jpg"
+        },
+        "photoDesktop": {
+          "name": "Dailoan",
+          "src": "http://devmedia.xtrip.vn/Tour/Recommend/Dailoan.jpg"
+        },
+        "type": "international",
+        "listTour": [
+          "VMTDLS160519-018533",
+          "VMTDLS220519-000093",
+          "VMTDLS230519-016139",
+          "VMTDLS050619-016140"
+        ]
+      },
+      {
+        "id": "5cd5496c153bd06f38b6425b",
+        "code": "TL",
+        "name": "Thailand",
+        "priceFrom": "4 triệu",
+        "photo": {
+          "name": "Thailand",
+          "src": "http://devmedia.xtrip.vn/Tour/Recommend/Thailand.jpg"
+        },
+        "photoDesktop": {
+          "name": "Thailand",
+          "src": "http://devmedia.xtrip.vn/Tour/Recommend/Thailand.jpg"
+        },
+        "type": "international",
+        "listTour": [
+          "VPTTLS010619-009197",
+          "VMTTLS060619-018504",
+          "TNTTLS060619-020504"
+        ]
+      },
+      {
+        "id": "5cd5496c153bd06f38b6425c",
+        "code": "NB",
+        "name": "Nhatban",
+        "priceFrom": "28 triệu",
+        "photo": {
+          "name": "Nhatban",
+          "src": "http://devmedia.xtrip.vn/Tour/Recommend/Nhatban.jpg"
+        },
+        "photoDesktop": {
+          "name": "Nhatban",
+          "src": "http://devmedia.xtrip.vn/Tour/Recommend/Nhatban.jpg"
+        },
+        "type": "international",
+        "listTour": [
+          "VJLNBS110619-019360",
+          "VJLNBS110619-019387",
+          "VJLNBS120619-019361",
+          "VJLNBS130619-019388"
+        ]
+      },
+      {
+        "id": "5cd5496c153bd06f38b6425d",
+        "code": "HQ",
+        "name": "Hanquoc",
+        "priceFrom": "17 triệu",
+        "photo": {
+          "name": "Hanquoc",
+          "src": "http://devmedia.xtrip.vn/Tour/Recommend/Hanquoc.jpg"
+        },
+        "photoDesktop": {
+          "name": "Thailand",
+          "src": "http://devmedia.xtrip.vn/Tour/Recommend/Hanquoc.jpg"
+        },
+        "type": "international",
+        "listTour": [
+          "TNHHQS150619-009004",
+          "TNHHQS160619-008979",
+          "TNHHQS220619-009005"
+        ]
+      }
+    ]
+  },
+  "message": null,
+  "status": true
+}

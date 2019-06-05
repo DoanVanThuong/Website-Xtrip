@@ -1,0 +1,19 @@
+<div class="my-booking my-booking-mobile" *ngIf="isMobile">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="my-booking my-booking-desktop" *ngIf="isDesktop">
+
+  <div class="main-body p-t-20">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3 col-md-4 left-section">
+          <app-navigator></app-navigator>
+        </div>
+        <div class="col-xl-9 col-md-8 right-section">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

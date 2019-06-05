@@ -1,0 +1,50 @@
+@import "_variables.less";
+
+.tour-result-desktop-wrapper {
+
+  .shadow {
+    border: 1px solid transparent;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+  }
+  .hover {
+    &:hover {
+      transition: all .25s linear;
+    }
+  }
+  .reset-btn {
+    color: @orange-2;
+  }
+  .content {
+    .breadcrumb {
+      padding: 15px 0px;
+      margin-bottom: 0;
+    }
+  }
+  .list-tour {
+    margin-top: 20px;
+    .tour-item {
+      border-radius: 10px;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+      background-color: @white;
+      padding: 10px;
+      margin-bottom: 10px;
+      &:hover {
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+        transition: all .2s;
+      }
+    }
+  }
+  .empty-text-des {
+    color: @gray-2;
+  }
+  .btn-main-v2 {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
+  .related-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: @gray-23;
+  }
+}
+

@@ -1,0 +1,86 @@
+<div bsModal #popup="bs-modal" class="modal fade not-pay-now-popup " role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header header bg-green">
+        <div class="row w-full">
+          <div class="col-1">
+            <img class="m-0 size-16x16" cdn-src="assets/images/icon-back.png" (click)="hide()">
+          </div>
+          <div class="col-10 title-heading text-center text-white font-20">{{heading}}</div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-wrapper">
+          <div class="row">
+            <div class="col-12">
+              <div class="info-note-payment">
+                <span>
+                    <img cdn-src="assets/images/tour/detail/lock.svg ">
+                </span>
+                <span class="m-l-10">
+                    Lưu ý. Bạn vui lòng thanh toán trước {{dataTransfer.paymentExpiredDate | moment:
+                    'HH:mm, DD/MM/YYYY'}}
+                </span>
+              </div>
+              <section class="row content-transfer">
+
+                <section class="w-full">
+                  <div class="heading"> Theo số thẻ</div>
+                  <div class="col-12">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="title">Số tài khoản</div>
+                        {{dataTransfer.accountNo}}
+                      </li>
+                      <li>
+                        <div class="title">Tên chủ tài khoản</div>
+                        {{dataTransfer.accountName}}
+                      </li>
+                      <li>
+                        <div class="title">Chi nhánh</div>
+                        {{dataTransfer.branch}}
+                      </li>
+                    </ul>
+                  </div>
+                </section>
+                <section class="w-full">
+                  <div class="heading">Theo số thẻ (chuyển khoản nhanh)</div>
+                  <div class="col-12">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="title">16 số thẻ</div>
+                        {{dataTransfer.cardNo}}
+                      </li>
+                    </ul>
+                  </div>
+                </section>
+                <section class="w-full">
+                  <div class="heading">Nội dung chuyển khoản &amp; tổng tiền</div>
+                  <div class="col-12">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="title">Nội dung chuyển khoản</div>
+                        {{dataTransfer.description}}
+                      </li>
+                      <li>
+                        <div class="title">Tổng số tiền</div>
+                        {{dataTransfer.orderTotal | currencyMoney: ''}}
+                        <span class="text-underline">đ</span>
+                      </li>
+                    </ul>
+                  </div>
+                </section>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /modal body -->
+      <div class="modal-footer">
+        <div class="w-full">
+          <button class="btn btn-main" (click)="confirmPaymentTransfer()">Xác thực chuyển khoản</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="position-relative h-full w-full">
+  <div class="navigator">
+    <div class="panel card panel-desktop">
+      <div class="panel-heading card-header">
+        <h5 class="card-title ">Tài khoản</h5>
+      </div>
+      <div class="panel-body card-body p-none p-b-10">
+        <ul class="account-menu">
+          <li class="account-item"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">
+            <a class="pointer" [routerLink]="['/account/information']">
+              <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-user-green.svg" alt="icon"/>
+              <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-user-white.svg" alt="icon"/>
+              Quản lý tài khoản
+            </a>
+          </li>
+          <li class="account-item" routerLinkActive="active">
+            <a class="pointer" [routerLink]="['/my-booking']">
+              <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-booking-green.svg" alt="icon"/>
+              <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-booking-white.svg" alt="icon"/>
+              Đặt chỗ của tôi
+            </a>
+          </li>
+          <li class="account-item" routerLinkActive="active">
+            <a class="pointer" [routerLink]="['/more/favourite']">
+              <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-favorite-green.svg" alt="icon"/>
+              <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-favorite-white.svg" alt="icon"/>
+              Danh sách yêu thích
+            </a>
+          </li>
+          <li class="account-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a class="pointer" [routerLink]="['/account/reward']">
+              <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-point-green.svg" alt="icon"/>
+              <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-point-white.svg" alt="icon"/>
+              Điểm thưởng của tôi
+            </a>
+          </li>
+          <li class="account-item" routerLinkActive="active">
+            <a class="pointer" [routerLink]="['/account/passenger']">
+              <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-user-group-green.svg"
+                   alt="icon"/>
+              <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-user-group-white.svg"
+                   alt="icon"/>
+              Thông tin hành khách
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

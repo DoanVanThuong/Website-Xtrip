@@ -1,0 +1,37 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.modal {
+  &.booking-report-popup {
+    .modal-dialog {
+
+      .modal-content {
+        height: auto;
+
+        .modal-header {
+          background-color: @gray-17;
+          padding: 10px;
+
+          .modal-title {
+            margin: 0;
+            font-weight: @font-medium;
+            color: @black;
+            font-size: 15px;
+          }
+        }
+
+        .modal-body {
+          color: @black;
+          padding: 0 20px;
+
+          .list-group {
+            > .list-group-item {
+              padding: 15px 0;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+<!--component html goes here -->
+<div bsModal
+     #popup="bs-modal"
+     class="modal popup-product-filter animated fadeInUp"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-12 center-line">
+            <div class="line-header"></div>
+          </div>
+        </div>
+        <div class="row m-t-23">
+          <div class="col-3 m-t-5" *ngIf="!!productFilter">
+            <a class="text-main font-medium" (click)="onReset()" [class.disabled]="checkDisableReset()">Đặt lại</a>
+          </div>
+          <div class="col-6 text-center font-20 font-weight-bold p-none">Bộ lọc</div>
+          <div class="col-3 m-t-5 text-right">
+            <a class="text-main font-medium" (click)="onFilter()">Xong</a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body p-none">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6" *ngIf="!!productFilter">
+            <div class="filter-price" *ngIf="labelSlider.price.min != labelSlider.price.max">
+              <div class="row">
+                <div class="col-5 p-r-none title">
+                  Khoảng giá
+                </div>
+                <div class="col-7 p-l-none text-right m-t-4">
+                  <span class="font-13 font-medium bg-price-range">
+                    {{labelSlider.price.min | currencyMoney: ''}} <span class="text-underline">đ</span> -
+                    {{labelSlider.price.max | currencyMoney: ''}} <span class="text-underline">đ</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 range-slider">
+                  <nouislider [config]="sliderPriceConfig" class="p-0-12"
+                              [min]="sliderPriceConfig.range.min"
+                              [max]="sliderPriceConfig.range.max"
+                              (change)="onPriceChange($event)"
+                              (update)="onChangePrice($event)"
+                              [(ngModel)]="filter.prices">
+                  </nouislider>
+                </div>
+              </div>
+            </div>
+            <div class="filter-time m-t-14">
+              <div class="title">Lọc theo</div>
+              <div class="btn-group">
+                <button class="btn m-t-10" *ngFor="let item of getArrayDataField(productFilter, 'options'); trackBy: trackByFn"
+                        [class.active]="checkIsExist(filter.options, item.code)"
+                        (click)="onSelectOptions(item.code)">
+                  {{ item.name }}
+                </button>
+              </div>
+            </div>
+
+            <!-- <div class="filter-option m-t-20">
+              <div class="title">Danh mục</div>
+              <div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"
+                      *ngFor="let item of getArrayDataField(productFilter, 'categories'); trackBy: trackByFn;">
+                    <a class="d-block"
+                      (click)="onSelectCategory(item.code)">
+                      {{ item.name }}
+                      <span class="pull-right">
+                        <img *ngIf="checkIsExist(filter.categories, item.code)" class="m-l-5 m-b-none m-t-n-3 size-24x24 animated fadeIn" cdn-src="assets/images/icon/icon-checked-green.svg" alt="img" />
+                        <img *ngIf="!checkIsExist(filter.categories, item.code)" class="m-l-5 m-b-none m-t-n-3 size-24x24 animated fadeIn" cdn-src="assets/images/icon/icon-uncheck-gray.svg" alt="img" />
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div> -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

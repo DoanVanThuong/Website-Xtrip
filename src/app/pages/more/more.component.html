@@ -1,0 +1,114 @@
+<div class="load-more p-b-70">
+  <app-header [heading]="'Xem thêm'" [fixed]="true" [version]="3"></app-header>
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="load-more-menu">
+          <div class="load-more-item coupon-n-favourite">
+            <div class="title">Khuyến mãi & yêu thích</div>
+            <div class="row">
+              <div class="col-12">
+                <div class="list">
+                  <ul>
+                    <li class="list-item">
+                      <a [routerLink]="['/more/coupon']">
+                        <img class="icon pre-icon" cdn-src="assets/images/more/coupon-menu.svg"/>
+                        <span>Mã khuyến mãi</span>
+                      </a>
+                    </li>
+                    <li class="list-item hidden">
+                      <a>
+                        <img class="icon pre-icon" cdn-src="assets/images/more/news-campaign.svg"/>
+                        <span>Tin khuyến mãi</span>
+                      </a>
+                    </li>
+                    <li class="list-item">
+                      <a [routerLink]="['/more/favourite']">
+                        <img class="icon pre-icon" cdn-src="assets/images/more/favorite.svg"/>
+                        <span>Yêu thích</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="load-more-item support">
+            <div class="title">Hỗ trợ</div>
+            <div class="row">
+              <div class="col-12">
+                <div class="list">
+                  <ul>
+                    <li class="list-item">
+                      <a [routerLink]="['/more/faq']">
+                        <img class="icon pre-icon" cdn-src="assets/images/more/question.svg"/>
+                        <span>Câu hỏi thường gặp</span>
+                      </a>
+                    </li>
+                    <li class="list-item">
+                      <a [routerLink]="['/more/guide']">
+                        <img class="icon pre-icon" cdn-src="assets/images/more/manual.svg"/>
+                        <span>Hướng dẫn sử dụng</span>
+                      </a>
+                    </li>
+                    <li class="list-item">
+                      <a [routerLink]="['/more/request-support']">
+                        <img class="icon pre-icon" cdn-src="assets/images/more/request.svg"/>
+                        <span>Yêu cầu hỗ trợ</span>
+                      </a>
+                    </li>
+                    <li class="list-item">
+                      <a href="tel:{{ CAPP.SUPPORT_CENTER }}">
+                        <img class="icon pre-icon" cdn-src="assets/images/more/phone.svg"/>
+                        <span>Hỗ trợ qua điện thoại </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="load-more-item information">
+            <div class="title">Thông tin</div>
+            <div class="row">
+              <div class="col-12">
+                <div class="list">
+                  <ul>
+                    <li class="list-item">
+                      <a [routerLink]="['/more/about-us']">
+                        <img class="icon pre-icon" cdn-src="assets/images/more/about.svg"/>
+                        <span>Về chúng tôi </span>
+                      </a>
+                    </li>
+                    <li class="list-item">
+                      <a [routerLink]="['/more/policy']">
+                        <img class="icon pre-icon" cdn-src="assets/images/more/policy.svg"/>
+                        <span>Chính sách</span>
+                      </a>
+                    </li>
+
+                    <li class="list-item">
+                      <a (click)="openFeedback()">
+                        <img class="icon pre-icon" cdn-src="assets/images/more/feedback.svg"/>
+                        <span>Đánh giá ứng dụng</span>
+                      </a>
+                    </li>
+                    <li class="list-item">
+                      <a>
+                        <img class="icon pre-icon" cdn-src="assets/images/more/share.svg"/>
+                        <span>Chia sẻ ứng dụng</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer-mobile></app-footer-mobile>
+</div>
+
+<feedback-popup></feedback-popup>

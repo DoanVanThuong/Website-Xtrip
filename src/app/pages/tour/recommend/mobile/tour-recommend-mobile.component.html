@@ -1,0 +1,28 @@
+<div class="tour-recommend tour-recommend-mobile">
+
+  <app-header [version]="3" [fixed]="true" [heading]="heading" [back]="true"></app-header>
+
+  <div class="container wrapper p-15"
+       min-height
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <div class="" *ngIf="!!tours.length">
+      <ul class="list-unstyled">
+        <li [class.m-t-15]="i > 0"
+            *ngFor="let tour of tours; trackBy: trackByFn; let i =index">
+          <tour-detail-item [tour]="tour"></tour-detail-item>
+        </li>
+      </ul>
+    </div>
+
+    <app-empty-screen [show]="!tours.length && !isLoading"
+                      (retry)="getRecommendTours()"
+                      [isRetry]="false">
+    </app-empty-screen>
+
+    <loading [show]="isLoading"></loading>
+  </div>
+</div>

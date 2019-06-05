@@ -1,0 +1,43 @@
+<div class="my-booking my-booking-mobile">
+  <app-header [fixed]="true" [heading]="'Đặt chỗ của tôi'" [version]="3">
+
+    <tabset [justified]="true"
+            [type]="'tabs'"
+            class="my-booking-tab booked-flight-tab">
+      <tab [heading]="'Vé máy bay'"
+           [active]="tab === MODULE.FLIGHT"
+           (selectTab)="onSelectTab($event, MODULE.FLIGHT)">
+      </tab>
+      <tab [heading]="'Khách sạn'"
+           [active]="tab === MODULE.HOTEL"
+           (selectTab)="onSelectTab($event, MODULE.HOTEL)">
+      </tab>
+      <tab [heading]="'Tour trọn gói'"
+           [active]="tab === MODULE.TOUR"
+           (selectTab)="onSelectTab($event, MODULE.TOUR)">
+      </tab>
+      <tab [heading]="'Vui chơi & tham quan'"
+           [active]="tab === MODULE.PRODUCT"
+           (selectTab)="onSelectTab($event, MODULE.PRODUCT)">
+      </tab>
+    </tabset>
+
+  </app-header>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="slot-booking">
+          <booked-flight *ngIf="tab === MODULE.FLIGHT"></booked-flight>
+          <booked-hotel *ngIf="tab === MODULE.HOTEL"></booked-hotel>
+          <booked-tour *ngIf="tab === MODULE.TOUR"></booked-tour>
+          <booked-product *ngIf="tab === MODULE.PRODUCT"></booked-product>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer-mobile></app-footer-mobile>
+</div>
+
+<sync-request-popup (submit)="onSync()" (cancel)="onSkip()"></sync-request-popup>

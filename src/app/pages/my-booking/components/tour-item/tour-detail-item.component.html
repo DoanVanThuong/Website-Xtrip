@@ -1,0 +1,98 @@
+<!-- for mobile -->
+<div class="booking-detail-item animated fadeInUp" *ngIf="isMobile">
+  <div class="booking-img">
+    <img class="img-responsive img-fix"
+         defaultImage="assets/images/no-thumbnail.png"
+         [lazyLoad]="tour.photo.src | size: 300"
+         [offset]="80"
+         [alt]="tour.tourName"
+         [title]="tour.tourName"
+         onerror="this.src = 'assets/images/no-thumbnail.png'"/>
+  </div>
+  <div class="booking-info">
+    <div class="booking-name">
+      {{ tour.tourName }}
+    </div>
+    <div class="booking-status">
+      <booking-status-tour [status]="tour.status" [statusName]="tour.statusName" [fill]="true" [icon]="true"></booking-status-tour>
+    </div>
+    <div class="booking-description">
+      <div class="row">
+        <div class="col-6 booking-time">
+          <div class="info-label font-11">Ngày đi</div>
+          <div class="font-18">{{ tour.departDate | departDate }}</div>
+        </div>
+        <div class="col-6 booking-from">
+          <div class="info-label font-11">Khởi hành từ</div>
+          <div class="font-18 text-truncate">{{ tour.departPlace }}</div>
+        </div>
+        <!-- <div class="col-4 booking-supplier" *ngIf="tour.supplier.logo != null">
+          <div class="info-label font-11">Tổ chức bởi</div>
+          <div class="font-18">
+            <img class="m-b-0 size-64x16 img-contain"
+                 defaultImage="assets/images/no-thumbnail.png"
+                 [lazyLoad]="tour.supplier.logo.src"
+                 [alt]="tour.supplier.name"
+                 [title]="tour.supplier.name"
+                 onerror="this.src = 'assets/images/no-thumbnail.png'"/>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- for desktop -->
+<div class="booking-tour-detail-item booking-tour-detail-item-desktop m-t-20" *ngIf="isDesktop">
+  <div class="date">Ngày đặt {{ tour.bookingDate | moment: 'DD/MM/YYYY' }}</div>
+  <div class="panel card panel-desktop m-t-10">
+    <div class="d-flex">
+      <div class="mn-w-200 w-200 mn-h-170">
+        <a class="pointer d-block h-full w-full" (click)="onOpenBookingDetail()">
+          <img class="m-b-none tour-item-image"
+               defaultImage="assets/images/no-thumbnail.png"
+               [lazyLoad]="tour.photo.src | size: 300"
+               onerror="this.src = 'assets/images/no-thumbnail.png'"
+               [alt]="tour.tourName"
+               [title]="tour.tourName"/>
+        </a>
+      </div>
+      <div class="w-full">
+        <div class="panel-heading card-header text-black">
+          Mã đặt chỗ: <span class="font-bold">{{ tour.code }}</span>
+          <span class="pull-right font-medium status">
+              <booking-status-tour [status]="tour.status" [statusName]="tour.statusName" ></booking-status-tour>
+          </span>
+        </div>
+        <div class="panel-body card-body">
+          <a class="pointer" (click)="onOpenBookingDetail()">
+            <div class="d-flex align-items-center justify-content-center flex-row">
+              <div class="mr-auto">
+                <h4 class="font-16 font-bold m-none h-40 over-hidden">{{ tour.tourName }}</h4>
+                <div class="d-flex m-t-20">
+                  <div class="m-r-20">
+                    <div class="font-13 text-light-gray">Ngày khởi hành</div>
+                    <div class="font-18 text-black">{{ tour.departDate | departDate }}</div>
+                  </div>
+                  <div class="m-r-20">
+                    <div class="font-13 text-light-gray">Số người</div>
+                    <div class="font-18 text-black">
+                     {{tour.adults + tour.children + tour.infants}}
+                    </div>
+                  </div>
+                  <div class="">
+                    <div class="font-13 text-light-gray">Nơi khởi hành</div>
+                    <div class="font-18 text-black">{{ tour.departPlace }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="font-18 font-medium mn-w-100 text-right m-l-15">
+                {{ tour.totalPrice | currencyMoney:''}} <span class="text-underline">đ</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

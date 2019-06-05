@@ -1,0 +1,43 @@
+<div class="authentication-page bg-img">
+  <div class="row">
+    <div class="col-12">
+      <a (click)="back()">
+        <img class="m-b-0 size-24x24" cdn-src="assets/images/icon/icon-close-green.svg" alt="icon"/>
+      </a>
+    </div>
+  </div>
+
+  <div class="form-box">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6 col-12">
+        <button class="btn btn-fb b-r-56 m-t-15 text-center"
+                (click)="onSignInWithFacebook()">
+          <img class="size-28x28 float-left" cdn-src="/assets/images/homepage/fb.svg" alt="Login with Facebook">
+          <span class="m-l-n-20">Đăng nhập bằng Facebook</span>
+        </button>
+
+        <button class="btn btn-gg b-r-56 m-t-15 text-center"
+                (click)="onSignInWithGoogle()">
+          <img class="size-28x28 float-left" cdn-src="/assets/images/homepage/gg.svg" alt="Login with Google">
+          <span class="m-l-n-20">Đăng nhập bằng Google</span>
+        </button>
+
+        <a class="btn btn-main-outline btn-register-by-phone w-full m-t-15"
+           [routerLink]="['login']"
+           [queryParams]="params">
+          <span class="text-main">Đăng nhập bằng email hoặc số điện thoại</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="row m-t-31">
+      <div class="container-fluid text-center text-main">
+        <a class="btn btn-main-link"
+           [routerLink]="['register']"
+           [queryParams]="params">Tạo tài khoản mới</a>
+      </div>
+    </div>
+  </div>
+
+
+</div>

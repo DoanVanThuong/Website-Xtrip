@@ -1,0 +1,111 @@
+<!--component html goes here -->
+<div class="product-search-form-page" [class.focused]="isFocus">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="form">
+        <div class="form-group" (click)="isDestinationShow = true; destination.name = ''; isFocus = true"
+             (clickOutside)="isDestinationShow = false; isFocus = false">
+          <input type="text" class="form-control" [placeholder]="title" [(ngModel)]="destination.name"
+                 (ngModelChange)="onChange($event)" (focus)="onSelectInput($event)"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="result-search-product shadow animated fadeIn" *ngIf="isDestinationShow">
+        <perfect-scrollbar>
+
+          <!-- not found -->
+          <div class="location-found">
+            <div class="heading" *ngIf="(!sourcesDestination.length && !sourcesProduct.length) && !!destination.name">
+              Không có kết quả
+            </div>
+          </div>
+
+          <!-- location -->
+          <div *ngIf="sourcesDestination.length > 0 && !!destination.name">
+            <div class="heading">Điểm đến</div>
+            <div class="data-box">
+              <div class="list-group-group list-group-flush">
+                <div class="list-group-item"
+                     *ngFor="let location of sourcesDestination; trackBy: trackByFn; let i = index">
+                  <a class="pointer d-block" [routerLink]="[ '/product/result' ]"
+                     [queryParams]="{destination: location.id, name: location.name, type: type}">
+                    <div class="justify-content-start align-items-center">
+                      <div class="m-l-10">
+                        <div class="text-truncate main-text"
+                             [innerHTML]="location.name | highlight : destination.name"></div>
+                        <div class="text-truncate font-13 sub-text"
+                             [innerHTML]="location.address | highlight : destination.name"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- activities -->
+          <div *ngIf="sourcesProduct.length > 0 && !!destination.name">
+            <div class="heading">Hoạt động</div>
+            <div class="data-box product-activities-item">
+              <div class="list-group-group list-group-flush">
+                <div class="list-group-item" *ngFor="let location of sourcesProduct; trackBy: trackByFn; let i = index">
+                  <a class="pointer" [routerLink]="['/product/' + location.id + '/detail']"
+                     [queryParams]="{type: type, name: location.name}">
+                    <div class="d-flex justify-content-start align-items-center">
+                      <div class="">
+                        <img class="size-36x36 b-r-3 img-fix" [src]="location.photo.src" alt="img"
+                             onerror="this.src='assets/images/no-thumbnail.png'"/>
+                      </div>
+                      <div class="m-l-10">
+                        <div class="text-truncate main-text"
+                             [innerHTML]="location.name | highlight : destination.name"></div>
+                        <div class="text-truncate font-13 sub-text"
+                             [innerHTML]="location.address | highlight : destination.name"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- history -->
+          <div class="location-history" *ngIf="!!history.length && !destination.name.length">
+            <div class="heading">Đã chọn gần đây</div>
+            <ul class="data-box d-flex flex-wrap">
+              <li class="his-item" *ngFor="let location of history; trackBy: trackByFn; let i = index">
+                <a class="d-block" [routerLink]="[ '/product/result' ]"
+                   [queryParams]="{destination: location.id, name: location.name, type: type}">{{location.name}}</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- favorite -->
+          <div class="location-favorite" *ngIf="!destination.name.length && !destinations.length">
+            <div class="heading">Điểm đến phổ biến</div>
+            <div class="data-box">
+              <div class="list-group-group list-group-flush">
+                <div class="list-group-item"
+                     *ngFor="let location of favoriteLocations; trackBy: trackByFn; let i = index">
+                  <a class="pointer d-block" [routerLink]="[ '/product/result' ]"
+                     [queryParams]="{destination: location.id, name: location.name, type: type}">
+                    <div class="justify-content-start align-items-center">
+                      <span class="main-text">{{location.name}}</span>,
+                      <span class="sub-text">{{location.address}}</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
+    </div>
+  </div>
+
+</div>

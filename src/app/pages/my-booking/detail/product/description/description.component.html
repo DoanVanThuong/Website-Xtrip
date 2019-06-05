@@ -1,0 +1,43 @@
+<div class="booking-detail-description booking-product-description justify-content-center"
+     *ngIf="!!product">
+  <div class="p-15 bg-green-linear">
+    <div class="row">
+      <div class="col-2">
+        <a class="" (click)="backTo()">
+          <img class="m-t-5 size-16x16" cdn-src="assets/images/icon/icon-close.svg" alt="icon"/>
+        </a>
+      </div>
+      <div class="col-8 text-center font-20 text-white font-medium text-truncate">
+        {{ heading }}
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper booking-detail-description-body bg-white p-15 p-t-none" min-height>
+    <div [ngSwitch]="mode">
+      <div class="policy" *ngSwitchCase="'policy'">
+        <ul>
+          <li *ngFor="let item of policies; trackBy: trackByFn">{{ item }}</li>
+        </ul>
+      </div>
+      <div class="notes" *ngSwitchCase="'note'">
+        <ul>
+          <li *ngFor="let item of notes; trackBy: trackByFn">{{ item }}</li>
+        </ul>
+      </div>
+      <div class="more" *ngSwitchCase="'more'">
+        <ul>
+          <li *ngFor="let item of product.bookingOptions; trackBy: trackByFn">
+            <div class="">
+              {{ item.name }}:
+              <span class="" *ngIf="!utilityHelper.isUrlify(item.value)">{{ item.value }}</span>
+              <span class="m-t-5" *ngIf="!!utilityHelper.isUrlify(item.value)">
+                <img class="mx-w-full" [src]="item.value" [alt]="item.name"/>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

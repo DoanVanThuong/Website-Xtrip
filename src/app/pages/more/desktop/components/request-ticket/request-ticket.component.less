@@ -1,0 +1,85 @@
+// component css goes here
+@import "_variables.less";
+.request-ticket-page {
+  .title {
+    color: @gray-23;
+    font-size: 24px;
+    font-weight: 900;
+  }
+  .shadow {
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1) !important;
+  }
+  .label-name {
+    color: @gray-1;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .form {
+    .list-group {
+      .list-group-item {
+        margin: 0 0 10px;
+        &.z-index-20 {
+          z-index: 20;
+        }
+        .r-10 {
+          right: 10px;
+        }
+        .line-custom {
+          border-bottom: 1px solid @gray-33;
+          padding-bottom: 7px;
+        }
+        .dropdown-toggle::after {
+          content: none;
+        }
+        .mat-form-field {
+          .mat-form-field-wrapper {
+            border-bottom: 1px solid @gray-33;
+            padding-bottom: 0px;
+          }
+          .mat-input-wrapper {
+            .mat-input-underline {
+              color: @gray-33;
+              background-color: @gray-33;
+            }
+          }
+          .mat-input-infix {
+            color: @black;
+            font-size: 15px;
+            font-weight: 500;
+          }
+          .mat-error {
+            font-size: 12px;
+            font-weight: 700;
+            color: @red-3;
+            top: 25px;
+          }
+        }
+      }
+    }
+    .dropdown-menu {
+      border-top: 1px solid @orange-2;
+      border-radius: 0 0 20px 20px;
+      left: 15px !important;;
+      right: 15px !important;;
+      .dropdown-item {
+        &:active {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+  .type-ticket {
+    .mat-input-underline {
+      margin-top: 0 !important;
+    }
+  }
+  .list-group-item:last-child {
+    border-bottom: 1px !important;
+  }
+  .w-200 {
+    width: 200px;
+  }
+  .p-10-25-25 {
+    padding: 10px 25px 25px;
+  }
+}

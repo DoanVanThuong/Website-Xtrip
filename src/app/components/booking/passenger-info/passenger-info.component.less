@@ -1,0 +1,47 @@
+@import '_variables.less';
+
+.passenger-info {
+  .title-color {
+    color: @gray-5
+  }
+  .p-12-5-12 {
+    padding: 12px 0 12px;
+  }
+  .w-10-pc {
+    width: 10%;
+  }
+  .w-80-pc {
+    width: 80%;
+  }
+  .w-10-pc {
+    width: 10%;
+  }
+  .passenger-invalid {
+    color: @red-2;
+    font-size: 13px;
+    font-weight: 300;
+    position: absolute;
+    z-index: 2;
+    bottom: -3px;
+  }
+}
+
+.passenger-info-desktop{
+    .switch-small-desktop{
+      .switch-small{
+        width: 51px;
+        height: 31px;
+
+        small{
+          width: 27px !important;
+          height: 27px !important;
+          top: 2px;
+        }
+        &.checked{
+          small{
+            left: 22px !important;
+          }
+        }
+      }
+    }
+}

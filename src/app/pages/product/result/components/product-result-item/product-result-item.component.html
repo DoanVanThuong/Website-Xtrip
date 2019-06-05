@@ -1,0 +1,126 @@
+<!--component html goes here -->
+
+<div class="product-result-item-page" *ngIf="!!product">
+  <div class="mobile shadow m-b-17 m-t-5 b-r-10" *ngIf="isMobile">
+    <a class="d-block" [routerLink]="[ '/product/' + product.id + '/detail' ]"
+       [queryParams]="generateQueryParams(product)">
+      <div class="carousel-slider">
+        <owl-carousel #owlElement [items]="product.photos"
+                      [carouselClasses]="['owl-theme', 'owl-dots-black', 'sliding']"
+                      [options]="carouselOptions">
+          <div class="row" *ngFor="let item of product.photos">
+            <div class="col-12">
+              <div class="position-relative">
+                <div class="slider-item">
+                  <img class="h-180 b-r-img-10 pointer img-fix"
+                       defaultImage="assets/images/no-thumbnail.png"
+                       [lazyLoad]="item.src | size:300"
+                       [offset]="80"
+                       [title]="item.name"
+                       [alt]="item.name"
+                       onerror="this.src='assets/images/no-thumbnail.png'"/>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </owl-carousel>
+        <div class="area-review">
+          <div class="reviews">
+            <span><img class="m-b-none m-t-n-3 p-r-3" cdn-src="assets/images/hotel/desktop/rating.svg"
+                       alt="img"/>{{product.reviewAverageScore
+              | number: '1.1'}}</span>
+            <span class="m-l-8"><img class="m-b-none p-r-3" cdn-src="assets/images/hotel/desktop/cmt.svg"
+                                     alt="img"/>{{product.reviewCount}}</span>
+          </div>
+          <div class="duration-time">
+            <img class="m-b-none m-t-n-2" cdn-src="assets/images/product/result/time.svg" alt="img"/>
+            {{returnDuration(product.durationDays, product.durationHours, product.durationMinutes)}}
+          </div>
+        </div>
+        <div class="discount" *ngIf="product.percentDiscount > 0">
+          Giảm <span class="font-17 font-weight-bold l-h-1">{{product.percentDiscount}}%</span>
+        </div>
+      </div>
+      <div class="content">
+        <div class="name">{{product.name}}</div>
+        <div class="address">{{product.address}}</div>
+        <div class="m-t-16">
+          <div class="original-price" *ngIf="product.originalPrice > product.sellingPrice">{{product.originalPrice |
+            currencyMoney: ''}} <span class="text-underline">đ</span></div>
+          <div class="row">
+            <div class="col-6 p-r-none">
+              <div class="selling-price">{{product.sellingPrice | currencyMoney: ''}}
+                <span class="text-underline">đ</span>
+                <span class="points m-l-5">+{{product.points}} điểm</span>
+              </div>
+            </div>
+            <div class="col-6 p-l-none text-right">
+              <div class="instant-confirm" *ngIf="product.instantConfirmation">
+                <img class="m-b-none m-t-n-3"
+                     cdn-src="assets/images/product/result/instant-confirm.svg" alt="img"/>
+                Xuất vé ngay
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="desktop bg-white b-r-10 m-t-10 product-shadow product-item pointer" *ngIf="isDesktop">
+    <a class="d-block p-10" [routerLink]="[ '/product/' + product.id + '/detail' ]"
+       [queryParams]="generateQueryParams(product)"
+       [title]="product.name">
+      <div class="row">
+        <div class="col-lg-3 p-r-10">
+          <img class="img-fix m-b-none w-full b-r-5 h-full"
+               defaultImage="assets/images/no-thumbnail.png"
+               [lazyLoad]="product.photo.src | size: 200"
+               onerror="this.src = 'assets/images/no-thumbnail.png'"
+               [alt]="product.name"
+               [title]="product.name"/>
+        </div>
+        <div class="col-lg-9 p-l-10">
+          <div class="row">
+            <div class="col-lg-8 bor-r mn-h-150">
+              <div class="de-name">
+                {{product.name}}
+              </div>
+              <div class="de-address">
+                {{product.address}}
+              </div>
+              <ul class="m-t-20 m-l-15">
+                <!-- <li class="m-t-5"><span class="font-medium">Số khách: </span>ít nhất 2 khách, tối đa 30 khách</li> -->
+                <li class="m-t-5"><span class="font-medium">Thời lượng: </span>{{returnDuration(product.durationDays,
+                  product.durationHours, product.durationMinutes)}}
+                </li>
+                <!-- <li class="m-t-5"><span class="font-medium">Giờ mở cửa: </span>08:00 - 19:00</li> -->
+              </ul>
+            </div>
+            <div class="col-lg-4 position-relative">
+              <div class="text-right">
+                <div class="de-confirmation">
+                  <span><img class="m-b-none size-24x24" cdn-src="assets/images/product/result/instant-confirm.svg"
+                             alt="img"/></span>
+                  Xuất vé ngay
+                </div>
+                <div class="de-price-pos">
+                  <div class="de-org-price" *ngIf="product.originalPrice > product.sellingPrice">
+                    {{product.originalPrice | currencyMoney: ''}} <span class="text-underline">đ</span>
+                  </div>
+                  <div class="de-selling-price">
+                    {{product.sellingPrice | currencyMoney: ''}} <span class="text-underline">đ</span>
+                  </div>
+                  <div class="de-points">
+                    +{{product.points | currencyMoney: '' }} điểm
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

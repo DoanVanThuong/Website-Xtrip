@@ -1,0 +1,55 @@
+<div class="select-date-page bg-white">
+  <div class="loading-wrapper" *ngIf="isLoading">
+    <loading [show]="isLoading"></loading>
+  </div>
+  <section class="product-heading bg-green-linear">
+    <div class="container">
+      <div class="row">
+        <div class="col-2">
+          <a class="d-block" (click)="back()">
+            <img class="size-16x16 m-b-none" cdn-src="assets/images/icon-back.png" alt="icon" />
+          </a>
+        </div>
+        <div class="col-8 p-none text-center">
+          <div class="product-name text-truncate">Chọn ngày</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="main-body bg-white">
+    <section class="date-selector-wp p-t-20">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="title">Ngày đi</div>
+            <a class="d-block date-selected shadow pointer" (click)="onShowDatePicker()">
+              <div class="d-flex align-items-center">
+                <img src="./assets/images/tour/desktop/icon-calendar-selected.svg" alt="img" class="img-fluid">
+                <div [class.text-black]="!!date" class="date-selected-content">{{!!date ? date : 'chọn ngày'}}</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <app-empty-screen [isRetry]="false" [show]="!isLoading && !combos.length" [heading]="'Thông báo'"
+      [description]="'Không có dữ liệu cho ngày này. Bạn vui lòng chọn ngày khác'"></app-empty-screen>
+
+    <section class="combo-wp m-t-30 bg-white" *ngIf="combos.length > 0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="title">Chọn combo</div>
+            <app-combo-mobile [data]="combos" [isShowButton]="true" (onSelect)="onSelectCombo($event)">
+            </app-combo-mobile>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<date-selector-popup [options]="dateOptions" [date]="selectedDate" [showButton]="false" (submit)="onSelectDate($event)">
+</date-selector-popup>

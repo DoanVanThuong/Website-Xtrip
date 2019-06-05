@@ -1,0 +1,21 @@
+<div class="sub-header">
+  <owl-carousel [carouselClasses]="['owl-theme', 'sliding']"
+                [items]="locations"
+                [options]="carouselOptions">
+    <div class="location-item"
+         *ngFor="let location of locations; trackBy: trackByFn">
+      <a class="pointer"
+         [routerLink]="[genUrl(location)]"
+         [queryParams]="generateQueryParams(location)">
+        <div class="location-image">
+          <img class="img-fix"
+               defaultImage="assets/images/no-thumbnail.png"
+               [src]="location.photo.src | size:300"
+               onerror="this.src='assets/images/no-thumbnail.png'"
+               [alt]="location.name"/>
+        </div>
+        <div class="location-name text-truncate">{{ location.name}}</div>
+      </a>
+    </div>
+  </owl-carousel>
+</div>

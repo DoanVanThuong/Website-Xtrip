@@ -1,0 +1,32 @@
+<div class="booking-detail-price justify-content-center" *ngIf="!!product">
+  
+  <app-header [back]="true" [heading]="'Tổng tiền'" [fixed]="true" [version]="3"></app-header>
+
+  <div class="wrapper booking-detail-price-body" min-height>
+    <div class="container">
+      <div class="row ">
+        <div class="col-12 col-md-8 col-lg-6 bg-white">
+          <div class="row" *ngFor="let item of product.priceSummary.detailItems; let i = index">
+            <div class="col-8">
+              {{ item.title }}
+            </div>
+            <div class="col-4 p-l-none text-right">
+              {{ item.price | currencyMoney:'' }} <span class="text-underline">đ</span>
+            </div>
+          </div>
+          <div class="total-price">
+            <div class="row">
+              <div class="col-4">
+                Tổng tiền
+              </div>
+              <div class="col-8 p-l-none text-right font-bold">
+                {{ totalPrice | currencyMoney:'' }} <span class="text-underline">đ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

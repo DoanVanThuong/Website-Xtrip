@@ -1,0 +1,52 @@
+@import '_variables.less';
+
+.price-detail-box {
+  font-size: 15px;
+
+  .line {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 1px;
+    width: 100%;
+    border-top: 1px dashed @gray-7;
+  }
+
+  .point {
+    background-color: @gray-13;
+    padding: 10px;
+  }
+
+  .btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .mat-accordion {
+    .mat-expansion-panel {
+      border-radius: 10px;
+      margin-top: 30px;
+      position: relative;
+      -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+              box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+      .mat-expansion-panel-header {
+        border-radius: 10px;
+        padding: 5px 20px;
+        .mat-expansion-panel-header-title {
+          display: block;
+        }
+      }
+      .mat-expansion-panel-body {
+        padding: 10px 20px 10px;
+        border-top: 1px solid @gray-8;
+      }
+      .mat-expansion-indicator {
+        &:after {
+          border-width: 0px 3px 3px 0px;
+          padding: 4px;
+          margin-top: -10px;
+          color: @green-2;
+        }
+      }
+    }
+  }
+}

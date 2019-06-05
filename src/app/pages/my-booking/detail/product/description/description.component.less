@@ -1,0 +1,27 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.booking-product-description {
+  .booking-detail-description-body {
+    .policy, .notes, .more {
+      ul {
+        > li {
+          padding-left: 12px;
+          position: relative;
+
+          &:before {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            .transform(translateY(-50%));
+            content: '';
+            width: 5px;
+            height: 5px;
+            .border-radius(50%);
+            background-color: @orange-2;
+          }
+        }
+      }
+    }
+  }
+}

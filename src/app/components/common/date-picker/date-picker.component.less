@@ -1,0 +1,225 @@
+@import '_variables.less';
+
+.date-picker {
+  .month {
+    margin-top: 10px;
+
+    table {
+      width: 100%;
+      max-width: 100%;
+
+      .prev, .next {
+        font-size: 24px;
+      }
+
+      tr {
+        padding: 3.5px;
+        > th, > td {
+          min-width: 30px;
+          text-align: center;
+        }
+      }
+
+      > thead {
+        > tr {
+          > th, > td {
+            padding: 5px;
+            min-height: 20px;
+            vertical-align: center;
+          }
+        }
+      }
+
+      > tbody {
+        > tr.week {
+
+          > td {
+            padding: 5px 0;
+            min-height: 30px;
+            vertical-align: center;
+            text-align: center;
+
+            a {
+              display: block;
+              width: 100%;
+              color: @black;
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              span {
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                padding: 6px;
+                background-color: transparent;
+                display: inline-block;
+                line-height: 1.5em;
+              }
+
+              &.today {
+                > span {
+                  background-color: @white;
+                  border: 1px solid @orange-2;
+                }
+              }
+
+              &.date-range {
+                background-color: @orange-3;
+                > span {
+                  background-color: transparent;
+                }
+              }
+
+              &.active {
+                > span {
+                  background-color: @orange-2;
+                  color: @white;
+                }
+              }
+
+              &.start-date {
+                //  background-color: gradient();
+                background-image: linear-gradient(to right, @white, @white 50%, @orange-3 50%, @orange-3 100%);
+                background-image: -moz-linear-gradient(to right, @white, @white 50%, @orange-3 50%, @orange-3 100%);
+                background-image: -webkit-linear-gradient(right, @white, @white 50%, @orange-3 50%, @orange-3 100%);
+                background-image: linear-gradient(to right, @white, @white 50%, @orange-3 50%, @orange-3 100%);
+              }
+              &.end-date {
+                //  background-color: gradient();
+                background-image: -moz-linear-gradient(to left, @white, @white 50%, @orange-3 50%, @orange-3 100%);
+                background-image: -webkit-linear-gradient(left, @white, @white 50%, @orange-3 50%, @orange-3 100%);
+                background-image: linear-gradient(to left, @white, @white 50%, @orange-3 50%, @orange-3 100%);
+              }
+              &.disabled {
+                color: @gray-8;
+                background: transparent !important;
+                span {
+                  border-color: transparent !important;
+                  background: transparent !important;
+                  color: inherit;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.theme-2 {
+    background-color: @white;
+    .month {
+      table {
+        >thead {
+          >tr {
+            &.week-title {
+              >th,
+              >td {
+                color: @gray-1;
+              }
+            }
+          }
+        }
+        >tbody {
+          font-size: 13px;
+          >tr.week {
+            >td {
+              a {
+                span {
+                  width: 36px;
+                  height: 36px;
+                  padding: 7px;
+                }
+                &.today {
+                  >span {
+                    color: @orange-2;
+                    border: none;
+                  }
+                }
+                &.date-range {
+                  background-color: @orange-6;
+                }
+                &.active {
+                  >span {
+                    background: linear-gradient(to right, @orange-4, @orange-5);
+                    color: @white;
+                  }
+                }
+                &.start-date {
+                  background-image: -moz-linear-gradient(to right, @white, @white 50%, @orange-6 50%, @orange-6 100%);
+                  background-image: -webkit-linear-gradient(right, @white, @white 50%, @orange-6 50%, @orange-6 100%);
+                  background-image: linear-gradient(to right, @white, @white 50%, @orange-6 50%, @orange-6 100%);
+                }
+                &.end-date {
+                  background-image: -moz-linear-gradient(to left, @white, @white 50%, @orange-6 50%, @orange-6 100%);
+                  background-image: -webkit-linear-gradient(left, @white, @white 50%, @orange-6 50%, @orange-6 100%);
+                  background-image: linear-gradient(to left, @white, @white 50%, @orange-6 50%, @orange-6 100%);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.theme-3 {
+    background-color: @white;
+    .month {
+      table {
+        >thead {
+          >tr {
+            &.week-title {
+              >th,
+              >td {
+                color: @gray-1;
+              }
+            }
+          }
+        }
+        >tbody {
+          font-size: 13px;
+          >tr.week {
+            >td {
+              a {
+                span {
+                  width: 36px;
+                  height: 36px;
+                  padding: 7px;
+                }
+                &.today {
+                  >span {
+                    color: @green-2;
+                    border: none;
+                  }
+                }
+                &.date-range {
+                  background-color: @green-22;
+                }
+                &.active {
+                  >span {
+                    background: linear-gradient(to right, @green-2, @green-2);
+                    color: @white;
+                  }
+                }
+                &.start-date {
+                  background-image: -moz-linear-gradient(to right, @white, @white 50%, @green-22 50%, @green-22 100%);
+                  background-image: -webkit-linear-gradient(right, @white, @white 50%, @green-22 50%, @green-22 100%);
+                  background-image: linear-gradient(to right, @white, @white 50%, @green-22 50%, @green-22 100%);
+                }
+                &.end-date {
+                  background-image: -moz-linear-gradient(to left, @white, @white 50%, @green-22 50%, @green-22 100%);
+                  background-image: -webkit-linear-gradient(left, @white, @white 50%, @green-22 50%, @green-22 100%);
+                  background-image: linear-gradient(to left, @white, @white 50%, @green-22 50%, @green-22 100%);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,45 @@
+<div bsModal #popup="bs-modal" class="modal fade tour-policy-detail-popup" role="dialog">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-2" (click)="hide()">
+            <img class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-close-2.svg" alt="close" />
+          </div>
+          <div class="col-8 text-center font-17 font-weight-bold">
+            Chính sách
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12" *ngIf="!!data && !!mode">
+            <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex"
+              (selectedIndexChange)="selectedIndexChange($event)" *ngIf="mode === 'new'">
+              <mat-tab label="Giá bao gồm" *ngIf="!!data.include">
+                <div class="content" [innerHTML]="data.include"></div>
+              </mat-tab>
+              <mat-tab label="Không bao gồm" *ngIf="!!data.exclude">
+                <div class="content" [innerHTML]="data.exclude"></div>
+              </mat-tab>
+              <mat-tab label="Phụ thu" *ngIf="!!data.surcharges">
+                <ul class="list-unstyled list-surcharges">
+                  <li *ngFor="let item of data.surcharges; let i = index;">
+                    <div> {{item.title}}: {{item.value}} </div>
+                  </li>
+                </ul>
+              </mat-tab>
+            </mat-tab-group>
+
+            <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex" *ngIf="mode === 'old'">
+              <mat-tab label="Chính sách">
+                <div class="content" [innerHTML]="data"></div>
+              </mat-tab>
+            </mat-tab-group>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

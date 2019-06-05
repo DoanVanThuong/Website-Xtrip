@@ -1,0 +1,90 @@
+<div class="request-support-mobile-page">
+  <app-header [back]="true" [heading]="'Yêu cầu hỗ trợ'" [fixed]="true" [version]="3"></app-header>
+
+  <div class="wrapper bg-white" min-height>
+    <div class="main-body">
+        <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <form class="form" [formGroup]="form" (submit)="onSubmit(form.value)">
+                  <div class="list-group list-group-flush">
+                    <div class="list-group-item" *ngIf="!isLoggedIn || fullName.value==''">
+                      <div class="row">
+                        <div class="col-5">Họ tên</div>
+                        <div class="col-7">
+                          <mat-form-field [floatLabel]="'never'">
+                            <input type="text" matInput placeholder="* Nhập họ tên" [formControl]="fullName" />
+                            <mat-error *ngIf="fullName.dirty">
+                              <span *ngIf="fullName.errors | equalError:'required'">Không được để trống</span>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-group-item" *ngIf="!isLoggedIn || fullName.value==''">
+                      <div class="row">
+                        <div class="col-5">Email</div>
+                        <div class="col-7">
+                          <mat-form-field [floatLabel]="'never'">
+                            <input type="email" matInput placeholder="* Nhập email" [formControl]="email" />
+                            <mat-error *ngIf="email.dirty">
+                              <span *ngIf="email.errors | equalError:'required'">Không được để trống</span>
+                              <span *ngIf="email.errors | equalError:'email'">Email không hợp lệ</span>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-group-item" *ngIf="!isLoggedIn || fullName.value==''">
+                      <div class="row">
+                        <div class="col-5">Số điện thoại</div>
+                        <div class="col-7">
+                          <mat-form-field [floatLabel]="'never'">
+                            <input type="text" matInput placeholder="(Không bắt buộc)" [formControl]="phone" />
+                            <mat-error *ngIf="phone.dirty">
+                              <span *ngIf="phone.errors | equalError:'phone'">Số điện thoại không hợp lệ</span>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-group-item" *ngIf="!params.code">
+                      <div class="row">
+                        <div class="col-5">Phân loại</div>
+                        <div class="col-7">
+                          <mat-form-field [floatLabel]="'never'">
+                            <input type="text" matInput placeholder="Chọn loại hỗ trợ" [formControl]="type" mbsc-scroller
+                              [mbsc-options]="scrollerOptions" />
+                            <span class="" matSuffix>
+                              <i class="fa fa-angle-right font-18"></i>
+                            </span>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="row">
+                        <div class="col-12">
+                          <mat-form-field [floatLabel]="'never'">
+                            <textarea type="text" expand-height matInput rows="10" placeholder="* Nhập nội dung"
+                              [formControl]="content">
+                                </textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+    </div>
+    
+  </div>
+
+  <div class="request-support-footer fixed-bottom z-index-500 ">
+    <button type="submit" class="btn btn-main btn-block" [disabled]="form.invalid" (click)="onSubmit(form.value)">
+      Gửi yêu cầu
+    </button>
+  </div>
+</div>

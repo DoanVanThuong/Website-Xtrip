@@ -1,0 +1,167 @@
+<div class="passenger-item passenger-item-desktop animated zoomIn">
+  <div class="panel panel-desktop card">
+    <div class="card-body panel-body">
+      <div class="note m-b-30" *ngIf="isInternational">
+        <span class="note-danger font-bold">Lưu ý quan trọng:</span> Bạn phải chắc chắn rằng hộ chiếu của bạn còn thời
+        hạn tối thiểu 6 tháng kể từ ngày khởi hành đối với chuyến bay quốc tế.
+      </div>
+
+      <div class="row">
+        <div class="container-fluid">
+          <div class="title">{{ heading }}</div>
+          <form [formGroup]="form"
+                class="form form-desktop m-t-10"
+                novalidate>
+            <div class="row">
+              <div class="container-fluid">
+                <div class="form-group">
+                  <div class="control-label">Danh xưng:</div>
+                  <div class="vocatives m-t-10">
+                    <button class="btn btn-main-outline"
+                            type="button"
+                            [class.active]="title === vocative"
+                            *ngFor="let vocative of vocatives; trackBy: trackByFn; let i = index"
+                            (click)="onSelectVocative(vocative)">
+                      {{ vocative }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Họ:</label>
+                  <input type="text"
+                         placeholder="Nhập họ"
+                         class="form-control underline"
+                         [formControl]="lastName"
+                         [typeahead]="passengers"
+                         typeaheadOptionField="lastName"
+                         [typeaheadItemTemplate]="passengerTemplate"
+                         [typeaheadScrollable]="true"
+                         [typeaheadMinLength]="0"
+                         [typeaheadOptionsInScrollableView]="7"
+                         (typeaheadOnSelect)="onSelectPassengerDropdown($event)"/>
+                  <div class="error" *ngIf="lastName.dirty || lastName.touched || isInvalid">
+                    <span *ngIf="lastName.errors | equalError:'required'">Vui lòng không để trống</span>
+                    <span *ngIf="lastName.errors | equalError:'minlength'">Không hợp lệ</span>
+                    <span *ngIf="lastName.errors | equalError:'maxlength'">Không hợp lệ</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Tên đệm & tên:</label>
+                  <input type="text"
+                         placeholder="Nhập tên đệm & tên"
+                         class="form-control underline"
+                         [formControl]="firstName"
+                         [typeahead]="passengers"
+                         typeaheadOptionField="firstName"
+                         [typeaheadItemTemplate]="passengerTemplate"
+                         [typeaheadScrollable]="true"
+                         [typeaheadMinLength]="0"
+                         [typeaheadOptionsInScrollableView]="7"
+                         (typeaheadOnSelect)="onSelectPassengerDropdown($event)"/>
+                  <div class="error" *ngIf="firstName.dirty || firstName.touched || isInvalid">
+                    <span *ngIf="firstName.errors | equalError:'required'">Vui lòng không để trống</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="isDOBShow">
+              <div class="col-md-6">
+                <div class="form-group has-icon">
+                  <label class="control-label">Ngày sinh:</label>
+                  <div class="icon-addon">
+                    <input type="text"
+                           placeholder="Nhập ngày sinh"
+                           class="form-control underline"
+                           [formControl]="dateOfBirth"
+                           bsDatepicker
+                           [maxDate]="maxDate"
+                           [bsConfig]="datePickerOptions"
+                           readonly/>
+                    <span class="form-control-icon">
+                      <img class="size-24x24" cdn-src="assets/images/icon/icon-calendar-orange.svg" alt="icon"/>
+                    </span>
+                  </div>
+                  <div class="error" *ngIf="dateOfBirth.dirty || dateOfBirth.touched || isInvalid">
+                    <div *ngIf="dateOfBirth.errors | equalError:'required'">Vui lòng không để trống</div>
+                    <div *ngIf="dateOfBirth.errors | equalError:'date'">Ngày sinh không hợp lệ</div>
+                    <div class="font-8"
+                         *ngIf="dateOfBirth.errors | equalError:'range_age'">
+                      <span class="" *ngIf="passenger.type === 'child'">
+                        Ngày sinh phải từ {{ rangeAge.from }} đến {{ rangeAge.to }} tuổi</span>
+                      <span class="" *ngIf="passenger.type === 'infant'">
+                        Ngày sinh phải dưới {{ rangeAge.to }} tuổi</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <booking-passport *ngIf="isInternational"
+                              [delay]="delay"
+                              [passenger]="passenger"
+                              [invalid]="isInvalid"
+                              (changes)="onPassportChange($event)">
+            </booking-passport>
+          </form>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="isBaggageShow">
+        <div class="col-md-6 baggage-box m-t-50"
+             *ngFor="let segment of segments; trackBy: trackByFn; let i = index">
+          <div class="title">{{ i !== 0 ? 'Hành lý chiều về' : 'Hành lý chiều đi' }}</div>
+          <div class="baggage-dropdown dropdown-baggage dropdown m-t-10" dropdown>
+            <button dropdownToggle
+                    type="button"
+                    class="btn  btn-baggage dropdown-toggle">
+              <div class="row">
+                <div class="col-9">
+                  <div class="baggage-carrier">
+                    <img [src]="segment.flightIcon"
+                         class="size-32x32 m-b-none m-t-n-3 m-r-10"
+                         [alt]="segment.carrierName"/>
+                    <span class="font-medium">{{ segment.carrierName }}</span>
+                  </div>
+                  <div class="baggage-weight">
+                    {{ selectedBaggages[i].weight }}kg -
+                    <app-price [price]="selectedBaggages[i].price"></app-price>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="d-flex align-items-center justify-content-end h-full">
+                    <i class="fa fa-angle-down text-main fa-2x"></i>
+                  </div>
+                </div>
+              </div>
+            </button>
+            <ul *dropdownMenu
+                role="menu"
+                class="dropdown-menu">
+              <li role="menuitem"
+                  *ngFor="let baggage of segment.baggages; trackBy: trackByFn">
+                <a class="pointer dropdown-item"
+                   (click)="onSelectBaggage(baggage, i)">
+                  {{ baggage.weight }}{{baggage.unit}} (+{{baggage.price | currencyMoney:'' }}<span
+                  class="text-underline">đ</span>)
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #passengerTemplate let-model="item">
+  <div class="passenger-item">
+    <img class="m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-user-gray.svg" alt="icon"/>
+    {{ model.title }} {{ model.lastName }} {{ model.firstName }}
+  </div>
+</ng-template>

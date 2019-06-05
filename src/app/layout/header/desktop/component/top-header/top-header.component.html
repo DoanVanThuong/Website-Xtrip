@@ -1,0 +1,84 @@
+<div class="top-header">
+  <div class="top-header-download"
+       [@showAnimate]="isDownloadShow ? 'show' : 'hide'">
+
+    <div class="d-flex flex-column flex-lg-row align-items-center">
+      <div class="d-flex align-items-center mr-lg-auto">
+        <img class="size-86x86 img-fix m-r-20"
+             cdn-src="assets/images/logo-square-white.png" alt="Xtrip" title="Xtrip"/>
+        <div class="">
+          <div class="font-20 font-medium">
+            Tải Xtrip: Ứng Dụng Đặt Tour Du Lịch, Khách Sạn, Vé Máy Bay & Vé Vui Chơi
+          </div>
+          <div class="m-t-5" *ngIf="!isProduction">
+            Nhập mã <span class="promo-code">XTRIPAPP</span> Giảm ngay <span class="font-bold font-18">500.000đ</span>
+            cho khách hàng lần đầu đặt chỗ trên ứng dụng Xtrip.
+          </div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center m-l-20">
+        <div class="d-flex align-items-center">
+          <div class="">
+            <a class="pointer d-block"
+               target="_blank"
+               [href]="CAPP.ANDROID_LINK">
+              <img class="mx-w-full w-130"
+                   cdn-src="assets/images/homepage/android-app.svg"/>
+            </a>
+            <a class="pointer d-block m-t-8 w-130"
+               target="_blank"
+               [href]="CAPP.IOS_LINK">
+              <img class="mx-w-full w-150" cdn-src="assets/images/homepage/apple-app.svg"/>
+            </a>
+          </div>
+          <div class="m-l-20">
+            <a class="pointer p-10 bg-white d-block"
+               target="_blank"
+               [href]="CAPP.APP_LINK">
+              <img class="size-100x100" cdn-src="assets/images/qrcode.svg"/>
+            </a>
+          </div>
+        </div>
+        <a class="pointer m-l-50"
+           (click)="isDownloadShow = !isDownloadShow">
+          <img class="size-32x32" cdn-src="assets/images/icon/icon-close-white.svg" alt="icon"/>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="top-header-info">
+    <div class="d-flex flex-column flex-md-row align-items-center">
+      <div class="nav-left mr-md-auto">
+        <nav class="navbar-nav flex-row">
+          <a class="nav-item" href="tel:{{ CAPP.SUPPORT_CENTER }}">
+            <!--<img class="size-16x16" cdn-src="assets/images/icon/icon-call-green.svg" alt="icon"/>-->
+            Hotline tour: <span class="text-green font-medium">{{ CAPP.SUPPORT_CENTER }}</span>
+          </a>
+          <a class="nav-item" href="tel:1900292977">
+            <!--<img class="size-16x16" cdn-src="assets/images/icon/icon-call-green.svg" alt="icon"/>-->
+            Dịch vụ khác: <span class="text-green font-medium">1900 292977</span>
+          </a>
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="navbar-nav flex-row">
+          <a class="nav-item" [routerLink]="['/blog']">
+            <!--<img class="size-16x16"
+                 cdn-src="assets/images/icon/icon-blog-green.svg"
+                 alt="icon"/>-->
+            Cảm hứng du lịch
+          </a>
+          <a class="nav-item" (click)="isDownloadShow = !isDownloadShow">
+            <!--<img class="size-16x16" cdn-src="assets/images/icon/icon-cellphone-green.svg" alt="icon"/>-->
+            Tải ứng dụng
+          </a>
+          <a class="nav-item" [routerLink]="['/more/faq']">
+            <!--<img class="size-16x16" cdn-src="assets/images/icon/icon-support-green.svg" alt="icon"/>-->
+            Trợ giúp
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

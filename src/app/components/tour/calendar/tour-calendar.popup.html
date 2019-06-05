@@ -1,0 +1,45 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade tour-calendar-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-green">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-2">
+              <a class="close float-left" (click)="hide()">
+                <img alt="icon" class="size-24x24 m-b-none" cdn-src="assets/images/back.svg">
+              </a>
+            </div>
+            <div class="col-8">
+              Chọn ngày
+            </div>
+          </div>
+        </div>
+        <div class="modal-sub-title text-center m-t-10">
+          <button class="btn btn-select-month"
+                  [(ngModel)]="selectedDate"
+                  mbsc-scroller
+                  [mbsc-options]="mobilScrollOptions">
+            {{ selectedDate | moment:'MM / YYYY'}}
+            <i class="fa fa-angle-down fa-lg"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <app-calendar [data]="tours"
+                      [month]="month"
+                      [year]="year"
+                      [options]="{startOfWeek: 1}"
+                      (select)="onSelectDate($event)"></app-calendar>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center">
+          Đơn vị tính: ngàn đồng
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

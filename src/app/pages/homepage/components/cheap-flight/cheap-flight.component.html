@@ -1,0 +1,71 @@
+<section class="block block-cheap-flight"
+         [class.m-t-none]="isDesktop"
+         [class.p-b-40]="isDesktop"
+         *ngIf="!!flights.length">
+  <!-- desktop -->
+  <div class="cheap-flight cheap-flight-desktop" *ngIf="isDesktop">
+    <div class="container">
+      <div class="row">
+        <div class="container-fluid">
+          <h3 class="block-title">Vé rẻ trong tháng</h3>
+          <div class="block-body">
+            <div class="row">
+              <div class="col-lg-9 p-r-10">
+                <div class="row">
+                  <div class="col-lg-4 col-sm-6"
+                       [class.m-t-20]="i/itemsPerRow >= 1"
+                       [class.p-l-10]="i%itemsPerRow > 0"
+                       [class.p-r-10]="i%itemsPerRow < itemsPerRow - 1"
+                       *ngFor="let flight of flights; trackBy: trackByFn; let i = index">
+                    <cheap-flight-item-desktop [flight]="flight"
+                                               (select)="onSelectFlight($event)">
+                    </cheap-flight-item-desktop>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-lg-3 p-l-10">
+                <div class="cheap-flight-banner">
+                  <a class="pointer" [routerLink]="['/flight']">
+                    <img class="" cdn-src="assets/images/bg-cheap-flight.png"/>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <cheap-flight-calendar-popup (select)="onSelectDate($event)"></cheap-flight-calendar-popup>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="flight-cheap cheap-flight-mobile m-t-15" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title">Vé rẻ trong tháng</h3>
+        <div class="block-body">
+          <owl-carousel [carouselClasses]="['owl-theme', 'sliding']"
+                        [items]="flights"
+                        [options]="carouselOptions">
+            <div class="" *ngFor="let flight of flights; trackBy: trackByFn; let i = index">
+              <cheap-flight-item-mobile [flight]="flight"
+                                        (select)="onSelectFlight($event)">
+              </cheap-flight-item-mobile>
+            </div>
+          </owl-carousel>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-desktop m-t-15">
+      <div class="panel-body p-15">
+        <a class="d-block" [routerLink]="['/flight/cheap-flight/search']">
+          <img class="size-24x24 m-t-n-3 m-r-10"
+               cdn-src="assets/images/icon/icon-target-red.png"/>
+          <span class="font-medium font-16">Chặng bay khác</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

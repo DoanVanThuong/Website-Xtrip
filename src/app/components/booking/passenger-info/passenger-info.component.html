@@ -1,0 +1,89 @@
+<div class="passenger-info passenger-info-mobile" *ngIf="isMobile">
+  <div class="justify-content-center">
+    <div class="p-10">
+      <div class="title-color font-13">Thông tin hành khách</div>
+    </div>
+    <div class="bg-white">
+      <div class="list-group list-group-flush" *ngIf="isAdditionalInfoShow">
+        <div class="list-group-item">
+          <div class="following-information d-flex justify-content-between align-items-center">
+            <div>Bổ sung thông tin sau</div>
+            <div class="title">
+              <ui-switch size="small"
+                         [ngModel]="isAdditionalInfo"
+                         (change)="onChangeAdditionalInfo($event)"></ui-switch>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="list-group list-group-flush" *ngIf="!isAdditionalInfoShow || !isAdditionalInfo">
+        <div class="list-group-item"
+             *ngFor="let passenger of passengers; trackBy: trackByFn; let i = index">
+          <a (click)="openPassengerForm(passenger, i)">
+            <div class="d-flex align-content-between align-items-center">
+              <img class="size-20x20 m-t-n-3 m-r-10" cdn-src="assets/images/tour/detail/icon-adult.svg" alt="icon"/>
+              <div class="w-full" [ngSwitch]="passenger.isUpdated">
+                <div *ngSwitchCase="false">
+                  <div [ngSwitch]="passenger.type">
+                    Hành khách
+                    <span *ngSwitchCase="'adult'">người lớn</span>
+                    <span *ngSwitchCase="'child'">trẻ em</span>
+                    <span *ngSwitchCase="'infant'">em bé</span>
+                    {{ passenger.index + 1}}
+                  </div>
+                </div>
+                <div *ngSwitchCase="true">
+                  {{ passenger.data.lastName}} {{passenger.data.firstName}}
+                </div>
+              </div>
+              <img class="size-15x15 m-t-n-3" cdn-src="assets/images/dropdown.svg" alt="icon"/>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Fill Passenger -->
+  <passenger-info-popup (submit)="onUpdatePassengers($event)"
+                        [range-age]="selectedPassenger.range"
+                        [segments]="segments"
+                        [passenger]="selectedPassenger.data"
+                        [invalid]="isInvalid">
+  </passenger-info-popup>
+  <!-- Form Fill Passenger -->
+</div>
+
+<!-- desktop -->
+<div class="passenger-info passenger-info-desktop m-t-20" *ngIf="isDesktop">
+  <h4 class="title">Thông tin hành khách</h4>
+
+  <div class="following-information m-b-20"
+       *ngIf="isAdditionalInfoShow">
+    <div class="panel panel-desktop card w-full">
+      <div class="card-body panel-body">
+        <div class="switch-small-desktop">
+          <ui-switch size="medium"
+                     [ngModel]="isAdditionalInfo"
+                     (ngModelChange)="onChangeAdditionalInfo($event)">
+          </ui-switch>
+          <span class="p-l-20 font-medium font-15 align-middle">Bổ sung thông tin sau</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-t-20" *ngIf="!isAdditionalInfoShow || !isAdditionalInfo">
+    <div [class.m-t-20]="i > 0"
+         *ngFor="let passenger of passengers; trackBy: trackByFn; let i = index">
+      <passenger-item [passenger]="passenger.data"
+                      [delay]="1000"
+                      [range-age]="passenger.range"
+                      [international]="isInternational"
+                      [segments]="segments"
+                      [invalid]="isInvalid"
+                      (changes)="onPassengerChange($event, i)"></passenger-item>
+    </div>
+  </div>
+
+</div>

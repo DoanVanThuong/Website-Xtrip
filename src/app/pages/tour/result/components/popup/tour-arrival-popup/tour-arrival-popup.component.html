@@ -1,0 +1,59 @@
+<!--component html goes here -->
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade tour-arrival-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-2">
+              <a class="pointer"
+                 (click)="hide()">
+                <img alt="icon" class="size-24x24 m-b-none"
+                     cdn-src="assets/images/icon/icon-close-2.svg">
+              </a>
+            </div>
+            <div class="col-8 text-center title">Chọn điểm đến</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="wrapper tour-container bg-white">
+              <app-empty-screen [show]="!arrivals.length && isLoading"
+                                [isRetry]="false"
+                                [heading]="'Hiện tại chưa có dữ liệu tour'"
+                                [description]="''"></app-empty-screen>
+
+              <loading [show]="isLoading"></loading>
+
+              <div class="row p-5-20" *ngIf="arrivals.length">
+                <div class="col-6"
+                     [class.p-r-5]="i%2 === 0"
+                     [class.p-l-5]="i%2 != 0"
+                     *ngFor="let item of arrivals; trackBy: trackByFn; let i = index">
+                  <a (click)="onSelectArrival(item)">
+                    <img class="img-fix w-full h-110 b-r-5"
+                         defaultImage="assets/images/no-thumbnail.png"
+                         [lazyLoad]="item.photo.src | size:250"
+                         [offset]="80"
+                         [alt]="item.name"
+                         [title]="item.name"
+                         onerror="this.src='assets/images/no-thumbnail.png'"/>
+                    <div class="name">
+                      {{item.name}}
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

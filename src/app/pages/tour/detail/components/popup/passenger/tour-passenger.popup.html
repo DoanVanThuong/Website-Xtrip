@@ -1,0 +1,73 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade tour-passenger-popup animated fadeInUp"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content tour-detail-desktop">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-12 center-line">
+            <div class="line-header"></div>
+          </div>
+        </div>
+        <div class="row m-t-20">
+          <div class="col-12">
+            <div class="text-center font-17 font-bold">Số người
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-body">
+        <div class="passenger-content" *ngIf="bookingTour">
+          <div class="list-group list-group-flush ">
+            <div class="list-group-item" *ngFor="let item of groupAge; let i = index">
+              <div class="row">
+                <div class="col-7 p-t-5">
+                  <span class="font-bold">{{item.title}}</span>
+                  <span class="intro">({{item.value}})</span>
+                  <div class="price">{{item.price | currencyMoney: ''}}
+                    <span class="text-underline">đ</span>
+                    <span class="">/ người</span>
+                  </div>
+                </div>
+                <div class="col-5 text-right">
+                  <app-counter *ngIf="item.type === 'ADT'" [min]="1" [max]="tour.available" [value]="bookingTour.adults"
+                               (change)="onPeopleChanges($event, 'adult')"></app-counter>
+                  <app-counter *ngIf="item.type === 'CHD'" [min]="0" [max]="bookingTour.adults >= tour.available ? 0 : tour.available" [value]="bookingTour.children"
+                  (change)="onPeopleChanges($event, 'children')"></app-counter>
+                  <app-counter *ngIf="item.type === 'INF'" [min]="0" [max]="bookingTour.adults" [value]="bookingTour.infants"
+                  (change)="onPeopleChanges($event, 'infant')"></app-counter>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="fixed-bottom footer  shadow bg-white">
+          <div class="footer-detail d-flex justify-content-between align-items-center p-l-15">
+            <div class="price-info">
+              <div>Giá
+                <span class="text-main">
+                                    {{totalPassenger}}
+                                </span>
+                người
+              </div>
+              <div class="price font-20 text-main font-bold">
+                {{ totalPrice | currencyMoney: '' }}
+                <span class="text-underline">đ</span>
+              </div>
+            </div>
+            <div class="btn-footer">
+              <button class="btn font-black font-16 " (click)="confim()">
+                Đồng ý
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

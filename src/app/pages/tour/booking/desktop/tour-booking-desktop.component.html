@@ -1,0 +1,58 @@
+<div class="tour-booking-desktop" [booking-step]="1">
+
+  <div class="main-body m-t-30">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-8 left-section">
+
+          <signin-request-desktop></signin-request-desktop>
+
+          <tour-booking-info [tour]="tour"
+                             [bookingInfo]="bookingTour"
+                             [journey]="journey"
+                             [package]="package"></tour-booking-info>
+
+          <div class="m-t-30 animated zoomIn">
+            <contact-info [data]="contact"
+                          (changes)="onContactChange($event)"
+                          [invalid]="isInvalid">
+            </contact-info>
+          </div>
+          <div class="m-t-30 animated zoomIn">
+            <passenger-info *ngIf="priceSummary"
+                            [adults]="bookingTour.adults"
+                            [children]="bookingTour.children"
+                            [infants]="bookingTour.infants"
+                            [rangeChildren]="bookingTour.rangeChildren"
+                            [rangeAdult]="bookingTour.rangeAdult"
+                            [rangeInfant]="bookingTour.rangeInfant"
+                            [international]="isInternational"
+                            [data]="passengers"
+                            (submit)="onUpdatePassenger($event)"
+                            [invalid]="isInvalid"
+                            [isAdditionalInfoShow]="true"
+                            (submitAdditionalInfo)="onFollowingInfo($event)">
+            </passenger-info>
+          </div>
+          <!-- Passenger Info -->
+        </div>
+        <div class="col-lg-4 right-section">
+          <div class="m-t-10">
+            <price-detail-box *ngIf="priceSummary"
+                              [summaryPrice]="priceSummary"
+                              [totalPrice]="totalPrice"
+                              [point]="point"
+                              [disabled]="detectDisableSubmit()"
+                              (submit)="onDeposit()">
+            </price-detail-box>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-tour-deposit-popup [data]="tourDepositItems" (submit)="onSubmitDeposit($event)"></app-tour-deposit-popup>
+
+</div>

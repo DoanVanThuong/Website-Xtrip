@@ -1,0 +1,28 @@
+<div bsModal #popup="bs-modal" class="modal fade hotel-hot-place-popup animated fadeInUp" role="dialog"
+  (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content tour-detail-desktop">
+      <div class="modal-header p-t-none">
+        <div class="row m-t-20">
+          <div class="col-2">
+            <a (click)="hide()" class="d-block size-24x24 text-center">
+              <img class="size-16x16" cdn-src="assets/images/icon/icon-close-green.svg">
+            </a>
+          </div>
+          <div class="col-8">
+            <div class="text-center font-17 font-bold">Địa danh phổ biến
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body bg-white">
+        <ul class="list-unstyled list-place-hotel">
+          <li class="d-flex justify-content-between" *ngFor="let place of data; let i = index; trackBy: trackByFn">
+            <div class="m-l-4">{{place.name}}</div>
+            <div class="distance">{{place.distance}}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="flight-result flight-result-mobile">
+
+  <!-- header -->
+  <app-header [back]="true" [fixed]="true" [filter]="true" [version]="3">
+    <header-title>
+      <flight-heading [options]="header"></flight-heading>
+    </header-title>
+
+    <header-filter>
+      <a class="d-inline-block position-relative"
+         (click)="onOpenFilter()">
+        <img alt="filter"
+             class="size-24x24 m-b-0 b-t-n-3"
+             cdn-src="assets/images/hotel/filter-icon.svg">
+        <div *ngIf="filterCounter > 0"
+             class="badge badge-danger counter">{{ filterCounter }}
+        </div>
+      </a>
+    </header-filter>
+
+    <div class="notify-text p-l-15 p-r-15 font-13 text-truncate">
+      <span class="animate-fading-in" *ngIf="isDone">* Giá vé tính trên 1 người lớn, đã bao gồm thuế, phí</span>
+    </div>
+
+    <app-progress-bar [text]="'Đang tìm chuyến bay...'" #processBar></app-progress-bar>
+
+
+  </app-header>
+  <!-- header -->
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <app-empty-screen [show]="isEmptyData && !isLoading"
+                          (retry)="getFlights(flightSearch)"></app-empty-screen>
+
+        <div *ngIf="!isEmptyData" class="content m-t-10 m-b-30">
+
+          <flight-detail-item *ngFor="let flight of flights; trackBy: trackByFn"
+                              (click)="onSelectFlight(flight)"
+                              [type]="isRoundTrip"
+                              [flight]="flight"
+                              [carriers]="carriers">
+          </flight-detail-item>
+
+          <flight-steps *ngIf="isRoundTrip" [step]="2"></flight-steps>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Filter -->
+<flight-filter-popup [data]="filter"
+                     (updateCounter)="onUpdateFilterCounter($event)"
+                     (submit)="onSubmitFilter($event)"></flight-filter-popup>
+<!-- Filter -->

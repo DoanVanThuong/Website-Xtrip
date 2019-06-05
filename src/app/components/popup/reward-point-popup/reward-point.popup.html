@@ -1,0 +1,33 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade reward-point-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="container-fluid">
+            <div class="title">
+              Điểm thưởng chờ duyệt
+            </div>
+            <div class="content">
+              <ul>
+                <li>
+                  Là điểm thưởng chưa được kích hoạt khi bạn thanh toán vé máy bay, tour, hotel…
+                </li>
+                <li>
+                  Điểm thưởng này sẽ được kích hoạt và cộng vào điểm khả dụng sau 3-7 ngày kể từ ngày bạn hoàn thành
+                  chuyến đi.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container-fluid m-t-20 text-center">
+            <button class="btn btn-link" (click)="hide()">Tôi đã hiểu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

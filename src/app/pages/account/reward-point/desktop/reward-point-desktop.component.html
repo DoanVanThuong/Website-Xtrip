@@ -1,0 +1,92 @@
+<div class="profile-reward-point profile-reward-point-desktop">
+
+  <div class="row">
+    <div class="col-lg-6 left">
+      <div class="panel card panel-desktop m-b-10">
+        <div
+            class="panel-body card-body mn-h-100 available-card">
+          <div class="text-dark-gray font-16">Điểm khả dụng</div>
+          <span class="point font-20 text-green">{{ available | currencyMoney:'' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 right">
+      <div class="panel card panel-desktop m-b-10">
+        <div class="panel-body card-body mn-h-100 pending-card">
+          <div class="text-dark-gray font-16">Điểm chờ duyệt</div>
+          <span class="point font-20">{{ pending | currencyMoney:'' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="panel card panel-desktop">
+        <div class="panel-body card-body p-15">
+          <div class="d-flex align-items-center align-content-start">
+            <img class="m-b-none m-t-n-3 size-24x24 m-r-10"
+                 cdn-src="assets/images/icon/icon-tip.svg"
+                 alt="icon"/>
+            <div class="text-dark-gray">
+              <span class="font-medium">Tips:</span>&nbsp;{{ tips[tipIndex] }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-t-20">
+    <div class="container-fluid">
+      <div infinite-scroll
+           [infiniteScrollDistance]="1"
+           [infiniteScrollThrottle]="150"
+           (scrolled)="onScrollDown()">
+        <h4 class="title m-t-none">Lịch sử</h4>
+        <div class="panel card panel-desktop m-b-none">
+          <div class="panel-body card-body">
+            <ul class="history-list">
+              <li *ngFor="let item of points; trackBy: trackByFn; let i = index">
+                <div class="description">
+                  <div class="content" [ngSwitch]="item.type">
+                    <div *ngSwitchCase="POINT_TYPE.PENDING">
+                      <div>Bạn được <span class="point-positive">+{{ item.point | currencyMoney:'điểm' }}</span> chờ
+                        duyệt
+                        khi đặt {{ item.serviceName }} {{ item.name }}
+                      </div>
+                    </div>
+                    <div *ngSwitchCase="POINT_TYPE.AVAILABLE">
+                      <div> Bạn được <span class="point-positive">+{{ item.point | currencyMoney:'điểm' }}</span> vào
+                        khả
+                        dụng khi đặt {{ item.serviceName }} {{ item.name }}
+                      </div>
+                    </div>
+                    <div *ngSwitchCase="POINT_TYPE.USED">
+                      <div>Bạn đã <span class="point-negative">-{{ item.point | currencyMoney:'điểm' }}</span> khi đặt
+                        {{ item.serviceName }} {{ item.name }}
+                      </div>
+                    </div>
+                    <div *ngSwitchCase="POINT_TYPE.CANCELLED">
+                      <div> Bạn mất <span class="point-negative">-{{ item.point | currencyMoney:'điểm' }}</span> khi hủy
+                        {{ item.serviceName }} {{ item.name }}
+                      </div>
+                    </div>
+                    <div *ngSwitchCase="POINT_TYPE.RETURN">
+                      <div> Bạn được hoàn <span class="point-positive">+{{ item.point | currencyMoney:'điểm' }}</span>
+                        do
+                        giao dịch không thành công từ đơn hàng #{{ item.orderCode }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="date">
+                    {{ item.time | moment:'day_ago' }}
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

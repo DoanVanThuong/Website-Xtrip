@@ -1,0 +1,162 @@
+@import '_variables.less';
+@import './_mixins.less';
+
+.faq-page {
+
+  .tab-container {
+    > .nav {
+      &.nav-tabs {
+        margin-bottom: 0;
+        background-color: @gray-6;
+
+        @media (max-width: 479px) {
+          overflow-x: auto;
+          overflow-y: hidden;
+          display: -webkit-box;
+          display: -moz-box;
+        }
+
+        > .nav-item {
+          > .nav-link {
+            background-color: transparent;
+            color: @gray-19;
+            font-size: 20px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 0;
+
+            &.active, &:active, &:hover, &:focus {
+              background-color: inherit;
+              color: @black;
+              border-color: transparent;
+              font-weight: 500;
+              .box-shadow(0, 0, 0, transparent);
+            }
+
+            > img {
+              width: 56px;
+              height: 56px;
+              margin-bottom: 0;
+
+              + span {
+                display: block;
+                margin-top: 5px;
+              }
+            }
+
+            @media (max-width: 575px) {
+              font-size: 16px;
+
+              > img {
+                width: 36px;
+                height: 36px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tab-content {
+    background-color: @white;
+    padding: 0 15px;
+
+    .title {
+      margin-top: 20px;
+      font-size: 30px;
+      font-weight: 400;
+
+      > img {
+        margin-bottom: 0;
+        margin-top: -3px;
+        margin-right: 20px;
+        width: 40px;
+        height: 40px;
+      }
+
+      @media (max-width: 575px) {
+        font-size: 18px;
+
+        > img {
+          width: 28px;
+          height: 28px;
+          margin-right: 15px;
+          margin-top: -5px;
+        }
+      }
+    }
+  }
+
+  .panel {
+    margin-bottom: 0px;
+    font-size: 15px;
+
+    .panel-heading {
+      padding: 0;
+
+      .panel-title {
+        font-size: 16px;
+        font-weight: 400;
+        color: @gray-2;
+        padding-right: 20px;
+        position: relative;
+
+        .heading-icon {
+          position: absolute;
+          right: 0px;
+          top: 50%;
+          transform: translateY(-50%);
+
+          .fa {
+            &.unactive {
+              display: inline-block;
+            }
+
+            &.active {
+              display: none;
+            }
+          }
+        }
+
+      }
+    }
+    .panel-collapse {
+      margin-top: 15px;
+    }
+    .panel-body {
+      padding: 20px;
+      background-color: @gray-17;
+      text-align: justify;
+
+      p {
+        font-size: 15px;
+      }
+    }
+
+    &.card {
+      box-shadow: none;
+      padding: 20px 0;
+      border-bottom: 1px dashed gray;
+    }
+
+    &.panel-open {
+      .panel-heading {
+        .panel-title {
+          font-weight: 500;
+          color: @green-2;
+
+          .fa {
+            &.unactive {
+              display: none;
+            }
+
+            &.active {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

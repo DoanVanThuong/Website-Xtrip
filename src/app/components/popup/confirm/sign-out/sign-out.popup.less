@@ -1,0 +1,36 @@
+@import '_variables.less';
+
+.modal {
+  &.popup-sign-out-confirm {
+
+    .modal-dialog {
+
+      max-width: 280px;
+
+      .modal-body {
+        padding: 15px;
+
+        .title {;
+          font-size: 18px;
+          font-weight: 500;
+          color: @gray-4;
+        }
+
+        .description {
+          font-size: 15px;
+          color: @gray-4;
+        }
+
+        .btn {
+          padding: 8px 15px;
+          margin-right: 8px;
+          min-width: 110px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}

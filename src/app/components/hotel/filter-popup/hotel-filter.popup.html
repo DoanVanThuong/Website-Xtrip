@@ -1,0 +1,85 @@
+<div bsModal #popup="bs-modal" class="modal fade popup-hotel-filter" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header bg-white">
+        <div class="row">
+          <div class="col-12 center-line">
+            <div class="line-header"></div>
+          </div>
+        </div>
+        <div class="row m-t-10">
+          <div class="col-3 text-green font-medium">
+            <a class="" (click)="onReset()"> Đặt lại</a>
+          </div>
+          <div class="col-6 text-center font-18">Bộ lọc</div>
+          <div class="col-3 text-right text-green font-medium" (click)="onFilter()">
+            Xong
+          </div>
+        </div>
+      </div>
+      <div class="modal-body p-0" *ngIf="isHaveFilter">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <ul class="list-section">
+              <li class="slider">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="title">Giá mỗi đêm</div>
+                  </div>
+                  <div class="col-6 text-right">
+                    <span class="bg-price">
+                      {{labelSlider.price.min | currencyMoney: ''}} <span class="text-underline">đ</span> - 
+                      {{labelSlider.price.max | currencyMoney: ''}} <span class="text-underline">đ</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="row m-t-10">
+                  <div class="col-12">
+                    <div class="p-l-10 p-r-20">
+                      <nouislider [config]="sliderConfig"
+                                  (change)="onPriceChange($event)"
+                                  [(ngModel)]="filter.prices"
+                                  (update)="onChangePrice($event)">
+                      </nouislider>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="hotel-class">
+                <div class="row">
+                  <div class="col-12 title">
+                    Hạng khách sạn
+                  </div>
+                </div>
+                <div class="star d-flex m-t-10">
+                  <div class="p-r-10" *ngFor="let star of filterOptions.stars; trackBy: trackByFn; let i = index">
+                    <a class="d-inline-block" (click)="onSelectStar(star)">
+                      <div class="box-size {{isStarSelected(filter.stars, star) ? 'active' : 'unactive'}} p-t-12">
+                        {{ star }}
+                        <img *ngIf="!!isStarSelected(filter.stars, star)" class="m-b-0 m-t-n-4" cdn-src="assets/images/hotel/icon-active-star.svg" alt="img"/>
+                        <img *ngIf="!isStarSelected(filter.stars, star)" class="m-b-0 m-t-n-4" cdn-src="assets/images/hotel/icon-unactive-star.svg" alt="img"/>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li class="options-class" *ngFor="let option of filterOptions.options; trackBy: trackByFn; let i = index">
+                <div class="row" *ngIf="!!option.values.length">
+                  <div class="col-12 title">
+                    {{option.name}}
+                  </div>
+                </div>
+                <ul class="d-flex flex-wrap m-t-10">
+                  <li class="option-item" [class.active]="checkIsActiveOptionItem(item.code, option.code)" *ngFor="let item of option.values">
+                    <a (click)="onSelectOptionItem(item.code, option.code)">{{item.name}}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="product-top-page">
+  <div *ngIf="!!products.length && isMobile">
+    <h4 class="title">
+      {{title}}
+    </h4>
+    <div class="w-full p-14 border-left over-hidden">
+      <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']" [items]="products" [options]="options">
+        <div class="cheap-tour-item" *ngFor="let product of products; trackBy: trackByFn;">
+          <home-product-item-desktop [product]="product"></home-product-item-desktop>
+        </div>
+      </owl-carousel>
+    </div>
+  </div>
+
+  <div *ngIf="!!products.length && isDesktop">
+    <h4 class="title">
+      {{title}}
+    </h4>
+    <div class="panel panel-desktop w-full bg-white b-r-10 p-20 over-hidden m-t-10">
+      <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']" [items]="products" [options]="options">
+        <div class="cheap-tour-item" *ngFor="let product of products; trackBy: trackByFn;">
+          <home-product-item-desktop [product]="product"></home-product-item-desktop>
+        </div>
+      </owl-carousel>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,32 @@
+<div class="album-item album-item-mobile" *ngIf="isMobile">
+  <a (click)="openDetailAlbum(album)" class="block" [title]="album.name">
+    <div class="album-image">
+      <img class="img-fluid img-fix m-b-none"
+           defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="album.photo.src | size: 300"
+           [alt]="album.name"
+           [title]="album.name"
+           onerror="this.src='assets/images/no-thumbnail.png'"/>
+    </div>
+    <div class="album-name p-10 bg-white" *ngIf="!!album.name">
+      {{album.name}}
+    </div>
+  </a>
+</div>
+
+<div class="album-item album-item-desktop" *ngIf="isDesktop">
+  <a class="d-block pointer" (click)="openDetailAlbum(album)" [title]="album.name">
+    <div class="album-image">
+      <img class="img-fluid img-fix"
+           defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="album.photo.src | size:300"
+           [offset]="80"
+           [alt]="album.name"
+           [title]="album.name"
+           onerror="this.src='assets/images/no-thumbnail.png'">
+    </div>
+    <div class="album-name p-10 bg-white">
+      {{album.name}}
+    </div>
+  </a>
+</div>

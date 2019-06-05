@@ -1,0 +1,25 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade popup-gallery"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-2">
+              <img class="m-b-none m-t-n-3 size-16x16"
+                   cdn-src="assets/images/icon-back.png"
+                   (click)="hide()">
+            </div>
+            <div class="col-8 text-truncate">{{ category.name || name }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+      </div>
+    </div>
+  </div>
+</div>

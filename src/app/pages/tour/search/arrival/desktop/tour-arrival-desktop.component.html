@@ -1,0 +1,54 @@
+<div class="tour-index">
+
+  <app-tour-search-bar-desktop [params]="tourSearch"></app-tour-search-bar-desktop>
+
+  <div class="main-body p-t-20"
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <div class="container">
+
+      <section class="tour-list" *ngIf="!!arrivals.length">
+        <h4 class="title">{{ isDomestic() ? 'Tour du lịch trong nước' : 'Tour du lịch nước ngoài' }}</h4>
+        <div class="panel panel-desktop">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 col-md-4 col-6"
+                   *ngFor="let arrival of arrivals; trackBy: trackByFn; let i = index">
+                <a class="pointer"
+                   [title]="arrival.name"
+                   [routerLink]="[arrival.href]"
+                   [queryParams]="genQueryParams(arrival)">
+                  {{ arrival.name }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="m-t-30">
+        <div class="" *ngIf="!!tours.length">
+          <h4 class="title">{{ isDomestic() ? 'Tour nổi bật trong nước' : 'Tour nổi bật nước ngoài' }}</h4>
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-6"
+                 [class.m-t-20]="i/itemsPerRow >= 1"
+                 [class.p-l-10]="i%itemsPerRow > 0"
+                 [class.p-r-10]="i%itemsPerRow < itemsPerRow - 1"
+                 *ngFor="let tour of tours; trackBy: trackByFn; let i = index">
+              <home-tour-item [tour]="tour"></home-tour-item>
+            </div>
+          </div>
+        </div>
+
+        <loading [show]="isLoading"
+                 [title]="'Đang tải dữ liệu'"
+                 [description]="'Vui lòng đợi trong giây lát'"></loading>
+
+      </section>
+    </div>
+  </div>
+
+</div>

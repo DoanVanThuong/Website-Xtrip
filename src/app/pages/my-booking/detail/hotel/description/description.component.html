@@ -1,0 +1,43 @@
+<div class="booking-detail-description  justify-content-center" *ngIf="!!hotel">
+  <app-header [back]="true" [heading]="hotel.hotelName" [fixed]="true"></app-header>
+  <div class="wrapper booking-detail-description-body bg-white" min-height>
+    <div class="container bg-white">
+      <div class="row ">
+        <div class="col-12">
+          <tabset [justified]="true" [type]="tabs" class="tab-mobile">
+            <tab [heading]="'Giới thiệu'" [active]="tab === 'intro'">
+              <div class="booking-detail-intro">
+                <div class="description" [innerHTML]="intro"></div>
+              </div>
+            </tab>
+
+            <tab [heading]="'Tiện nghi'" [active]="tab ==='facility'">
+              <div class="booking-detail-facility">
+                <div class="facility-group" *ngFor="let group of facilities; let i = index">
+                  <div class="title text-uppercase">
+                    {{ group.name }}
+                  </div>
+                  <div class="facility-list">
+                    <div class="row">
+                      <div class="col-6 m-b-5 m-t-5" *ngFor="let facility of group.facilities; let j = index">
+
+                        <i class="dot fa fa-circle"></i>
+                        <span class="m-l-15 d-block"> {{ facility.name }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab [heading]="'Chính sách'" [active]="tab === 'policy'">
+              <div class="booking-detail-policy">
+                <div class="description" *ngFor="let policy of policies; let i = index" [innerHTML]="policy"></div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,204 @@
+<div class="flight-preview-page">
+  <app-header [back]="true" [heading]="'Thông tin khách hàng'" [fixed]="true" [version]="3">
+    <stepper-booking [step]="2"></stepper-booking>
+  </app-header>
+
+  <div class="wrapper preview-booking m-b-120" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <!-- Heading Image -->
+        <div class="img-title position-relative flight-banner">
+          <div class="position-absolute w-full z-index-3">
+            <div class="row p-t-25">
+              <div class="col-4 text-center title-l">
+                {{flights[0].origin}}
+              </div>
+              <div class="col-4 text-center p-t-22">
+                <div class="line-flight-preview position-relative">
+                  <div class="position-absolute pos-icon">
+                    <img class="size-24x24 m-t-3"
+                         src="{{ mode == 2 ? 'assets/images/returnflight.svg' : 'assets/images/icon-flight.svg' }}"
+                         alt="flight"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4 text-center title-l">
+                {{flights[0].destination}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 text-center title-small font-12">{{getLocationName(flights[0].origin)}}</div>
+              <div class="col-4"></div>
+              <div class="col-4 text-center title-small font-12">{{getLocationName(flights[0].destination)}}</div>
+            </div>
+          </div>
+        </div>
+        <!-- Heading Image -->
+
+        <tabset [justified]="true" class="tab-mobile-white tab-preview">
+          <tab [heading]="'Chuyến bay'" [active]="tab == 'general'" (selectTab)="tab='general'"></tab>
+          <tab [heading]="'Giá vé'" [active]="tab == 'price'" (selectTab)="tab='price'"></tab>
+          <tab [heading]="'Hành khách'" [active]="tab == 'passenger'" (selectTab)="tab='passenger'"></tab>
+        </tabset>
+
+        <div class="content" *ngIf="tab == 'general'">
+          <flight-review-item *ngFor="let flight of flights;  trackBy: trackByFn; let i = index"
+                              [heading]="i > 0 ? 'Chuyến bay chiều về' : 'Chuyến bay chiều đi' "
+                              [mode]="'search'" [flight]="flight">
+          </flight-review-item>
+        </div>
+
+        <div class="price-detail-summary content" *ngIf="tab == 'price'">
+          <div class="row">
+            <div class="container-fluid">
+              <div class="row" [class.m-t-10]="i > 0" *ngFor="let group of summaryPrice.summaries; let i = index">
+                <div class="container-fluid">
+                  <div class="title">{{ group.name }}</div>
+                  <div class="p-l-15">
+                    <div class="row" *ngFor="let item of group.groupItem.detailItems">
+                      <div class="col-7">{{ item.title }}</div>
+                      <div class="col-5 text-right">
+                        {{ item.price | currencyMoney: '' }}
+                        <span class="text-underline">đ</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="col-12 text-right total-price">Tổng tiền:
+                  <span class="font-medium text-main">
+                    {{ (totalPrice + baggagePrice) | currencyMoney: '' }}<span class="text-underline">đ</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="passenger-tab content" *ngIf="tab == 'passenger'">
+
+          <!-- Contact Info -->
+          <div class="row p-10">
+            <div class="col-12">
+              <div class="title-color">Thông tin liên hệ</div>
+            </div>
+          </div>
+
+          <div class="list-group list-group-flush">
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Họ</div>
+                <div class="col-7">{{ bookingFlight.Contact.LastName }}</div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Tên đệm & tên</div>
+                <div class="col-7">{{bookingFlight.Contact.FirstName }}</div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Điện thoại</div>
+                <div class="col-7">{{ bookingFlight.Contact.MobileNumber }}</div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Email</div>
+                <div class="col-7">{{ bookingFlight.Contact.Email }}</div>
+              </div>
+            </div>
+          </div>
+          <!-- Contact Info -->
+
+          <!-- Passenger Info -->
+          <div class="row p-10">
+            <div class="col-12">
+              <div class="title-color">Thông tin khách hàng</div>
+            </div>
+          </div>
+
+          <div class="list bg-white p-t-10 p-b-10">
+            <div class="list-item" *ngFor="let passenger of passengers">
+              <div class="row p-l-10 p-r-10">
+                <div class="col-12 text-green">
+                  <span class="font-bold">
+                    {{utilityHelper.getPassengerTitle(passenger.Title, passenger.PassengerType) }} {{
+                    passenger.LastName }} {{passenger.FirstName}}
+                  </span>
+                </div>
+              </div>
+              <div class="row p-l-20 p-r-10 m-t-5" *ngIf="!!passenger.DateOfBirth">
+                <div class="col-6">Ngày sinh</div>
+                <div class="col-6 text-right">{{ passenger.DateOfBirth | moment: 'DD/MM/YYYY' }}</div>
+              </div>
+              <div class="row p-l-20 p-r-10 m-t-5" *ngIf="!!passenger.PassportNumber">
+                <div class="col-6">Số hộ chiếu</div>
+                <div class="col-6 text-right">{{ passenger.PassportNumber }}</div>
+              </div>
+              <div class="row p-l-20 p-r-10 m-t-5" *ngIf="!!passenger.PassportCountry">
+                <div class="col-6">Quốc gia</div>
+                <div class="col-6 text-right">{{ passenger.PassportCountry }}</div>
+              </div>
+              <div class="row p-l-20 p-r-10 m-t-5" *ngIf="!!passenger.PassportExpiry">
+                <div class="col-6">Ngày hết hạn</div>
+                <div class="col-6 text-right">{{ passenger.PassportExpiry | moment: 'DD/MM/YYYY' }}</div>
+              </div>
+              <div class="row p-l-20 p-r-10 m-t-5" *ngIf="!!passenger.National">
+                <div class="col-6">Quốc tịch</div>
+                <div class="col-6 text-right">{{ passenger.National }}</div>
+              </div>
+            </div>
+          </div>
+          <!-- Passenger Info -->
+
+          <!-- Bill Info -->
+          <div class="row p-10" *ngIf="bookingFlight.invoiced">
+            <div class="col-12">
+              <div class="title-color">Thông tin xuất hóa đơn điện tử</div>
+            </div>
+          </div>
+
+          <div class="list-group" *ngIf="bookingFlight.invoiced">
+            <div class="list-group-item p-10">
+              <div class="row">
+                <div class="col-12">
+                  {{ bookingFlight.vatInvoiceInfo.companyName}}
+                </div>
+                <div class="col-12">
+                  MST: {{bookingFlight.vatInvoiceInfo.taxIdentificationNo}}
+                </div>
+                <div class="col-12">
+                  Đ/c công ty: {{bookingFlight.vatInvoiceInfo.companyAddress}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Bill Info -->
+
+        </div>
+
+        <div class="footer fixed-bottom">
+          <div class="row font-14 p-10 m-t-n-10 bg-policy">
+            <div class="col-12">
+              Bằng việc chạm nút bên dưới, bạn đã đồng ý với các
+              <a [routerLink]="['/more/policy']" class="text-main underline">Điều kiện và Chính sách</a> của Xtrip
+            </div>
+          </div>
+
+          <div class="p-l-10 p-r-10 p-b-10 bg-policy">
+            <button class="btn btn-main btn-block"
+                    (click)="onBookingFlight()">Thanh toán
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<payment-change-popup></payment-change-popup>

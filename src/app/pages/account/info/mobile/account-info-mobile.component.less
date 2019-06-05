@@ -1,0 +1,27 @@
+@import "_variables.less";
+
+.account-info {
+
+  &.account-info-mobile {
+    margin-bottom: 60px;
+
+    .account-info,
+    .account-info-more {
+      .title {
+        padding: 8px 12px;
+        font-size: 13px;
+        color: @gray-5;
+      }
+    }
+
+    .account-footer {
+      background-color: @gray-6;
+      padding: 5px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+  }
+}

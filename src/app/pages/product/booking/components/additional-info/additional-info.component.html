@@ -1,0 +1,311 @@
+<!-- for mobile -->
+<div class="additional-info additional-info-mobile {{ class }}"
+     *ngIf="isMobile && perBooking.length">
+  <h4 class="title">Thông tin bổ sung</h4>
+  <div class="m-t-20">
+    <form [formGroup]="form"
+          class="form form-desktop">
+      <div *ngFor="let item of perBooking; trackBy: trackByFn; let i = index">
+        <div class="" [ngSwitch]="item.inputType">
+
+          <!-- inputType 1 -->
+          <div class="form-group" *ngSwitchCase="1">
+            <mat-form-field floatLabel="always">
+              <mat-label>{{ item.name }}</mat-label>
+              <input type="text"
+                     matInput
+                     [formControlName]="item.uuid"
+                     mbsc-scroller
+                     [mbsc-options]="item.option"
+                     [placeholder]="item.description || item.name"/>
+              <div matSuffix class="text-main p-5">
+                <i class="fa fa-triangle-down"></i>
+              </div>
+              <mat-error>Không được để trống</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- inputType 2 -->
+          <div class="form-group" *ngSwitchCase="2">
+            <label class="control-label">{{ item.name }}</label>
+            <div class="row" [formArrayName]="item.uuid">
+              <div class="col-6"
+                   *ngFor="let subItem of form.controls[item.uuid].controls; trackBy: trackByFn; let i = index">
+                <div class="" [formGroupName]="i">
+                  <label class="checkbox">
+                    {{ item.items[i].label }}
+                    <input type="checkbox" [formControlName]="item.uuid + '-' + i"/>
+                    <span></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- inputType 3 -->
+          <div class="form-group" *ngSwitchCase="3">
+            <mat-form-field floatLabel="always">
+              <mat-label>{{ item.name }}:</mat-label>
+              <input type="text"
+                     matInput
+                     mask="000"
+                     [formControlName]="item.uuid"
+                     [placeholder]="item.description || item.name"/>
+              <mat-error>Không được để trống</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- inputType 4/9 -->
+          <div class="form-group" *ngSwitchCase="[4,9].includes(item.inputType) ? item.inputType : ''">
+            <mat-form-field floatLabel="always">
+              <mat-label>{{ item.name }}:</mat-label>
+              <input type="text"
+                     matInput
+                     [formControlName]="item.uuid"
+                     [placeholder]="item.description || item.name"/>
+              <mat-error>Không được để trống</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- typeInput 5 -->
+          <div class="form-group" *ngSwitchCase="5">
+            <label class="control-label">{{ item.name }}</label>
+            <div class="row">
+              <div class="col-9 text-light-gray">
+                {{ item.description }}
+              </div>
+              <div class="col-3 text-right">
+                <ui-switch size="small"
+                           [formControlName]="item.uuid"></ui-switch>
+              </div>
+            </div>
+          </div>
+
+          <!-- inputType 6 -->
+          <div class="form-group" *ngSwitchCase="6">
+            <mat-form-field floatLabel="always">
+              <mat-label>{{ item.name }}:</mat-label>
+              <input type="text"
+                     matInput
+                     [formControlName]="item.uuid"
+                     mask="00/00/0000"
+                     [placeholder]="item.description || '01/01/1990'"/>
+              <mat-error>Không được để trống</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- inputType 10 -->
+          <div class="form-group" *ngSwitchCase="10">
+            <mat-form-field floatLabel="always">
+              <mat-label>{{ item.name }}</mat-label>
+              <input type="text"
+                     matInput
+                     mask="00:00"
+                     [formControlName]="item.uuid"
+                     [placeholder]="item.description || '12:00'"/>
+              <mat-error>Không được để trống</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- inputType 11 -->
+          <div class="form-group" *ngSwitchCase="11">
+            <mat-form-field floatLabel="always">
+              <mat-label>{{ item.name }}</mat-label>
+              <input type="text"
+                     matInput
+                     mask="00:00 00/00/0000"
+                     [formControlName]="item.uuid"
+                     [placeholder]="item.description || '07:00 01/01/1990'"/>
+              <mat-error>Không được để trống</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- inputType 14 -->
+          <div class="form-group" *ngSwitchCase="14">
+            <mat-form-field floatLabel="always">
+              <mat-label>{{ item.name }}</mat-label>
+              <input type="text"
+                     matInput
+                     mask="A*"
+                     [formControlName]="item.uuid"
+                     [placeholder]="item.description || item.name"/>
+              <mat-error>Không được để trống</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- inputType 15 -->
+          <div class="form-group" *ngSwitchCase="15">
+
+            <label class="control-label">{{ item.name }}:</label>
+            <div class="m-t-10">
+              <button class="btn btn-main-outline"
+                      [class.active]="form.controls[item.uuid].value === subItem.value"
+                      type="button"
+                      *ngFor="let subItem of item.items; trackBy: trackByFn"
+                      (click)="onSelectValue(item, subItem.value)">
+                {{ subItem.label }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="additional-info additional-info-desktop {{ class }}"
+     *ngIf="isDesktop && perBooking.length">
+  <h4 class="title">Thông tin bổ sung</h4>
+  <div class="panel panel-desktop">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-12">
+          <form [formGroup]="form"
+                class="form form-desktop">
+            <div *ngFor="let item of perBooking; trackBy: trackByFn; let i = index">
+              <div class="" [ngSwitch]="item.inputType">
+
+                <!-- inputType 1 -->
+                <div class="form-group form-dropdown" *ngSwitchCase="1">
+                  <label class="control-label">{{ item.name }}</label>
+                  <div class="dropdown underline" dropdown>
+                    <a class="pointer d-block"
+                       [class.placeholder]="!findInList(item.uuid, perBooking[i].items)"
+                       dropdownToggle>
+                      {{ findInList(item.uuid, perBooking[i].items) || (item.description || item.name) }}
+                      <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu" *dropdownMenu>
+                      <li class="dropdown-item"
+                          *ngFor="let subItem of perBooking[i].items">
+                        <a class="pointer" (click)="onSelectDropdown(item.uuid, subItem)">{{ subItem.label }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- inputType 2 -->
+                <div class="form-group" *ngSwitchCase="2">
+                  <mat-label class="font-medium font-13 text-light-gray">{{ item.name }}:</mat-label>
+                  <div class="row m-t-10" [formArrayName]="item.uuid">
+                    <div class="col-6"
+                         *ngFor="let subItem of form.controls[item.uuid].controls; trackBy: trackByFn; let i = index">
+                      <div class="" [formGroupName]="i">
+                        {{ form.controls[item.uuid].controls[item.uuid + '-' + i] | json }}
+                        <label class="checkbox">
+                          {{ item.items[i].label }}
+                          <input type="checkbox" [formControlName]="item.uuid + '-' + i"/>
+                          <span></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- inputType 3 -->
+                <div class="form-group" *ngSwitchCase="3">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{ item.name }}:</mat-label>
+                    <input type="text"
+                           matInput
+                           mask="000"
+                           [formControlName]="item.uuid"
+                           [placeholder]="item.description || item.name"/>
+                    <mat-error>Không được để trống</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- inputType 4/9 -->
+                <div class="form-group"
+                     *ngSwitchCase="[4,9].includes(item.inputType) ? item.inputType : ''">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{ item.name }}:</mat-label>
+                    <input type="text"
+                           autocomplete="off"
+                           matInput
+                           [formControlName]="item.uuid"
+                           [placeholder]="item.description || item.name"/>
+                    <mat-error>Không được để trống</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- inputType 5 -->
+                <div class="form-group" *ngSwitchCase="5">
+                  <label class="control-label">{{ item.name }}</label>
+                  <div class="row">
+                    <div class="col-9 text-light-gray">
+                      {{ item.description }}
+                    </div>
+                    <div class="col-3 text-right">
+                      <ui-switch size="small"
+                                 [formControlName]="item.uuid"></ui-switch>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ngày sinh / ngày hết hạn -->
+                <div class="form-group" *ngSwitchCase="6">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{ item.name }}:</mat-label>
+                    <input type="text"
+                           matInput
+                           [formControlName]="item.uuid"
+                           mask="00/00/0000"
+                           [placeholder]="item.description || '01/01/1990'"/>
+                    <mat-error>Không được để trống</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- inputType 10 -->
+                <div class="form-group" *ngSwitchCase="10">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{ item.name }}</mat-label>
+                    <input type="text"
+                           matInput
+                           mask="00:00"
+                           [formControlName]="item.uuid"
+                           [placeholder]="item.description || '12:00'"/>
+                    <mat-error>Không được để trống</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- inputType 11 -->
+                <div class="form-group" *ngSwitchCase="11">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{ item.name }}:</mat-label>
+                    <input type="text"
+                           autocomplete="off"
+                           matInput
+                           [formControlName]="item.uuid"
+                           mask="00:00 00/00/0000"
+                           [placeholder]="item.description || '07:00 01/01/1990'"/>
+                    <mat-error>Không được để trống</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- inputType 14 -->
+                <div class="form-group" *ngSwitchCase="14">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{ item.name }}:</mat-label>
+                    <input type="text"
+                           matInput
+                           mask="A*"
+                           [formControlName]="item.uuid"
+                           [placeholder]="item.description || item.name"/>
+                    <mat-error>Không được để trống</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #dropdownTemplate let-model="item">
+    <div class="text-truncate">
+      {{ model.label }}
+    </div>
+  </ng-template>
+</div>

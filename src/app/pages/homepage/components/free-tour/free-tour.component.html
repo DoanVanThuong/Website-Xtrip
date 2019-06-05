@@ -1,0 +1,148 @@
+<div class="block block-free-tour {{ class }}">
+
+  <!-- mobile -->
+  <div class="free-tour free-tour-mobile" *ngIf="isMobile">
+
+    <h4 class="block-title m-b-none">{{ place.title || 'Du lịch tự túc' }}</h4>
+    <div class="block-body">
+
+      <home-empty class="m-t-10 "
+                  [show]="!place.items.length && !isLoading"
+                  (reload)="getFreeTour()"></home-empty>
+
+      <div class="" *ngIf="!!place.items.length">
+        <div class="block block-destination block-destination-mobile">
+          <h4 class="block-title m-b-none">{{ place.title }}</h4>
+          <div class="block-body">
+            <div class="scroll-container hidden-scrollbar">
+              <div class="scroll-area">
+                <div class="scroll-item"
+                     *ngFor="let place of place.items; trackBy: trackByFn">
+                  <a class="pointer"
+                     [class.active]="selectedPlace.code === place.code"
+                     (click)="onSelectPlace(place)">
+                    {{ place.name }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="free-tour-body">
+
+          <loading [show]="isLoading" title="Đang tải dữ liệu"></loading>
+
+          <home-empty class="m-t-10 "
+                      [show]="isEmpty() && !isLoading"
+                      (reload)="getFreeTour()"></home-empty>
+
+          <div class="" *ngIf="!isEmpty() && !isLoading">
+            <!-- vé máy bay -->
+            <home-flight-ticket class=""
+                                [depart]="freeTour.depart"
+                                [return]="freeTour.return"
+                                [heading]="flight.title"
+                                [description]="flight.subText"
+                                [flights]="flight.items"></home-flight-ticket>
+
+            <!-- khách sạn -->
+            <home-hotel class=""
+                        [place]="selectedPlace"
+                        [checkIn]="freeTour.depart"
+                        [checkOut]="freeTour.return"
+                        [heading]="hotel.title"
+                        [description]="hotel.subText"
+                        [hotels]="hotel.items"></home-hotel>
+
+            <!-- vé tham quan -->
+            <home-product class="p-b-none"
+                          [heading]="activity.title"
+                          [description]="activity.subText"
+                          [products]="activity.items"></home-product>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- desktop -->
+  <div class="free-tour free-tour-desktop" *ngIf="isDesktop">
+
+    <home-empty class="home-empty-desktop m-none"
+                content="Nhấp chuột để thử lại"
+                [show]="!place.items.length && !isLoading"
+                (reload)="getFreeTour()"></home-empty>
+
+    <div class="" *ngIf="!!place.items.length">
+      <div class="container">
+        <div class="block block-destination block-destination-desktop">
+          <h4 class="block-title">{{ place.title }}</h4>
+
+          <div class="block-body m-t-15">
+
+            <div class="scroll-container hidden-scrollbar">
+              <div class="scroll-area">
+                <div class="scroll-item"
+                     *ngFor="let place of place.items; trackBy: trackByFn">
+                  <a class="pointer"
+                     [class.active]="selectedPlace.code === place.code"
+                     (click)="onSelectPlace(place)">
+                    <div class="place-image">
+                      <img class="img-fix"
+                           defaultImage="assets/images/no-thumbnail.png"
+                           [lazyLoad]="place.photo.src | size:300"
+                           [alt]="place.name"
+                           [title]="place.name"
+                           onerror="this.src = 'assets/images/no-thumbnail.png'"/>
+                      <div class="place-name">{{ place.name }}</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="free-tour-body">
+        <div class="container">
+
+          <loading [show]="isLoading" title="Đang tải dữ liệu"></loading>
+
+          <home-empty class="home-empty-desktop m-none"
+                      content="Nhấp chuột để thử lại"
+                      [show]="isEmpty() && !isLoading"
+                      (reload)="getFreeTour()"></home-empty>
+
+          <div class="" *ngIf="!isEmpty() && !isLoading">
+            <!-- vé máy bay -->
+            <home-flight-ticket class="p-t-none"
+                                [params]="flight.params"
+                                [depart]="freeTour.depart"
+                                [return]="freeTour.return"
+                                [heading]="flight.title"
+                                [description]="flight.subText"
+                                [flights]="flight.items"></home-flight-ticket>
+
+            <!-- khách sạn -->
+            <home-hotel class="p-t-none"
+                        [params]="hotel.params"
+                        [checkIn]="freeTour.depart"
+                        [checkOut]="freeTour.return"
+                        [heading]="hotel.title"
+                        [description]="hotel.subText"
+                        [hotels]="hotel.items"></home-hotel>
+
+            <!-- vé tham quan -->
+            <home-product class="p-t-none p-b-none"
+                          [heading]="activity.title"
+                          [description]="activity.subText"
+                          [params]="activity.params"
+                          [products]="activity.items"></home-product>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

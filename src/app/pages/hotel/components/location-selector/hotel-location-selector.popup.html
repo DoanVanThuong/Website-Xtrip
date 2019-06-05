@@ -1,0 +1,94 @@
+<div bsModal #popup="bs-modal"
+     class="modal fade hote-location-selector popup-location-selector"
+     role="dialog"
+     (onShow)="onShow($event)"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div class="d-flex">
+          <div class="back">
+            <a class="d-block" (click)="hide()">
+              <img class="size-20x20" cdn-src="assets/images/icon/icon-close-green.svg" alt="img" />
+            </a>
+          </div>
+          <div class="input-search position-relative">
+            <input type="text" autofocus placeholder="Tên khách sạn hoặc địa điểm" autocomplete="off"
+              [ngModelOptions]="{standalone: true}"
+              [(ngModel)]="keyword"
+              (ngModelChange)="onChange($event)" />
+              <img class="m-b-none pos-lookup" src="assets/images/icon/icon-lookup-gray.svg" alt="img" />
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div *ngIf="!sources && !isTyping">
+              <div class="row large-title">
+                <div class="col-12">Không có kết quả</div>
+              </div>
+            </div>
+            <div>
+              <loading [show]="isTyping"></loading>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div *ngIf="sources.length > 0 && !!keyword && !isTyping">
+                  <div class="row large-title">
+                    <div class="col-12">Kết quả tìm kiếm</div>
+                  </div>
+                  <ul>
+                    <li class="position-relative" *ngFor="let item of sources" (click)="onSelect(item, 'result')">
+                      <div class="main-name">{{item.name}}</div>
+                      <span class="sub-name text-truncate">{{item.name}}</span>,
+                      <span class="sub-name text-truncate">{{item.countryName}}</span>
+                      <div class="location-name">
+                        <span>{{item.destinationType | hotelLocationType}}</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div *ngIf="(!!history.length && !isTyping && !keyword.length)">
+                  <div class="row large-title">
+                    <div class="col-12">Đã chọn gần đây</div>
+                  </div>
+                  <ul>
+                    <li class="position-relative" *ngFor="let item of history" (click)="onSelect(item)">
+                      <div class="main-name">{{item.name}}</div>
+                      <div class="sub-name text-truncate">{{item.name}}, {{item.countryName}}</div>
+                      <div class="location-name">
+                        <span>{{item.destinationType | hotelLocationType}}</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                <div *ngIf="!!sourcesFavorite.length && !sources.length && !isTyping">
+                  <div class="favorite-location">
+                    <div class="row large-title">
+                      <div class="col-12">Điểm đến phổ biến</div>
+                    </div>
+                  </div>
+                  <ul>
+                    <li class="position-relative" *ngFor="let item of sourcesFavorite" (click)="onSelect(item, 'result')">
+                      <div class="main-name">{{item.name}}</div>
+                      <div class="sub-name text-truncate">{{item.name}}, {{item.countryName}}</div>
+                      <div class="location-count">
+                        <span>{{item.numberOfHotels}} khách sạn</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

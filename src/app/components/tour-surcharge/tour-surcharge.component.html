@@ -1,0 +1,7 @@
+<div class="tour-surcharge-page">
+  <ul *ngIf="!!data.length">
+    <li *ngFor="let item of data">
+      <img class="m-b-none m-t-n-4" cdn-src="assets/images/icon/icon-dot-green-2.svg" alt=""> {{ item.title }}: <span class="text-green">{{ item.value }}</span>
+    </li>
+  </ul>
+</div>

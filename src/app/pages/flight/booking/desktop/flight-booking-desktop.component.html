@@ -1,0 +1,43 @@
+<div class="flight-booking flight-booking-desktop" [booking-step]="1">
+
+  <section class="main-body p-t-30">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 left-section">
+
+          <signin-request-desktop></signin-request-desktop>
+
+          <flight-ticket></flight-ticket>
+
+          <contact-info [data]="contact"
+                        (changes)="onContactChange($event)"
+                        [invalid]="isInvalid"></contact-info>
+
+          <!-- Passenger Info -->
+          <passenger-info *ngIf="summaryPrice"
+                          [data]="passengers"
+                          [international]="isInternational"
+                          [adults]="bookingFlight.Adult"
+                          [children]="bookingFlight.Child"
+                          [infants]="bookingFlight.Infant"
+                          [segments]="segments"
+                          [invalid]="isInvalid"
+                          (submit)="onUpdatePassenger($event)">
+          </passenger-info>
+          <!-- Passenger Info -->
+        </div>
+        <div class="col-lg-4 right-section">
+          <price-detail-box *ngIf="summaryPrice"
+                            [totalPrice]="totalPrice"
+                            [point]="point"
+                            [summaryPrice]="summaryPrice"
+                            [disabled]="detectDisableSubmit()"
+                            (submit)="onBookingFlight($event)"></price-detail-box>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<payment-change-popup></payment-change-popup>

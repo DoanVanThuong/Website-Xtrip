@@ -1,0 +1,84 @@
+.checkbox, .radio {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked {
+      ~ span {
+        background-color: @green-2;
+        border-color: @green-2;
+
+        &:after {
+          display: block;
+        }
+      }
+    }
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    background-color: @white;
+    border: 1px solid @gray-3;
+    .transition(all .3s linear 0s);
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+
+      left: 6px;
+      top: 1px;
+      width: 7px;
+      height: 12px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      .transform(rotate(45deg));
+
+    }
+  }
+
+}
+
+.icheck {
+  &.icheckbox, &.iradio {
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url('../../assets/images/icon/icon-uncheck-gray.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+
+    &.checked {
+      background-image: url('../../assets/images/icon/icon-checked-green.svg');
+    }
+
+    &.disabled {
+      cursor: default;
+    }
+  }
+}

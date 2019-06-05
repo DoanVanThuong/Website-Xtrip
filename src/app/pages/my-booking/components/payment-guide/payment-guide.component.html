@@ -1,0 +1,283 @@
+<div class="payment-guide-page justify-content-center" *ngIf="!!data">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="p-15 bg-white">
+        <div class="row">
+          <a class="col-2 m-t-5" (click)="backTo()">
+            <img class="m-b-0 size-16x16"
+                 cdn-src="assets/images/icon/icon-close.svg" alt="img"/>
+          </a>
+          <div class="col-8 text-center text-black font-20 font-black">Hướng dẫn thanh toán</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div min-height class="bg-white wrapper" [ngSwitch]="data.paymentDetail.method">
+
+    <!-- COD -->
+    <div class="row cod p-l-10 p-r-10"
+         *ngSwitchCase="METHOD.COD">
+      <div class="container-fluid">
+        <ul class="steps">
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 1:</strong>
+                Nhân viên thu hộ sẽ gọi cho bạn trước khi đến.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 2:</strong>
+                Bạn sẽ nhận hoá đơn thu hộ (có mộc đỏ) ngay sau khi nhân viên thu tiền.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 3:</strong>
+                Bạn sẽ nhận email chứa mã đặt vé, phòng hoặc tour trong vòng 3-6 tiếng kể từ lúc nhân viên thu tiền.
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- COD -->
+
+    <!-- Payoo -->
+    <div class="row payment-method store p-l-10 p-r-10"
+         *ngSwitchCase="METHOD.STORE">
+      <div class="container-fluid">
+        <ul class="steps">
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 1:</strong>
+                Chụp màn hình chứa mã Payoo
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 2:</strong>
+                Đến cửa hàng, điểm giao dịch Payoo gần nhất , <a class="text-main" href="#">xem tại đây</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 3:</strong>
+                Báo cho nhân viên thu ngân rằng bạn muốn thanh toán hóa đơn Payoo.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 4:</strong>
+                Cung cấp mã Payoo cho nhân viên thu ngân
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 5:</strong>
+                Nhân viên có thể sẽ xác nhận Số di dộng, Email, Họ tên dùng đặt chỗ của bạn
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 6:</strong>
+                Nếu có bất kỳ trở ngại nào, xin liên hệ bộ phận hỗ trợ khách hàng của Payoo qua số điện thoại.
+                <a class="text-main" href="tel:1900545478">1900 545478</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 7:</strong>
+                Bạn sẽ nhận được thông báo xác nhận thanh toán thành công qua ứng dụng Xtrip sau khi đã thanh toán.
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Payoo -->
+
+    <!-- Office -->
+    <div class="row payment-method office p-l-10 p-r-10"
+         *ngSwitchDefault>
+      <div class="container-fluid">
+        <ul class="steps">
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 1:</strong>
+                Bạn chụp màn hình mã đặt chỗ hoặc QR code.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 2:</strong>
+                Xuất trình mã đặt chỗ hoặc QR code khi thanh toán tại Xtrip: <a class="text-main"> 136 Nguyễn Duy Dương,
+                Phường 9, Quận 5, Thành phố Hồ Chí Minh.</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 3:</strong>
+                Bạn sẽ nhận được thông báo xác nhận thanh toán thành công qua ứng dụng Xtrip sau khi đã thanh toán.
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Office -->
+
+    <!-- Transfer -->
+    <div class="row payment-method transfer p-l-10 p-r-10"
+         *ngSwitchCase="METHOD.TRANSFER">
+      <div class="container-fluid">
+        <ul class="steps">
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 1:</strong>
+                Bạn đăng nhập vào internet banking và tiến hành chuyển khoản cho Xtrip
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-table">
+              <div class="d-table-cell">
+                <img class="m-b-0 size-10x10" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+              </div>
+              <div class="d-table-cell p-l-5">
+                <strong>Bước 2:</strong>
+                Bạn sẽ nhận được thông báo xác nhận thanh toán thành công qua ứng dụng Xtrip xác nhận đã nhận chuyển
+                khoản.
+              </div>
+            </div>
+
+          </li>
+        </ul>
+
+        <div class="bank-info m-t-20">
+          <div class="row">
+            <div class="col-8 p-t-5">
+              <strong class="font-15">Thông tin tài khoản</strong>
+            </div>
+            <div class="col-4 text-right" *ngIf="!!bankCode">
+                <span class="bank-logo">
+                  <img class="mx-w-full" src="{{url}}{{bankCode}}.png" alt="bank"/>
+                </span>
+            </div>
+          </div>
+          <div class="row m-t-10">
+            <div class="title">Theo số tài khoản</div>
+            <ul>
+              <li>
+                <div class="label">Số tài khoản</div>
+                <div class="bank-account-number">{{paymentInfo.accountNo}}</div>
+              </li>
+              <li>
+                <div class="label">Tên chủ tài khoản</div>
+                <div class="bank-account-name">{{paymentInfo.accountName}}</div>
+              </li>
+              <li>
+                <div class="label">Chi nhánh</div>
+                <div class="bank-account-branch">{{paymentInfo.branch}}</div>
+              </li>
+            </ul>
+          </div>
+          <div class="row" *ngIf="!!paymentInfo.cardNo">
+            <div class="title">Theo số thẻ (chuyển khoản nhanh)</div>
+            <ul>
+              <li>
+                <div class="label">16 số thẻ</div>
+                <div class="bank-card-number">{{paymentInfo.cardNo}}</div>
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            <div class="title">Nội dung thanh toán &amp; tổng tiền</div>
+            <ul>
+              <li>
+                <div class="label">Nội dung thanh toán</div>
+                <div class="payment-description">{{paymentInfo.description}}</div>
+              </li>
+              <li class="line"></li>
+              <li>
+                <div class="label">Tổng số tiền</div>
+                <div class="total-price">{{paymentInfo.orderTotal | currencyMoney: ''}} <span
+                    class="text-underline">đ</span></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Transfer -->
+
+  </div>
+</div>

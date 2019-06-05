@@ -1,0 +1,58 @@
+@import "_variables.less";
+@import "_mixins.less";
+.modal.note-detail-popup {
+    .modal-dialog {
+        max-width: 780px;
+        .modal-content {
+            .border-radius(10px);
+            .modal-header {
+                padding: 15px 20px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                background-color: @gray-17;
+                .close {
+                    padding: 0px;
+                    font-size: 24px;
+                }
+                .button-group {
+                    font-size: 18px;
+                    font-weight: 700;
+                    >a {
+                        margin-right: 30px;
+                        color: @gray-37;
+                        &.active,
+                        &:active,
+                        &:hover,
+                        &:focus {
+                            color: @orange-2;
+                        }
+                        &:last-child {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+            .modal-body {
+                .flight-detail-item {
+                    color: @gray-2;
+                }
+                .list-detail-info{
+                    li{
+                      font-size: 15px;
+                      font-weight: 400;
+                      &:before{
+                        content: "";
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        background: @green-2;
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin-right: 2px;
+                      }
+                    }
+                  }
+            }
+        }
+    }
+}

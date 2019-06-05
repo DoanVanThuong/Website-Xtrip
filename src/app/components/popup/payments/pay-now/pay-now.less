@@ -1,0 +1,65 @@
+@import '_variables.less';
+
+.not-pay-now-popup {
+  .modal-body {
+    padding-top: 8px;
+    .modal-wrapper {
+      .not-pay-now-content {
+        padding: 0px 8px;
+      }
+    }
+    .info-note-payment {
+      width: 100%;
+      color: @white;
+      background: @orange-2;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 8px;
+      margin-bottom: 10px;
+      img {
+        vertical-align: super;
+      }
+    }
+    .content-transfer {
+      .heading {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        color: @green-2;
+        height: 36px;
+        background: @gray-17;
+        padding-left: 15px;
+      }
+      .title {
+        color: @gray-1;
+        font-size: 13px;
+      }
+      ul {
+        li {
+          padding: 7px;
+          color: @black;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .modal-footer {
+    border-top: none;
+    padding: 15px 8px;
+    button {
+      width: 100%;
+      color: @white;
+      background: @orange-2;
+    }
+  }
+}

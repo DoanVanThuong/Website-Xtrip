@@ -1,0 +1,89 @@
+<div class="hotel-mapview-mode">
+  <agm-map class="maker-view h-maps" #gm
+    [style.height.vh]="100"
+    [usePanning]="true"
+    [latitude]="lat" 
+    [longitude]="lng" 
+    [zoom]="zoom"
+    [disableDefaultUI]="true"
+    [zoomControl]="false"
+    [streetViewControl]="false"
+    [gestureHandling]="'greedy'"
+    (mapClick)="onMapClick($event)"
+    (zoomChange)="zoomChange($event)"
+    (mapReady)="mapReady($event)">
+
+    <agm-overlay *ngFor="let item of hotels; trackBy: trackByFn"
+      [latitude]="item.latitude"
+      [longitude]="item.longitude">
+      <div class="block">
+        <div class="item-maker font-15 text-center font-medium position-relative animated fadeIn"
+          [class.sold-out]="item.isSoldOut"
+          [class.selected]="item == selectedMarker">
+          {{!item.isSoldOut ? (item.sellingPrice | currencyMoney: '') : 'Hết phòng'}}
+          <span *ngIf="!item.isSoldOut" class="text-underline">đ</span>
+        </div>
+      </div>
+    </agm-overlay>
+    
+    <agm-marker
+      *ngFor="let maker of hotels; let i = index;"
+      [latitude]="maker.latitude"
+      [longitude]="maker.longitude"
+      [iconUrl]="iconUrl(maker.isSoldOut)"
+      (markerClick)="clickedMarker(maker, i)">
+
+    </agm-marker>
+
+  </agm-map>
+
+  <div class="hotel-carousel position-absolute animated fadeInUp" *ngIf="!!selectedMarker">
+    <div class="h-140 bg-white">
+      <owl-carousel #owlElement
+        [options]="owlOptions"
+        [items]="markers"
+        [carouselClasses]="['sliding']">
+        <div class="item" *ngFor="let hotel of hotels; let i = index; trackBy: trackByFn">
+          <a (click)="onSelectHotel(hotel)">
+            <div class="d-flex h-120">
+              <div class="image">
+                <img class="" [src]="hotel.photo.url" alt="img" onerror="this.src='assets/images/no-thumbnail.png'" />
+              </div>
+              <div class="hotel-detail">
+                <div class="hotel-name">
+                  <span class="stars">
+                    {{hotel.stars}}
+                    <span>
+                      <img class="m-b-none m-t-n-3 m-l-n-2" src="assets/images/icon/icon-star-white.svg" alt="img" />
+                    </span>
+                  </span>
+                  {{hotel.name}}
+                </div>
+                <div class="hotel-address text-truncate">
+                  <span><img class="m-b-none size-14x14" cdn-src="assets/images/icon/icon-location-gray.svg" alt="img" /></span>
+                  <span class="m-t-n-2">{{hotel.fullAddress}}</span>
+                </div>
+
+                <div class="position-absolute pos-price-coupon">
+                  <div class="hotel-price">
+                    {{hotel.sellingPrice | currencyMoney: ''}} <span class="text-underline">đ</span>
+                  </div>
+                  <div class="hotel-coupon" *ngIf="!!hotel.coupon.available">
+                    Nhập mã <span class="font-weight-bold text-green">{{hotel.coupon.couponCode}}</span> giảm ngay 
+                    <span *ngIf="!hotel.coupon.usePercentage">{{hotel.coupon.discountAmount | currencyMoney: ''}} <span class="text-underline">đ</span></span>
+                    <span *ngIf="hotel.coupon.usePercentage">{{hotel.coupon.discountPercentage}}%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </owl-carousel>
+    </div>
+  </div>
+  <div class="position-absolute pos-icon-close">
+    <a (click)="back()">
+      <img class="m-b-none" src="assets/images/icon/icon-close.svg" alt="img" />
+    </a>
+  </div>
+</div>

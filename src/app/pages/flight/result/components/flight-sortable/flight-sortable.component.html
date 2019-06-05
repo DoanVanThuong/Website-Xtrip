@@ -1,0 +1,25 @@
+<div class="flight-sortable">
+  <div class="panel card panel-desktop">
+    <div class="panel-heading card-header">
+      <div class="panel-title card-title">
+        <div class="d-inline-block">
+          <ng-content></ng-content>
+        </div>
+        <span class="pull-right">* Giá tiền tính trên 1 người lớn, đã bao gồm thuế phí</span>
+      </div>
+    </div>
+    <div class="panel-body card-body">
+      <span class="d-inline-block m-b-10 m-t-10 font-medium font-14">Sắp xếp</span>
+      <div class="pull-right d-inline-block">
+        <div class="options">
+          <a class="pointer"
+             [class.active]="sortIndex === sort.index"
+             *ngFor="let sort of filterOptions.sorts; trackBy: trackByFn; let i = index"
+             (click)="onSelect(sort.index)">
+            {{ sort.name }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

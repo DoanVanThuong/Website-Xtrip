@@ -1,0 +1,46 @@
+<!--component html goes here -->
+<div bsModal #popup="bs-modal" class="modal fade promotion-survey-popup" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <owl-carousel #owlElement [items]="serveyItems" [carouselClasses]="['owl-theme', 'owl-dots-black', 'sliding']"
+              [options]="carouselOptions">
+              <div *ngFor="let item of serveyItems; let i = index">
+                <div class="position-relative h-100-vh">
+                  <div class="col-12 title">
+                    Chào mừng bạn đến với Xtrip
+                  </div>
+                  <div class="img-cnt text-center">
+                    <img class="w-full {{checkingPos(i)}}" [src]="item.img" alt="img" />
+                  </div>
+                </div>
+
+                <div class="bg-item">
+                  <div class="cnt-title">
+                    {{item.title}}
+                  </div>
+                  <div class="description">
+                    <div class="des d-flex" *ngFor="let des of item.description">
+                      <img *ngIf="item.description.length > 1" class="m-b-none m-t-3 m-r-8 size-16x16 w-auto" cdn-src="assets/images/more/promotion-survey/check.svg"
+                        alt="img" /><span>{{des}}</span>
+                    </div>
+                  </div>
+                  <div class="row p-0-20 m-t-40" *ngIf="i === 4">
+                    <!-- <div class="col-6">
+                      <button class="btn btn-main-v2 w-full" (click)="openLinkServey()">Nhận xét</button>
+                    </div> -->
+                    <div class="col-12 text-center">
+                      <button class="btn w-full close-btn" (click)="hide()">Thoát</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </owl-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

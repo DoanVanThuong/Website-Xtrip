@@ -1,0 +1,42 @@
+<div class="block block-cheap-tour"
+     *ngIf="!!tours.length">
+  <div class="cheap-tour cheap-tour-desktop" *ngIf="isDesktop">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title">Tour giá rẻ</h3>
+        <div class="block-body">
+          <div class="panel panel-desktop">
+            <div class="panel-body">
+              <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']"
+                            [items]="tours"
+                            [options]="carouselOptions">
+                <div class="cheap-tour-item" style="{width: 275px}"
+                     *ngFor="let tour of tours; trackBy: trackByFn">
+                  <home-tour-item-desktop [tour]="tour"></home-tour-item-desktop>
+                </div>
+              </owl-carousel>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cheap-tour cheap-tour-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title">Tour giá rẻ</h3>
+        <div class="block-body">
+          <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-stage-full']"
+                        [items]="tours"
+                        [options]="carouselOptions">
+            <div class="cheap-tour-item" style="{width: 275px}"
+                 *ngFor="let tour of tours; trackBy: trackByFn">
+              <home-tour-item-desktop [tour]="tour" [depart]="false"></home-tour-item-desktop>
+            </div>
+          </owl-carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<section class="block block-flight {{ class }}" *ngIf="!!flights.length">
+
+  <!-- desktop -->
+  <div class="free-tour--flight-desktop" *ngIf="isDesktop">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center">
+          <h4 class="block-title m-none">{{ heading }}</h4>
+          <a class="pointer text-green font-medium"
+             (click)="onSelectFlight()"
+             [routerLink]="['flight/result']"
+             [queryParams]="generateQueryParams()">
+            <span class="d-none d-lg-block">Xem thêm</span>
+            <span class="d-lg-none">
+              <img class="size-16x16 scale-one-half"
+                   cdn-src="assets/images/icon/icon-angle-right-green.svg" alt="icon"/>
+            </span>
+          </a>
+        </div>
+
+        <div class="block-body m-t-10">
+          <div class="row">
+            <div class="col-4 flight-item"
+                 [class.m-t-20]="i/itemsPerRow >= 1"
+                 [class.p-l-10]="i%itemsPerRow > 0"
+                 [class.p-r-10]="i%itemsPerRow < itemsPerRow-1"
+                 *ngFor="let flight of flights; trackBy: trackByFn; let i = index">
+              <a class="pointer d-flex h-full justify-content-center align-items-center flex-lg-row flex-column"
+                 (click)="onSelectFlight()"
+                 [routerLink]="['flight/result']"
+                 [queryParams]="generateQueryParams(flight)">
+                <div class="flight-logo d-flex flex-row flex-lg-column align-items-center">
+                  <img class="img-fix"
+                       [src]="flight.photo.src"
+                       [alt]="flight.photo.name"/>
+                  <div class="flight-carrier-name">{{ flight.name }}</div>
+                </div>
+
+                <div class="flight-info">
+                  <div class="flight-origin d-flex justify-content-between align-items-center align-content-center">
+                    <div class="text-truncate">
+                      <img class="size-14x14 m-t-n-3" cdn-src="assets/images/icon/icon-circle-green.svg" alt="icon"/>
+                      {{ flight.originName}}
+                    </div>
+                    <div class="flight-code">{{ flight.origin }}</div>
+                  </div>
+                  <div class="flight-destination d-flex justify-content-between align-items-center">
+                    <div class="text-truncate">
+                      <img class="size-14x14 m-t-n-3" cdn-src="assets/images/icon/icon-location-green.svg" alt="icon"/>
+                      {{ flight.destinationName }}
+                    </div>
+                    <div class="flight-code">{{ flight.destination }}</div>
+                  </div>
+
+                  <div class="flight-price m-t-10">
+                    Giá từ:
+                    <app-price class="text-green font-medium" [price]="flight.price"></app-price>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="free-tour--flight-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="block-title m-none">
+          <a class="pointer d-flex justify-content-center align-items-center"
+             [routerLink]="['/flight/result']"
+             [queryParams]="generateQueryParams()">
+            <h4 class="m-none">{{ heading }}</h4>
+            <img class="size-16x16 scale-one-half  ml-auto"
+                 cdn-src="assets/images/icon/icon-angle-right-green.svg" alt="icon"/>
+          </a>
+        </div>
+        <div class="block-description">
+          {{ description }}
+        </div>
+        <div class="block-body m-t-10">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"
+                *ngFor="let flight of flights; trackBy: trackByFn;">
+              <a class="d-block pointer"
+                 (click)="onSelectFlight()"
+                 [routerLink]="['flight/result']"
+                 [queryParams]="generateQueryParams(flight)">
+                <div class="d-flex justify-content-center">
+                  <div class="mr-auto">
+                    <img class="m-t-n-3 size-16x16 m-r-5"
+                         [src]="flight.photo.src | size:20:20:true"
+                         [alt]="flight.photo.name"/>
+                    {{ flight.name }}
+                  </div>
+                  <div class="">
+                    Giá từ:
+                    <app-price class="text-green font-medium" [price]="flight.price"></app-price>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,75 @@
+<div class="bill-info">
+
+  <div class="row">
+    <div class="col-9">
+      <div class="title-header p-10 font-13">{{title || 'Xuất hóa đơn điện tử'}}</div>
+    </div>
+    <div class="col-3 p-t-10 p-r-20 text-right">
+      <ui-switch (change)="onChangeSwitchBill($event)"
+                 [checked]="isShowVAT"
+                 size="small"
+                 color="#4CAF50"></ui-switch>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="isShowVAT">
+        <form class="form"
+              [formGroup]="form"
+              novalidate>
+          <div class="list-group list-group-flush">
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Tên công ty:</div>
+                <div class="col-7">
+                  <mat-form-field floatLabel="never">
+                    <input matInput
+                           placeholder="* Nhập tên công ty"
+                           type="text"
+                           [formControl]="companyName">
+                    <mat-error class="error"
+                             align="start"
+                             *ngIf="companyName.dirty">
+                      <span *ngIf="companyName.errors | equalError:'required'">Vui lòng nhập tên công ty</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Mã số thuế:</div>
+                <div class="col-7">
+                  <mat-form-field floatLabel="never">
+                    <input matInput placeholder="* Nhập mã" type="text"
+                           [formControl]="taxIdentificationNo">
+                    <mat-error class="error" align="start"
+                             *ngIf="taxIdentificationNo.dirty">
+                      <span *ngIf="taxIdentificationNo.errors | equalError:'required'">Vui lòng nhập mã</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Địa chỉ công ty:</div>
+                <div class="col-7">
+                  <mat-form-field class="d-block" floatLabel="never">
+                    <input matInput placeholder="* Nhập địa chỉ" type="text"
+                           [formControl]="companyAddress">
+                    <mat-error class="error" align="start" *ngIf="companyAddress.dirty">
+                      <span *ngIf="companyAddress.errors | equalError:'required'">Vui lòng nhập địa chỉ công ty</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

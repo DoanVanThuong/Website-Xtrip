@@ -1,0 +1,67 @@
+<div class="block block-banner">
+
+  <!-- for mobile -->
+  <div class="banner banner-mobile" *ngIf="isMobile">
+    <h4 class="block-title">Ưu đãi dành cho bạn</h4>
+    <div class="block-body">
+      <div class="scroll-container hidden-scrollbar">
+        <div class="scroll-area">
+          <div class="banner-item scroll-item"
+               *ngFor="let banner of banners; trackBy: trackByFn">
+            <a class="pointer" [href]="banner.url"
+               [target]="getTargetOfLink(banner.url)"
+               *ngIf="banner.url !== '#'">
+              <img class="img-fix"
+                   defaultImage="assets/images/no-thumbnail.png"
+                   errorImage="assets/images/no-thumbnail.png"
+                   [src]="banner.photo.src"
+                   [alt]="banner.name"
+                   [title]="banner.name"
+                   onerror="this.src='assets/images/no-thumbnail.png'"/>
+            </a>
+
+            <img class="img-fix"
+                 defaultImage="assets/images/no-thumbnail.png"
+                 [src]="banner.photo.src"
+                 [alt]="banner.name"
+                 [title]="banner.name"
+                 onerror="this.src='assets/images/no-thumbnail.png'"
+                 *ngIf="banner.url === '#'"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- for desktop -->
+  <div class="banner banner-desktop" *ngIf="isDesktop">
+    <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover', 'owl-dots-black']"
+                  [items]="banners"
+                  [options]="carouselOptions">
+      <div class="banner-item"
+           *ngFor="let banner of banners; trackBy: trackByFn">
+        <a class="pointer"
+           [href]="banner.url"
+           [target]="getTargetOfLink(banner.url)"
+           *ngIf="banner.url !== '#'">
+          <img class="img-fix"
+               defaultImage="assets/images/no-thumbnail.png"
+               [src]="banner.photo.src"
+               [alt]="banner.name"
+               [title]="banner.name"
+               onerror="this.src='assets/images/no-thumbnail.png'"/>
+        </a>
+
+        <img class="img-fix"
+             defaultImage="assets/images/no-thumbnail.png"
+             [src]="banner.photo.src"
+             [alt]="banner.name"
+             [title]="banner.name"
+             onerror="this.src='assets/images/no-thumbnail.png'"
+             *ngIf="banner.url === '#'"/>
+      </div>
+    </owl-carousel>
+  </div>
+
+</div>

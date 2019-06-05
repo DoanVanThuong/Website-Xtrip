@@ -1,0 +1,45 @@
+<div class="forgot-password-page">
+  <div class="row">
+    <div class="col-12">
+      <a (click)="goBack()">
+        <img class="m-b-0 size-24x24" cdn-src="assets/images/icon/icon-close-green.svg" alt="icon"/>
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h4 class="title">
+        Quên mật khẩu
+      </h4>
+      <div class="description">
+        Mật khẩu khôi phục sẽ được gửi qua email của bạn
+      </div>
+    </div>
+  </div>
+
+  <div class="form-box no-bg-form-box p-0 m-t-41">
+    <div class="row justify-content-center m-t-30">
+      <div class="col-lg-4 col-md-6 col-12">
+        <form class="form form-mobile"
+              [formGroup]="form"
+              (submit)="onSubmit(form.value)">
+          <div class="form-group"
+               [ngClass]="{'has-error': (!email.valid && (email.dirty || showValid))}">
+            <mat-form-field>
+              <input type="email" [formControl]="email" matInput placeholder="Email"/>
+              <img matSuffix class="size-24x24" cdn-src="assets/images/user-profile/icon-email.svg" alt="icon"/>
+              <mat-error *ngIf="email.dirty">
+                <span *ngIf="email.errors | equalError:'required'">Vui lòng nhập email</span>
+                <span *ngIf="email.errors | equalError:'email'">Email không hợp lệ</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="m-t-20">
+            <button class="btn btn-forgot-password" [disabled]="form.invalid">Khôi phục mật khẩu</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

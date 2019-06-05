@@ -1,0 +1,128 @@
+@import './_variables.less';
+@import './_mixins.less';
+
+.introduction {
+  background-color: @white;
+
+  .main-body {
+
+    font-size: 15px;
+    line-height: 1.67;
+
+    .heading {
+      font-size: 18px;
+      font-weight: @font-medium;
+      color: @green-2;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    .sub-heading {
+      font-weight: @font-bold;
+    }
+
+    p {
+      font-size: inherit;
+      margin: 0;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin: 10px 0 10px 20px;
+      padding-left: 20px;
+
+      li {
+
+      }
+    }
+
+    ol {
+      margin: 10px 0;
+      padding-left: 15px;
+
+      li {
+
+      }
+    }
+  }
+
+  .banner-desktop{
+    .owl-carousel {
+
+      .owl-nav {
+        .transition(all .5s linear 0s);
+        height: 0px;
+        margin: 0;
+
+        &.disabled {
+          opacity: .9;
+        }
+
+        .owl-next, .owl-prev {
+          .rgba(@dark-gray, 1);
+          border-radius: 5px;
+          padding: 8px 6px !important;
+          text-align: center;
+          font-size: 32px;
+          line-height: 1;
+          font-weight: 400;
+          color: @white;
+          position: absolute;
+          top: 50%;
+          outline: none;
+          margin: 0;
+        }
+        .owl-next {
+          right: -20px;
+          transform: translate(50%, -50%);
+        }
+        .owl-prev {
+          left: -20px;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      &.owl-stage-full {
+        .owl-stage-outer {
+          padding: 15px;
+          margin: -15px;
+        }
+      }
+
+      &.owl-nav-hover {
+
+        .owl-nav {
+          opacity: 0;
+        }
+
+        &:hover {
+          .owl-nav {
+            opacity: 1;
+          }
+        }
+      }
+
+      &.owl-dots-black {
+        .owl-dots {
+
+          .owl-dot {
+            width: 16px;
+            height: 16px;
+            border: 2px solid @white;
+            border-radius: 50%;
+            background-color: hsla(hue(@black), saturation(@black), lightness(@black), .6);
+            margin-right: 10px;
+
+            span {
+              background-color: transparent;
+              margin: 0;
+            }
+            &.active {
+              background-color: @white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

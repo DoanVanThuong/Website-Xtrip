@@ -1,0 +1,18 @@
+<div id="footer"
+     class="footer footer-mobile fixed-bottom d-flex justify-content-between">
+  <div *ngFor="let route of routers; trackBy: trackByFn; let i = index"
+       class="nav-item"
+       [routerLinkActiveOptions]="{exact: route.activeExact}"
+       routerLinkActive="active">
+    <a [routerLink]="[route.url]" class="d-block">
+      <img class="icon m-b-none size-28x28 active"
+           [src]="route.icon.active"
+           [alt]="route.title"/>
+      <img class="icon m-b-none size-28x28 unactive"
+           [src]="route.icon.inactive"
+           [alt]="route.title"/>
+      <div class="nav-title">{{ route.title }}</div>
+      <span class="badge badge-danger" *ngIf="!!route.badge">{{ route.badge}}</span>
+    </a>
+  </div>
+</div>

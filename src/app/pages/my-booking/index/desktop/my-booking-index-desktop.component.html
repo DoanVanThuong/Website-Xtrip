@@ -1,0 +1,31 @@
+<div class="my-booking my-booking-desktop">
+  <section>
+    <div class="button-group over-hidden">
+      <button class="btn btn-white"
+              [class.active]="tab === MODULE.FLIGHT"
+              (click)="onSelectTab(null, MODULE.FLIGHT)">Vé máy bay
+      </button>
+      <button class="btn btn-white"
+              [class.active]="tab === MODULE.HOTEL"
+              (click)="onSelectTab(null, MODULE.HOTEL)">Khách sạn
+      </button>
+      <button class="btn btn-white"
+              [class.active]="tab === MODULE.TOUR"
+              (click)="onSelectTab(null, MODULE.TOUR)">Tour
+      </button>
+      <button class="btn btn-white"
+              [class.active]="tab === MODULE.PRODUCT"
+              (click)="onSelectTab(null, MODULE.PRODUCT)">Vui chơi & tham quan
+      </button>
+    </div>
+  </section>
+
+  <section class="m-t-10">
+    <booked-flight *ngIf="tab === MODULE.FLIGHT"></booked-flight>
+    <booked-hotel *ngIf="tab === MODULE.HOTEL"></booked-hotel>
+    <booked-tour *ngIf="tab === MODULE.TOUR"></booked-tour>
+    <booked-product *ngIf="tab === MODULE.PRODUCT"></booked-product>
+  </section>
+</div>
+
+<sync-request-popup (submit)="onSync()" (cancel)="onSkip()"></sync-request-popup>

@@ -1,0 +1,67 @@
+<div class="room-detail-item bg-white p-10 line">
+  <div class="row">
+    <div class="col-12 font-bold font-15">{{room.roomName}}</div>
+  </div>
+  <div class="d-flex m-t-5">
+    <div>Tối đa:</div>
+    <div class="maximum-people bg p-0-4">
+      <img class="m-b-0 m-t-n-3" cdn-src="assets/images/hotel/room/man.svg">
+      <span class=""> x {{room.limitedAdults}}</span>
+    </div>
+  </div>
+  <div class="room-image m-t-10">
+    <a (click)="onClickMoreService(room)">
+      <img class="m-b-0 image-size"
+           defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="room.photo.src | size: 400"
+           [offset]="80"
+           onerror="this.src='assets/images/no-thumbnail.png'"
+           [title]="room.roomName"
+           [alt]="room.roomName"/>
+    </a>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="d-flex m-t-10"
+           *ngFor="let fac of room.facilityGroups.mainFacilityGroup.facilities | slice:0:3; trackBy: trackByFn; let i = index">
+        <div class=""><img class="size-24x24 m-b-0" src="{{fac.imageHost}}android/{{fac.imagePath}}" alt="img"/></div>
+        <div class="text-truncate font-13 text-black m-t-3 p-l-5">{{fac.name}}</div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="d-flex m-t-10"
+           *ngFor="let pre of room.roomPreferences | slice: 0:3; trackBy: trackByFn; let i = index">
+        <div class=""><img class="size-24x24 m-b-0" src="{{pre.imageHost}}android/{{pre.imagePath}}" alt="img"/></div>
+        <div class="text-truncate font-13 text-black m-t-3 p-l-5">{{pre.name}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row more-detail">
+    <div class="col-12 m-t-10 m-b-10 line"></div>
+    <div class="col-12 title font-14" (click)="onClickMoreService(room)">
+      Xem thêm chi tiết <span class="pull-right"><img class="m-b-0" cdn-src="assets/images/hotel/room/arrow.svg" alt="img"/></span>
+    </div>
+    <div class="col-12 m-t-10 m-b-10 line"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-6 m-t-10">
+      <a (click)="onBookingHotel()">
+        <button class="btn btn-main font-bold font-18 btn-main-outline">
+          Đặt ngay
+        </button>
+      </a>
+    </div>
+    <div class="col-6 text-right">
+      <div class="font-13 {{ room.allotment <= 3 ? 'remain-red' : 'remain-green' }}">
+        Còn {{room.allotment}} phòng <span *ngIf="room.allotment <= 3">cuối cùng</span>
+      </div>
+      <div class="font-13">{{night}} đêm</div>
+      <div class="font-18 price font-bold">{{ room.sellingPrice | currencyMoney: '' }} <span
+          class="text-underline">đ</span></div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,47 @@
+<div class="sign-in">
+  <form class="form form-signin"
+        [formGroup]="form"
+        (ngSubmit)="onSignIn(form.value)">
+    <div class="form-group has-icon"
+         [ngClass]="{'has-error': error.username || (!username.valid && username.dirty)}">
+      <div class="icon-addon">
+        <input [formControl]="username"
+               type="username"
+               class="form-control"
+               [placeholder]="isProduction ? 'Email' : 'Email hoặc số điện thoại'"/>
+        <span class="form-control-icon">
+          <img class="size-24x24" cdn-src="assets/images/icon/icon-email-gray.svg" alt="icon"/>
+        </span>
+      </div>
+      <div class="error d-none" *ngIf="username.dirty || !!error.username">
+        <span *ngIf="username.errors | equalError:'required'">
+          {{ isProduction ? 'Email được yêu cầu' : 'Email hoặc số điện thoại được yêu cầu' }}</span>
+        <span *ngIf="username.errors | equalError:'isNotEmail'">Email không hợp lệ</span>
+        <span *ngIf="username.errors | equalError:'email'">Email không hợp lệ</span>
+        <span *ngIf="username.errors | equalError:'isNotPhone'">Số điện thoại không hợp lệ</span>
+      </div>
+    </div>
+    <div class="form-group has-icon"
+         [ngClass]="{'has-error': (!password.valid && (password.dirty || showValid))}">
+      <div class="icon-addon">
+        <input [formControl]="password"
+               [type]="isPassword ? 'password':'text'"
+               class="form-control"
+               placeholder="Mật khẩu"/>
+        <a class="form-control-icon" (click)="isPassword = !isPassword">
+          <img class="size-24x24" cdn-src="assets/images/icon/icon-password-gray-hide.svg" alt="icon"/>
+        </a>
+      </div>
+      <div class="error d-none" *ngIf="password.dirty">
+        <span *ngIf="password.errors | equalError:'required'">Yêu cầu nhập Mật khẩu</span>
+        <span *ngIf="password.errors | equalError:'minlength'">Mật khẩu phải có tối thiểu 6 ký tự</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-block btn-main font-18" [disabled]="form.invalid">Đăng nhập</button>
+    </div>
+    <div class="form-group text-center m-t-10">
+      <a class="forget pointer" (click)="openForgotPassword()">Quên mật khẩu?</a>
+    </div>
+  </form>
+</div>

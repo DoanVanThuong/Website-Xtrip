@@ -1,0 +1,81 @@
+<div class="blog-page">
+  <app-header *ngIf="isMobile" [back]="true" [heading]="'Cẩm nang du lịch'" [fixed]="true"></app-header>
+
+  <div class="wrapper"
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <!-- for mkt -->
+    <h1 class="invisible h-none m-none">Tin tức du lịch</h1>
+
+    <div *ngIf="isMobile" class="container-fluid m-t-10">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-12 text-center"
+             *ngFor="let blog of blogs; trackBy: trackByFn;">
+          <a class="blog-list-item" [routerLink]="['/blog', blog.code, blog.alias]">
+            <div class="img-blog">
+              <img class="img-fluid mx-w-full"
+                   defaultImage="assets/images/no-thumbnail.png"
+                   [lazyLoad]="blog.photo.src"
+                   onerror="this.src='assets/images/no-thumbnail.png'"
+                   [alt]="blog.name"
+                   [title]="blog.name"/>
+            </div>
+            <div class="blog-description text-center font-bold">
+              <p class="f-15">{{blog.name}}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isDesktop">
+      <div class="page-header">
+        <div class="page-header-image">
+          <div class="content-center">
+            <div class="row">
+              <div class="col-md-8 ml-auto mr-auto text-center">
+
+                <h1 class="title">Giới thiệu các điểm đến phổ biến, tour hấp dẫn và kinh nghiệm du lịch</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container m-t-30">
+        <div class="article"
+             *ngFor="let blog of blogs; trackBy: trackByFn; let i = index">
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <div class="card card-blog card-plain text-center" data-toggle="tooltip">
+                <div class="card-image">
+                  <a class="pointer" [routerLink]="['/blog/', blog.code, blog.alias]">
+                    <img class="img img-raised img-fluid"
+                         defaultImage="assets/images/no-thumbnail.png"
+                         [lazyLoad]="blog.photo.src"
+                         onerror="this.src='assets/images/no-thumbnail.png'"
+                         [alt]="blog.name"
+                         [title]="blog.name">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h3 class="card-title pointer">{{blog.name}}</h3>
+                  <div class="card-description">
+                    <p [innerHTML]="blog.summary">...</p>
+                  </div>
+                </div>
+                <a class="pointer" class="btn btn-main-v2 btn-round btn-sm m-auto"
+                   [routerLink]="['/blog/', blog.code, blog.alias]">
+                  Xem chi tiết
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <loading [show]="isLoading"></loading>
+      </div>
+    </div>
+  </div>
+</div>

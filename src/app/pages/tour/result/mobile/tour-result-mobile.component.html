@@ -1,0 +1,145 @@
+<div class="tour-result tour-result-mobile">
+
+  <div class="header header-mobile">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex p-5-0-0">
+          <span class="pos-arrow">
+            <a class="d-block" (click)="back()">
+              <img class="m-b-none" cdn-src="assets/images/icon/icon-back-white.svg" alt="img"/>
+            </a>
+          </span>
+          <span class="w-full m-t-6">
+            <a (click)="changeArrival()">
+              <div class="input-style">
+                <span class="m-r-10 float-right">
+                  <img class="m-b-none"
+                       cdn-src="assets/images/icon/icon-arrow-down-gray.svg"
+                       alt="img"/></span>
+                <span class="m-l-10">{{ keyword }}</span>
+              </div>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter navigator -->
+    <div class="filter-navigator position-relative">
+      <div class="row font-14 text-white">
+        <div class="col-4 text-center bor-r-item position-relative p-l-none p-r-none">
+          <a (click)="openFilter()">
+            <img class="m-b-none m-t-n-3 m-r-8 size-14x14"
+                 cdn-src="assets/images/icon/icon-filter-white.svg"
+                 alt="img"/> Bộ lọc
+          </a>
+          <span class="position-absolute red-point" *ngIf="!!filterCounter"></span>
+        </div>
+        <div class="col-4 text-center bor-r-item p-l-none p-r-none">
+          <a (click)="openChangeDatePopup()">
+            <img class="m-b-none m-t-n-3 m-r-8 size-14x14"
+                 cdn-src="assets/images/icon/icon-date-white.svg" alt="img"/>
+            Đổi ngày
+          </a>
+        </div>
+        <div class="col-4 text-center position-static p-l-none p-r-none">
+          <div class="dropdown" dropdown>
+            <a dropdownToggle>
+              <img class="m-b-none m-t-n-3 m-r-8 size-14x14"
+                   cdn-src="assets/images/icon/icon-sort-white.svg"
+                   alt="img"/> Sắp xếp
+            </a>
+            <ul class="dropdown-menu pos-dropdown"
+                *dropdownMenu id="dropdown-basic" role="menu"
+                aria-labelledby="button-basic">
+              <li class="" *ngFor="let sort of filterOption.sorts; trackBy: trackByFn">
+                <a class="pointer"
+                   [class.active]="tourSearch.sortIndex.toString() === sort.index.toString()"
+                   (click)="onSelectSort(sort.index)">
+                  <div class="row">
+                    <div class="col-10">{{ sort.name }}</div>
+                    <div class="col-2 text-right"
+                         *ngIf="tourSearch.sortIndex.toString() === sort.index.toString()">
+                      <img class="m-b-none m-t-n-5"
+                           cdn-src="assets/images/product/result/check.svg" alt="img"/>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Filter nagivator -->
+  </div>
+
+  <div class="container wrapper p-15 p-t-none"
+       min-height
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-12">
+
+        <!-- Date range title -->
+        <div class="row" *ngIf="!!params.from && !!params.to && tours.length > 0 && !isLoading && !relatedTours.length">
+          <div class="col-12 date-range">
+            Thời gian đi: {{params.from | departDate:true:'DD/MM/YYYY'}} - {{params.to | departDate:true:'DD/MM/YYYY'}}
+          </div>
+        </div>
+        <!-- Date range title -->
+
+        <!-- Filter item by tag -->
+        <app-tour-tag-filter
+          *ngIf="(!!params.from && !!params.to && tours.length === 0 && filterCounter > 0 && !isLoading) || !!relatedTours.length"
+          [data]="filter"
+          [params]="params">
+        </app-tour-tag-filter>
+        <!-- Filter item tag -->
+
+        <!-- Detail item -->
+        <div class="tour-list bg-white">
+          <div class="item m-b-16"
+               *ngFor="let tour of tours; trackBy: trackByFn">
+            <tour-detail-item [tour]="tour"></tour-detail-item>
+          </div>
+        </div>
+
+        <div class="related-title" *ngIf="!!relatedTours.length">Có thể bạn quan tâm</div>
+        <div class="tour-list bg-white" *ngIf="!!relatedTours.length">
+          <div class="item m-b-16"
+               *ngFor="let tour of relatedTours; trackBy: trackByFn">
+            <tour-detail-item [tour]="tour"></tour-detail-item>
+          </div>
+        </div>
+        <!-- Detail item -->
+
+        <!-- Empty screen -->
+        <app-empty-screen [show]="!tours.length && !relatedTours.length && !isLoading"
+                          (retry)="getTours()"
+                          [isRetry]="false">
+        </app-empty-screen>
+        <!-- Empty screen -->
+
+        <!-- Loading spinner -->
+        <loading [show]="isLoading"></loading>
+        <!-- Loading spinner -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<tour-filter-mobile-popup *ngIf="!reInitFilter"
+                          [data]="filter"
+                          [params]="tourSearch"
+                          (updateCounter)="onUpdateFilterCounter($event)"
+                          (submit)="onUpdateFilter($event)"></tour-filter-mobile-popup>
+
+<app-tour-arrival-popup (select)="onSelectArrival($event)"></app-tour-arrival-popup>
+
+<app-tour-date-picker-popup [date]="selectedDate"
+                            (submit)="onSelectDate($event)"></app-tour-date-picker-popup>
+

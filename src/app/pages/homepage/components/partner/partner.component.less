@@ -1,0 +1,33 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.block.block-partner {
+
+  .block-title {
+    margin-bottom: 0;
+  }
+
+  .payment-partner,
+  .airline-partner {
+
+    .col-8-cus {
+      @media (min-width: 992px) {
+        flex: 0 0 12.5%;
+        max-width: 12.5%; // 8 columns
+        padding: 0 15px;
+      }
+    }
+
+    > div {
+      text-align: center;
+
+      img {
+        width: 100%;
+        max-width: 124px;
+        max-height: 70px;
+        object-fit: cover;
+      }
+    }
+
+  }
+}

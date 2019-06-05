@@ -1,0 +1,51 @@
+@import '_variables.less';
+
+.optional {
+  .optional-mobile {
+    .title-header {
+      color: @gray-5;
+    }
+    &.checkbox-coupon {
+      .errors-mes {
+        color: @orange-2;
+        margin-top: -8px;
+        font-size: 12px;
+      }
+      .applied-cp {
+        color: @orange-2;
+        font-weight: 500;
+        font-size: 15px;
+      }
+
+    }
+
+    ul {
+      &.selected-optional {
+        background-color: @white;
+
+        > li {
+          padding: 12px;
+          position: relative;
+          border-bottom: 1px solid @gray-18;
+
+          &:last-child {
+            border-width: 0;
+          }
+
+          > a {
+
+            font-size: 15px;
+            color: @gray-4;
+
+            > img {
+              max-width: 110%;
+              position: absolute;
+              top: 12px;
+              right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

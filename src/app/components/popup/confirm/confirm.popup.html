@@ -1,0 +1,34 @@
+<div bsModal
+     #popup="bs-modal" class="modal fade popup-confirm" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="container-fluid text-center">
+            <h3 class="title" *ngIf="title">
+              <span [innerHTML]="title"></span>
+              <button class="btn-close" *ngIf="isClose" (click)="hide()">&times;</button>
+            </h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container-fluid text-center">
+            <div class="description" *ngIf="message" [innerHTML]="message"></div>
+          </div>
+        </div>
+        <div class="row m-t-15">
+          <div class="col-6">
+            <button class="btn btn-main-v2 btn-block"
+                    (click)="onAccept()">{{ btnAcceptLabel || 'Đồng ý' }}
+            </button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-gray-outline  btn-block"
+                    (click)="onCancel()">{{ btnCancelLabel || 'Hủy' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

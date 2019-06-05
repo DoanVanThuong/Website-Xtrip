@@ -1,0 +1,87 @@
+<div class="cod-form">
+  <div class="row">
+    <div class="col-md-10">
+      <form class="form form-desktop"
+            [formGroup]="form"
+            novalidate>
+        <div class="row">
+          <div class="col-md-6">
+            <!--<mat-form-field [floatLabel]="'always'">
+              <input type="text" matInput placeholder="Nhập họ & tên:" [formControl]="FullName" />
+              <mat-error *ngIf="FullName.dirty">
+                <span *ngIf="FullName.errors | equalError:'required'">Không được để trống</span>
+                <span *ngIf="FullName.errors | equalError:'minlength'">Họ & tên có ít nhất 3 kí tự</span>
+              </mat-error>
+            </mat-form-field>-->
+            <div class="form-group">
+              <label class="control-label">Họ & tên</label>
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập họ & tên:"
+                     [formControl]="FullName"/>
+              <div class="error" *ngIf="FullName.dirty">
+                <span *ngIf="FullName.errors | equalError:'required'">Vui lòng không để trống</span>
+                <span *ngIf="FullName.errors | equalError:'minlength'">Họ & tên có ít nhất 3 kí tự</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Số điện thoại</label>
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập số điện thoại:"
+                     [formControl]="MobileNumber"/>
+              <div class="error" *ngIf="MobileNumber.dirty">
+                <span *ngIf="MobileNumber.errors | equalError:'required'">Vui lòng không để trống</span>
+                <span *ngIf="MobileNumber.errors | equalError:'pattern'">Số điện thoại chưa chính xác</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="control-label">Địa chỉ thu hộ:</label>
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập địa chỉ thu hộ"
+                     [formControl]="Address"/>
+              <div class="error" *ngIf="Address.dirty">
+                <span *ngIf="Address.errors | equalError:'required'">Vui lòng không để trống</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <textarea type="text"
+                        rows="1"
+                        class="form-control underline"
+                        placeholder="Lời nhắn (không bắt buộc)"
+                        [formControl]="Note">
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="note">
+        <div class="note-title font-15 font-bold">Lưu ý:</div>
+        <ul class="">
+          <li>
+            Nhân viên thu hộ sẽ gọi cho bạn trước khi đến.
+          </li>
+          <li>
+            Bạn sẽ nhận hoá đơn thu hộ (có mộc đỏ) ngay sau khi nhân viên thu tiền.
+          </li>
+          <li>
+            Bạn sẽ nhận email chứa mã đặt vé, phòng hoặc tour trong vòng 3-6 tiếng kể
+            từ lúc nhân viên thu tiền.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

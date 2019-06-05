@@ -1,0 +1,79 @@
+@import '../../../../less/_variables.less';
+
+.flight-preview-page {
+  .img-title {
+    height: 120px;
+    width: 100%;
+    background: url('./../../../../assets/images/flight-review-banner.jpg');
+    background-size: cover;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      background: rgba(47, 47, 47, .65);
+    }
+  }
+  .line-flight-preview {
+    height: 1px;
+    background-color: @white;
+    width: 100%;
+  }
+  .title-l {
+    font-size: 30px;
+    color: @white;
+  }
+  .title-small {
+    color: @white;
+  }
+  .pos-icon {
+    top: -15px;
+    left: 50%;
+    width: 30px;
+    transform: translateX(-50%);
+
+    &:after {
+      content: '';
+      height: 3px;
+      width: 100%;
+      background-color: @gray-28;
+      top: 13px;
+      left: 0;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+  .passenger-tab {
+    .title-color {
+      color: @gray-5;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+  .hl-policy {
+    color: @orange-2;
+    text-decoration: underline;
+  }
+  .bg-policy {
+    background-color: @gray-6;
+  }
+  .footer {
+    height: auto;
+  }
+
+  .tab-preview{
+    .fixed{
+      width: 100%;
+      z-index: 1;
+      top:95px;
+      position: fixed;
+      -webkit-transition: all .2s;
+      -o-transition: all .2s;
+      transition: all .2s;
+    }
+  }
+ 
+}

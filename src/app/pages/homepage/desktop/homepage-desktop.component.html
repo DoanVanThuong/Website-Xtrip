@@ -1,0 +1,91 @@
+<div class="home home-desktop">
+
+  <div class="main-body">
+    <!-- slider -->
+    <home-banner></home-banner>
+
+    <!-- promotion -->
+    <home-promotion class="p-b-none" *ngIf="!isProduction"></home-promotion>
+
+    <!-- tour đề xuất -->
+    <home-propose-tour class="p-b-none"></home-propose-tour>
+
+    <!-- tour nước ngoài -->
+    <home-popular-tour class="p-b-none" [international]="true"></home-popular-tour>
+
+    <!-- tour trong nước -->
+    <home-popular-tour class="p-b-none"></home-popular-tour>
+
+    <!-- tour hạn chót -->
+    <home-flashdeal-tour class="p-b-none"></home-flashdeal-tour>
+
+    <!-- tour tự túc -->
+    <home-free-tour class="p-none"></home-free-tour>
+
+    <!-- newbie -->
+    <div class="block block-newbie">
+      <div class="container">
+        <div class="row justify-content-md-end">
+          <div class="col-md-7">
+            <h3 class="block-title">
+              Ứng dụng du lịch toàn diện<br/> mang lại một trải nghiệm hoàn hảo.
+            </h3>
+            <div class="block-body m-t-20">
+              <ul class="list-unstyled">
+                <li class="d-flex justify-content-start align-items-center">
+                  <img class="size-32x32"
+                       cdn-src="assets/images/icon/icon-earth-white.svg"
+                       alt="icon"/>
+                  Đa dạng tour trong và ngoài nước
+                </li>
+                <li class="d-flex justify-content-start align-items-center">
+                  <img class="size-32x32"
+                       cdn-src="assets/images/icon/icon-airplane-white.svg"
+                       alt="icon"/>
+                  Săn vé máy bay giá rẻ
+                </li>
+                <li class="d-flex justify-content-start align-items-center">
+                  <img class="size-32x32"
+                       cdn-src="assets/images/icon/icon-hotel-white.svg"
+                       alt="icon"/>
+                  Tìm kiếm và lựa chọn đặt phòng khách sạn thông minh
+                </li>
+                <li class="d-flex justify-content-start align-items-center">
+                  <img class="size-32x32"
+                       cdn-src="assets/images/icon/icon-ticket-white.svg"
+                       alt="icon"/>
+                  Đặt vé vui chơi, tham quan với giá tốt nhất
+                </li>
+              </ul>
+              <div class="m-t-20">
+                <a class="pointer"
+                   target="_blank"
+                   [href]="CAPP.ANDROID_LINK">
+                  <img class="mx-w-full w-160"
+                       cdn-src="assets/images/android-app.png"/>
+                </a>
+                <a class="pointer m-l-20"
+                   target="_blank"
+                   [href]="CAPP.IOS_LINK">
+                  <img class="mx-w-full w-160" cdn-src="assets/images/apple-app.png"/>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- album tour -->
+    <home-tour-album></home-tour-album>
+
+    <!-- knowledge -->
+    <home-more-question class="p-b-none"></home-more-question>
+
+    <!-- Đối tác -->
+    <home-partner></home-partner>
+
+  </div>
+
+  <app-video-popup></app-video-popup>
+</div>

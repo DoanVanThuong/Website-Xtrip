@@ -1,0 +1,60 @@
+@import "_variables.less";
+@import './_mixins.less';
+
+.hotel-search-bar {
+  min-height: 100px;
+  width: 100%;
+  // position: absolute;
+  left: 0;
+  right: 0;
+  // top: 485px;
+
+  &.fixed-top {
+    position: fixed !important;
+    z-index: 1000;
+  }
+
+  .hotel-search-form {
+    background-color: @white;
+    padding: 14px 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .form.form-desktop {
+    .form-group {
+      margin: 0;
+      line-height: 1;
+
+      .form-control {
+        height: 22px;
+      }
+    }
+  }
+
+  .btn-main-v3 {
+    &.btn-search-hotel {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    &.mn-w-150 {
+      min-width: 150px;
+    }
+  }
+
+  .room-passenger-box{
+    margin-top: 5px;
+    min-height: 100px;
+    // min-width: 300px;
+    position: absolute;
+    background-color: @white;
+    top: 45px;
+    right: -5px;
+    overflow-x: hidden;
+    z-index: 1000;
+    -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+  }
+}

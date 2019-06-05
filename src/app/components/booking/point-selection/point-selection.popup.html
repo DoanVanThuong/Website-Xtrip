@@ -1,0 +1,50 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade popup-select-point"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog bottom bottom-0">
+    <div class="modal-content">
+      <div class="modal-body p-none">
+        <div class="header font-14 p-10">
+          Chọn số điểm muốn dùng
+        </div>
+        <div *ngIf="min < max">
+          <div class="row p-t-8 p-l-10 p-r-10">
+            <div class="col-6 p-l-10">Bạn có</div>
+            <div class="col-6 text-right p-r-10">{{ max | currencyMoney: '' }} điểm</div>
+          </div>
+          <div class="row p-l-20 p-r-20">
+            <div class="col-12 slider">
+              <nouislider [min]="min"
+                          [max]="max"
+                          [config]="sliderConfig"
+                          [(ngModel)]="selectedPoint"
+                          (ngModelChange)="onChangeSlider($event)"></nouislider>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="point-selected font-14">
+            {{ utilityHelper.numberFormat(selectedPoint) }} điểm = {{ utilityHelper.numberFormat(price) }}
+            <span class="text-underline">đ</span>
+          </div>
+        </div>
+        <div class="row p-10">
+          <div class="col-6">
+            <button class="btn btn-cancel-outline btn-block"
+                    (click)="onCancel()">Hủy
+            </button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-main btn-block"
+                    (click)="onSubmit()">Đồng ý
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<error-popup [message]="errorMessage"></error-popup>

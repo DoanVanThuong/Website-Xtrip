@@ -1,0 +1,120 @@
+@import '_variables.less';
+
+.tour-related {
+  .item {
+    padding-right: 0px;
+    margin-bottom: 10px;
+
+    .tour-related-item {
+      width: 285px;
+      border-radius: 10px;
+      border: solid 1px @gray-3;
+      min-height: 345px;
+      position: relative;
+
+      .img-tour-related {
+        height: 180px;
+        overflow: hidden;
+
+        .img-tour {
+          width: 100%;
+          height: 100%;
+          -o-object-fit: cover;
+          object-fit: cover;
+          -webkit-transition: all 0.4s linear 0s;
+          transition: all 0.4s linear 0s;
+          border-radius: 10px 10px 0 0;
+
+          &:hover {
+            -webkit-transition: all 0.4s linear 0s;
+            transition: all 0.4s linear 0s;
+            cursor: pointer;
+            -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+          }
+        }
+
+        .icon {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          color: @white;
+          width: 45%;
+
+          img {
+            vertical-align: text-top;
+          }
+
+          .bg-review {
+            background: @green-2;
+            border-radius: 5px;
+            padding: 0px 5px;
+          }
+
+          .bg-orange {
+            background: @orange-2;
+            border-radius: 5px;
+            padding: 3px 7px;
+          }
+        }
+      }
+
+      .content {
+        .tour-name {
+          font-size: 15px;
+          color: @gray-2;
+          font-weight: 700;
+          //min-height: 44px;
+          overflow: hidden;
+        }
+
+        .journey {
+          font-size: 15px;
+          color: @gray-9;
+          font-size: 13px;
+        }
+
+        .price {
+          color: @orange-2;
+          font-weight: 700;
+          line-height: 20px;
+        }
+
+        .point {
+          color: @gray-1;
+          font-size: 14px;
+        }
+
+        .depart-time {
+          ul {
+            li {
+              font-size: 15px;
+              font-weight: 500;
+              padding-bottom: 10px;
+              font-size: 13px;
+
+              &:before {
+                content: "";
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: @green-2;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+              }
+
+              .title-detail {
+                color: @black;
+              }
+
+              .info {
+                font-weight: 400;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

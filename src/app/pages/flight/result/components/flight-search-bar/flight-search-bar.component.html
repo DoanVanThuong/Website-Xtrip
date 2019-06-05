@@ -1,0 +1,351 @@
+<div class="flight-search-bar search-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-inline-block text-white">
+          <a class="pointer" (click)="onModeChange(false)">
+            <img class="m-b-none m-t-n-3 m-r-10 size-24x24"
+                 [src]="!isRoundTrip ? 'assets/images/icon/icon-checked-circle.svg': 'assets/images/icon/icon-uncheck-circle-gray.svg'"
+                 alt="icon"/>
+            Một chiều
+          </a>
+        </div>
+        <div class="d-inline-block m-l-20 text-white">
+          <a class="pointer" (click)="onModeChange(true)">
+            <img class="m-b-none m-t-n-3 m-r-10 size-24x24"
+                 [src]="isRoundTrip ? 'assets/images/icon/icon-checked-circle.svg': 'assets/images/icon/icon-uncheck-circle-gray.svg'"
+                 alt="icon"/>
+            Khứ hồi
+          </a>
+        </div>
+      </div>
+      <div class="col-12 m-t-10">
+        <div class="form form-desktop flight-search-form">
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="w-full m-r-20">
+              <div class="row">
+
+                <!-- Nơi khởi hành -->
+                <div class="col-3 p-r-30">
+                  <a class="pointer btn-switch"
+                     (click)="onSwap()">
+                    <img alt="icon" class="m-b-none size-28x28"
+                         cdn-src="assets/images/icon/icon-flight-reserve-green.svg">
+                  </a>
+                  <div class="search-origin"
+                       (clickOutside)="onClickedOutside($event, 'origin')"
+                       (click)="openDropdownSearch('origin')">
+                    <div class="form-group">
+                      <label class="control-label">Điểm khởi hành</label>
+                      <input type="text"
+                             class="form-control"
+                             [(ngModel)]="origin"
+                             autocomplete="off"
+                             (focus)="onSelectInput($event)"
+                             placeholder="Chọn đểm khởi hành"
+                             (ngModelChange)="onOriginChange($event)"/>
+                    </div>
+
+                    <div class="result-flight-location shadow animated fadeIn"
+                         *ngIf="isOriginShow">
+                      <perfect-scrollbar>
+
+                        <!-- not found -->
+                        <div class="location-find"
+                             *ngIf="!origins.length && isOriginTyping">
+                          <div class="heading" *ngIf="origins.length">Kết quả tìm kiếm</div>
+                        </div>
+
+                        <!-- found -->
+                        <div class="location-find" *ngIf="origins.length > 0">
+                          <div class="heading">Kết quả tìm kiếm</div>
+                          <div class="data-box">
+                            <div class="list-group list-group-flush">
+                              <div class="list-group-item"
+                                   *ngFor="let location of origins; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location, 'origin')">
+                                  <div class="row">
+                                    <div class="col-10">
+                                          <span class="d-inline-block"
+                                                [innerHTML]="(location.location + ' - ' + location.name) | highlight:origin"></span>
+                                    </div>
+                                    <div class="col-2 text-right">
+                                          <span class="text-light-gray"
+                                                [innerHTML]="location.code | highlight:origin "></span>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- history -->
+                        <div class="location-history"
+                             *ngIf="!!selectedLocations.length && !origins.length && !isOriginTyping">
+                          <div class="heading">Đã chọn gần đây</div>
+                          <div class="data-box">
+                            <div class="list-group list-group-flush">
+                              <div class="list-group-item"
+                                   *ngFor="let location of selectedLocations | slice:0:3; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location, 'origin')">
+                                  <div class="row">
+                                    <div class="col-10">
+                                      {{ location.location }} - {{ location.name }}
+                                    </div>
+                                    <div class="col-2 text-right">
+                                      <span class="text-light-gray">{{location.code}}</span>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- favorite -->
+                        <div class="location-favorite"
+                             *ngIf="!!favoriteLocations.length && !origins.length && !isOriginTyping">
+                          <div class="heading">Địa điểm phổ biến</div>
+                          <div class="data-box">
+                            <div class="list-group list-group-flush">
+                              <div class="list-group-item"
+                                   *ngFor="let location of favoriteLocations; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location, 'origin')">
+                                  <div class="row">
+                                    <div class="col-10">
+                                      {{ location.location }} - {{ location.name }}
+                                    </div>
+                                    <div class="col-2 text-right">
+                                      <span class="text-light-gray">{{ location.code }}</span>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </perfect-scrollbar>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Nơi đến -->
+                <div class="col-3 p-l-30">
+                  <div class="search-destination"
+                       (clickOutside)="onClickedOutside($event, 'destination')"
+                       (click)="openDropdownSearch('destination')">
+                    <div class="form-group">
+                      <label class="control-label">Điểm đến</label>
+                      <input [(ngModel)]="destination"
+                             class="form-control"
+                             autocomplete="off"
+                             type="text"
+                             (focus)="onSelectInput($event)"
+                             placeholder="Chọn điểm đến"
+                             (ngModelChange)="onDestinationChange($event)"/>
+                    </div>
+
+                    <div class="result-flight-location shadow animated fadeIn"
+                         *ngIf="isDestinationShow">
+                      <perfect-scrollbar>
+
+                        <!-- not found -->
+                        <div class="location-find" *ngIf="!!destinations.length && isDestinationTyping">
+                          <div class="heading" *ngIf="destinations.length">Kết quả tìm kiếm</div>
+                        </div>
+
+                        <!-- found -->
+                        <div *ngIf="destinations.length > 0">
+                          <div class="heading">Kết quả tìm kiếm</div>
+                          <div class="data-box">
+                            <div class="list-group list-group-flush">
+                              <div class="list-group-item"
+                                   *ngFor="let location of destinations; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location, 'destination')">
+                                  <div class="row">
+                                    <div class="col-10">
+                          <span class="d-inline-block"
+                                [innerHTML]=" (location.location + ' - ' + location.name) | highlight:destination"></span>
+                                    </div>
+                                    <div class="col-2 text-right">
+                                    <span class="text-light-gray"
+                                          [innerHTML]="location.code | highlight:destination"></span>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- history -->
+                        <div *ngIf="!!selectedLocations.length && !destinations.length && !isDestinationTyping">
+                          <div class="heading">Đã chọn gần đây</div>
+                          <div class="data-box">
+                            <div class="list-group list-group-flush">
+                              <div class="list-group-item"
+                                   *ngFor="let location of selectedLocations | slice:0:3; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location, 'destination')">
+                                  <div class="row">
+                                    <div class="col-10">
+                                      {{ location.location }} - {{ location.name }}
+                                    </div>
+                                    <div class="col-2 text-right">
+                                      <span class="text-light-gray">{{location.code}}</span>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- favourite -->
+                        <div class="location-favorite"
+                             *ngIf="!!favoriteLocations.length && !destinations.length && !isDestinationTyping">
+                          <div class="heading">Địa điểm phổ biến</div>
+                          <div class="box-data">
+                            <div class="list-group list-group-flush">
+                              <div class="list-group-item"
+                                   *ngFor="let location of favoriteLocations; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location, 'destination')">
+                                  <div class="row">
+                                    <div class="col-10">
+                                      {{ location.location }} - {{ location.name }}
+                                    </div>
+                                    <div class="col-2 text-right">
+                                      <span class="text-light-gray">{{ location.code }}</span>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </perfect-scrollbar>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Chọn ngày -->
+                <div class="col-3 b-left">
+                  <div class="date-selector">
+                    <div class="form-group has-icon">
+                      <label class="control-label">Ngày đi {{ isRoundTrip ? '- về' : '' }}</label>
+                      <div class="icon-addon">
+                        <div class="form-control over-hidden"
+                             *ngIf="!isRoundTrip"
+                             bsDatepicker
+                             [bsConfig]="datePickerOptions "
+                             (bsValueChange)="onSelectedDate($event)">
+                          <span class="placeholder" *ngIf="!flightSearch.DepartDate">Chọn ngày khởi hành</span>
+                          <span class="" *ngIf="!!flightSearch.DepartDate">
+                            {{ date }}
+                          </span>
+                        </div>
+                        <div class="form-control over-hidden"
+                             *ngIf="isRoundTrip"
+                             bsDaterangepicker
+                             [bsConfig]="datePickerOptions "
+                             (bsValueChange)="onSelectedDate($event)">
+                          <span class="placeholder"
+                                *ngIf="!flightSearch.DepartDate || !flightSearch.ReturnDate">Chọn ngày đi - về</span>
+                          <span class="" *ngIf="!!flightSearch.DepartDate && !!flightSearch.ReturnDate">
+                            {{ date }}
+                          </span>
+                        </div>
+                        <div class="form-control-icon">
+                          <img class="size-24x24 m-b-none form-control-icon"
+                               cdn-src="assets/images/icon/icon-calendar.svg"
+                               alt="icon"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Chọn hành khách -->
+                <div class="col-3 b-left p-r-none">
+                  <div class="passenger-selector"
+                       (clickOutside)="onClickedOutside($event, 'passenger')"
+                       (click)="openDropdownSearch('passenger')">
+                    <div class="form-group">
+                      <label class="control-label">Số hành khách</label>
+                      <input type="text"
+                             class="form-control"
+                             [(ngModel)]="passenger"
+                             placeholder="Số hành khách"
+                             readonly/>
+                    </div>
+
+                    <div class="passenger-box shadow animated fadeIn"
+                         *ngIf="isPassengerShow">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                              <div class="row">
+                                <div class="col-7 p-t-5">
+                                  Người lớn <span class="intro">(> 12 tuổi)</span>
+                                </div>
+                                <div class="col-5">
+                                  <app-counter [value]="flightSearch.Adult"
+                                               [min]="1"
+                                               [max]="onDetectMaxPassenger('adult')"
+                                               [error]="'Tổng số hành khách người lớn và trẻ em không được lớn hơn 9.'"
+                                               (change)="onPassengerChange($event, 'adult')"></app-counter>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="list-group-item">
+                              <div class="row">
+                                <div class="col-7 p-t-5">
+                                  Trẻ em <span class="intro">(2-12 tuổi)</span>
+                                </div>
+                                <div class="col-5">
+                                  <app-counter [value]="flightSearch.Child"
+                                               [min]="0"
+                                               [max]="onDetectMaxPassenger('child')"
+                                               [error]="'Tổng số hành khách người lớn và trẻ em không được lớn hơn 9.'"
+                                               (change)="onPassengerChange($event, 'child')"></app-counter>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="list-group-item">
+                              <div class="row">
+                                <div class="col-7 p-t-5">
+                                  Em bé <span class="intro">(< 2 tuổi)</span>
+                                </div>
+                                <div class="col-5">
+                                  <app-counter [value]="flightSearch.Infant"
+                                               [min]="0"
+                                               [max]="onDetectMaxPassenger('infant')"
+                                               [error]="'Số hành khách em bé phải nhỏ hơn hoặc bằng số hành khách người lớn (Tối đa chỉ 4 em bé)'"
+                                               (change)="onPassengerChange($event, 'infant')"></app-counter>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="">
+              <button type="button"
+                      class="btn btn-main-v2 mn-w-100"
+                      [disabled]="onDisableSubmit()"
+                      (click)="onSearch()">
+                Tìm vé
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

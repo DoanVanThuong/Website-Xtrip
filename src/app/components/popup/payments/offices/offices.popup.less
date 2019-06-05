@@ -1,0 +1,36 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.office-popup {
+  .modal-content {
+    background: @gray-17;
+    .modal-body {
+      p {
+        color: @black;
+      }
+    }
+    .modal-footer {
+      border-top: 0;
+      padding: 15px 8px;
+      button {
+        background: @orange-2;
+        color: @white;
+        width: 100%;
+      }
+    }
+    .office-content {
+      padding: 0px 8px;
+      .item-payment-office {
+        padding: 8px 16px;
+        border: 1px solid @gray-13;
+        .border-radius(5px);
+        background-color: @white;
+        color: @black;
+        .address-company {
+          margin-left: 20px;
+          max-width: 80%;
+        }
+      }
+    }
+  }
+}

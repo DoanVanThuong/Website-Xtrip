@@ -1,0 +1,60 @@
+<div class="personal-info">
+  <h4 class="title m-none m-b-10">Thông tin cá nhân</h4>
+
+  <div class="panel card panel-desktop">
+    <div class="panel-body card-body">
+      <div class="row">
+        <div class="col-lg-8 col-md-10">
+          <form class="form form-desktop"
+                [formGroup]="form"
+                (submit)="onSubmit(form.value)">
+            <div class="form-group">
+              <label class="control-label">Họ:</label>
+
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập họ"
+                     [formControl]="LastName" autocomplete="off" />
+              <div class="error" *ngIf="LastName.dirty">
+                <span *ngIf="LastName.errors | equalError:'required'">Không được để trống</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Tên đệm & tên:</label>
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập tên"
+                     [formControl]="FirstName" autocomplete="off" />
+              <div class="error" *ngIf="FirstName.dirty">
+                <span *ngIf="FirstName.errors | equalError:'required'">Không được để trống</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Số điện thoại:</label>
+
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập số điện thoại"
+                     [formControl]="PhoneNumber" readonly disabled>
+              <div class="error" *ngIf="PhoneNumber.dirty">
+                <span *ngIf="PhoneNumber.errors | equalError:'required'">Không được để trống</span>
+                <span *ngIf="PhoneNumber.errors | equalError:'phone'">Không hợp lệ</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <button type="submit"
+                        class="btn btn-main-v2 mn-w-120 font-bold"
+                        [disabled]="form.invalid">
+                  Cập nhật
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

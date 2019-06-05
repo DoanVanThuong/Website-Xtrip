@@ -1,0 +1,438 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.tour-detail {
+
+  &.tour-detail-mobile {
+    position: relative;
+
+    .loading-wrapper {
+      position: fixed;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: @white;
+      opacity: .4;
+      top: 0;
+      z-index: 99999;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .view-more-link {
+      text-align: center;
+      padding: 5px 15px;
+      border: 1px solid @orange-2;
+      border-radius: 20px;
+      font-size: 13px;
+      color: @orange-2;
+    }
+    .title {
+      font-weight: 700;
+      font-size: 20px;
+      color: @gray-23;
+    }
+    .tour-heading {
+      padding: 12px 15px;
+      position: absolute;
+      top: 0px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      color: @white;
+      font-size: 20px;
+      -webkit-transition: all 0.15s ease;
+      transition: all 0.15s ease;
+      &.scroll {
+        background-color: @white;
+        position: fixed;
+        -webkit-transition: all .25s ease-in;
+        transition: all .25s ease-in;
+        top: 0;
+        .tour-name {
+          display: block;
+          -webkit-transition: all .25s ease-in;
+          transition: all .25s ease-in;
+          color: @black;
+          font-size: 15px;
+          font-weight: 700;
+          letter-spacing: -0.42px;
+          padding-top: 2px;
+        }
+        .icon-heading {
+          display: none;
+          background: transparent;
+          i {
+            display: none;
+          }
+          &.icon-back,
+          &.icon-heart,
+          &.icon-share {
+            img {
+              display: block;
+            }
+          }
+        }
+      }
+      .tour-name {
+        display: none;
+      }
+      .icon-heading {
+        background: @black;
+        text-align: center;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        font-size: 15px;
+        i {
+          &:before {
+            font-size: 15px;
+          }
+        }
+        &.icon-back {
+          i {
+            &:before {
+              font-size: 24px;
+            }
+          }
+        }
+        &.icon-heart {
+          i {
+            &:before {
+              font-size: 17px;
+            }
+          }
+        }
+        &.icon-back,
+        &.icon-heart,
+        &.icon-share {
+          > img {
+            display: none;
+          }
+        }
+      }
+    }
+    .scroll-to {
+      -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+      width: 100%;
+      display: none;
+      &.scroll {
+        background: @white;
+        display: block;
+        position: fixed;
+        -webkit-transition: all .3s ease-in;
+        transition: all .3s ease-in;
+        top: 45px;
+        z-index: 4;
+      }
+      .quick-menu-wp {
+        ul {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          li {
+            padding: 8px 10px;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+            color: @gray-7;
+            width: calc(~"100%/3");
+            text-align: center;
+            &.active {
+              border-bottom: 3px solid @green-2;
+              color: @green-2;
+              font-weight: 700;
+              -webkit-transition: all .15s;
+              transition: all .15s;
+            }
+          }
+        }
+      }
+    }
+    .image-header {
+      min-height: 200px;
+      position: relative;
+      .slider-item {
+        overflow: hidden;
+        img {
+          height: 200px;
+        }
+      }
+      .bg-gradient {
+        background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.8)), to(rgba(0, 0, 0, 0)));
+        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        height: 36px;
+      }
+      .tour-code {
+        position: absolute;
+        color: @white;
+        left: 10px;
+        bottom: 4px;
+        font-size: 13px;
+        z-index: 2;
+      }
+      .slider-length {
+        position: absolute;
+        right: 8px;
+        bottom: 7px;
+        z-index: 2;
+        color: @white;
+        background: @green-2;
+        padding: 1px 4px;
+        font-size: 12px;
+        border-radius: 15px;
+      }
+    }
+    .include-content {
+      p {
+        margin-bottom: 0;
+      }
+    }
+    .mat-tab-group {
+      .mat-tab-labels {
+        .mat-tab-label {
+          width: calc(~'100% / 3');
+        }
+      }
+    }
+    .description-tour-wp {
+      .name {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 20px;
+      }
+      .journey {
+        color: @gray-1;
+        font-size: 12px;
+        letter-spacing: 0;
+        line-height: 18px;
+        font-weight: 400;
+      }
+      .list-info {
+        li {
+          font-weight: 400;
+          font-size: 13px;
+          position: relative;
+          line-height: 2;
+          &:before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: @green-2;
+            position: absolute;
+            top: 10px;
+            left: -8px;
+          }
+          &.coupon {
+            .code {
+              text-transform: uppercase;
+              font-weight: 700;
+              color: @white;
+              padding: 2px 4px;
+              background-color: @orange-2;
+              border-radius: 3px;
+            }
+          }
+        }
+      }
+    }
+    .price-wp {
+      margin-top: 4px;
+      padding: 10px 0px;
+      border-bottom: 1px solid @gray-3;
+      .price-info {
+        border-right: 1px solid @gray-3;
+        .price {
+          font-size: 14px;
+          color: @orange-2;
+          font-weight: 700;
+          span,
+          i {
+            font-weight: 700;
+          }
+        }
+        .people-info {
+          font-size: 11px;
+        }
+      }
+      .depart-info {
+        .departDate {
+          font-weight: 700;
+          font-size: 14px;
+          span,
+          i {
+            color: @orange-2;
+            font-weight: 700;
+          }
+        }
+        .quantity {
+          color: @green-2;
+          font-size: 11px;
+        }
+      }
+    }
+    .services-wp {
+      padding: 20px 0px;
+      ul {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        li {
+          padding: 5px 10px;
+          -webkit-box-flex: 0;
+          -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+          text-align: center;
+        }
+      }
+    }
+    .journey-wp {
+      margin-top: 4px;
+      padding: 20px 0px;
+      img {
+        margin-bottom: 20px;
+      }
+      .content {
+        color: @black;
+        line-height: 26px;
+        font-size: 15px;
+        letter-spacing: 0;
+        text-align: justify;
+        color: @black;
+        margin-bottom: 10px;
+      }
+    }
+    .transport-wp {
+      padding: 20px 0px;
+    }
+
+    .hashtag-wp {
+      margin-top: 4px;
+      padding: 20px 0px;
+      .hashtags {
+        .hashtag-item {
+          color: @gray-2 !important;
+          background-color: @gray-3;
+          margin-right: 8px;
+          padding: 4px 8px;
+          border-radius: 5px;
+          margin-top: 10px;
+        }
+      }
+    }
+    .supplier-wp {
+      margin-top: 4px;
+      padding: 20px 0px;
+      &.p-b-70 {
+        padding-bottom: 70px !important;
+      }
+      .supplier {
+        max-width: 83%;
+      }
+      .logo-supplier {
+        width: 48px;
+      }
+    }
+    .tour-related-wp {
+      margin-top: 4px;
+      padding: 20px 0px;
+      .owl-carousel {
+        .owl-item {
+          .tour-related-item {
+            .tour-detail-info {
+              img {
+                display: initial;
+                width: auto;
+              }
+              margin-bottom: 5px;
+            }
+          }
+        }
+      }
+      .tour-detail-desc {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        min-height: 36px;
+      }
+    }
+
+    .booking-footer {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 100;
+      .box-shadow(0, 0, 5px, rgba(0, 0, 0, .2));
+      background-color: @white;
+
+      .btn {
+        font-size: 16px;
+        padding: 8px 15px;
+        font-weight: @font-bold;
+      }
+
+      .icon-chat-fixed {
+        position: fixed;
+        z-index: 2;
+        .border-radius(50%);
+        position: fixed;
+        right: 15px;
+        background-color: @white;
+        padding: 10px;
+        width: 55px;
+        height: 55px;
+        color: @white;
+        &.shadow {
+          .box-shadow(0, 0, 3px, rgba(0, 0, 0, .2));
+        }
+
+        &.social-chat {
+          bottom: 140px;
+
+        }
+        &.phone-chat {
+          bottom: 75px;
+        }
+      }
+
+    }
+    .line-top {
+      border-top: 4px solid @gray-6;
+    }
+    .p-html {
+      p {
+        font-size: 15px;
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div class="tour-date-selector">
+
+  <!-- Header -->
+  <div class="tour-date-selector-header fixed-header">
+    <div class="row">
+      <div class="col-2 p-t-5">
+        <a (click)="back()">
+          <img alt="icon" class="size-24x24 m-b-none" cdn-src="assets/images/icon/icon-back.svg">
+        </a>
+      </div>
+      <div class="col-10"></div>
+    </div>
+    <div class="row shadow-header">
+      <div class="col-12 title-time">
+        Khoảng thời gian bạn bắt đầu chuyến đi
+      </div>
+      <div class="col-12 time-range">
+        <span *ngIf="!selected.start&&!selected.end">Chọn ngày</span>
+        <span *ngIf="!!selected.start">{{selected.start | departDate: false: 'DD/MM'}}</span>
+        <span *ngIf="!!selected.end">- {{selected.end | departDate: false: 'DD/MM'}}</span>
+      </div>
+    </div>
+  </div>
+  <!-- Header -->
+
+  <!-- Container -->
+  <div class="tour-date-selector-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-8 col-lg-6 m-t-n-10 p-l-none p-r-none">
+          <app-date-picker [options]="dateOptions" [data]="selected" (change)="onChange($event)"
+                           [theme]="'theme-2'"></app-date-picker>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container -->
+
+  <!-- Footer -->
+  <div class="tour-date-selector-footer fixed-bottom">
+    <div class="shadow-bottom pos-btn">
+      <button class="btn btn-main-v2 btn-block b-r-56"
+              [disabled]="onDisableSubmit()"
+              (click)="onSubmit($event)">
+        {{!selected.start && !selected.end ? 'Ngày bất kỳ' : 'Xác nhận'}}
+      </button>
+    </div>
+  </div>
+  <!-- Footer -->
+
+</div>

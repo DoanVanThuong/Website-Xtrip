@@ -1,0 +1,271 @@
+<div class="tour-detail-desktop-wp" [id]="scrollToItem[0].value">
+
+  <app-tour-search-bar-desktop [params]="tourSearch"
+                               [arrival]="tour.arrivalPlace"
+                               [arrival-alias]="tour.arrivalAlias"></app-tour-search-bar-desktop>
+
+  <div class="loading-wrapper" *ngIf="isLoading">
+    <loading [show]="isLoading"></loading>
+  </div>
+
+  <div class="content-wp main-body">
+    <div class="row">
+      <div class="col-12 font-18 text-center" *ngIf="!isLoading && !tour">Không có dữ liệu</div>
+    </div>
+
+    <section class="header-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <app-breadcrumb-desktop [items]="breadcrumbs"></app-breadcrumb-desktop>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 left-section"
+               id="basicHeight">
+            <tour-info [tour]="tour"></tour-info>
+          </div>
+          <div class="col-lg-8 right-section">
+            <div class="tour-detail-gallery-wp bg-white shadow"
+                 *ngIf="!isLoading && basicHeight>0">
+              <tour-carousel [images]="galleryPhotos" [tour]="tour" [height]="basicHeight"></tour-carousel>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="main-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 left-section">
+
+            <div class="left-content-wp bg-white ">
+              <div class="title">Ngày khởi hành</div>
+              <div class="list-depart m-t-20"
+                   *ngIf="!isLoadingDepart && !!departDates.length">
+                <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']"
+                              [items]="departDates"
+                              [options]="carouselOptions">
+                  <a *ngFor="let departTour of departDates; let i = index"
+                     [routerLink]="departTour.href"
+                     [queryParams]="genQueryParams(departTour)"
+                     [class.active]="selectedDate === departTour"
+                     class="pointer" [title]="departTour.adultPrice">
+
+                    <div class="content">
+                      <div>{{departTour.departDate | departDate: false : "DD/MM/YYYY"}}</div>
+                      <div class="available" [class.low-available-text]="departTour.fakeAvailable <= 3">còn
+                        {{departTour.fakeAvailable}} chỗ
+                      </div>
+                    </div>
+                    <div class="price-info">{{ departTour.adultPrice | currencyMoney: '' }}
+                      <span class="text-underline">đ</span>
+                      <span>/ người</span>
+                    </div>
+                    <div class="icon-selected" *ngIf="selectedDate === departTour">
+                      <img cdn-src="assets/images/icon/icon-selected-depart.svg" alt="">
+                    </div>
+                  </a>
+                </owl-carousel>
+              </div>
+              <loading [show]="isLoadingDepart"></loading>
+            </div>
+
+            <div class="left-content-wp bg-white">
+              <mat-tab-group>
+
+                <mat-tab label="Lịch trình">
+                  <div class="m-t-31" *ngIf="!!package && !!package.departInfo">
+                    <div class="title">Phương tiện</div>
+                    <tour-transport [data]="package"></tour-transport>
+                  </div>
+                  <div class="title m-t-30">Lịch trình</div>
+                  <tour-journey [journey]="journey"></tour-journey>
+                </mat-tab>
+
+                <mat-tab label="Chính sách">
+
+                  <!-- new format data -->
+                  <div *ngIf="!!tour.policyContent">
+                    <div class="include m-t-31" *ngIf="!!tour.policyContent.include">
+                      <div class="title">Giá bao gồm</div>
+                      <div class="term-policy custom-inner-html" [innerHTML]="tour.policyContent.include"></div>
+                    </div>
+
+                    <div class="exclude m-t-31" *ngIf="!!tour.policyContent.exclude">
+                      <div class="title">Giá không bao gồm</div>
+                      <div class="term-policy custom-inner-html" [innerHTML]="tour.policyContent.exclude"></div>
+                    </div>
+
+                    <div class="surcharge m-t-31"
+                         *ngIf="!!tour.policyContent.surcharges && !!tour.policyContent.surcharges.length">
+                      <div class="title">Phụ thu</div>
+                      <app-tour-surcharge [data]="tour.policyContent.surcharges"></app-tour-surcharge>
+                    </div>
+                  </div>
+                  <!-- /new format data -->
+
+                  <!-- old format data -->
+                  <div class="m-t-31" *ngIf="!tour.policyContent && !!tour.policy">
+                    <div class="p-html" [innerHTML]="tour.policy"></div>
+                  </div>
+                  <!-- /old format data -->
+
+                </mat-tab>
+
+                <mat-tab label="Điều khoản">
+
+                  <!-- new format data -->
+                  <div *ngIf="!!tour.termsContent">
+                    <div class="refurn" *ngIf="!!tour.termsContent.refund">
+                      <div class="title m-t-31">Hoàn huỷ tour</div>
+                      <div class="term-policy custom-inner-html" [innerHTML]="tour.termsContent.refund"></div>
+                    </div>
+
+                    <div class="refurn" *ngIf="!!tour.termsContent.visa">
+                      <div class="title m-t-31">Thủ tục xin visa</div>
+                      <div class="term-policy custom-inner-html" [innerHTML]="tour.termsContent.visa"></div>
+                    </div>
+
+                    <div class="refurn" *ngIf="!!tour.termsContent.notes">
+                      <div class="title m-t-31">Lưu ý</div>
+                      <div class="term-policy custom-inner-html" [innerHTML]="tour.termsContent.notes"></div>
+                    </div>
+                  </div>
+                  <!-- /new format data -->
+
+                  <!-- old format data -->
+                  <div class="m-t-31" *ngIf="!tour.termsContent && !!tour.terms">
+                    <div class="p-html" [innerHTML]="tour.terms"></div>
+                  </div>
+                  <!-- /old format data -->
+
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+
+            <!-- hash tag -->
+            <div class="left-content-wp bg-white" *ngIf="!!tour.hashTags && !!tour.hashTags.length">
+              <div class="title-small">Từ khóa liên quan:</div>
+              <ul class="d-flex flex-wrap hashtags">
+                <li class="hashtag-item" *ngFor="let item of tour.hashTags">
+                  <a class="d-block pointer" [attr.href]="item.url" target="_blank" [title]="item.keyWord">{{
+                    item.keyWord }}</a>
+                </li>
+              </ul>
+            </div>
+            <!-- hash tag -->
+
+          </div>
+          <div class="col-lg-4 right-section ">
+            <div class="position-relative w-full h-full">
+              <div class="w-content">
+                <div class="bg-white box-booking-tour m-t-20">
+                  <div class="row ">
+                    <div class="col-12">
+                      <div class="head">
+                        <div class="title m-b-5">Số người</div>
+                      </div>
+                      <div class="content">
+                        <div class="passenger-box">
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="list-group list-group-flush">
+                                <div class="list-group-item p-r-none"
+                                     *ngFor="let item of groupAge; trackBy: trackByFn; let i = index">
+                                  <div class="row">
+                                    <div class="col-8 p-t-5 p-l-none">
+                                      <span class="font-medium">{{item.title}}</span>
+                                      <span class="intro">({{item.value}})</span>
+                                      <div class="price">{{item.price | currencyMoney: ''}}
+                                        <span class="text-underline">đ</span>
+                                        <span class="">/ người</span>
+                                      </div>
+                                    </div>
+                                    <div class="col-4 p-r-none d-flex justify-content-around align-items-center">
+                                      <app-counter *ngIf="item.type === 'ADT'" [min]="!!tour.available ? 1 : 0"
+                                                   [max]="tour.available"
+                                                   [value]="!!tour.available ? bookingTour.adults : 1"
+                                                   (change)="onPeopleChanges($event, 'adult')"></app-counter>
+
+                                      <app-counter *ngIf="item.type === 'CHD'" [min]="0"
+                                                   [max]="bookingTour.adults >= tour.available ? 0 : tour.available"
+                                                   [value]="bookingTour.children"
+                                                   (change)="onPeopleChanges($event, 'children')"></app-counter>
+
+                                      <app-counter *ngIf="item.type === 'INF'" [min]="0"
+                                                   [max]="!!tour.available ? bookingTour.adults : 0"
+                                                   [value]="bookingTour.infants"
+                                                   (change)="onPeopleChanges($event, 'infant')"></app-counter>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="foot p-20">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="text-dark-gray font-medium">Tổng tiền:</div>
+                          <div class="font-18 text-dark-gray">
+                            <span> {{!!totalPrice ? (totalPrice | currencyMoney: '') : (tour.adultPrice | currencyMoney: '')}}</span>
+                            <span class="text-underline m-l-5">đ</span>
+                          </div>
+                        </div>
+                        <div class="btn-book-tour m-t-10">
+                          <button *ngIf="!!tour.available && !isExpired"
+                                  class="btn btn-main-v2 font-16 font-bold"
+                                  (click)="onBookTour()" [disabled]="!totalPrice">
+                            Đặt chỗ
+                          </button>
+                          <a role="button"
+                             *ngIf="!tour.available || isExpired"
+                             class="btn btn-main-v2 btn-block font-16 font-bold"
+                             href="{{tour.feedbackContact.fbLink}}">
+                            Liên hệ
+                          </a>
+                        </div>
+                        <div class="m-t-15">
+                          <button class="btn btn-white-outline-v2 btn-block text-main font-16 font-bold"
+                                  (click)="onOpenAdvisory()">
+                            Tư vấn tour
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /tour booking info -->
+                <!-- <div class="bg-white box-contact m-t-20 p-20">
+                  <tour-contact></tour-contact>
+                </div> -->
+                <!-- /contact -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-content related-tour" *ngIf="!!relatedTours && relatedTours.length > 0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="tour-related-wp bg-white m-t-20">
+              <div class="title-footer-content">Có thể bạn quan tâm</div>
+              <tour-related [tours]="relatedTours"></tour-related>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</div>
+
+<!-- tour advisory popup -->
+<tour-advisory-popup [tour]="tour"></tour-advisory-popup>

@@ -1,0 +1,25 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.signin-request {
+  &.signin-request-desktop {
+    .border-radius(10px);
+    padding: 20px;
+
+    background-color: @green-2;
+    background-image: url('../../../../../assets/images/signin-bg.png');
+    background-position: 0;
+    background-size: cover;
+
+    .btn.btn-white-outline {
+      background: transparent;
+      padding: 7px 15px;
+      font-size: 14px;
+      font-weight: 500;
+      .border-radius(10px);
+      border-color: @white;
+      line-height: 1;
+      color: @white;
+    }
+  }
+}

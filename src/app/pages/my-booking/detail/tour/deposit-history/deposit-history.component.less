@@ -1,0 +1,55 @@
+@import '_variables.less';
+
+.deposit-history-page {
+  .deposit-history-header {
+    padding: 15px 16px;
+    background-color: @white;
+    .title {
+      font-size: 18px;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+  .deposit-history-body {
+    padding: 0 16px;
+    .mat-accordion {
+      .mat-expansion-panel {
+        border-radius: 10px;
+        margin-top: 30px;
+        position: relative;
+        -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+        .mat-expansion-panel-header {
+          border-radius: 10px;
+          padding: 5px 18px 5px 10px;
+          .mat-expansion-panel-header-title {
+            display: block;
+          }
+          .price-remaining {
+            font-size: 11px;
+            color: @gray-1;
+            font-style: italic;
+          }
+          .date-remaining {
+            font-size: 11px;
+            color: @gray-2;
+            top: -20px;
+            left: 0;
+          }
+        }
+        .mat-expansion-panel-body {
+          padding: 10px 10px 10px;
+          border-top: 1px solid @gray-8;
+        }
+        .mat-expansion-indicator {
+          &:after {
+            border-width: 0px 3px 3px 0px;
+            padding: 4px;
+            margin-top: -10px;
+            color: @green-2;
+          }
+        }
+      }
+    }
+  }
+}

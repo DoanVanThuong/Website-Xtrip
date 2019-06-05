@@ -1,0 +1,29 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade succeed-review-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-green">
+      <div class="modal-body">
+        <a class="close pointer" (click)="hide()">
+          <img alt="close"
+               class="m-b-none size-24x24"
+               cdn-src="assets/images/icon/icon-close-white.svg">
+        </a>
+        <div class="text-center font-16 text-white">
+          <img alt="image"
+               class="image m-b-none"
+               cdn-src="assets/images/review-thank.png"/>
+
+          <div class="m-t-20">
+            <div class="">Cảm ơn bạn về những đóng góp!</div>
+            <div class="">Nhận xét của bạn sẽ được đăng sau khi kiểm duyệt.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

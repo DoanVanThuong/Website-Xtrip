@@ -1,0 +1,29 @@
+<div class="booking-detail-passenger justify-content-center" *ngIf="!!product">
+  <app-header [back]="true" [heading]="'Thông tin khách hàng'" [fixed]="true" [version]="3"></app-header>
+
+  <div class="wrapper booking-detail-passenger-body p-15" min-height>
+    <div class="container bg-white">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="passenger-group"
+               *ngFor="let group of [passengers.SNR || [], passengers.ADT || [], passengers.CHD || [], passengers.INF || []]; trackBy: trackByFn">
+            <div class="passenger-information" *ngFor="let passenger of group; trackBy: trackByFn; let i = index">
+              <div class="vocative text-green font-medium p-t-5 p-b-5">
+                Hành khách {{ utilityHelper.getPassengerTypeLabel(passenger.paxType) }} {{ i + 1 }}
+              </div>
+              <div class="p-5" *ngFor="let item of passenger.properties; trackBy: trackByFn">
+                <div class="row">
+                  <div class="col-6">{{ item.name }}</div>
+                  <div class="col-6 text-right">
+                    <div class="text-break-word">{{ item.value }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

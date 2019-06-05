@@ -1,0 +1,86 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.cod-popup {
+
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+
+      }
+
+      .modal-body {
+
+        .note-wrapper {
+          background: @gray-3;
+          padding: 14px;
+          ul {
+            li {
+              font-size: 13px;
+              color: @gray-2;
+              margin-top: 9px;
+              position: relative;
+              padding-left: 15px;
+
+              &:before {
+                content: '';
+                position: absolute;
+                top: 10px;
+                left: 0;
+                .transform(translateY(-50%));
+                width: 5px;
+                height: 5px;
+                .border-radius(50%);
+                background-color: @green-2;
+              }
+
+            }
+          }
+        }
+
+        .form {
+
+          .mat-form-field {
+            &.mat-form-field-hide-placeholder {
+              .mat-form-field-wrapper {
+
+                .mat-form-field-infix {
+                  border-top-width: 15px;
+                }
+              }
+            }
+
+            .mat-form-field-wrapper {
+
+              .mat-form-field-infix {
+                .mat-input-element {
+                  color: @black;
+                }
+
+                .mat-form-field-label {
+                  color: @orange-2;
+                }
+              }
+
+              .mat-form-field-underline {
+                background-color: @gray-33;
+                height: 1px;
+              }
+
+              .mat-form-field-subscript-wrapper {
+                margin-top: 3px;
+              }
+            }
+          }
+        }
+      }
+
+      .modal-footer {
+        border-top: none;
+        padding: 10px;
+        padding: 15px;
+      }
+    }
+  }
+}
+

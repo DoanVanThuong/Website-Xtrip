@@ -1,0 +1,41 @@
+<div bsModal #popup="bs-modal" class="modal fade tour-term-detail-popup" role="dialog">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-2" (click)="hide()">
+            <img class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-close-2.svg" alt="close" />
+          </div>
+          <div class="col-8 text-center font-17 font-weight-bold">
+            Điều khoản
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12" *ngIf="!!data && !!mode">
+
+            <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex" (selectedIndexChange)="selectedIndexChange($event)" *ngIf="mode === 'new'">
+              <mat-tab label="Hoàn huỷ tour" *ngIf="!!data.refund">
+                <div class="content" [innerHTML]="data.refund"></div>
+              </mat-tab>
+              <mat-tab label="Thủ tục xin visa" *ngIf="!!data.visa">
+                <div class="content" [innerHTML]="data.visa"></div>
+              </mat-tab>
+              <mat-tab label="Lưu ý" *ngIf="!!data.notes">
+                <div class="content" [innerHTML]="data.notes"></div>
+              </mat-tab>
+            </mat-tab-group>
+
+            <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex" *ngIf="mode === 'old'">
+              <mat-tab label="Điều khoản">
+                <div class="content" [innerHTML]="data"></div>
+              </mat-tab>
+            </mat-tab-group>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

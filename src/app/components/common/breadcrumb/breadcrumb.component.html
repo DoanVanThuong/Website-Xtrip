@@ -1,0 +1,13 @@
+<div class="breadcrumb-desktop">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item font-13"
+          *ngFor="let item of items; trackBy: trackByFn">
+        <a *ngIf="!!item.link"
+           [routerLink]="[item.link]"
+           [queryParams]="item.queryParams" class="pointer">{{item.title}}</a>
+        <span *ngIf="!item.link">{{item.title}}</span>
+      </li>
+    </ol>
+  </nav>
+</div>

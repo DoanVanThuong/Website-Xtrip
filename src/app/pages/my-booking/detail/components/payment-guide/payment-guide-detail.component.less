@@ -1,0 +1,49 @@
+@import '_variables.less';
+@import './_mixins.less';
+
+.payment-guide {
+
+  ul {
+    &.steps {
+      > li {
+        margin-top: 10px;
+        color: @black;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .bank-info {
+    .bank-info-box {
+      /*padding: 10px 20px;
+      width: 100%;
+      .border-radius(10px);
+      .box-shadow(0, 0, 3px, rgba(0, 0, 0, .2));*/
+
+      .bank-info-heading {
+        border-bottom: 1px solid @gray-3;
+      }
+
+      .bank-info-body {
+        .list-group.list-group-flush {
+          > .list-group-item {
+            padding: 15px 0;
+            border-style: dashed;
+            border-color: @gray-3;
+          }
+        }
+
+        .label {
+          min-width: 150px;
+          font-size: 15px;
+          font-weight: 700;
+          color: @black !important;
+          margin-right: auto;
+          text-transform: inherit;
+        }
+      }
+    }
+  }
+}

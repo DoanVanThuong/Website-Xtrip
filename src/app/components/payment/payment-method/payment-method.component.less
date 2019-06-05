@@ -1,0 +1,177 @@
+@import '_variables.less';
+@import './_mixins.less';
+
+.payment-method {
+
+  .payment-countdown {
+    padding: 8px 12px;
+    .border-radius(5px);
+    .rgba(@green-2, 0.15);
+    font-weight: 500;
+
+    span {
+      color: @red-4
+    }
+  }
+
+  ul.payment-list {
+    > li {
+
+      > a {
+        display: block;
+        padding: 10px 0;
+
+        &.active {
+
+        }
+
+        .payment-title {
+          .countdown {
+            font-weight: 500;
+            font-size: 13px;
+            padding: 3px 5px;
+            background-color: @gray-3;
+            color: @gray-1;
+            .border-radius(5px);
+          }
+        }
+
+        .description {
+          font-size: 13px;
+
+          > .discount {
+            color: @orange-2;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    .payment-options {
+      margin-left: 80px;
+
+      ul {
+        &::after {
+          content: '';
+          clear: both;
+        }
+
+        > li {
+          font-size: 13px;
+
+        }
+
+        &.payment-office {
+          > li {
+
+          }
+        }
+
+        &.payment-atm,
+        &.payment-transfer {
+          > li {
+            float: left;
+            padding: 4px;
+
+            > a {
+              border: 1px solid @gray-10;
+              padding: 8px 3px;
+              width: 90px;
+              height: 60px;
+              border-radius: 5px;
+
+              > img {
+                max-width: 100%;
+                height: auto;
+                object-fit: contain;
+              }
+              &.active, &:hover, &:focus {
+                border-color: @orange-2;
+                .box-shadow(0, 0, 5px, rgba(0, 0, 0, .3));
+              }
+            }
+          }
+
+        }
+        &.payment-store {
+          > li {
+            float: left;
+            padding: 4px;
+            > a {
+              padding: 8px 3px;
+              width: 90px;
+              height: 60px;
+              border-radius: 5px;
+
+              > img {
+                max-width: 100%;
+                height: auto;
+                object-fit: contain;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .payment-office {
+    background: @white;
+
+    .title-office {
+      font-size: 15px;
+    }
+
+    .item-payment-office {
+      padding: 13px 6px;
+      border-bottom: 1px solid @gray-13;
+
+      .img-company {
+        width: 50%;
+      }
+
+      .address-company {
+        max-width: 70%;
+      }
+    }
+  }
+
+  .payment-atm {
+    .list-atm {
+      background: @white;
+      margin-top: 10px;
+
+      .list-atm-item {
+        padding: 10px;
+
+        .item-name {
+          padding-top: 7px;
+          font-size: 16px;
+          color: @black;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .dx-scrollable-native.dx-scrollable-vertical, .dx-scrollable-native.dx-scrollable-vertical .dx-scrollable-container {
+      overflow-y: scroll;
+    }
+
+  }
+
+  .payment-store {
+    .img-store {
+      width: 100px;
+
+      img {
+        width: 100%;
+        margin: 8px 0px;
+      }
+    }
+  }
+
+
+}

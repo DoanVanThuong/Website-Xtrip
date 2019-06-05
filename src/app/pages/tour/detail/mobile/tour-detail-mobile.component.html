@@ -1,0 +1,421 @@
+<div class="tour-detail tour-detail-mobile">
+
+  <div class="loading-wrapper" *ngIf="isLoading">
+    <loading [show]="isLoading"></loading>
+  </div>
+  <div class="tour-heading">
+    <div class="row">
+      <div class="col-2">
+        <a class="icon-heading icon-back d-flex justify-content-center align-items-center" (click)="back()">
+          <img cdn-src="assets/images/icon/icon-back-green.svg" alt="" class="m-b-none icon-back">
+          <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="col-6 p-none">
+        <div class="tour-name text-truncate">{{ tour.name }}</div>
+      </div>
+      <div class="col-4 text-right p-r-none p-l-35">
+        <div class="d-flex justify-content-center">
+          <a (click)="onFavourite()"
+             class="icon-heading icon-heart d-flex justify-content-center align-items-center"
+             [class.bg-white]="isFavorite">
+            <i class="fa fa-heart-o" aria-hidden="true" *ngIf="!isFavorite"></i>
+            <i>
+              <img cdn-src="assets/images/icon/icon-like-circle.svg" alt="" class="m-b-none " *ngIf="isFavorite">
+            </i>
+            <img cdn-src="assets/images/icon/icon-like-green.svg" alt="" class="m-b-none " *ngIf="!isFavorite">
+            <img cdn-src="assets/images/icon/icon-like-circle.svg" alt="" class="m-b-none " *ngIf="isFavorite">
+
+          </a>
+          <a class="m-l-10 icon-heading icon-share d-flex justify-content-center align-items-center"
+             (click)="onSocialSharing()">
+            <i class="fa fa-share-alt " aria-hidden="true"></i>
+            <img cdn-src="assets/images/icon/icon-share-green.svg" alt="" class="m-b-none">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="scroll-to shadow" id="tabsID" *ngIf="!isLoading">
+    <div class="quick-menu-wp">
+      <ul class="list-unstyled list-inline">
+        <li *ngFor="let item of scrollToItem; trackBy: trackByFn"
+            class="item font-15" [class.active]="item.value === selectedScrollTo"
+            (click)="triggerScrollTo(item.key, item.value)">
+          {{item.display}}
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="wrapper p-b-60">
+    <section class="image-header">
+      <owl-carousel #owlElement [items]="tour.photos" [carouselClasses]="['owl-theme', 'owl-dots-black', 'sliding']"
+                    [options]="carouselOptions">
+        <div class="row" *ngFor="let item of tour.photos" (click)="openGalleryPopup()">
+          <div class="col-12">
+            <div class="position-relative">
+              <div class="slider-item">
+                <img class="m-b-0 b-r-img-10 pointer img-fix"
+                     [src]="item.src | size:300"
+                     onerror="this.src='assets/images/no-thumbnail.png'" alt="img"/>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </owl-carousel>
+      <div class="bg-gradient">
+        <div class="tour-code">
+          Mã tour: {{tour.code}}
+          <a class="m-l-5"
+             ngxClipboard
+             [cbContent]="tour.code"
+             (cbOnSuccess)="onClipboardSuccess('Đã sao lưu mã tour thành công.')">
+            <img class="m-t-n-3 size-16x16"
+                 cdn-src="assets/images/icon/icon-copy2-orange.svg"
+                 alt="icon"/>
+          </a>
+
+        </div>
+        <div class="slider-length">{{currentItem}}/{{tour.photos.length}}</div>
+      </div>
+
+    </section>
+
+    <!-- /image slider -->
+    <section class="description-tour-wp bg-white p-t-10 p-b-10">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="name m-b-10">{{tour.name}}</div>
+            <app-tour-highlight [data]="tour.highlights" [length]="" [mode]="'scroll'"></app-tour-highlight>
+            <!-- <div class="journey">{{tour.journey}}</div> -->
+            <ul class="list-unstyled list-info p-l-10 m-t-10">
+              <li>
+                Thời gian: {{tour.days}}N{{tour.nights}}Đ
+                <span>(ngày về dự kiến: {{tour.returnDate | moment: 'DD/MM/YYYY'}})</span>
+              </li>
+              <li>
+                Nơi khởi hành: {{tour.departPlace}}
+              </li>
+              <li class="coupon" *ngIf="!!tour.coupon && !!tour.coupon.couponCode && !!tour.coupon.available">
+                Nhập mã <span class="code">{{ tour.coupon.couponCode }}</span> giảm
+
+                <span *ngIf="tour.coupon.usePercentage">
+                  <span class="font-weight-bold">{{ tour.coupon.discountPercentage }}%</span>, tối đa 
+                  <span class="font-weight-bold">{{ tour.coupon.maxDiscount | currencyMoney: '' }} <span
+                    class="text-underline">đ</span></span>
+                </span>
+
+                <span *ngIf="!tour.coupon.usePercentage">
+                  <span class="font-weight-bold">{{ tour.coupon.discountAmount | currencyMoney: '' }}
+                    <span class="text-underline">đ</span>
+                  </span>
+                </span>
+
+                <span ngxClipboard [cbContent]="tour.coupon.couponCode"
+                      (cbOnSuccess)="onClipboardSuccess('Đã sao lưu mã giảm khuyến mãi thành công.')" class="m-l-5">
+                  <img class="m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-copy2-orange.svg" alt="copy"/>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /description -->
+
+    <section class="price-wp bg-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-6 price-info text-center">
+                <a (click)="openPopupPassenger()" class="d-block">
+                  <div class="font-13">
+                    Giá {{bookingTour.adults + bookingTour.children + bookingTour.infants}} người
+                  </div>
+                  <div class="price">
+                    {{!!totalPrice ? (totalPrice | currencyMoney: '') : (tour.adultPrice | currencyMoney: '')}} <span
+                    class="text-underline">đ</span>
+                    &nbsp;
+                    <span>
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div class="people-info" [innerHTML]="showPeople()"></div>
+                </a>
+              </div>
+              <div class="col-6 text-center depart-info">
+                <a (click)="openPopupDepartDate()" class="d-block">
+                  <div class="font-13">Ngày khởi hành</div>
+                  <div class="departDate" *ngIf="tour.departDate">
+                    {{tour.departDate | departDate : false}}
+                    <span *ngIf="!!this.departDates.length">
+                      <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div class="quantity" [class.low-available-text]="tour.fakeAvailable <= 3">
+                    ({{!!tour.fakeAvailable ? 'Còn ' + tour.fakeAvailable + ' chỗ' : 'Hết chỗ'}})
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- price & depart date -->
+
+    <!-- tab group -->
+    <mat-tab-group mat-align-tabs="center" [selectedIndex]="selectedIndex"
+                   (selectedTabChange)="selectedTabChange($event)">
+      <mat-tab label="Lịch trình">
+        <!-- transport & hotel -->
+        <section class="transport-wp bg-white" *ngIf="!!package && !!package.departInfo">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div class="title">Phương tiện</div>
+                <tour-transport [data]="package"></tour-transport>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- journey -->
+        <section class="journey-wp bg-white">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div class="title m-b-10">Lịch trình</div>
+                <tour-journey [journey]="journey" (submit)="openTourJourney($event)"></tour-journey>
+              </div>
+            </div>
+          </div>
+        </section>
+      </mat-tab>
+      <mat-tab label="Chính sách">
+        <!-- policy  [id]="scrollToItem[3].value" -->
+        <section class="term-policy-wp bg-white mn-h-180">
+          <div class="container">
+
+            <!-- new format data -->
+            <div class="row" *ngIf="!!tour.policyContent">
+              <div class="col-12" *ngIf="!!tour.policyContent.include">
+                <div class="title">Giá bao gồm</div>
+                <div class="include-content mx-h-60 over-hidden" [innerHTML]="tour.policyContent.include"></div>
+                <div class="col-12 text-center m-t-10">
+                  <a class="view-more-link text-main font-medium" (click)="openTourPolicy(0)">
+                    Hiển thị chi tiết
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-12 line-top m-t-20" *ngIf="!!tour.policyContent.exclude">
+                <div class="title m-t-20">Giá không bao gồm</div>
+                <div class="include-content mx-h-60 over-hidden" [innerHTML]="tour.policyContent.exclude"></div>
+                <div class="col-12 text-center m-t-10">
+                  <a class="view-more-link text-main font-medium" (click)="openTourPolicy(1)">
+                    Hiển thị chi tiết
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-12 line-top m-t-20"
+                   *ngIf="!!tour.policyContent.surcharges && !!tour.policyContent.surcharges.length">
+                <div class="title m-t-20">Phụ thu</div>
+                <app-tour-surcharge [data]="tour.policyContent.surcharges"></app-tour-surcharge>
+              </div>
+            </div>
+            <!-- /new format data -->
+
+            <!-- old format data -->
+            <div class="row" *ngIf="!tour.policyContent && !!tour.policy">
+              <div class="col-12">
+                <div class="p-html" [innerHTML]="tour.policy"></div>
+              </div>
+            </div>
+            <!-- /old format data -->
+
+          </div>
+        </section>
+      </mat-tab>
+      <mat-tab label="Điều khoản">
+        <!-- term -->
+        <section class="term-policy-wp bg-white mn-h-180">
+          <div class="container">
+
+            <!-- new format data -->
+            <div class="row" *ngIf="!!tour.termsContent">
+              <div class="col-12" *ngIf="!!tour.termsContent.refund">
+                <div class="title">Hoàn hủy tour</div>
+                <div class="include-content mx-h-60 over-hidden" [innerHTML]="tour.termsContent.refund"></div>
+                <div class="col-12 text-center m-t-10">
+                  <a class="view-more-link text-main font-medium" (click)="openTourTerm(0)">
+                    Hiển thị chi tiết
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-12 line-top m-t-20" *ngIf="!!tour.termsContent.visa">
+                <div class="title m-t-20">Thủ tục xin Visa</div>
+                <div class="include-content mx-h-60 over-hidden" [innerHTML]="tour.termsContent.visa"></div>
+                <div class="col-12 text-center m-t-10">
+                  <a class="view-more-link text-main font-medium" (click)="openTourTerm(1)">
+                    Hiển thị chi tiết
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-12 line-top m-t-20" *ngIf="!!tour.termsContent.notes">
+                <div class="title m-t-20">Lưu ý</div>
+                <div class="include-content mx-h-60 over-hidden" [innerHTML]="tour.termsContent.notes"></div>
+                <div class="col-12 text-center m-t-10">
+                  <a class="view-more-link text-main font-medium" (click)="openTourTerm(2)">
+                    Hiển thị chi tiết
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- new format data -->
+
+            <!-- old format data -->
+            <div class="row" *ngIf="!tour.termsContent && !!tour.terms">
+              <div class="col-12">
+                <div class="p-html" [innerHTML]="tour.terms"></div>
+              </div>
+            </div>
+            <!-- /old format data -->
+
+          </div>
+        </section>
+      </mat-tab>
+    </mat-tab-group>
+    <!-- tab group -->
+
+    <!-- hashtag -->
+    <section class="hashtag-wp bg-white " *ngIf="!!tour.hashTags && !!tour.hashTags.length">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="title">Từ khóa liên quan</div>
+            <ul class="d-flex flex-wrap hashtags m-b-10">
+              <li class="hashtag-item" *ngFor="let item of tour.hashTags">
+                <a class="d-block pointer" [attr.href]="item.url" target="_blank" [title]="item.keyWord">{{
+                  item.keyWord }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- related tour -->
+    <section class="tour-related-wp bg-white m-t-4" *ngIf="!!relatedTours.length">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 tour-detail-relate p-l-none p-r-none">
+            <div class="tour-info">
+              <div class="title m-b-10 p-l-15">Bạn có thể quan tâm</div>
+              <owl-carousel [items]="tour.photos"
+                            [carouselClasses]="['owl-theme', 'owl-dots-black', 'sliding']"
+                            [options]="carouselOptions">
+                <div class="tour-related-item m-l-10 m-r-10"
+                     *ngFor="let tour of relatedTours; trackBy: trackByFn;">
+                  <tour-detail-item [tour]="tour" [mode]="'carousel'"></tour-detail-item>
+                </div>
+              </owl-carousel>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /tour related -->
+
+    <section class="mn-h-70 bg-white"></section>
+
+    <section class="booking-footer fixed-bottom p-10-15">
+      <div class="row">
+        <div class="col-6 p-r-10">
+          <button class="btn btn-white-outline-v2 btn-block text-main b-5 p-10"
+                  (click)="onOpenAdvisory()">
+            Tư vấn tour
+          </button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-main-v2 btn-block b-5 p-10"
+                  (click)="onBookTour()"
+                  *ngIf="!!tour.available && !isExpired">
+            Đặt chỗ
+          </button>
+          <a role="button"
+             target="_blank"
+             *ngIf="!tour.available || isExpired"
+             class="btn btn-main-v2 btn-block b-5"
+             href="{{tour.feedbackContact.fbLink}}">
+            Liên hệ
+          </a>
+        </div>
+      </div>
+
+      <div class="icon-chat-fixed shadow d-flex justify-content-center align-items-center phone-chat bg-main">
+        <a [href]="'tel:' + tour.feedbackContact.hotline">
+          <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="icon-chat-fixed shadow d-flex justify-content-center align-items-center social-chat">
+        <a (click)="openPopupChat()">
+          <img class="w-30" cdn-src="assets/images/icon/icon-chat.svg" alt="icon">
+        </a>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<!-- gallery -->
+<gallery-popup [images]="galleryPhotos"></gallery-popup>
+
+<!-- passenger -->
+<passenger-popup [tour]="tour" [data]="bookingTour" (onConfirm)="onConfirmPassenger($event)"
+                 [groupAge]="groupAge"></passenger-popup>
+
+<!-- depart date -->
+<depart-date-popup [data]="departDates"
+                   [date]="tour.departDate"></depart-date-popup>
+
+<!-- social media -->
+<social-sharing *ngIf="!!tour.name"
+                #SocialSharing
+                [title]="tour.name"
+                [image]="tour.photo.src"
+                [description]="tour.name"></social-sharing>
+
+<!-- chat -->
+<chat-info-popup [contact]="tour.feedbackContact"></chat-info-popup>
+
+<!-- tour advisory popup -->
+<tour-advisory-popup [tour]="tour"></tour-advisory-popup>
+
+<!-- tour journey detail popup -->
+<app-tour-journey-detail-popup [data]="journey" [tabIndex]="journeyTabIndex"
+                               (indexChange)="journeyIndexChange($event)"></app-tour-journey-detail-popup>
+
+<!-- tour policy detail popup -->
+<app-tour-policy-detail-popup
+  [data]="!!tour.policyContent ? tour.policyContent : tour.policy"
+  [tabIndex]="policyTabIndex"
+  (indexChange)="policyIndexChange($event)"
+  [mode]="!!tour.policyContent ? 'new' : 'old'">
+</app-tour-policy-detail-popup>
+
+<!-- tour term detail popup -->
+<app-tour-term-detail-popup
+  [data]="!!tour.termsContent ? tour.termsContent : tour.terms"
+  [tabIndex]="termTabIndex"
+  (indexChange)="termIndexChange($event)"
+  [mode]="!!tour.termsContent ? 'new' : 'old'">
+</app-tour-term-detail-popup>

@@ -1,0 +1,46 @@
+<div bsModal #popup="bs-modal" class="modal fade hotel-facility-popup animated fadeInUp" role="dialog"
+  (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content tour-detail-desktop">
+      <div class="modal-header p-t-none">
+        <div class="row m-t-20">
+          <div class="col-2">
+            <a (click)="hide()" class="d-block size-24x24 text-center">
+              <img class="size-16x16" cdn-src="assets/images/icon/icon-close-green.svg">
+            </a>
+          </div>
+          <div class="col-8">
+            <div class="text-center font-17 font-bold text-light-gray">Tiện nghi
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <ul class="list-unstyled">
+          <accordion>
+            <accordion-group [isOpen]="true" [panelClass]="'panel-desktop'"
+              *ngFor="let item of data; let i = index; trackBy: trackByFn">
+              <div class="font-14 font-medium" accordion-heading>
+                <img [src]="item.photo.src" alt="" class="m-b-none" class="size-24x24 align-bottom">
+                {{item.name}}
+                <span class="pull-right" *ngIf="!!item.facilities.length">
+                  <a class="text-center size-24x24 d-block">
+                    <img class="m-b-none m-t-n-3 size-12x12 icon-collapse"
+                      cdn-src="assets/images/icon/icon-angle-down-green.svg" alt="icon" />
+                    <img class="m-b-none m-t-n-3 size-12x12 icon-expand"
+                      cdn-src="assets/images/icon/icon-angle-up-green.svg" alt="icon" />
+                  </a>
+                </span>
+              </div>
+              <ul class="list-unstyled list-facilities">
+                <li *ngFor="let facility of item.facilities; let j = index; trackBy: trackByFn">
+                  <div class="m-l-5">{{facility}}</div>
+                </li>
+              </ul>
+            </accordion-group>
+          </accordion>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

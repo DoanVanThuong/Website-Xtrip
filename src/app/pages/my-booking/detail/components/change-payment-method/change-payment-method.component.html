@@ -1,0 +1,31 @@
+<!--component html goes here -->
+<div class="change-payment-method" *ngIf="!isProduction">
+  <div class="row" *ngIf="isMobile">
+    <div class="col-12"
+         *ngIf="utilityHelper.findNotInList(status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])">
+      <a class="btn btn-main-v2 btn-block"
+         [routerLink]="['/payment']"
+         [queryParams]="{reservationCode: code, module: module}">
+        <span class="text-white font-18">Đổi thanh toán</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="isDesktop">
+    <div class="col-12"
+         *ngIf="utilityHelper.findNotInList(status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])">
+      <button class="btn btn-main-v2 mn-w-200"
+              (click)="onOpenChangePaymentMethod()">
+        <span class="text-white font-18">Đổi thanh toán</span>
+      </button>
+    </div>
+  </div>
+
+  <app-change-payment-popup
+      *ngIf="!!flight && utilityHelper.findNotInList(status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])"
+      [module]="module"
+      [reservationCode]="code"
+      [airports]="airports"
+      [data]="data"
+      (submit)="submitChangePayment()"></app-change-payment-popup>
+</div>

@@ -1,0 +1,127 @@
+<div class="hotel-detail-item-desktop">
+  <div class="line-break list-view" *ngIf="viewMode === 'list'">
+    <div class="d-flex">
+      <div class="w-160 p-r-10">
+        <a class="d-block pointer" [routerLink]="['/hotel', hotel.code, 'detail']" [queryParams]="onGenerateParameters(hotel)">
+            <img class="img-fix m-b-none w-full b-r-5 h-full mn-h-120" defaultImage="assets/images/no-thumbnail.png"
+            [lazyLoad]="hotel.photo.url | resizeImage: 300"
+            [alt]="hotel.name" [title]="hotel.name" onerror="this.src='assets/images/no-thumbnail.png'" />
+        </a>
+      </div>
+      <div class="w-full">
+        <div class="d-flex">
+          <div class="info-area">
+            <div class="name">
+              <a class="d-block pointer" [routerLink]="['/hotel', hotel.code, 'detail']" [queryParams]="onGenerateParameters(hotel)">
+                <span class="font-13 font-medium bg-stars">{{hotel.stars}}
+                  <span><img class="m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-star-white.svg" alt="img" /></span>
+                </span> {{hotel.name}}
+              </a>
+            </div>
+            <div class="address">
+              <span><img class="m-b-none m-t-n-3" src="assets/images/icon/icon-location-gray.svg" alt="img" /></span>
+              {{ hotel.fullAddress }}
+            </div>
+            <div class="nearby font-13" *ngIf="!!hotel.nearBy">
+              Gần {{hotel.nearBy}}
+            </div>
+            <ng-template *ngIf="!hotel.isSoldOut; else soldOutBlockInfo">
+              <ul class="main-faccilities d-flex flex-wrap m-t-10" *ngIf="!!hotel.facilities.length">
+                <li class="m-r-16" *ngFor="let item of hotel.facilities">
+                  <span><img class="m-b-none size-24x24 m-r-2" src="{{item.imageHost}}android/{{item.imagePath}}" [alt]="item.name" /></span> 
+                  {{item.name}}
+                </li>
+              </ul>
+              <ul class="preferServies d-flex flex-wrap m-t-10" *ngIf="!!hotel.preferServices.length">
+                <li class="m-r-10 m-b-10 bg-prefer-item" *ngFor="let item of hotel.preferServices">
+                  {{item}}
+                </li>
+              </ul>
+            </ng-template>
+            <ng-template #soldOutBlockInfo>
+              <div class="sold-out-small-text">Phòng này đã hết cho ngày bạn chọn. Hãy xem qua với khách sạn tương tự khác</div>
+            </ng-template>
+          </div>
+
+          <!-- Not sold out -->
+          <div class="price-area" *ngIf="!hotel.isSoldOut; else soldOutBlockPrice">
+            <div>
+              <span class="prices"><span class="font-14">Giá</span> {{hotel.sellingPrice | currencyMoney: ''}} <span class="text-underline">đ</span></span>
+            </div>
+            <div class="nights">
+              Giá phòng {{nights}} đêm
+            </div>
+            <div class="coupon m-t-10 m-b-10" *ngIf="hotel.coupon.available">
+              <span class="coupon-item" *ngIf="!hotel.coupon.usePercentage">
+                Nhập mã <span class="font-medium">{{hotel.coupon.couponCode}}</span> giảm ngay <span class="text-green text-medium">{{hotel.coupon.discountAmount | currencyMoney: ''}} <span class="text-underline">đ</span></span>
+              </span>
+              <span class="coupon-item" *ngIf="hotel.coupon.usePercentage">
+                Nhập mã <span class="font-medium">{{hotel.coupon.couponCode}}</span> giảm ngay <span class="text-green text-medium">{{hotel.coupon.discountPercentage}}</span> tối đa {{hotel.coupon.maxDiscount}}
+              </span>
+            </div>
+            <span class="multi-book">
+              Được đặt nhiều, còn <span class="font-weight-bold font-16">3</span> phòng
+            </span>
+          </div>
+          <!-- Not sold out -->
+
+          <!-- Sold out -->
+          <ng-template #soldOutBlockPrice>
+            <div class="sold-out">
+              <img class="m-b-none" src="assets/images/icon/icon-sold-out.svg" alt="img" />
+              <div class="sold-text">
+                Bạn đã lỡ phòng này
+              </div>
+            </div>
+          </ng-template>
+          <!-- Sold out -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-view m-b-20" *ngIf="viewMode === 'grid'">
+    <a class="d-block pointer" [routerLink]="['/hotel', hotel.code, 'detail']" [queryParams]="onGenerateParameters(hotel)">
+      <div class="img-area">
+        <img class="img-fix m-b-none w-full img-border h-180" defaultImage="assets/images/no-thumbnail.png"
+          [lazyLoad]="hotel.photo.url | resizeImage: 300" [alt]="hotel.name" [title]="hotel.name"
+          onerror="this.src='assets/images/no-thumbnail.png'">
+      </div>
+      <div class="m-t-10 font-16 text-truncate">
+        <span class="font-13 font-medium bg-stars">{{hotel.stars}}
+          <span><img class="m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-star-white.svg" alt="img" /></span>
+        </span> {{hotel.name}}
+      </div>
+      <div class="address text-truncate m-t-8">
+        <span><img class="m-b-none m-t-n-3" src="assets/images/icon/icon-location-gray.svg" alt="img" /></span>
+        {{ hotel.fullAddress }}
+      </div>
+      <div class="nearby font-13 m-t-10" *ngIf="!!hotel.nearBy">
+        Gần {{hotel.nearBy}}
+      </div>
+      <ul class="main-faccilities d-flex flex-wrap m-t-8" *ngIf="!!hotel.facilities.length">
+        <li class="m-r-4" *ngFor="let item of hotel.facilities">
+          <span><img class="m-b-none size-24x24 m-r-2" src="{{item.imageHost}}android/{{item.imagePath}}" [alt]="item.name" /></span> 
+        </li>
+      </ul>
+      <div class="m-t-8">
+        <span class="grid-price">{{hotel.sellingPrice | currencyMoney: ''}} <span class="text-underline">đ</span></span>
+      </div>
+      <ul class="preferServies d-flex flex-wrap m-t-10" *ngIf="!!hotel.preferServices.length">
+        <li class="m-r-10 m-b-10 bg-prefer-item" *ngFor="let item of hotel.preferServices | slice : 0 : 2">
+          {{item}}
+        </li>
+      </ul>
+      <div class="coupon m-t-10 m-b-10" *ngIf="hotel.coupon.available">
+        <span class="coupon-item" *ngIf="!hotel.coupon.usePercentage">
+          Nhập mã <span class="font-medium">{{hotel.coupon.couponCode}}</span> giảm ngay <span class="text-green text-medium">{{hotel.coupon.discountAmount | currencyMoney: ''}} <span class="text-underline">đ</span></span>
+        </span>
+        <span class="coupon-item" *ngIf="hotel.coupon.usePercentage">
+          Nhập mã <span class="font-medium">{{hotel.coupon.couponCode}}</span> giảm ngay <span class="text-green text-medium">{{hotel.coupon.discountPercentage}}</span> tối đa {{hotel.coupon.maxDiscount}}
+        </span>
+      </div>
+    </a>
+  </div>
+
+</div>

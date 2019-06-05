@@ -1,0 +1,76 @@
+@import '_variables.less';
+.popup-flight-filter {
+  .header {
+    background-image: linear-gradient(to right, @green-19 0%, @green-20 100%);
+  }
+  .h-60 {
+    height: 60px;
+  }
+  .text-white {
+    color: @white;
+  }
+  .filter-sort-area {
+    .title {
+      color: @gray-1;
+      background-color: @gray-13;
+      padding: 5px 10px;
+    }
+    .item {
+      padding: 8px 20px;
+      border-bottom: 1px solid @gray-3;
+      font-size: 14px;
+    }
+    .active {
+      color: @orange-2;
+    }
+    .p-25-30-5-15 {
+      padding: 25px 30px 5px 15px;
+    }
+    .filter-time {
+      .noUi-horizontal {
+        height: 3px;
+      }
+      .noUi-handle {
+        border-radius: 50%;
+      }
+      .noUi-horizontal {
+        .noUi-handle {
+          width: 25px;
+          height: 25px;
+          top: -12px;
+        }
+      }
+      .noUi-handle:after, .noUi-handle:before {
+        width: 0px;
+      }
+      .noUi-target {
+        border: 1px solid @orange-2;
+        border-width: 0;
+        box-shadow: none;
+        background: gray;
+        height: 2px;
+      }
+      .noUi-connect {
+        background: @orange-2;
+      }
+      .noUi-tooltip {
+        border: none;
+        color: @orange-2;
+        padding: 0;
+        background: transparent;
+      }
+    }
+    .filter-carrier {
+      .logo {
+        max-width: 32px;
+      }
+      .name {
+        width: 100%;
+        padding-left: 5px;
+      }
+      .check {
+        min-width: 25px;
+      }
+    }
+  }
+}

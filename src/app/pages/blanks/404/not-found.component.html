@@ -1,0 +1,29 @@
+<div class="page-404 p-t-30">
+  <div class="container">
+
+    <div class="logo text-center" [ngSwitch]="isVMTravel">
+      <a [routerLink]="['/']"
+         class="logo pointer"
+         *ngSwitchCase="true"
+         title="Vietmap Travel">
+        <img class="mx-w-270 w-full"
+             cdn-src="assets/images/logo-by-xtrip.png" alt="logo"/>
+      </a>
+      <a [routerLink]="['/']"
+         class="logo pointer"
+         *ngSwitchDefault
+         title="Xtrip">
+        <img class="mx-w-270 w-full"
+             cdn-src="assets/images/logo-by-vmtravel.png" alt="logo"/>
+      </a>
+    </div>
+
+    <div class="page-content">
+      <div class="content">
+        <h1>404</h1>
+        <div class="description">Opps! Trang bạn tìm không tồn tại.</div>
+        <a [routerLink]="['/']" class="m-t-20 btn btn-main-v2">Về trang chủ</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div id="smart-banner"
+     class="smart-banner"
+     [class.hide]="!onShow()"
+     [@smartAnimated]="onShow() ? 'show' : 'hidden'">
+  <a class="smart-banner-close" (click)="onClose()">
+    <img class="size-24x24 m-b-none" cdn-src="assets/images/icon/icon-close-white.svg" alt="close"/>
+  </a>
+  <a class="smart-banner-button" (click)="onInstall()"></a>
+</div>

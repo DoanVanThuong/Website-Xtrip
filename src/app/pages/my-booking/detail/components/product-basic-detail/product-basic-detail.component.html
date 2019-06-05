@@ -1,0 +1,126 @@
+<div class="product-basic-detail">
+  <div class="row" *ngIf="!!product">
+    <div class="col-lg-{{mode === 0 ? 6 : 12}}">
+      <div class="d-flex flex-column justify-content-center h-full {{mode === 1 ? 'm-l-20 m-r-20' : ''}}">
+        <h4 class="font-17 font-bold text-black m-none">
+          {{ product.productName }}
+        </h4>
+        <div class="font-13">
+          {{ product.productAddress }}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6" *ngIf="mode === 0">
+      <div class="booking-time-box">
+        <div class="row">
+          <div class="col-6">
+            <div *ngIf="utilityHelper.findNotInList(product.status, [STATUS.PAID, STATUS.WAITING])">
+              <div class="text-light-gray font-13">Thời gian giữ chỗ còn:</div>
+              <div class="font-20 text-green font-bold">
+                <countdown [time]="product.holdExpiry" (submit)="onExpired()"></countdown>
+              </div>
+              <div class="font-13 text-light-gray">
+                Hết hạn {{ product.holdExpiry | moment:'HH:mm, DD/MM' }}
+              </div>
+            </div>
+            <div class="" *ngIf="utilityHelper.findInList(product.status, [STATUS.PAID, STATUS.WAITING])">
+              <div class="text-light-gray font-13">Mã vé</div>
+              <div class="font-20 text-green font-bold">
+                {{ product.pnr }}
+              </div>
+              <div class="font-12 text-light-gray">
+                (Mã dùng tại quầy vé)
+              </div>
+            </div>
+          </div>
+          <div class="col-6 b-l text-right">
+            <div *ngIf=" product.paymentDetail.method === METHOD.STORE">
+              <div class="text-light-gray font-medium font-13">Mã thanh toán Payoo:</div>
+              <div class="font-20 text-green font-bold">{{ product.paymentDetail.transactionNo }}</div>
+              <div class="font-12 font-medium text-light-gray">
+                Mã đặt chỗ: <span class="text-green">{{ product.code }}</span>
+              </div>
+            </div>
+            <div *ngIf="product.paymentDetail.method !== METHOD.STORE">
+              <div class="text-light-gray font-13">Mã đặt chỗ</div>
+              <div class="font-20 text-green font-bold">
+                {{ product.code }}
+              </div>
+              <div class="font-13 text-light-gray">
+                (Mã dùng tại Xtrip)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="list-group list-group-flush m-t-20" *ngIf="!!product">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Tình trạng</div>
+        <div class="col-8">
+          <booking-status [status]="product.status" [border]="true"></booking-status>
+          <span *ngIf="product.isReviewed" class="status status-box status-success mn-w-110">Đã nhận xét</span>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Combo</div>
+        <div class="col-8">
+          {{ product.productOptionName }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Tên hành khách</div>
+        <div class="col-8">
+          {{ product.contactName }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Ngày tham quan</div>
+        <div class="col-8">
+          {{ !!product.timeslot ? product.timeslot + ', ':'' }}{{ product.departDate | moment : 'DD/MM/YYYY' }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Thời lượng tham quan</div>
+        <div class="col-8">
+          {{ product.duration }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Số người</div>
+        <div class="col-8">
+          {{ product.totalPax }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Tổng tiền</div>
+        <div class="col-8">
+          {{ product.totalPrice | currencyMoney: '' }} <span class="text-underline">đ</span>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item" *ngIf="mode === 1">
+      <div class="row">
+        <div class="col-4 font-bold">Hình thức thanh toán</div>
+        <div class="col-8">
+          {{ currentPayment }}
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

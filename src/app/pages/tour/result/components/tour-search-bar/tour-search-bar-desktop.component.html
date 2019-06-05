@@ -1,0 +1,79 @@
+<div class="tour-search-bar bg-search-bar search-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="form form-desktop tour-search-form ">
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="w-full m-r-20">
+              <div class="row">
+                <div class="col-5">
+                  <div class="search-destination"
+                       (clickOutside)="onClickedOutside($event, 'arrival')"
+                       (click)="openDropdownSearch()">
+                    <div class="form-group">
+                      <label class="control-label">Điểm đến</label>
+                      <input type="text"
+                             class="form-control"
+                             [(ngModel)]="arrival"
+                             placeholder="Chọn điểm đến"
+                             readonly/>
+                    </div>
+                    <div class="result-tour-location shadow animated fadeIn" *ngIf="isArrivalShow">
+                      <perfect-scrollbar>
+                        <div *ngIf="!!arrivals.length">
+                          <div class="international-tour">
+                            <div class="data-box">
+                              <div class="row m-none">
+                                <div class="col-4 text-center item-cell"
+                                     [class.border-bottom]="(i / 3) < arrivals.length/3"
+                                     *ngFor="let arrival of arrivals; trackBy: trackByFn; let i = index">
+                                  <a class="pointer d-flex justify-content-center align-items-center h-full"
+                                     [class.border-right]="i % 3 < 2 && i < arrivals.length - 1"
+                                     (click)="onSelectLocation(arrival)">
+                                    {{ arrival.name }}
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </perfect-scrollbar>
+                    </div>
+                    <!-- /arrival result -->
+
+                  </div>
+                </div>
+                <!-- /arrival-->
+
+                <div class="col-7 b-left">
+                  <div class="search-departure"
+                       (click)="openDropdownSearch()">
+                    <div class="form-group">
+                      <label class="control-label">Khoảng thời gian bạn bắt đầu chuyến đi</label>
+                      <div class="form-control over-hidden" bsDaterangepicker [bsConfig]="datePickerOptions"
+                           (bsValueChange)="onSelectedDate($event)">
+                        <span class="placeholder" *ngIf="!date.length">Chọn ngày đi - về</span>
+                        <span class="" *ngIf="!!date.length">
+                            {{ date }}
+                          </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /Điểm khởi hành -->
+              </div>
+            </div>
+            <div class="btn-search-tour">
+              <button type="submit"
+                      class="btn btn-main-v2 mn-w-100"
+                      [disabled]="onDisableSubmit()"
+                      (click)="onSearchTour()">
+                Tìm tour
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+@import '_variables.less';
+
+.hotel-apply-point-popup {
+    &.show {
+        background: rgba(0, 0, 0, 0.80);
+        overflow-y: hidden !important;
+    }
+
+    .modal-dialog {
+        &.fullscreen {
+            @media only screen and (min-width: 100px) and (max-width: 479px) {
+                top: 70% !important;
+                @media (max-height: 480px)  {
+                    top: 65% !important;
+                }
+            }
+        }
+
+        .modal-content {
+            border-top-left-radius: 20px !important;
+            border-top-right-radius: 20px !important;
+
+            .modal-header {
+                padding: 10px 14px;
+                background: @gray-41;
+            }
+
+            .icon-close {
+                padding: 1px 4px;
+            }
+
+            .modal-body {
+                .switch-small-mobile {
+                    .point-number {
+                        color: #9e9e9e;
+
+                        &.active {
+                            color: @green-2;
+                        }
+                    }
+
+                    .switch {
+                        border: none;
+
+                        &.switch-medium {
+                            height: 31px;
+                        }
+
+                        &.checked {
+                            background: @green-2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .modal-footer {
+        .btn-footer {
+            margin: 15px;
+        }
+    }
+}

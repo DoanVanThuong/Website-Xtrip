@@ -1,0 +1,114 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.passenger-info-item {
+
+  &.passenger-info-item-desktop {
+    .form {
+
+      .form-group {
+        .control-label {
+          color: @gray-1;
+        }
+
+        .mat-form-field {
+          .mat-form-field-wrapper {
+
+            .mat-form-field-label-wrapper {
+              .mat-form-field-label {
+                color: @gray-1;
+              }
+            }
+          }
+        }
+
+        &.form-dropdown {
+          .dropdown{
+            padding-bottom: 6px;
+          }
+
+          .dropdown-menu {
+            top: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+            .border-radiuses(0, 10px, 10px, 0);
+
+            .dropdown-item {
+              color: @gray-2;
+              .border-radius(0);
+              outline: none;
+
+              &.active {
+                color: @gray-2;
+                background-color: @gray-3;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .form {
+    .form-group {
+      margin-bottom: 10px;
+
+      .control-label {
+        font-size: 13px;
+        color: @orange-2;
+      }
+
+      .mat-form-field {
+        .mat-form-field-wrapper {
+          .mat-form-field-underline {
+            height: 1px;
+            background-color: @gray-33;
+          }
+
+          .mat-form-field-label-wrapper {
+            .mat-form-field-label {
+              color: @orange-2;
+              font-size: 15px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      &.form-sex {
+        .btn {
+          margin-right: 10px;
+          border-radius: 25px;
+          padding: 10px 20px;
+          min-width: 90px;
+          font-weight: 500;
+          transition: background 0.5s linear;
+
+          &.active, &:hover, &:focus {
+            background-color: @orange-2;
+            background-image: linear-gradient(to right, @orange-4, @orange-2);
+            color: @white;
+            .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+          }
+        }
+      }
+    }
+  }
+
+  .uploader-container {
+    padding: 10px;
+    background-color: @gray-17;
+    border: 1px dashed @gray-46;
+    .border-radius(5px);
+
+    label {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin: 0;
+      input[type=file] {
+        display: none;
+      }
+    }
+  }
+}

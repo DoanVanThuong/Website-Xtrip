@@ -1,0 +1,48 @@
+<div class="date-picker {{theme}}">
+  <div class="month"
+       *ngFor="let monthItem of months; trackBy: trackByFn; let i = index">
+    <table>
+      <thead class="heading">
+      <tr class="date-controls">
+        <th class="prev">
+          <div class="">
+            <a (click)="onSelectNextMonth(-1)"
+               *ngIf="onButtonShow(i==0)">
+              <i class="fa fa-angle-left"></i>
+            </a>
+          </div>
+        </th>
+        <th class="title" colspan="5">
+          Tháng {{ monthItem.month | moment:'M'}}, {{ monthItem.month | moment:'YYYY'}}
+        </th>
+        <th class="next">
+          <a (click)="onSelectNextMonth(1)"
+             *ngIf="onButtonShow(i === (months.length - 1))">
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </th>
+      </tr>
+      <tr class="week-title">
+        <th *ngFor="let day of headers; trackBy: trackByFn; let i = index">{{ day }}</th>
+      </tr>
+      </thead>
+      <tbody class="calendar">
+      <tr class="week" *ngFor="let row of convertNumberToArray(monthItem.rows); trackBy: trackByFn; let i = index">
+        <td class="date" *ngFor="let col of convertNumberToArray(headers.length); trackBy: trackByFn; let j = index">
+          <a [class.disabled]="onDisabledDate(monthItem.dates[row][col].value, monthItem.month)"
+             [class.today]="onCurrentDate(monthItem.dates[row][col].value)"
+             [class.date-range]="onDateRange(monthItem.dates[row][col].value)"
+             [class.start-date]="onStartDate(monthItem.dates[row][col].value)"
+             [class.end-date]="onEndDate(monthItem.dates[row][col].value)"
+             [class.active]="onSelectedDate(monthItem.dates[row][col].value)"
+             (click)="onSelectDate(monthItem.dates[row][col].value, monthItem.dates[row][col].disabled)">
+            <span>
+              {{ onShowDate(monthItem.dates[row][col].value, monthItem.month) | moment: 'DD' }}
+            </span>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

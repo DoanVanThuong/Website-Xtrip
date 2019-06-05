@@ -1,0 +1,48 @@
+<!-- for mobile -->
+<div class="booked-tour" *ngIf="isMobile">
+  <div class=""
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <loading [show]="isLoading"></loading>
+
+    <app-booking-empty-screen [show]="isLoading === false && !tours.length"
+                              [image]="'assets/images/booked-tour-empty.png'"
+                              [title]="'BẠN CHƯA CÓ THÔNG TIN ĐẶT TOUR'"
+                              [description]="'Khám phá ngay những tour du lịch hấp dẫn'"
+                              (retry)="searchTour()"></app-booking-empty-screen>
+
+    <div class="booked-tour-list">
+      <tour-booking-detail-item *ngFor="let tour of tours; trackBy: trackByFn"
+                                [tour]="tour"
+                                (click)="openDetail(tour)"></tour-booking-detail-item>
+
+    </div>
+  </div>
+</div>
+
+<!-- for desktop -->
+<div class="booked-tour" *ngIf="isDesktop">
+  <div infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <booking-empty [show]="!isLoading && !tours.length"
+                   [heading]="'Không có đặt chỗ'"
+                   [description]="'Mọi chỗ bạn đặt sẽ được hiển thị tại đây.'"></booking-empty>
+
+    <div *ngIf="tours.length">
+      <div *ngFor="let tour of tours; trackBy: trackByFn; let i = index">
+        <tour-booking-detail-item [tour]="tour"
+                                  (select)="openDetail(tour)"></tour-booking-detail-item>
+      </div>
+    </div>
+
+    <loading [show]="isLoading"
+             [title]="'Đang tải dữ liệu'"
+             [description]="'Vui lòng đợi trong giây lát'"></loading>
+  </div>
+</div>

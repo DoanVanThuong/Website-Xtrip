@@ -1,0 +1,53 @@
+<div class="notification" *ngIf="isMobile">
+  <app-header [heading]="'Thông báo'" [fixed]="true" [version]="3">
+
+    <tabset #tabset [justified]="true" type="tabs">
+      <tab [heading]="'Chung'"
+           [active]="tab === 'general'"
+           (selectTab)="onSelectTab($event, 'general')">
+
+      </tab>
+      <tab [heading]="'Tin nhắn'"
+           [active]="tab === 'inbox'"
+           (selectTab)="onSelectTab($event, 'inbox')">
+      </tab>
+    </tabset>
+  </app-header>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+
+        <notification-general *ngIf="tab ==='general'"></notification-general>
+
+        <div class="" *ngIf="tab === 'inbox'">
+          <div class="content container-empty-screen p-t-40" *ngIf="!isLoggedIn">
+            <div class="container-data-empty-screen">
+              <div class="row">
+                <div class="container-fluid text-center">
+                  <div class="">
+                    <img cdn-src="assets/images/empty-screen.png" width="245.7dp" height="177.3dp">
+                  </div>
+                  <div class="m-t-20">
+                    <strong>Bạn chưa đăng nhập</strong>
+                  </div>
+                  <div class="text-center">Đăng nhập để sử dụng chức năng này</div>
+                  <div class="m-t-10">
+                    <a [routerLink]="['/authentication']" [queryParams]="{url: _router.url}"
+                       class="btn btn-main">
+                      <strong>Đăng Nhập</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <notification-inbox *ngIf="isLoggedIn"></notification-inbox>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <app-footer-mobile></app-footer-mobile>
+</div>

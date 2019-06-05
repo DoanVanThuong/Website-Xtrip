@@ -1,0 +1,48 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade flight-detail-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="button-group">
+          <a class="pointer"
+             [class.active]="selectedIndex == 0"
+             (click)="onSelectTicket(0)">Chiều đi</a>
+          <a class="pointer"
+             [class.active]="selectedIndex === 1"
+             *ngIf="mode === 2"
+             (click)="onSelectTicket(1)">Chiều về</a>
+        </div>
+        <a class="pull-right pointer" (click)="hide()">
+          <img class="m-b-none size-24x24"
+               cdn-src="assets/images/icon/icon-close-gray.svg" alt="icon"/>
+        </a>
+      </div>
+      <div class="modal-body p-20">
+        <div *ngFor="let flight of flights; trackBy: trackByFn; let i = index">
+
+          <div class="flight-detail-item" *ngIf="i === selectedIndex">
+            <div class="font-16 font-bold text-main">
+              {{ utilityHelper.findInListWith(flight.origin, airports, 'code', 'location') }} - {{
+              utilityHelper.findInListWith(flight.destination, airports, 'code', 'location') }}
+            </div>
+
+            <div class="font-14 font-medium">
+              {{ flight.departTime | moment:'HH:mm' }} - {{ flight.landingTime | moment:'HH:mm' }}
+              <span class="d-inline-block m-l-10 m-r-10">|</span>
+              Khởi hành: {{ flight.departTime | departDate }}
+            </div>
+
+            <div class="m-t-20">
+              <app-flight-detail-desktop [flight]="flight"
+                                         [point]="false"
+                                         [isCollapse]="true"></app-flight-detail-desktop>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

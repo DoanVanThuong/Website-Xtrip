@@ -1,0 +1,64 @@
+@import "_variables.less";
+.filter {
+  .reset-btn {
+    color: @orange-2;
+  }
+  .line {
+    border-bottom: 1px solid @gray-18;
+  }
+  .bg-price {
+    background-color: @gray-13;
+    border-radius: 50px;
+    padding: 3px 12px;
+  }
+  .slider {
+    .pos-slider {
+      padding-left: 2px;
+      padding-right: 18px;
+    }
+    .noUi-target {
+      .noUi-connect {
+        background: @green-2;
+      }
+    }
+    .noUi-target.noUi-horizontal .noUi-handle {
+      border: 2px solid @green-2;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      top: -9px;
+      cursor: pointer;
+      transition: all .5s linear;
+      box-shadow: unset;
+      &:hover {
+        background-color: @green-2;
+        transition: all .5s linear;
+        box-shadow: unset;
+      }
+    }
+    .noUi-target.noUi-horizontal {
+      height: 2px;
+    }
+  }
+  .bor-top {
+    border-top: 1px solid @gray-13;
+  }
+  .hotel-class {
+    .circle {
+      width: 44px;
+      height: 44px;
+      text-align: center;
+      padding-top: 11px;
+      color: @white;
+      border-radius: 5px;
+      font-size: 13px;
+      &.active {
+        background-image: linear-gradient(to right, @green-19, @green-20)
+      }
+      &.unactive {
+        color: @black;
+        border: solid 1px @gray-3;
+      }
+    }
+  }
+}

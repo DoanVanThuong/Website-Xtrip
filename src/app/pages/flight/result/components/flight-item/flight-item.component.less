@@ -1,0 +1,75 @@
+@import '_variables.less';
+@import './_mixins.less';
+
+.flight-item {
+
+  min-height: 100px;
+  background-color: @white;
+  border-radius: 10px;
+  .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .1));
+
+  &:hover {
+    .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .3));
+  }
+
+  .flight-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: @gray-2;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    padding: 6px 12px;
+  }
+
+  .flight-info {
+    padding: 15px;
+    min-height: 100px;
+    position: relative;
+
+    .stop-point {
+      color: @orange-2;
+      font-size: 12px;
+      position: absolute;
+      padding-left: 3px;
+      padding-right: 3px;
+      left: 50%;
+      top: 2px;
+      transform: translateX(-50%);
+      z-index: 500;
+      background-color: white;
+    }
+
+    .best-combo {
+      display: none;
+      position: absolute;
+      min-width: 130px;
+      border-top-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      background-color: @green-2;
+      color: @white;
+      padding: 3px 8px;
+      font-weight: 500;
+      z-index: 500;
+      top: 0;
+      left: 0;
+      text-align: center;
+    }
+
+    &.best-combo {
+
+      padding-top: 30px;
+      min-height: 120px;
+
+      .best-combo {
+        display: inline-block;
+      }
+    }
+  }
+
+  .flight-detail {
+    padding: 20px;
+    background-color: @gray-36;
+  }
+}

@@ -1,0 +1,152 @@
+<div bsModal #popup="bs-modal" class="modal fade popup-flight-filter " role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header fixed-header header">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-3">
+              <img class="m-0 size-16x16" cdn-src="assets/images/icon-back.png" (click)="hide()">
+            </div>
+            <div class="col-6 text-center text-white font-18">Bộ lọc</div>
+            <div class="col-3 text-right text-white f-13 p-t-4" (click)="onReset()">
+              Đặt lại
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body over-y p-0">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="row">
+              <div class="container-fluid">
+                <div class="filter-sort-area">
+
+                  <div class="sort">
+                    <div class="title">Sắp xếp</div>
+                    <div class="row">
+                      <div class="col-12">
+                        <ul>
+                          <li class="item"
+                              [class.active]="filter.sort === sort.index"
+                              *ngFor="let sort of filterOptions.sorts; trackBy: trackByFn; let i = index">
+                            <a class="d-block"
+                               (click)="onSelectSort(sort.index)">
+                              {{ sort.name }}
+                              <span *ngIf="filter.sort === sort.index"
+                                    class="pull-right">
+                                <img class="m-b-0 m-t-n-4" cdn-src="assets/images/icon/icon-checked-orange.svg"
+                                     alt="checked"/>
+                              </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="filter-stop-point">
+                    <div class="title">Điểm dừng</div>
+                    <div class="row">
+                      <div class="col-12">
+                        <ul>
+                          <li class="item"
+                              [class.active]="isStopPointSelected(filter.points, point.index)"
+                              *ngFor="let point of filterOptions.points; trackBy: trackByFn; let i = index">
+                            <a class="d-block"
+                               (click)="onSelectPoint(point.index)">
+                              {{ point.name }}
+                              <span *ngIf="isStopPointSelected(filter.points, point.index)"
+                                    class="pull-right">
+                                <img class="m-b-0 m-t-n-4" cdn-src="assets/images/icon/icon-checked-orange.svg"
+                                     alt="checked"/>
+                              </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="filter-time">
+                    <div class="title">Giờ cất cánh</div>
+                    <div class="row p-l-20 p-r-22 p-t-5 text-main">
+                      <div class="col-6">{{labelSlider.depart.start}}</div>
+                      <div class="col-6 text-right">{{labelSlider.depart.end}}</div>
+                    </div>
+                    <div class="row p-l-25 p-r-40 m-b-5">
+                      <div class="col-12">
+                        <nouislider [config]="sliderConfig"
+                                    [(ngModel)]="filter.depart"
+                                    (ngModelChange)="onSliderChange($event, 'depart')">
+                        </nouislider>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="filter-time">
+                    <div class="title">Giờ hạ cánh</div>
+                    <div class="row p-l-20 p-r-22 p-t-5 text-main">
+                      <div class="col-6">{{ labelSlider.landing.start }}</div>
+                      <div class="col-6 text-right">{{ labelSlider.landing.end }}</div>
+                    </div>
+                    <div class="row p-l-25 p-r-40 m-b-5">
+                      <div class="col-12">
+                        <nouislider [config]="sliderConfig"
+                                    [(ngModel)]="filter.landing"
+                                    (ngModelChange)="onSliderChange($event, 'landing')">
+                        </nouislider>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="filter-carrier">
+                    <div class="title">Hãng hàng không</div>
+                    <div class="row">
+                      <div class="col-12">
+                        <ul>
+                          <li class="item"
+                              [class.active]="isCarrierSelected(filter.carriers, carrier.code)"
+                              *ngFor="let carrier of filterOptions.carriers; trackBy: trackByFn; let i = index">
+                            <a (click)="onSelectCarrier(carrier.code)">
+                              <div class="d-table">
+                                <div class="logo d-table-cell">
+                                  <img class="size-18x18 m-b-0 m-t-n-4"
+                                       [src]="carrier.icon"
+                                       alt="logo-carrier"/>
+                                </div>
+                                <div class="name d-table-cell">
+                                  {{ carrier.name }}
+                                  <span *ngIf="carrier.price !== 0" class="pull-right">
+                                    {{carrier.price | currencyMoney: '' }} <span class="text-underline">đ</span>
+                                  </span>
+                                </div>
+                                <div class="check d-table-cell">
+                                  <img *ngIf="isCarrierSelected(filter.carriers, carrier.code)"
+                                       class="m-b-0 m-t-n-4"
+                                       cdn-src="assets/images/icon/icon-checked-orange.svg"
+                                       alt="checked"/>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer p-5">
+        <div class="row">
+          <div class="col-12">
+            <button (click)="onSubmit()" class="btn btn-main btn-block font-bold">Lọc chuyến bay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

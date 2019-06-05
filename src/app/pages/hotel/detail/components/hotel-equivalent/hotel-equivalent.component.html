@@ -1,0 +1,69 @@
+<div class="hotel-equivalent-desktop animated zoomIn" *ngIf="equivalentHotels.length > 0">
+  <div class="row m-t-20 shadow b-r-10 m-l-none">
+
+    <div class="col-12 bg-white b-r-10">
+      <div class="p-8">
+
+        <section class="row">
+          <div class="col-lg-12">
+            <h2 class="title font-24 font-bold">
+              Bạn có thể quan tâm
+            </h2>
+          </div>
+        </section>
+
+        <section class="row">
+          <div class="col-lg-3 pointer m-b-20" *ngFor="let hotel of equivalentHotels | slice:0:4">
+            <div class="row">
+              <div class="col-lg-12 position-relative">
+                <a [routerLink]="['/hotel/', hotel.code, 'detail']"
+                   [queryParams]="genQueryParams(hotel)"
+                   (click)="onClickDetail(hotel)">
+                  <img class="w-full img-fix mx-h-180 b-r-t-l-10 b-r-t-r-10"
+                       defaultImage="assets/images/no-thumbnail.png"
+                       [lazyLoad]="hotel.photo.url | size:500"
+                       [alt]="hotel.name"
+                       [title]="hotel.name"
+                       onerror="this.src='assets/images/no-thumbnail.png'">
+                  <div class="bor-hotel">
+                    <div class="font-bold font-15">{{hotel.name}}</div>
+                    <div class="font-13 address">{{hotel.fullAddress}}</div>
+                    <div class="m-t-10" *ngIf="!!hotel.preferService">
+                      <span class="bg-fac">{{hotel.preferService}}</span>
+                    </div>
+
+                    <div class="col-lg-12 m-t-5">
+                      <div class="row">
+                        <div class="col-lg-12 p-0" *ngIf="hotel.isSoldOut">
+                          Giá {{nights}} đêm
+                        </div>
+                        <div *ngIf="!hotel.isSoldOut" class="col-lg-7 text-main font-bold font-18 p-0">{{hotel.salePrice
+                          | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+                        <div *ngIf="!hotel.isSoldOut" class="col-lg-5 text-right font-14 points p-0 m-t-3">
+                          +{{hotel.points | currencyMoney: ''}} điểm
+                        </div>
+                        <div class="sold-out" *ngIf="hotel.isSoldOut">Đã hết phòng</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row position-absolute pos-reviews">
+                    <div class="col-12 d-flex">
+                      <app-reviews-rating [rating]="hotel.rating" [reviews]="hotel.reviews"></app-reviews-rating>
+                      <div class="review-star bg-stars m-l-5"
+                           [class.m-l-10]="hotel.rating>0&&hotel.reviews>0">
+                        {{hotel.stars}}<img class="m-b-0 m-t-n-3 m-l-4" cdn-src="assets/images/hotel/desktop/star.svg"
+                                            alt="img">
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </div>
+</div>

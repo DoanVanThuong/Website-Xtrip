@@ -1,0 +1,39 @@
+<div class="blog-detail-page">
+  <app-header *ngIf="isMobile" [heading]="titleBlog" [fixed]="true" [back]="true"></app-header>
+
+  <div class="wrapper main-body p-t-20">
+    <div class="container-fluid bg-white">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+          <div class="detail-content-blog">
+            <div class="blog-title" [innerHTML]="blog.summary | safeHTML">
+            </div>
+            <!-- /title -->
+            <div class="list-icon-sub">
+              <ul class="list-inline ">
+                <li>
+                  <img class="img-fluid m-r-5" cdn-src="assets/images/home/lock.png">
+                  <span>{{blog.date | moment: 'DD/MM/YYYY HH:mm'}}</span>
+                </li>
+                <li class="m-l-10">
+                  <img class="img-fluid m-r-5" cdn-src="assets/images/home/eyes.png">
+                  <span>{{blog.view}}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="blog-content m-t-10  m-b-10">
+              <div class="blog-des ">
+                <div [innerHTML]="blog.description | safeHTML"></div>
+              </div>
+              <div class="img-blog">
+                <img defaultImage="assets/images/no-thumbnail.png" [lazyLoad]="blog.photo.src" [offset]="80"
+                  onerror="this.src='assets/images/no-thumbnail.png'" [alt]="blog.name" [title]="blog.name" />
+              </div>
+            </div>
+            <!-- content -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

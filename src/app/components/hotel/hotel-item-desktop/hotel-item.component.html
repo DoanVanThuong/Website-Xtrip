@@ -1,0 +1,54 @@
+<div class="hotel-item hotel-item-desktop">
+  <a class="pointer"
+     [title]="hotel.name"
+     [routerLink]="['/hotel/', hotel.code, 'detail']"
+     [queryParams]="generateHotelParameters()">
+    <div class="hotel-image position-relative">
+      <img defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="hotel.photo.url | size:300"
+           [offset]="80"
+           [alt]="hotel.name"
+           [title]="hotel.name"
+           onerror="this.src='assets/images/no-thumbnail.png'"/>
+
+      <div class="hotel-price">
+        <div class="price-selling">
+          {{ hotel.salePrice | currencyMoney: '' }}&nbsp;<span class="text-underline">đ</span> / đêm
+        </div>
+      </div>
+
+      <div class="hotel-star">
+        <hotel-star [stars]="hotel.stars"></hotel-star>
+      </div>
+
+      <div class="hotel-prefer" *ngIf="!!hotel.preferServices">
+        {{ hotel.preferServices }}
+      </div>
+    </div>
+    <div class="hotel-info">
+      <div class="hotel-name">
+        {{ hotel.name }}
+      </div>
+      <div class="hotel-location m-t-10">
+        <div class="d-flex justify-content-cdenter align-items-start">
+          <div class="mr-auto">
+            <!--<img class="m-t-n-3" cdn-src="assets/images/icon/icon-location-black.svg" alt="icon"/>
+            {{ hotel.fullAddress }}-->
+          </div>
+          <div class="hotel-review">
+            <div class="d-flex">
+              <div class="">
+                <img class="m-t-n-3 size-14x14" cdn-src="assets/images/icon/icon-rating.svg" alt="icon"/>
+                {{ hotel.rating }}
+              </div>
+              <div class="m-l-5">
+                <img class="m-t-n-3 size-14x14" cdn-src="assets/images/icon/icon-comment.svg" alt="icon"/>
+                {{ hotel.reviews }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

@@ -1,0 +1,145 @@
+@import "_variables.less";
+
+.profile-reward-point {
+  
+  .header {
+    &.header-mobile {
+      box-shadow: none;
+    }
+  }
+
+  &.profile-reward-point-mobile {
+
+    .profile-reward-point-slider {
+      .profile-point-slider-item {
+        color: @white;
+        background-image: linear-gradient(to right, #4fdea0 0%, #19bfa9 100%);
+        min-height: 200px;
+        position: relative;
+        .img {
+          position: absolute;
+          top: 16px;
+          right: 15px;
+          > img {
+            width: 185px;
+          }
+        }
+        .item {
+          margin-left: 16px;
+          margin-top: 60px;
+          .title {
+            font-size: 18px;
+            font-weight: 700;
+          }
+          .content {
+            font-size: 15px;
+            line-height: 20px;
+            font-weight: 400;
+            padding-top: 4px;
+          }
+          .load-more {
+            background-color: transparent;
+            font-size: 13px;
+            text-decoration: underline;
+          }
+        }
+      }
+      .owl-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        > .owl-dot {
+          margin-right: 8px;
+          &:last-child {
+            margin-right: 0;
+          }
+          > span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: @gray-3;
+          }
+          &.active {
+            > span {
+              background-color: @orange-1;
+            }
+          }
+        }
+      }
+    }
+    .reward-point {
+      padding: 15px;
+      background-color: @white;
+      .row {
+        .col-6:first-child {
+          border-right: 1px solid @gray-3;
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+      }
+      .title {
+        font-size: 14px;
+        color: @black;
+        img {
+          margin-top: -5px;
+          margin-left: 5px;
+        }
+      }
+      .point {
+        font-size: 30px;
+        color: @gray-7;
+        &.available {
+          color: @green-2
+        }
+      }
+    }
+    .reward-point-history {
+      margin-top: 8px;
+      padding: 10px 16px 16px;
+      background-color: @white;
+      min-height: 200px;
+      .title {
+        font-size: 16px;
+        color: @black;
+        font-weight: 500;
+      }
+      ul.history-list {
+        margin-left: 20px;
+        list-style-image: url("../../../../../assets/images/icon/icon-dot-gray.svg");
+
+        > li {
+          position: relative;
+          padding: 10px;
+          .status {
+            position: absolute;
+            top: 23px;
+            left: 8px;
+            font-size: 10px;
+            color: @gray-10;
+            &.new {
+              color: @green-1
+            }
+          }
+          .description {
+            > .content {
+              font-size: 15px;
+              .point-negative {
+                color: @orange-2;
+              }
+              .point-positive {
+                color: @green-2;
+              }
+            }
+            > .date {
+              color: @gray-9;
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

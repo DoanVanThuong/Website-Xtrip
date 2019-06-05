@@ -1,0 +1,66 @@
+@import "_variables.less";
+
+.tour-arrival, .tour-arrival-popup {
+
+  .container {
+    padding: 10px 15px 0px 15px !important;
+  }
+  .title {
+    font-size: 17px;
+    font-weight: 700;
+    color: @gray-2;
+  }
+  .header {
+    .p-16-10 {
+      padding: 16px 10px;
+    }
+    &.fixed-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+  }
+
+  .tour-container {
+    border-top: 5px solid @gray-41;
+    .bg-title {
+      background-color: @white;
+      padding: 8px 14px;
+      border-top: 5px solid @gray-41;;
+    }
+    .item-cell {
+      padding: 9px 0;
+      background-color: @white;
+
+      &.border-top {
+        border-top: 1px solid @gray-13;
+      }
+    }
+    .bottom-line {
+      border-bottom: 1px solid @gray-13;
+    }
+    .bor-r {
+      border-right: 1px solid @gray-13;
+    }
+    .h-109 {
+      height: 109px;
+    }
+    .size-pos-img {
+      padding: 10px 10px 0;
+    }
+    .p-5-20 {
+      padding: 5px 20px;
+    }
+    .name {
+      font-weight: 500;
+      font-size: 13px;
+      color: @black;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+  }
+
+}

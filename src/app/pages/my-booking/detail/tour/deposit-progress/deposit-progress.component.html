@@ -1,0 +1,42 @@
+<div class="deposit-progress-page">
+  <app-header [back]="true" heading="Đã thanh toán" [fixed]="true"></app-header>
+
+  <div class="wrapper bg-white" min-height>
+    <div class="title">
+      Tiến độ & hạn thanh toán
+    </div>
+    <div class="warning-description">
+      <div class="bg-warning-des">
+        <span class="warning-title">Lưu ý:</span> Tour sẽ tự huỷ sau ngày <span
+          class="font-weight-bold">{{ tour.holdExpiry | moment: 'DD/MM/YYYY' }}</span>, nếu bạn chưa thanh toán đủ theo từng giai đoạn.
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row m-l-none m-r-none">
+        <div class="col-12">
+          <div class="deposit-timeline m-t-10">
+            <div class="deposit-timeline-group" *ngFor="let item of tour.payments; trackBy: trackByFn">
+              <div class="deposit-origin deposit-timeline-item">
+                <div class="deposit-time">
+                  <div class="font-medium month" [class.disabled]="item.status === 0">{{ item.paymentExpiredDate | moment: 'DD/MM' }}</div>
+                  <div class="year">{{ item.paymentExpiredDate | moment: 'YYYY' }}</div>
+                </div>
+                <div class="deposit-description {{ item.status === 1 ? 'active-dot' : 'disable-dot' }}">
+                  <div [class]="item.status === 1 ? 'active-title' : 'disable-title'">
+                    {{ item.title }}
+                  </div>
+                  <div class="mn-h-40">
+                    <div class="slt-des" [innerHTML]="item.note"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

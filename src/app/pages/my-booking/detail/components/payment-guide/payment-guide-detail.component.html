@@ -1,0 +1,284 @@
+<div class="payment-guide" [ngSwitch]="paymentInfo.method">
+
+  <!-- COD -->
+  <div class="row cod" *ngSwitchCase="METHOD.COD">
+    <div class="container-fluid">
+      <ul class="steps">
+        <li>
+          <div class="d-flex">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 1:</strong>
+              Nhân viên thu hộ sẽ gọi cho bạn trước khi đến.
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 2:</strong>
+              Bạn sẽ nhận hoá đơn thu hộ (có mộc đỏ) ngay sau khi nhân viên thu tiền.
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 3:</strong>
+              Bạn sẽ nhận email chứa mã đặt vé, phòng hoặc tour trong vòng 3-6 tiếng kể từ lúc nhân viên thu tiền.
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- COD -->
+
+  <!-- Payoo -->
+  <div class="row store" *ngSwitchCase="METHOD.STORE">
+    <div class="container-fluid">
+      <ul class="steps">
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 1:</strong> Chụp màn hình chứa mã thanh toán Payoo hoặc chép lại mã.
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 2:</strong> Đến cửa hàng hoặc điểm giao dịch Payoo gần nhất.
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 3:</strong> Cung cấp Tên/Số điện thoại và Mã thanh toán Payoo do Xtrip cung cấp để xác nhận
+              thanh toán với nhân viên cửa hàng.
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 4:</strong> Khi bạn hoàn tất thanh toán tại cửa hàng. Vé điện tử/ Phiếu thanh toán sẽ được
+              gửi vào email của bạn trong vòng 60 phút.
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 5:</strong> Nếu có bất cứ trở ngại nào, xin vui lòng liên hệ bộ phận chăm sóc khách hàng
+              Payoo để được hỗ trợ <a class="pointer text-green font-bold" href="tel:1900545478"> 1900 545478</a>.
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="font-bold m-t-10 text-black">Lưu ý: Thanh toán trong thời gian quy định</div>
+    </div>
+  </div>
+  <!-- Payoo -->
+
+  <!-- Office -->
+  <div class="row office" *ngSwitchCase="METHOD.OFFICE">
+    <div class="container-fluid">
+      <ul class="steps">
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 1:</strong>
+              Bạn chụp màn hình mã đặt chỗ hoặc QR code.
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 2:</strong>
+              Xuất trình mã đặt chỗ hoặc QR code khi thanh toán tại Xtrip: <a class="text-green font-medium"> 136 Nguyễn
+              Duy Dương, Phường 9, Quận 5, Thành phố Hồ Chí Minh.</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 3:</strong>
+              Bạn sẽ nhận được thông báo xác nhận thanh toán thành công qua ứng dụng Xtrip sau khi đã thanh toán.
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Office -->
+
+  <!-- Transfer -->
+  <div class="row transfer" *ngSwitchCase="METHOD.TRANSFER">
+    <div class="container-fluid">
+      <ul class="steps">
+        <li>
+          <div class="d-flex ">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 1:</strong>
+              Bạn đăng nhập vào internet banking và tiến hành chuyển khoản cho Xtrip
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex">
+            <img class="m-b-0 m-t-3 size-14x14" src="../../assets/images/icon/icon-dot-green.svg" alt="icon"/>
+            <div class="p-l-5">
+              <strong>Bước 2:</strong>
+              Bạn sẽ nhận được thông báo xác nhận thanh toán thành công qua ứng dụng Xtrip xác nhận đã nhận chuyển
+              khoản.
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="bank-info m-t-30" *ngIf="paymentInfo">
+        <div class="row">
+          <div class="col-12">
+            <h5 class="font-18 font-bold m-t-none m-b-none">Thông tin chuyển khoản</h5>
+            <div class="bank-info-box m-t-10">
+              <div class="bank-info-heading">
+                <div class="d-flex justify-content-center align-items-center">
+                  <img class="mx-h-40 mr-auto" src="{{url}}{{bankCode}}.png" alt="bank"/>
+                  <div class="text-right">
+                    <span class="font-bold">Thanh toán trước</span>
+                    <div class="font-bold text-green">
+                      {{ paymentInfo.paymentExpiredDate | moment: 'HH:mm, DD/MM/YYYY' }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bank-info-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-center align-items-center">
+                      <div class="label">Số tài khoản</div>
+                      <div class="text-right">
+                        {{ paymentInfo.accountNo }}
+                        <a class="pointer"
+                           ngxClipboard
+                           [cbContent]="paymentInfo.accountNo"
+                           (cbOnSuccess)="onClipboardSuccess('Đã sao lưu số tài khoản thành công.')">
+                          <img class="m-b-none m-t-n-3"
+                               cdn-src="assets/images/icon/icon-copy-orange.svg" alt="icon"/>
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item" *ngIf="!!paymentInfo.cardNo">
+                    <div class="d-flex justify-content-center align-items-center">
+                      <div class="label">
+                        Theo số thẻ <span class="font-normal">(cho chuyển khoản nhanh):</span>
+                      </div>
+                      <div class="text-right">
+                        {{ paymentInfo.cardNo }}
+                        <a class="pointer"
+                           ngxClipboard
+                           [cbContent]="paymentInfo.cardNo"
+                           (cbOnSuccess)="onClipboardSuccess('Đã sao lưu số thẻ thành công.')">
+                          <img class="m-b-none m-t-n-3"
+                               cdn-src="assets/images/icon/icon-copy-orange.svg" alt="icon"/>
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="d-flex">
+                      <div class="label">Tên chủ tài khoản</div>
+                      <div class="text-right">
+                        {{ paymentInfo.accountName }}
+                        <a class="pointer"
+                           ngxClipboard
+                           [cbContent]="paymentInfo.accountName"
+                           (cbOnSuccess)="onClipboardSuccess('Đã sao lưu tên chủ tài khoản thành công.')">
+                          <img class="m-b-none m-t-n-3"
+                               cdn-src="assets/images/icon/icon-copy-orange.svg" alt="icon"/>
+                        </a>
+                      </div>
+                    </div>
+                  <li class="list-group-item">
+                    <div class="d-flex">
+                      <div class="label">Chi nhánh</div>
+                      <div class="text-right">
+                        {{ paymentInfo.branch}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="d-flex">
+                      <div class="label">Nội dung thanh toán</div>
+                      <div class="text-right">
+                        {{paymentInfo.description}}
+                        <a class="pointer"
+                           ngxClipboard
+                           [cbContent]="paymentInfo.description"
+                           (cbOnSuccess)="onClipboardSuccess('Đã sao lưu nội dung thành công.')">
+                          <img class="m-b-none m-t-n-3"
+                               cdn-src="assets/images/icon/icon-copy-orange.svg" alt="icon"/>
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="d-flex">
+                      <div class="label">Tổng số tiền</div>
+                      <div class="text-right">
+                        {{ paymentInfo.orderTotal | currencyMoney: ''}} <span class="text-underline">đ</span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="row" *ngIf="paymentInfo.cardNo != ''">
+                <div class="title">Theo số thẻ (chuyển khoản nhanh)</div>
+                <ul>
+                  <li>
+                    <div class="label">16 số thẻ</div>
+                    <div class="bank-card-number">{{paymentInfo.cardNo}}</div>
+                  </li>
+                </ul>
+              </div>
+              <div class="row">
+                <div class="title">Nội dung thanh toán &amp; tổng tiền</div>
+                <ul>
+                  <li>
+                    <div class="label">Nội dung thanh toán</div>
+                    <div class="payment-description">{{paymentInfo.description}}</div>
+                  </li>
+                  <li class="line"></li>
+                  <li>
+                    <div class="label">Tổng số tiền</div>
+                    <div class="total-price">{{paymentInfo.orderTotal | currencyMoney: ''}} <span
+                        class="text-underline">đ</span></div>
+                  </li>
+                </ul>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Transfer -->
+</div>

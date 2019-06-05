@@ -1,0 +1,25 @@
+<div class="sort-tour-wp ">
+  <div class="sort-tour-header">
+    <div class="sort-tour-header-content">
+      <img cdn-src="assets/images/tour/desktop/tour.svg" alt="img" class="img-fluid"/>
+      <span>
+                Kết quả tìm kiếm tại ”{{ keyword }}”
+            </span>
+    </div>
+  </div>
+  <div class="sort-tour-content b-r-b-l-10 b-r-b-r-10">
+    <div class="sort-tour-item-wp">
+      <div class="sort-tour-title ">Sắp xếp</div>
+      <div class="sort-tour-item">
+        <ul class="list-inline list-item">
+          <li class="item"
+              [class.active]="selectedSortIndex === item.index"
+              *ngFor="let item of sorts; let i = index"
+              (click)="onSelectSort(item.index)">
+            <a> {{ item.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

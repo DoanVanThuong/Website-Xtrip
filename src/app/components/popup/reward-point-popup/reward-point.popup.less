@@ -1,0 +1,49 @@
+@import '_variables.less';
+
+.modal {
+  &.reward-point-popup {
+
+    .modal-dialog {
+      max-width: 320px;
+
+      .modal-body {
+        padding: 15px;
+
+        .title {
+          font-size: 18px;
+          color: @black;
+          margin-bottom: 20px;
+        }
+        .content {
+          ul {
+            margin-left: 20px;
+            list-style-image: url("../../../../assets/images/icon/icon-dot-gray.svg");
+
+            li {
+              position: relative;
+              font-size: 13px;
+              margin-bottom: 10px;
+              &:last-child {
+                margin: 0
+              }
+              .dot {
+                position: absolute;
+                top: 4px;
+                left: 0px;
+                color: black;
+                font-size: 8px;
+                color: @gray-10;
+              }
+            }
+          }
+        }
+        .btn {
+          &.btn-link {
+            color: @orange-2;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}

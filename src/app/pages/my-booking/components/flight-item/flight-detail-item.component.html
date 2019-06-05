@@ -1,0 +1,77 @@
+<!-- for mobile -->
+<div class="booking-flight-detail-item booking-flight-detail-item-mobile" *ngIf="isMobile">
+  <a [routerLink]="['/my-booking/flight', flight.code]">
+    <div class="flight-location text-truncate">
+      {{ getAirportWith(flight.segments[0].origin, 'location') }}
+      <img class="size-12x12 img-fix m-l-5 m-r-5"
+           [src]="flight.segments.length > 1 ? 'assets/images/icon/icon-arrow-round.svg' : 'assets/images/icon/icon-arrow-right.svg'"
+           alt="icon"/>
+      {{ getAirportWith(flight.segments[0].destination, 'location') }}
+    </div>
+
+    <div class="flight-price">
+      Giá: {{ flight.totalPrice | currencyMoney:'' }} <span class="text-underline">đ</span>
+    </div>
+    <div class="flight-status d-flex justify-content-center">
+      <div class="mr-auto">
+        Mã đặt chỗ: {{ flight.code }}
+      </div>
+      <div class="">
+        <booking-status [status]="flight.status" [fill]="true" [icon]="true"></booking-status>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- for desktop -->
+<div class="booking-flight-detail-item booking-flight-detail-item-desktop {{ class }}" *ngIf="isDesktop">
+  <div class="date">Ngày đặt {{ flight.bookingDate | moment: 'DD/MM/YYYY' }}</div>
+
+  <div class="panel panel-desktop m-t-10">
+    <div class="panel-heading">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="mr-auto text-black">
+          Mã đặt chỗ: <span class="font-bold">{{ flight.code }}</span>
+        </div>
+        <booking-status [status]="flight.status" [fill]="true" [icon]="true"></booking-status>
+      </div>
+    </div>
+    <div class="panel-body">
+      <a class="pointer" [routerLink]="['/my-booking/flight', flight.code]">
+        <div class="d-flex align-items-center justify-content-center flex-row">
+          <div class="mr-auto">
+            <div class="font-bold font-16">
+              {{getAirportWith(flight.segments[0].origin, 'location')}}
+              <img class="m-b-none m-t-n-3 m-l-10 m-r-10"
+                   [src]="flight.segments.length > 1 ? 'assets/images/icon/icon-return.svg' : 'assets/images/icon/icon-way.svg'"
+                   alt="icon"/>
+              {{ getAirportWith(flight.segments[0].destination, 'location')}}
+            </div>
+            <div class="font-medium m-t-5">
+              Ngày đi
+              <div class="d-inline-block" *ngIf="flight.segments.length > 1">- về</div>
+              : {{ flight.segments[0].departTime | departDate }}
+              <div class="d-inline-block" *ngIf="flight.segments.length > 1">
+                - {{ flight.segments[1].departTime | departDate }}
+              </div>
+            </div>
+            <div class="flight-airline font-medium m-t-10">
+              <div class=""
+                   [class.m-t-10]="i > 0"
+                   *ngFor="let segment of flight.segments | slice:0:1; trackBy: trackByFn; let i = index">
+                <img class="m-t-n-3 size-32x32 m-r-10"
+                     [alt]="segment.airline.name"
+                     [title]="segment.airline.name"
+                     [src]="segment.airline.icon"/>
+                {{ segment.airline.name }} - {{ segment.flightNumber }}
+              </div>
+            </div>
+          </div>
+          <div class="font-18 font-medium mn-w-100 text-right m-l-15">
+            {{ flight.totalPrice | currencyMoney:'' }} <span class="text-underline">đ</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

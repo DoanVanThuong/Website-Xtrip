@@ -1,0 +1,38 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade booking-report-popup "
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-bottom animated fadeInUp">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center font-15 font-medium">
+          Gửi thông tin vé
+          <a class="pull-right pointer" (click)="hide()">
+            <img alt="close"
+                 class="size-24x24"
+                 cdn-src="assets/images/icon/icon-close-gray.svg">
+          </a>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"
+                  *ngFor="let method of methods; trackBy: trackByFn"
+                  [class.d-none]="!method.available">
+                <a class="d-block" (click)="onSelect(method.mode)">
+                  <img class="size-24x24 m-r-10 m-t-n-3"
+                       cdn-src="assets/images/icon/icon-pdf.svg" alt="icon"/>
+                  Gửi bằng PDF qua email
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

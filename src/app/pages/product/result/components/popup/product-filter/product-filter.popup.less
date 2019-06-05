@@ -1,0 +1,130 @@
+// component css goes here
+@import "_variables.less";
+
+.modal.popup-product-filter {
+  &.show {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+  .modal-dialog {
+    &.fullscreen {
+      padding-top: 60px;
+    }
+    .modal-content {
+      border-top-left-radius: 20px !important;
+      border-top-right-radius: 20px !important;
+      .modal-header {
+        padding: 10px 14px;
+        .center-line {
+          left: calc(~"50% - 41px");
+        }
+        .line-header {
+          width: 52px;
+          height: 5px;
+          border-radius: 100px;
+          background-color: @gray-50;
+        }
+        a {
+          &.disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: .4;
+          }
+        }
+      }
+      .modal-body {
+        padding: 0;
+
+        .title {
+          color: @gray-2;
+          font-size: 20px;
+          font-weight: 700;
+        }
+
+        .list-group {
+          .list-group-item {
+            &:first-child {
+              border-top: none;
+            }
+            padding: 10px 0;
+            border-top: 1px solid @gray-8;
+            border-bottom: none;
+            margin-bottom: 0;
+            a {
+              color: @black;
+            }
+          }
+        }
+
+        .btn-group {
+          .btn {
+            padding: 6px 20px;
+            border-radius: 50px;
+            margin-right: 10px;
+            background-color: @gray-41;
+            border: 1px solid transparent;
+            color: @gray-23;
+            font-weight: 500;
+            -webkit-transition: all .25s linear;
+            transition: all .25s linear;
+
+            &:first-child {
+              border-radius: 50px;
+            }
+
+            &:last-child {
+              border-radius: 50px;
+            }
+            &.active {
+              border-color: @green-2;
+              color: @green-2;
+              background-color: @white;
+              -webkit-transition: all .25s linear;
+              transition: all .25s linear;
+            }
+          }
+        }
+
+        .filter-day, .filter-price, .filter-time, .filter-option {
+          padding: 0 14px;
+          .bg-price-range {
+            padding: 4px 8px;
+            background-color: @gray-13;
+            border-radius: 50px;
+          }
+          .range-slider {
+            .p-0-12 {
+              padding: 0 12px;
+            }
+            .ng2-nouislider {
+              .noUi-target {
+                height: 2px;
+                .noUi-connect {
+                  background: @green-2;
+                }
+                .noUi-handle {
+                  -webkit-box-shadow: none;
+                          box-shadow: none;
+                  border: 2px solid @green-2;
+                  width: 24px;
+                  height: 24px;
+                  top: -12px;
+                  right: -12px;
+                }
+              }
+            }
+          }
+          .show-option-stl {
+            padding: 5px 10px;
+            background-color: @gray-13;
+            font-weight: 500;
+            font-size: 13px;
+            border-radius: 50px;
+            color: @black;
+          }
+        }
+
+      }
+
+    }
+  }
+}

@@ -1,0 +1,93 @@
+ <div class="map-view">
+  <div class="row">
+    <div class="col-12 position-relative">
+      <agm-map #gm [ngStyle]="{'height.px': filterHeight}" *ngIf="markers.length > 0 && filterHeight > 0"
+          [latitude]="lat"
+          [longitude]="lng"
+          [zoom]="13"
+          [styles]="mapStyles"
+          [disableDefaultUI]="true"
+          [zoomControl]="false"
+          (mapClick)="onMapClick($event)">
+
+          <agm-overlay *ngFor="let item of markers; let i=index; trackBy: trackByFn"
+            [latitude]="item.lat"
+            [longitude]="item.lng">
+            <div class="block">
+              <div class="item-maker font-15 text-center font-medium position-relative"
+                [class.sold-out]="item.data.isSoldOut"
+                [class.selected]="item.data == selectedMarker">
+                {{!item.data.isSoldOut ? (item.price | currencyMoney: '') : 'Hết phòng'}}
+                <span *ngIf="!item.data.isSoldOut" class="text-underline">đ</span>
+              </div>
+            </div>
+          </agm-overlay>
+
+          <agm-marker
+            *ngFor="let maker of markers; let i = index; trackBy: trackByFn"
+            [latitude]="maker.lat"
+            [longitude]="maker.lng"
+            [iconUrl]="iconUrl(maker.data.isSoldOut)"
+            (markerClick)="clickedMarker(maker.data, i)">
+
+            <agm-snazzy-info-window
+              [borderRadius]="'10px'"
+              [closeWhenOthersOpen]="true"
+              [showCloseButton]="false">
+
+              <ng-template>
+                <a (click)="onClickDetail(maker.data)">
+                  <div class="row animated fadeIn pointer">
+                    <div class="col-4 position-relative">
+                      <img class="m-b-0 img-info-window" [src]="maker.data.photo.url" alt="img" onerror="this.src='assets/images/no-thumbnail.png'" />
+                      <div class="position-absolute position-rt" *ngIf="maker.data.rating>0&&maker.data.reviews>0">
+                        <span class="bg-rt-info">
+                          <span class="font-13">
+                            <img class="m-b-0 m-t-n-3 p-r-4 size-18x18" cdn-src="assets/images/hotel/desktop/rating.svg" alt="img" />{{maker.data.rating}}
+                          </span>
+                          <span class="font-13 m-l-8">
+                            <img class="m-b-0 m-t-n-3 p-r-4 size-18x18" cdn-src="assets/images/hotel/desktop/cmt.svg" alt="img" />{{maker.data.reviews}}
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="font-15 font-bold text-black text-truncate">{{maker.data.name}}</div>
+                      <div class="m-t-5">
+                        <hotel-star [stars]="maker.data.stars"></hotel-star>
+                      </div>
+                      <div class="m-t-8" *ngIf="!!maker.data.preferService">
+                        <span class="prefer font-15">{{maker.data.preferService}}</span>
+                      </div>
+                      <div class="m-t-30 font-14 font-medium" *ngIf="!maker.data.isSoldOut">Giá {{nights}} đêm</div>
+                      <div class="row" *ngIf="!maker.data.isSoldOut">
+                        <div class="col-6 p-r-i">
+                          <div class="font-18 font-bold m-t-4 text-main">{{maker.data.salePrice | currencyMoney: ''}} <span class="font-15 text-normal text-underline">đ</span></div>
+                        </div>
+                        <div class="col-6 points font-14 text-right m-t-8">+{{maker.data.points | currencyMoney: ''}} điểm</div>
+                      </div>
+                      <div class="font-16 sold-out-text m-t-54" *ngIf="maker.data.isSoldOut">Đã hết phòng</div>
+                    </div>
+                  </div>
+                </a>
+              </ng-template>
+
+            </agm-snazzy-info-window>
+
+          </agm-marker>
+
+      </agm-map>
+
+      <div>
+        <loading [show]="isLoading"></loading>
+      </div>
+      <div class="text-center font-18 m-t-10" *ngIf="!isLoading&&markers.length === 0">Không có dữ liệu</div>
+
+      <div class="position-absolute back-btn pointer">
+        <a (click)="switchtoList()"><span><img class="m-b-0 m-t-n-2 p-r-5" cdn-src="assets/images/hotel/desktop/arrow-left.svg"
+              alt="img"></span>Quay lại</a>
+      </div>
+      <div class="position-absolute pointer info-btn text-right" *ngIf="!isLoading&&markers.length > 0">*Giá hiển thị là giá phòng tính trong {{nights}} đêm</div>
+    </div>
+  </div>
+</div>

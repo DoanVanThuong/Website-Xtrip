@@ -1,0 +1,46 @@
+<div bsModal #popup="bs-modal" class="modal fade popup-promotion" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="banner">
+          <img class="m-b-0 w-full" cdn-src="assets/images/more/banner-popup-promotion.svg" alt="img"/>
+        </div>
+
+        <div class="row">
+          <div class="col-12 title font-15 font-bold p-10-30">
+            Nhập mã quà tặng để nhận ngay ưu đãi.
+          </div>
+          <div class="col-12 text-center p-10-30">
+            <form class="form" [formGroup]="form" novalidate>
+              <mat-form-field class="w-full">
+                <input matInput placeholder="Mã quà tặng" type="text"
+                       [formControl]="code"
+                       (ngModelChange)="onChangeCode($event)"/>
+                <mat-hint class="error" align="left" *ngIf="code.dirty">
+                  <span *ngIf="code.errors | equalError:'required'">Vui lòng mã khuyến mãi</span>
+                  <span *ngIf="errorMessage != ''">{{ errorMessage }}</span>
+                </mat-hint>
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+
+        <div class="row m-t-5 p-l-20 p-r-20 m-b-20">
+          <div class="col-6 p-r-5">
+            <button class="btn btn-main-outline btn-block font-bold"
+                    (click)="onCancel()">Bỏ qua</button>
+          </div>
+          <div class="col-6 p-l-5">
+            <button [disabled]="code.value != '' ? false : true"
+                    class="btn btn-main btn-block font-bold"
+                    (click)="onSubmit()">Sử dụng mã
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-promotion-result-popup [data]="data"></app-promotion-result-popup>

@@ -1,0 +1,50 @@
+<div class="flight-ticket-information animated zoomIn">
+  <h4 class="title">Thông tin vé</h4>
+  <div class="panel card panel-desktop">
+    <div class="panel-body card-body">
+      <div class="row">
+        <div class="col-lg-10 font-medium">
+          <div class="row"
+               [class.m-t-20]="i > 0"
+               *ngFor="let flight of flights; trackBy: trackByFn; let i = index">
+            <div class="col-lg-6 text-center text-lg-left">
+              <div class="d-flex flex-column h-full">
+                <div class="font-16 font-bold">
+                  {{ getAirportWith(flight.origin, 'location') }} - {{ getAirportWith(flight.destination, 'location') }}
+                </div>
+                <div class="font-14 ">
+                  {{ flight.departTime | moment:'HH:mm' }} - {{ flight.landingTime | moment:'HH:mm' }}
+                  <span class="d-inline-block m-l-10 m-r-10">|</span>
+                  Khởi hành: {{ flight.departTime | departDate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-left">
+              <div class="d-flex flex-column justify-content-center h-full">
+                <div class="font-13"
+                     *ngFor="let airport of flight.airports; trackBy: trackByFn; let i = index">
+                  <img class="m-b-none m-t-n-3 size-16x16"
+                       [alt]="getCarrierWith(airport.carrierCode, 'name')"
+                       [src]="getCarrierWith(airport.carrierCode, 'icon')"/>
+                  {{ getCarrierWith(airport.carrierCode,'name') }}
+                  - <span *ngFor="let item of airport.carriers; trackBy: trackByFn; let i = index">
+                    {{ item.flightNumber }} {{flight.ticketType}}{{ i < airport.carriers.length - 1 ? ',' : ''}}
+                  </span>
+                  {{ i < flight.airports.length - 1 ? '&' : ' ' }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 p-l-none">
+          <div class="d-flex align-items-center justify-content-end text-right h-full">
+            <a class="pointer text-main text-underline font-16 font-medium"
+               (click)="onOpenTicketDetail()">Xem chi tiết</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<flight-detail-popup [flights]="flights"></flight-detail-popup>

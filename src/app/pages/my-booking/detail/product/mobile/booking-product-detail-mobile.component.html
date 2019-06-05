@@ -1,0 +1,223 @@
+<div class="booking-detail booking-product-detail " *ngIf="!!product">
+  <div class="booking-header" scroll>
+    <div class="row">
+      <div class="col-2">
+        <div class="back" (click)="back()">
+          <img class="m-b-0 m-t-5" cdn-src="assets/images/icon-back.png" alt="back"/>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="product-name-header font-20 text-white text-center text-truncate">{{ product.productName }}</div>
+      </div>
+      <div class="col-2"></div>
+    </div>
+  </div>
+  <!-- /product header -->
+
+  <div class="product-image">
+    <img class="img-fluid"
+         defaultImage="assets/images/no-thumbnail.png"
+         [lazyLoad]="product.productPhoto.src"
+         onerror="this.src = 'assets/images/no-thumbnail.png'"
+         [alt]="product.productName"
+         [title]="product.productName"/>
+  </div>
+  <!--/product image  -->
+
+  <div class="product-info">
+    <div class="product-name">
+      <strong>{{ product.productName }}</strong>
+    </div>
+    <div class="product-address">
+      <img class="size-16x16 m-t-n-3" cdn-src="assets/images/icon/icon-location-gray.svg" alt="icon"/>
+      {{ product.productAddress }}
+    </div>
+    <div class="product-description">
+      <div class="row">
+        <div class="col-5 p-r-none product-time">
+          <div class="info-label">Ngày đi</div>
+          <div class="info-value">{{ product.departDate | departDate }}</div>
+        </div>
+        <div class="col-4 product-duration">
+          <div class="info-label">Thời lượng</div>
+          <div class="info-value text-truncate">{{ product.duration }}</div>
+        </div>
+        <div class="col-3 product-passenger">
+          <div class="info-label">Số người</div>
+          <div class="info-value">{{ product.totalPax }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/product information-->
+
+  <div class="product-booking-info p-t-10">
+    <div>
+      <div class="product-name font-18 font-medium">
+        {{ product.productOptionName }}
+      </div>
+      <div class="product-status">
+        <booking-status [status]="product.status" [fill]="true" [icon]="true"></booking-status>
+      </div>
+      <div class="updating-status" *ngIf="utilityHelper.findInList(product.status, [STATUS.SUCCESS, STATUS.WAITING])">
+        <div class="title">Mã vé</div>
+        <div class="text-green font-18 font-weight-bold">{{product.pnr}}</div>
+      </div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"
+          *ngIf="utilityHelper.findInList(product.status, [STATUS.UNPAID, STATUS.CANCEL, STATUS.PENDING])">
+        <div class="row">
+          <div class="{{ product.paymentDetail.method === METHOD.STORE ? 'col-6' : 'col-12'}} p-r-none">
+            <div class="product-keep-place">
+              <div class="title">Thời gian giữ chỗ còn</div>
+              <div class="countdown" *ngIf="utilityHelper.findNotInList(product.status, [STATUS.PAID, STATUS.WAITING])">
+                <countdown [time]="product.holdExpiry" (submit)="onExpired()"></countdown>
+              </div>
+              <div class="note">
+                Hết hạn lúc {{ product.holdExpiry | moment:'HH:mm'}}, {{ product.holdExpiry | moment:"DD/MM" }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6" *ngIf="product.paymentDetail.method === METHOD.STORE">
+            <div class="payoo-payment">
+              <div class="title">Mã thanh toán Payoo</div>
+              <div class="transaction-number">{{ product.paymentDetail.transactionNo }}</div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <a class="d-block" [routerLink]="['qrcode']">
+          <div class="row">
+            <div class="col-6 item">Mã đặt chỗ</div>
+            <div class="col-6 text-right text-green">
+              {{ product.code }}
+              <span><img class="qrcode m-b-0 m-l-5" cdn-src="assets/images/icon/qr-code.svg" alt="QRCode"/></span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-5 item">Thông tin người đặt</div>
+          <div class="col-7 text-right text-black">
+            {{ product.contactName }}
+          </div>
+        </div>
+      </li>
+      <li class=" list-group-item">
+        <div class="row">
+          <div class="col-3 item p-r-none">Số khách</div>
+          <div class="col-9 text-right text-black">
+            {{ product.totalPax }} khách
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item" *ngIf="!!product.timeslot">
+        <div class="row">
+          <div class="col-7 item">Khung giờ</div>
+          <div class="col-5 text-right text-black">
+            {{ product.timeslot }}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item"
+          *ngIf="!!product.passengers.length"
+          [routerLink]="['/my-booking/product', product.code, 'passenger']">
+        <div class="row">
+          <div class="col-7 item">Thông tin khách hàng</div>
+          <div class="col-5 text-right text-black">
+            Chi tiết
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item"
+          [routerLink]="['/my-booking/product', product.code, 'price']">
+        <div class="row">
+          <div class="col-6">
+            <strong>Tổng tiền</strong>
+          </div>
+          <div class="col-6 text-right">
+            <strong>{{ product.totalPrice | currencyMoney: '' }} <span class="text-underline">đ</span></strong>
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--/product booking information-->
+
+  <div class="product-booking-info m-t-10 p-b-10">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"
+          *ngIf="utilityHelper.findNotInList(product.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])">
+        <a class="d-block" [routerLink]="['/my-booking/product', product.code, 'payment-guide']">
+          Hướng dẫn thanh toán
+          <span class="pull-right">
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </span>
+        </a>
+      </li>
+      <li class="list-group-item"
+          *ngIf="!!product.vouchers.length">
+        <a class="d-block" [routerLink]="['/my-booking/product', product.code, 'e-ticket']">
+          Vé điên tử
+          <span class="pull-right">
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </span>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="d-block" [routerLink]="['/my-booking/product', product.code, 'description']"
+           [queryParams]="{tab: 'note'}">
+          Thông tin lưu ý
+          <span class="pull-right">
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </span>
+        </a>
+      </li>
+      <li class="list-group-item" *ngIf="product.bookingOptions.length">
+        <a class="d-block" [routerLink]="['/my-booking/product', product.code, 'description']"
+           [queryParams]="{tab: 'more'}">
+          Thông tin bổ sung
+          <span class="pull-right">
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </span>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="d-block" [routerLink]="['/my-booking/product', product.code, 'description']"
+           [queryParams]="{tab: 'policy'}">
+          Chính sách hoàn hủy
+          <span class="pull-right">
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </span>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a href="tel:{{ CAPP.SUPPORT_CENTER }}">
+          <img class="m-r-10" cdn-src="assets/images/icon/icon-phone.svg"/> Hỗ trợ qua điện thoại
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="" [routerLink]="['/more/request-support']" [queryParams]="{type: 'product', code: code}">
+          <img class="m-r-10" cdn-src="assets/images/icon/icon-support.svg"/> Yêu cầu hỗ trợ
+        </a>
+      </li>
+      <li class="list-group-item"
+          *ngIf="utilityHelper.findNotInList(product.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])">
+
+        <a class="btn btn-main-v2 btn-block p-10 font-18"
+           [routerLink]="['/payment']"
+           [queryParams]="{reservationCode: product.code, module: 'product'}">
+          Đổi thanh toán
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>

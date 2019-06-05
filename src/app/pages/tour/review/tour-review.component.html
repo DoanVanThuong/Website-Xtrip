@@ -1,0 +1,153 @@
+<div class="tour-preview-page">
+  <app-header [back]="true" [heading]="'Thông tin đặt tour'" [fixed]="true" [version]="3">
+    <stepper-booking [step]="2"></stepper-booking>
+  </app-header>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="tour">
+          <div class="title">Thông tin tour</div>
+          <div class="content">
+            <div class="row">
+              <div class="col-12 font-18 font-medium text-truncate">
+                {{ tour.name }}
+              </div>
+              <div class="col-12 m-t-5">
+                <img alt="icon" class="size-16x16 m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-dot-green.svg">
+                Đặt tour từ {{tour.supplier.name}}
+              </div>
+              <div class="col-12 m-t-5">
+                <img alt="icon" class="size-16x16 m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-dot-green.svg">
+                Khởi hành từ: {{tour.departPlace}}
+              </div>
+              <div class="col-12 m-t-10">
+                <img alt="icon" class="size-16x16 m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-dot-green.svg">
+                Thời gian đi: {{ tour.departDate | departDate:false }}, {{tour.days}}N{{tour.nights}}Đ
+              </div>
+              <div class="col-12 m-t-10">
+                <img alt="icon" class="size-16x16 m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-dot-green.svg">
+                Số người: {{ numberPeople(bookingTour.adults, bookingTour.children, bookingTour.infants)}}
+              </div>
+              <!--<div class="col-12 m-t-10">
+                <img alt="icon" class="size-16x16 m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-dot-green.svg">
+                Hoàn tiền khi hủy tour
+              </div>-->
+            </div>
+          </div>
+
+          <div class="passenger" *ngIf="!bookingTour.isAdditionalInfo">
+            <div class="title">Thông tin khách hàng</div>
+            <div class="content">
+              <div class="row"
+                   [class.m-t-10]="i > 0"
+                   *ngFor="let passenger of bookingTour.passengers; trackBy: trackByFn; let i = index">
+                <div class="col-12">
+                      <span class="text-green font-medium">
+                        {{utilityHelper.getPassengerTitle(passenger.Title, passenger.PassengerType)}} {{passenger.LastName}} {{passenger.FirstName}}
+                      </span>
+                  <a class="d-block pull-right"
+                     (click)="openPassengerInfoPopup(passenger, i)">
+                    <img cdn-src="assets/images/tour/detail/edit.svg"/>
+                  </a>
+                </div>
+                <div class="col-12 m-t-10"
+                     *ngIf="passenger.PassengerType != 'ADT'">
+                  <div class="row">
+                    <div class="col-5">
+                      Ngày sinh
+                    </div>
+                    <div class="col-7">
+                      {{ passenger.DateOfBirth | moment:'DD/MM/YYYY' }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12" *ngIf="tour.isInternational">
+                  <div class="row m-t-10">
+                    <div class="col-5">Số hộ chiếu</div>
+                    <div class="col-7">{{ passenger.PassportNumber }}</div>
+                  </div>
+                  <div class="row m-t-10">
+                    <div class="col-5">Quốc gia</div>
+                    <div class="col-7 text-truncate">{{ passenger.PassportCountry }}</div>
+                  </div>
+                  <div class="row m-t-10">
+                    <div class="col-5">Ngày hết hạn</div>
+                    <div class="col-7">{{ passenger.PassportExpiry | moment: 'DD/MM/YYYY' }}</div>
+                  </div>
+                  <div class="row m-t-10">
+                    <div class="col-5">Quốc tịch</div>
+                    <div class="col-7 text-truncate">{{ passenger.National }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="e-bill" *ngIf="bookingTour.invoiced">
+            <div class="title">Thông tin xuất hóa đơn điện tử</div>
+            <div class="content">
+              <div class="row">
+                <div class="col-12">
+                  <div class="">{{ bookingTour.vatInvoiceInfo.companyName }}</div>
+                  <div class="">MST: {{ bookingTour.vatInvoiceInfo.taxIdentificationNo }}</div>
+                  <div class="">Đ/c công ty: {{ bookingTour.vatInvoiceInfo.companyAddress }}</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <a class="text-main" (click)="redirectToBooking()">
+                    <img class="size-16x16 m-r-5" cdn-src="assets/images/hotel/book/edit.svg" alt="icon"/>
+                    Chỉnh sửa thông tin
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="price-detail" *ngIf="!!priceSummary">
+            <div class="title">Tổng tiền</div>
+            <div class="content">
+              <div class="row">
+                <div class="col-12">
+                  <div class="row"
+                       *ngFor="let item of priceSummary.detailItems; trackBy: trackByFn; let i = index">
+                    <div class="col-7">{{item.title}}</div>
+                    <div class="col-5 text-right">
+                      <span class="">{{ item.price | currencyMoney: '' }}
+                        <span class="text-underline">đ</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="line"></div>
+                  <div class="row">
+                    <div class="col-7">Tổng tiền</div>
+                    <div class="col-5 text-right">
+                      <span class="price"> {{ totalPrice | currencyMoney: '' }}
+                        <span class="text-underline">đ</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tour-preview-footer fixed-bottom footer">
+    Bằng việc chạm vào nút bên dưới, bạn đã đồng ý với các
+    <a class="text-main font-normal" [routerLink]="['/more/policy']">Điều khoản và Chính sách</a> của Xtrip.
+    <div class="m-t-10">
+      <button class="btn btn-main btn-block"
+              [disabled]="!priceSummary"
+              (click)="onPayment()">Thanh toán ngay
+      </button>
+    </div>
+  </div>
+</div>
+
+<passenger-info-popup [passenger]="passenger"
+                      (submit)="onUpdatePassenger($event)"></passenger-info-popup>

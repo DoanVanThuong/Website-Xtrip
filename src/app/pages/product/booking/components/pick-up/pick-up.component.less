@@ -1,0 +1,46 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.pick-up-info {
+
+  ul {
+    > li {
+      padding-left: 15px;
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 7px;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        background-color: @green-2;
+        .border-radius(50%);
+      }
+    }
+  }
+
+  .form.form-desktop {
+    .form-group {
+      .form-control {
+        padding-top: 0px;
+        height: auto;
+      }
+    }
+  }
+
+  &.pick-up-info-mobile {
+
+    color: @gray-2;
+
+    .title {
+      color: @gray-23;
+      font-size: 24px;
+    }
+
+  }
+  &.pick-up-info-desktop {
+
+  }
+}

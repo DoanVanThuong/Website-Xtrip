@@ -1,0 +1,52 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.modal {
+  &.price-detail-popup {
+    .modal-dialog {
+
+      @media (min-width: 575px) {
+        max-width: 400px;
+      }
+
+      .modal-content {
+
+        .modal-header {
+          padding: 10px 15px;
+
+          @media (min-width: 575px) {
+            padding: 15px;
+            background-color: @gray-17;
+          }
+
+          .modal-title {
+            font-weight: @font-medium;
+            font-size: 15px;
+
+            @media (min-width: 575px) {
+              font-size: 18px;
+            }
+          }
+        }
+
+        .modal-body {
+          padding: 15px;
+
+          @media (min-width: 575px) {
+            padding: 20px;
+          }
+          .detail-item {
+            li {
+              &:last-child {
+                border-bottom: 1px solid @gray-3;
+                padding-bottom: 10px;
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+  }
+}

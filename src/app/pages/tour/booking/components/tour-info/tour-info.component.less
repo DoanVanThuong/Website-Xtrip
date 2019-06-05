@@ -1,0 +1,68 @@
+@import '_variables.less';
+
+.tour-info-booking {
+  .tour-info-wp-booking {
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    background: @white;
+    padding: 20px;
+    .img-tour {
+      /*width: 140px;*/
+      height: 100px;
+      overflow: hidden;
+      margin: 0px auto;
+      border-radius: 5px;
+      img {
+        max-width: 100%;
+        // height: auto;
+      }
+    }
+    .info {
+      padding-left: 0px;
+      @media only screen and (min-width: 960px) and (max-width: 1240px) {
+        padding-left: 10px;
+      }
+    }
+    .tour-name {
+      font-weight: 700;
+      font-size: 16px;
+      color: @gray-2;
+      letter-spacing: 0;
+      margin-top: 0;
+    }
+    .tour-detail-wp {
+      font-size: 15px;
+      border-bottom: 1px solid @gray-3;
+      padding-bottom: 15px;
+      .title-detail {
+        font-size: 13px;
+        color: @gray-1;
+        letter-spacing: 0;
+        font-weight: 400;
+      }
+    }
+    .list-detail-info {
+      margin-top: 15px;
+      li {
+        font-size: 15px;
+        font-weight: 400;
+        &:before {
+          content: "";
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: @green-2;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        span {
+          color: @gray-2;
+        }
+      }
+    }
+  }
+  .view-detail {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}

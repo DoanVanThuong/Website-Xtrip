@@ -1,0 +1,41 @@
+<div class="header header-mobile account-header theme-green">
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="mr-auto">
+      <div *ngIf="!isLoggedIn">
+        <div class="font-18 font-medium">Đăng Ký / Đăng Nhập</div>
+        <div class="font-13 m-t-3">Trải nghiệm quyền lợi thành viên xtrip</div>
+      </div>
+      <div class="d-flex justify-content-start align-items-center"
+           *ngIf="isLoggedIn">
+        <img class="img-circle size-40x40"
+             defaultImage="assets/images/no-thumbnail.png"
+             [lazyLoad]="profile.avatar"
+             [title]="profile.fullName"
+             [alt]="profile.fullName"
+             onerror="this.src = 'assets/images/no-thumbnail.png'"/>
+        <div class="m-l-10">
+          <div class="font-18 font-medium text-truncate">
+            {{ profile.firstName }}
+          </div>
+          <div class="font-13 m-t-3">
+            <div class="d-inline-block">
+              <span class="font-bold">{{ profile.points | currencyMoney:'' }}</span> điểm
+            </div>
+            <span class="dot-white m-l-5 m-r-5"></span>
+            <div class="d-inline-block">
+              <span class="font-medium">{{ profile.coupon }}</span> mã nguyến mãi
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="account-notification">
+      <a [routerLink]="['/notification']" class="position-relative">
+        <img class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-bell-circle.svg" alt="icon"/>
+        <div class="badge badge-danger notification-badge" *ngIf="!!notificationBadge">
+          {{ notificationBadge }}
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

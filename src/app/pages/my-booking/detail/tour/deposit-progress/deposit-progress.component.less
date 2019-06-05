@@ -1,0 +1,162 @@
+@import '_variables.less';
+.deposit-progress-page {
+  .title {
+    background-color: @gray-48;
+    color: @gray-2;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+  .warning-description {
+    .bg-warning-des {
+      background-color: @green-15;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    font-size: 13px;
+    font-weight: 400;
+    padding: 10px 14px;
+    .warning-title {
+      color: @c-gg;
+      font-weight: 700;
+    }
+  }
+  .deposit-timeline {
+    height: 100%;
+    .deposit-timeline-group {
+      .deposit-timeline-item {
+        position: relative;
+        clear: both;
+        line-height: 1.25;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        .deposit-time {
+          position: relative;
+          float: left;
+          left: 0;
+          top: 0;
+          height: 100%;
+          text-align: right;
+          padding: 15px 20px 0 0;
+          text-align: center;
+          .month {
+            &.disabled {
+              color: @gray-9;
+            }
+          }
+          .year {
+            color: @gray-1;
+          }
+        }
+        .deposit-description {
+          float: right;
+          position: relative;
+          text-align: left;
+          background-color: transparent;
+          padding: 15px 0 10px 20px;
+          border-width: 0;
+          color: @gray-2; // line
+          .slt-des {
+            line-height: 20px;
+            text-align: justify;
+          }
+          .mn-h-40 {
+            min-height: 40px;
+          }
+          .active-title {
+            font-weight: 700;
+            color: @black;
+          }
+          .disable-title {
+            color: @gray-9;
+          }
+          &:after {
+            content: '';
+            height: 100%;
+            border-left: 2px solid @gray-3;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            -webkit-transform: translateX(-50%);
+                    transform: translateX(-50%);
+          } // dot
+          &.active-dot {
+            &:before {
+              content: url('../../../../../../assets/images/icon/icon-deposit-active.svg');;
+              height: 24px;
+              width: 24px;
+              border-radius: 50%;
+              position: absolute;
+              top: 13px;
+              left: 0;
+              -webkit-transform: translateX(-50%);
+                      transform: translateX(-50%);
+              z-index: 100;
+            }
+          }
+          &.disable-dot {
+            &:before {
+              content: url('../../../../../../assets/images/icon/icon-deposit-disabled.svg');;
+              height: 24px;
+              width: 24px;
+              border-radius: 50%;
+              position: absolute;
+              top: 13px;
+              left: 0;
+              -webkit-transform: translateX(-50%);
+                      transform: translateX(-50%);
+              z-index: 100;
+            }
+          }
+        }
+        &:after {
+          clear: both;
+        }
+        &.deposit-pending {
+          .deposit-description {
+            &:before {
+              top: 50%;
+              -webkit-transform: translate(-50%, -50%);
+                      transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
+      &:first-child {
+        .deposit-timeline-item {
+          &:first-child {
+            .deposit-time {
+              padding-top: 0;
+              text-align: center;
+            }
+            .deposit-description {
+              padding-top: 0;
+              &:after {
+                top: 15px;
+                height: 120%;
+              }
+              &:before {
+                top: -3px;
+                background-color: @green-2;
+              }
+            }
+          }
+        }
+      }
+      &:last-child {
+        .deposit-timeline-item {
+          &:last-child {
+            .deposit-description {
+              &:after {
+                content: unset;
+              }
+              &:before {
+                background-color: @green-2;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+@import "_variables.less";
+.hotel-carousel {
+  .mx-h-380 {
+    max-height: 380px;
+  }
+  .owl-carousel {
+    position: relative;
+    .owl-dots {
+      display: none;
+      .owl-dot {
+        &:hover,
+        &.active {
+          span {
+            background-color: @green-2;
+          }
+        }
+      }
+    }
+    .owl-nav {
+      height: 0px;
+      @media (max-width: 479px) {
+        display: none;
+      }
+      .owl-next,
+      .owl-prev {
+        background: transparent;
+        border-radius: 50%;
+        text-align: center;
+        color: hsla(0, 0%, 100%, .6);
+        position: absolute;
+        top: 47%;
+        outline: none;
+        margin: 0;
+        &:hover {
+          color: @white;
+        }
+      }
+      .owl-next {
+        right: 20px;
+      }
+      .owl-prev {
+        left: 20px;
+      }
+    }
+  }
+  .pos-like {
+    top: 15px;
+    right: 15px;
+    z-index: 2;
+    cursor: pointer;
+  }
+  .pos-img-view {
+    right: 15px;
+    bottom: 15px;
+    z-index: 2;
+    background-color: @white;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}

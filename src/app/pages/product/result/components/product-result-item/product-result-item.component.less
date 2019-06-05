@@ -1,0 +1,160 @@
+// component css goes here
+@import "_variables.less";
+.product-result-item-page {
+  .mobile {
+    .carousel-slider {
+      height: 180px;
+      position: relative;
+      .area-review {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        color: @white;
+        z-index: 1;
+      }
+      .reviews {
+        background-color: @green-2;
+        padding: 2px 4px;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+      .duration-time {
+        background-color: @orange-2;
+        padding: 2px 4px;
+        border-radius: 5px;
+      }
+      .discount {
+        position: absolute;
+        background-image: url('../../../../../../assets/images/product/result/discount-bg.svg');
+        background-repeat: no-repeat;
+        top: 0;
+        right: 10px;
+        z-index: 1;
+        width: 50px;
+        height: 58px;
+        text-align: center;
+        font-size: 13px;
+        color: @white;
+        padding-top: 3px;
+      }
+      .l-h-1 {
+        line-height: 1;
+      }
+    }
+    .content {
+      padding: 10px;
+      .name {
+        font-weight: 700;
+        font-size: 15px;
+        color: @gray-2;
+      }
+      .address {
+        font-size: 13px;
+        color: @gray-1;
+      }
+      .original-price {
+        font-size: 12px;
+        color: @gray-1;
+        text-decoration: line-through;
+      }
+      .selling-price {
+        font-weight: 700;
+        color: @orange-2;
+        font-size: 15px;
+        line-height: 1;
+      }
+      .points {
+        font-size: 12px;
+        color: @gray-1;
+        font-weight: 400;
+      }
+      .instant-confirm {
+        font-size: 13px;
+        color: @orange-2;
+      }
+    }
+    .h-180 {
+      height: 180px;
+    }
+    .b-r-img-10 {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+
+    }
+    .owl-theme {
+      &.owl-dots-black {
+        .owl-dots {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          span {
+            background: transparent;
+            border: 1px solid @white;
+            width: 8px;
+            height: 8px;
+          }
+          .active {
+            span {
+              background: @white;
+              width: 8px;
+              height: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .desktop {
+    &.product-shadow {
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+    }
+    &.product-item {
+      border: 1px solid transparent;
+      transition: all .25s linear;
+      &:hover {
+        border-color: @orange-2;
+        transition: all .25s linear;
+      }
+    }
+    .bor-r {
+      border-right: 1px solid @gray-10;
+      padding-right: 10px;
+    }
+    .de-name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    li {
+      list-style-image: url('../../../../../../assets/images/hotel/desktop/li.svg');
+    }
+    .de-address {
+      font-size: 15px;
+      color: @gray-1;
+    }
+    .de-confirmation {
+      color: @orange-2;
+    }
+    .de-price-pos {
+      position: absolute;
+      bottom: 0;
+      right: 15px;
+      .de-org-price {
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: line-through;
+      }
+      .de-selling-price {
+        color: @orange-2;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .de-points {
+        color: @gray-1;
+        font-size: 14px;
+      }
+    }
+  }
+}

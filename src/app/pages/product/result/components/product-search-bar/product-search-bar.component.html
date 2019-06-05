@@ -1,0 +1,155 @@
+<div class="product-search-bar search-bar d-flex flex-fill align-items-center">
+  <div class="container">
+
+    <!-- <div class="row">
+      <div class="col-12">
+        <ul class="d-flex m-b-8">
+          <li class="item-type pointer" *ngFor="let type of types; let i = index">
+            <a (click)="selectType(type.code)">
+              <span><img class="m-b-none m-t-n-3 p-r-5" cdn-src="assets/images/product/result/{{!!params.type ? typeProduct(type) : i === 0 ? 'checked-desktop' : 'unchecked-desktop'}}.svg" alt="img" /></span>
+              {{type.display}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form form-desktop product-search-form d-flex">
+          <div class="d-flex justify-content-center align-items-center w-full">
+            <div class="w-full m-r-20">
+              <div class="row">
+                <!-- Nơi khởi hành -->
+                <div class="col-12">
+                  <div class="search-destination position-relative" (click)="openFormSearch()"
+                       (clickOutside)="isDestinationShow = false">
+                    <div class="title-form animated fadeInUp" *ngIf="keyword != ''">
+                      Điểm đến
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control"
+                             placeholder="Tìm kiếm địa điểm, hoạt động hoặc điểm tham quan"
+                             [(ngModel)]="keyword" (ngModelChange)="onChange($event)" (focus)="onSelectInput($event)"/>
+                    </div>
+                    <!-- Dropbox here -->
+                    <div class="result-product-location shadow animated fadeIn" *ngIf="isDestinationShow">
+                      <perfect-scrollbar>
+
+                        <!-- not found -->
+                        <div class="location-found">
+                          <div class="heading"
+                               *ngIf="(!sourcesDestination.length && !sourcesProduct.length) && !!keyword">Không có kết
+                            quả
+                          </div>
+                        </div>
+
+                        <!-- location -->
+                        <div *ngIf="sourcesDestination.length > 0 && !!keyword">
+                          <div class="heading">Điểm đến</div>
+                          <div class="data-box">
+                            <div class="list-group-group list-group-flush">
+                              <div class="list-group-item"
+                                   *ngFor="let location of sourcesDestination; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location)">
+                                  <div class="justify-content-start align-items-center">
+                                    <div class="m-l-10">
+                                      <div class="text-truncate main-text"
+                                           [innerHTML]="location.name | highlight : keyword"></div>
+                                      <div class="text-truncate font-13 sub-text"
+                                           [innerHTML]="location.address | highlight : keyword"></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- activities -->
+                        <div *ngIf="sourcesProduct.length > 0 && !!keyword">
+                          <div class="heading">Hoạt động</div>
+                          <div class="data-box product-activities-item">
+                            <div class="list-group-group list-group-flush">
+                              <div class="list-group-item"
+                                   *ngFor="let location of sourcesProduct; trackBy: trackByFn; let i = index">
+                                <a class="pointer" [routerLink]="['/product/' + location.id + '/detail']">
+                                  <div class="d-flex justify-content-start align-items-center">
+                                    <div class="m-l-10">
+                                      <img class="size-36x36 b-r-3 img-fix" [src]="location.photo.src" alt="img"
+                                           onerror="this.src='assets/images/no-thumbnail.png'"/>
+                                    </div>
+                                    <div class="m-l-10">
+                                      <div class="text-truncate main-text"
+                                           [innerHTML]="location.name | highlight : keyword"></div>
+                                      <div class="text-truncate font-13 sub-text"
+                                           [innerHTML]="location.address | highlight : keyword"></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- history -->
+                        <div class="location-history" *ngIf="!!history.length && !keyword.length">
+                          <div class="heading">Đã chọn gần đây</div>
+                          <div class="data-box">
+                            <div class="list-group-group list-group-flush">
+                              <div class="list-group-item">
+                                <div class="row">
+                                  <div class="col-4"
+                                       *ngFor="let location of history; trackBy: trackByFn; let i = index">
+                                    <div class="p-5">
+                                      <a class="pointer" (click)="onSelectLocation(location)">
+                                        <span class="history-item">{{location.name}}</span>
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- favorite -->
+                        <div class="location-favorite" *ngIf="!keyword.length && !destinations.length">
+                          <div class="heading">Điểm đến phổ biến</div>
+                          <div class="data-box">
+                            <div class="list-group-group list-group-flush">
+                              <div class="list-group-item"
+                                   *ngFor="let location of favoriteLocations; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location)">
+                                  <div class="justify-content-start align-items-center">
+                                    <div class="p-l-10">
+                                      <div class="text-truncate main-text">{{location.name}}</div>
+                                      <div class="text-truncate font-13 sub-text">{{location.address}}</div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </perfect-scrollbar>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="pos-button">
+              <button type="button" class="btn btn-main-v2 btn-search-product mn-w-100"
+                      (click)="onSearch()"
+                      [disabled]="!keyword">
+                Tìm kiếm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

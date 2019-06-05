@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-12">
+    <div *ngIf="!!checkIn && !!checkOut" class="checkin-checkout-info d-flex align-items-center">
+      <img cdn-src="assets/images/icon/icon-calendar-green-outline.svg" alt="" class="size-16x16">
+      <div class="m-l-8 font-13">
+        {{checkIn | moment: '14:00 DD/MM/YYYY'}} -
+        {{checkOut | moment: '12:00 DD/MM/YYYY'}}
+      </div>
+    </div>
+  </div>
+</div>

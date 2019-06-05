@@ -1,0 +1,63 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade depart-date-popup animated fadeInUp"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-12 center-line">
+            <div class="line-header"></div>
+          </div>
+        </div>
+        <div class="row m-t-20">
+          <div class="col-12">
+            <div class="text-center font-17 font-bold">Ngày khởi hành
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-body">
+        <ul class="list-unstyled list-depart">
+          <li class="active" *ngFor="let departTour of data; trackBy: trackByFn"
+              [class.active]="selectedDate === departTour">
+            <a class=""
+               (click)="onSelectDepartDate(departTour)"
+               [routerLink]="departTour.href"
+               [queryParams]="genQueryParams(departTour)">
+              <div class="content">
+                <div>{{departTour.departDate | departDate:false:'DD/MM/YYYY'}}</div>
+                <div class="available" [class.low-available-text]="departTour.fakeAvailable <= 3">
+                  còn {{departTour.fakeAvailable}} chỗ
+                </div>
+              </div>
+              <div class="price-info">{{departTour.adultPrice | currencyMoney: ''}}
+                <span class="text-underline">đ</span>
+                <span>/ người</span>
+              </div>
+              <div class="icon-selected" *ngIf="selectedDate === departTour">
+                <img cdn-src="assets/images/icon/icon-selected-depart.svg" alt="">
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="button-fixed">
+                <button class="btn btn-main-v2 btn-block font-bold font-16 p-10-20" (click)="onSubmit()">
+                  Đồng ý
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

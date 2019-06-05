@@ -1,0 +1,95 @@
+<div class="flight-item flight-item-desktop pointer">
+  <div class="flight-info" [class.best-combo]="flight.isCoupled && isRoundTrip">
+    <div class="row">
+      <div class="col-12">
+        <ng-content></ng-content>
+      </div>
+    </div>
+
+    <div class="best-combo">
+      <img class="m-b-none m-t-n-3 size-16x16"
+           cdn-src="assets/images/icon/icon-hot.svg" alt="icon"/>
+      Best combo
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="d-flex justify-content-center align-items-center flex-column h-full">
+
+          <div class="flight-logos">
+            <img class="m-b-none size-32x32" [class.m-l-10]="i > 0"
+                 *ngFor="let airplane of airplanes; trackBy: trackByFn; let i = index"
+                 [alt]="getCarrierWith(airplane.carrierCode, 'name')"
+                 [src]="getCarrierWith(airplane.carrierCode, 'icon')"/>
+          </div>
+          <div class="flight-description m-t-10 font-13 text-center">
+            <div class="d-inline-block"
+                 *ngFor="let airplane of airplanes; trackBy: trackByFn; let i = index">
+              {{ getCarrierWith(airplane.carrierCode, 'name') }}
+              - <span *ngFor="let item of airplane.carriers; trackBy: trackByFn; let i = index">
+                  {{ item.flightNumber }} {{ flight.ticketType }}{{ i < airplane.carriers.length - 1 ? ',' : ''}}
+              </span>
+              {{ i < airplanes.length - 1 ? '&':'' }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="d-flex justify-content-center align-items-center h-full">
+          <div class="text-right">
+            <strong class="font-18">{{flight.departTime | moment: 'HH:mm' }}</strong>
+
+            <div class="font-13 text-light-gray">{{ flight.origin }}</div>
+          </div>
+          <div class="text-center m-l-10 m-r-10">
+            <div class="mn-w-90">
+              <div class="position-relative">
+                <img class="arrow img-responsive m-b-none m-t-5 m-b-10"
+                     cdn-src="assets/images/arrow.svg" alt="img"/>
+                <span class="stop-point" *ngIf="flight.stops > 0">{{ flight.stops }}</span>
+              </div>
+              <div class="font-13 text-light-gray">
+                <span>{{ flight.stops == 0 ? 'bay thẳng' : (flight.stops == 1 ? '1 điểm dừng' : '+2 điểm dừng')}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-r-none">
+            <strong class="font-18">{{ flight.landingTime | moment: 'HH:mm'}}</strong>
+            <div class="font-13 text-light-gray">{{ flight.destination }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="d-flex justify-content-center align-items-center h-full flex-column">
+          <div class=""> {{ flight.flightDuration | duration }}</div>
+          <div class="" *ngIf="isDetail">
+            <a class="pointer text-main font-14" (click)="isExpanded = !isExpanded">
+              Chi tiết vé
+              <img class="m-b-none m-t-n-3"
+                   [src]="!isExpanded ? 'assets/images/icon/icon-expand-square.svg':'assets/images/icon/icon-collapse-square.svg'"
+                   alt="icon"/>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 text-right">
+        <div class="d-flex justify-content-center align-items-center flex-column h-full">
+          <div class="flight-price">
+            <span class="price font-18 font-bold">
+              {{ flight.totalPrice | currencyMoney:'' }} <span class="underline">đ</span>
+            </span>
+          </div>
+          <div class="m-t-5" *ngIf="isDetail">
+            <button class="btn btn-main-v2 mn-w-110"
+                    (click)="onSelect(flight)">
+              Chọn
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-flight-detail-desktop [flight]="flight"
+                             [isCollapse]="isExpanded"></app-flight-detail-desktop>
+</div>

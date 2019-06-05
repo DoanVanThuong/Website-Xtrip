@@ -1,0 +1,77 @@
+<div class="product-popular-location">
+
+  <div *ngIf="!!destinations.length && isMobile">
+    <h4 class="title">
+      {{title}}
+    </h4>
+    <div class="p-0-9">
+      <div class="row">
+        <div class="col-6 p-r-none p-l-none"
+             *ngFor="let destination of destinations; trackBy: trackByFn; let i = index">
+          <a class="d-block" [routerLink]="[ '/product/result' ]"
+             [queryParams]="{name: destination.name, destination: destination.id, type: type}">
+            <div class="margin-5 position-relative">
+              <img class="w-full img-fix h-104"
+                   defaultImage="assets/images/no-thumbnail.png"
+                   [lazyLoad]="destination.photo.src | size: 230"
+                   [offset]="80"
+                   [title]="destination.name"
+                   [alt]="destination.name"
+                   onerror="this.src='assets/images/no-thumbnail.png'"/>
+              <div class="position-absolute pos-bg">{{destination.name}}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <loading [show]="!destinations.length && isMobile"></loading>
+
+  <div *ngIf="!!destinations.length && isDesktop">
+    <h4 class="title">
+      {{title}}
+    </h4>
+
+    <div class="row m-t-10">
+      <!-- <div class="col-5">
+        <div class="loc-item position-relative" *ngFor="let destination of destinations | slice : 0 : 1; trackBy: trackByFn;">
+          <a class="d-block" [routerLink]="[ '/product/result' ]" [queryParams]="{name: destination.name, id: destination.id, type: type}">
+            <img class="w-full img-fix main-pic b-r-10" [src]="destination.photo.src | resizeImage: 400" [alt]="destination.name"
+              onerror="this.src='assets/images/no-thumbnail.png'" />
+          </a>
+          <div class="position-absolute pos-loc"><span class=""><img class="m-b-none m-t-n-3" cdn-src="assets/images/homepage/possition.svg"
+                alt="img" /></span>{{destination.address}}</div>
+        </div>
+      </div> -->
+      <div class="col-12">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-6"
+               [class.m-t-20]="i/itemsPerRow >= 1"
+               [class.p-l-10]="i%itemsPerRow > 0"
+               [class.p-r-10]="i%itemsPerRow < itemsPerRow-1"
+               *ngFor="let destination of destinations; trackBy: trackByFn; let i = index">
+            <div class="loc-item position-relative">
+              <a class="d-block" [routerLink]="[ '/product/result' ]"
+                 [queryParams]="{name: destination.name, destination: destination.id, type: type}">
+                <img class="w-full img-fix sub-pic b-r-10"
+                     defaultImage="assets/images/no-thumbnail.png"
+                     [lazyLoad]="destination.photo.src | size: 300"
+                     [offset]="80"
+                     [title]="destination.name"
+                     [alt]="destination.name"
+                     onerror="this.src='assets/images/no-thumbnail.png'"/>
+                <div class="position-absolute pos-loc"><span class="">
+                  <img class="m-b-none m-t-n-3"
+                       cdn-src="assets/images/homepage/possition.svg"
+                       alt="img"/></span>{{destination.name}}
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

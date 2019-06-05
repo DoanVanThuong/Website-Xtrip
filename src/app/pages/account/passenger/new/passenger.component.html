@@ -1,0 +1,122 @@
+<div class="passenger-new-page passenger-info" *ngIf="isMobile">
+  <app-header [back]="true" [heading]="'Thông tin hành khách'" [fixed]="true" [version]="3"></app-header>
+
+  <div class="wrapper" min-height>
+
+    <div class="passenger-info">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="title">Thông tin hành khách</div>
+          <div class="row">
+            <div class="container-fluid">
+              <form class="form form-mobile"
+                    [formGroup]="form"
+                    (submit)="onSubmit(form.value)">
+                <div class="list-group list-group-flush">
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-5">Danh xưng</div>
+                      <div class="col-7">
+                        <div class="dropdown dropdown-vocative" dropdown>
+                          <a dropdownToggle
+                             class="d-block"
+                             [class.placeholder]="!title">
+                            {{ title || 'Nhập danh xưng' }}
+                            <i class="fa fa-angle-right fa-lg text-black pull-right m-t-3"></i>
+                          </a>
+                          <ul id="dropdown-vocative"
+                              *dropdownMenu
+                              class="dropdown-menu"
+                              role="menu" aria-labelledby="button-vocative">
+                            <li role="menuitem" *ngFor="let vocative of vocatives; let i = index">
+                              <a class="dropdown-item" (click)="onSelectVocative(vocative)">
+                                {{ vocative }}
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-5">Họ</div>
+                      <div class="col-7">
+                        <mat-form-field [floatLabel]="'never'">
+                          <input type="text"
+                                 matInput
+                                 placeholder="Vd: Nguyễn"
+                                 [formControl]="lastname"/>
+                          <mat-error *ngIf="lastname.dirty">
+                            <span *ngIf="lastname.errors | equalError:'required'">Không được để trống</span>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-5">Tên đệm & tên</div>
+                      <div class="col-7">
+                        <mat-form-field [floatLabel]="'never'">
+                          <input type="text"
+                                 matInput placeholder="Vd: Văn A"
+                                 [formControl]="firstname"/>
+                          <mat-error *ngIf="firstname.dirty">
+                            <span *ngIf="firstname.errors | equalError:'required'">Không được để trống</span>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-5">Ngày sinh</div>
+                      <div class="col-7">
+                        <mat-form-field class="w-full"
+                                        [floatLabel]="'never'">
+                          <input type="text"
+                                 matInput
+                                 [textMask]="{mask: mask}"
+                                 placeholder="DD/MM/YYYY"
+                                 [formControl]="dateOfBirth"/>
+                          <mat-error *ngIf="dateOfBirth.dirty">
+                            <span *ngIf="dateOfBirth.errors | equalError:'required'">Không được để trống</span>
+                            <span *ngIf="dateOfBirth.errors | equalError:'date'">Không hợp lệ</span>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="passenger-more">
+            <div class="title">Thông tin bổ sung</div>
+            <!-- passenger section -->
+            <passenger-passport (passportChange)="onPassportChange($event)"
+                                [passenger]="passenger"></passenger-passport>
+            <div class="m-t-10">
+              <passenger-identity (identityChange)="onIdentityChange($event)"
+                                  [passenger]="passenger"></passenger-identity>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="passenger-footer">
+    <button type="submit" class="btn btn-main btn-block"
+            [disabled]="detectDisableButton()"
+            (click)="onSubmit(form.value)">
+      {{ isUpdate ? 'Cập nhật thông tin' : 'Lưu thông tin' }}
+    </button>
+  </div>
+</div>
+
+<div class="passenger-new passenger-new-desktop" *ngIf="isDesktop">
+  <passenger-box></passenger-box>
+</div>

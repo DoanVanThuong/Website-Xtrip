@@ -1,0 +1,10 @@
+<div class="review-box">
+  <div class="panel panel-desktop card m-b-20 animated zoomIn">
+    <div class="panel-body card-body">
+      <div class="font-18 font-bold">Mức độ hài lòng của bạn về chất lượng dịch vụ?</div>
+      <button class="btn btn-white-outline" (click)="openPopup()">Để lại nhận xét</button>
+    </div>
+  </div>
+</div>
+
+<comment-popup [categories]="categories" (submit)="onSubmit($event)"></comment-popup>

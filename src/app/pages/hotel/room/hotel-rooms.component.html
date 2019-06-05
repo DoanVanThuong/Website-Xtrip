@@ -1,0 +1,79 @@
+<div class="hotel-rooms">
+
+  <app-header [back]="true" [heading]="'Chọn phòng'" [fixed]="true"></app-header>
+
+  <!-- Container -->
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <!-- Change Date, Night, Room -->
+        <div class="change-options">
+          <div class="row m-l-none m-r-none">
+
+            <div class="col-6 bg-white text-center b-r p-10-5">
+              <a (click)="onShowDatePicker()">
+                <div class="font-13 text-light-gray">
+                  <img class="size-16x16 m-t-n-3"
+                       cdn-src="assets/images/icon/icon-calendar.svg"
+                       alt="img"/>
+                  Ngày nhận - trả phòng
+                </div>
+                <div class="text-truncate">{{ checkIn }}</div>
+              </a>
+            </div>
+            <div class="col-6 bg-white text-center b-l p-10-5">
+              <a class="" (click)="mbscScroller.instance.show()">
+                <div class="font-13 text-light-gray">
+                  <img class="size-16x16 m-t-n-3"
+                       cdn-src="assets/images/icon/icon-door-gray.svg"
+                       alt="img"/>
+                  Số phòng - khách
+                </div>
+                <div class="text-truncate">
+                  <strong>{{param.rooms}}</strong> <span class="font-13">phòng</span> -
+                  <strong>{{param.adults}}</strong> <span class="font-13">khách</span>
+                </div>
+              </a>
+              <input class="d-none"
+                     #mbscScroller="mobiscroll"
+                     mbsc-scroller
+                     [mbsc-options]="roomScrollerOptions"
+                     [(ngModel)]="roomValue"
+                     (onSet)="onSetRoom($event)"
+                     (onChange)="onChangeRoom($event)">
+            </div>
+          </div>
+        </div>
+        <!-- Change Date, Night, Room -->
+
+        <!-- Title Result -->
+        <div class="m-t-10 m-b-10 title-result">
+          Kết quả tìm phù hợp với {{param.rooms}} phòng - {{param.adults}} khách
+        </div>
+        <!-- Title Result -->
+
+        <!-- Room Items -->
+        <div class="room-items" *ngIf="!isShowLoading">
+          <room-detail-item *ngFor="let room of rooms; trackBy: trackByFn; let i = index"
+                            [param]="param"
+                            [room]="room"
+                            [night]="night"
+                            (booking)="goToBookingHotel(room)">
+          </room-detail-item>
+        </div>
+        <!-- Room Items -->
+
+        <!-- Empty Data Screen - start -->
+        <app-empty-screen [show]="!isShowLoading && rooms.length === 0"></app-empty-screen>
+        <!-- Empty Data Screen - end -->
+
+      </div>
+      <!-- Container -->
+
+    </div>
+  </div>
+</div>
+
+<date-selector-popup [options]="dateOptions"
+                     [date]="selectedDate"
+                     (submit)="onSelectDate($event)"></date-selector-popup>

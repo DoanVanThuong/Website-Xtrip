@@ -1,0 +1,88 @@
+<div class="account-info-page account-fill-info">
+
+  <div class="header header-mobile fixed-header">
+    <div class="row justify-content-end bg-header">
+      <div class="col-8 text-center">
+        <div class="header-title">Cập nhật thông tin</div>
+      </div>
+      <div class="col-2 text-right p-l-none p-r-10">
+        <a class="skip d-block" [routerLink]="['/account']">Bỏ qua</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-12">
+        <form class="form"
+              [formGroup]="form"
+              (submit)="onSubmit(form.value)">
+          <div class="account-info">
+            <div class="title">Hãy cập nhật thêm thông tin cá nhân để đặt mua vé nhanh hơn và được hỗ trợ tốt hơn</div>
+            <div class="list-group list-group-flush">
+              <div class="list-group-item">
+                <div class="row">
+                  <div class="col-5">Họ</div>
+                  <div class="col-7">
+                    <mat-form-field class="w-full"
+                                        [floatLabel]="'never'">
+                      <input type="text"
+                             matInput
+                             placeholder="Nhập họ"
+                             [formControl]="LastName"/>
+                      <mat-error *ngIf="LastName.dirty">
+                        <span *ngIf="LastName.errors | equalError:'required'">Không được để trống</span>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="row">
+                  <div class="col-5">Tên đệm & tên</div>
+                  <div class="col-7">
+                    <mat-form-field class="w-full"
+                                        [floatLabel]="'never'">
+                      <input type="text"
+                             matInput placeholder="Nhập tên đệm & tên"
+                             [formControl]="FirstName"/>
+                      <mat-error *ngIf="FirstName.dirty">
+                        <span *ngIf="FirstName.errors | equalError:'required'">Không được để trống</span>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="list-group-item">
+                <div class="row">
+                  <div class="col-5">Điện thoại</div>
+                  <div class="col-7">
+                    <mat-form-field class="w-full"
+                                        [floatLabel]="'never'">
+                      <input type="text"
+                             matInput
+                             placeholder="Nhập SĐT"
+                             [formControl]="PhoneNumber"/>
+                      <mat-error *ngIf="PhoneNumber.dirty">
+                        <span *ngIf="PhoneNumber.errors | equalError:'required'">Không được để trống</span>
+                        <span *ngIf="PhoneNumber.errors | equalError:'phone'">Không hợp lệ</span>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="account-footer fixed-bottom z-index-2000">
+        <button type="submit" class="btn btn-main btn-block"
+                [disabled]="!detectDisableButton()"
+                (click)="onSubmit(form.value)">
+          Cập nhật
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

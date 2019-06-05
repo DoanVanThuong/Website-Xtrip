@@ -1,0 +1,90 @@
+<!--component html goes here -->
+<div bsModal #popup="bs-modal"
+     class="modal fade hotel-room-popup-desktop"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex justify-content-between align-items-center w-full">
+          <div class="font-18 gray-text font-bold mx-w-80-pc">{{room.roomName}}</div>
+          <div class="">
+            <img class="m-b-0 m-t-n-3" cdn-src="assets/images/hotel/desktop/people.svg" alt="img"/>
+            <span class="gray-text font-15 font-medium">Sức chứa: {{ room.limitedAdults }} người lớn</span>
+            <a class="" (click)="hide()">
+              <img class="m-b-0 m-t-n-3 m-l-25 pointer"
+                   cdn-src="assets/images/icon/icon-close-gray.svg" alt="img"/>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-4 bo-r">
+            <img class="img-fix w-full h-180 b-r-10"
+                 [src]="room.photo.src | size:300"
+                 onerror="this.src='assets/images/no-thumbnail.png'"/>
+            <div class="m-t-10 text-main text-underline font-medium font-16 pointer" *ngIf="room.roomImageList.length">
+              <a class="pointer" (click)="onOpenGalleryPopup(room.roomImageList)">Xem chi tiết hình ảnh</a>
+            </div>
+            <div class="m-t-10 font-15"
+                 *ngFor="let fac of room.facilityGroups.mainFacilityGroup.facilities | slice:0:2">
+              <img class="m-b-0 m-t-n-3 size-24x24"
+                   src="{{fac.imageHost}}/android/{{fac.imagePath}}"/>
+              {{ fac.name }}
+            </div>
+          </div>
+          <div class="col-lg-4 bo-r">
+            <div class="font-bold font-15 gray-text">
+              {{room.facilityGroups.roomFacilityGroup.name}}
+            </div>
+            <ul class="m-t-15 d-flex flex-wrap">
+              <li class="p-r-10"
+                  *ngFor="let item of room.facilityGroups.roomFacilityGroup.facilities; trackBy: trackByFn">
+                <img class="m-b-0 m-t-n-3 size-16x16"
+                     cdn-src="assets/images/hotel/desktop/li.svg">
+                <span class="m-l-n-3">{{item.name}}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <div class="font-bold font-15 gray-text">Bao gồm</div>
+            <div class="m-t-24">
+              <div class="m-b-15" *ngFor="let item of room.roomPreferences">
+                <span class="fac-item-bg">{{item.name}}</span>
+              </div>
+            </div>
+            <div class="m-t-20" *ngIf="!!room.facilityGroups.refundPolicyGroup.facilities.length">
+              <div class="m-t-30 text-black">
+                <div class="font-bold">Lưu ý:</div>
+                <ul>
+                  <li
+                    *ngFor="let item of room.facilityGroups.refundPolicyGroup.facilities; trackBy: trackByFn; let i = index">
+                    <img class="m-b-0 m-t-n-3 size-16x16" cdn-src="assets/images/hotel/desktop/li.svg">
+                    {{ item.name }}
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row m-t-10" *ngIf="!!room.refundPolicies.length">
+          <div class="container-fluid">
+            <div class="font-18 font-bold m-t-30">Chính sách phòng</div>
+            <div *ngFor="let item of room.refundPolicies; trackBy: trackByFn">
+              {{ item }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-hotel-gallery-popup #HotelGalleryPopup
+                         [mode]="'room'"
+                         [room]="room"
+                         [images]="galleryImages">
+</app-hotel-gallery-popup>

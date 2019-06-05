@@ -1,0 +1,55 @@
+<div bsModal #popup="bs-modal" class="modal" role="dialog" (onHidden)="hide()" (onShow)="handle('onShow', $event)" (onHide)="handle('onHide', $event)">
+  <div class="modal-dialog bottom bottom-59">
+    <div class="modal-content">
+      <div class="modal-body p-none">
+        <div class="price-detail" *ngIf="summaryPrice">
+
+          <div class="header font-14 p-10">
+            Chi tiết tổng tiền
+          </div>
+
+          <div *ngIf="summaryPrice.detailItems">
+            <div class="row p-10"
+                 *ngFor="let item of summaryPrice.detailItems; trackBy: trackByFn; let i = index">
+              <div class="col-7 font-15">
+                {{ item.title }}
+              </div>
+              <div class="col-5 text-right font-15">
+                {{ item.price | currencyMoney: '' }}
+                <span class="text-underline">đ</span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="summaryPrice.summaries">
+            <div class="row p-10"
+                 *ngFor="let item of summaryPrice.summaries; trackBy: trackByFn; let i = index ">
+              <div class="container-fluid">
+                <div class="title font-15">{{ item.name }}</div>
+                <div class="p-l-15">
+                  <div class="row" *ngFor="let item of item.groupItem.detailItems">
+                    <div class="col-7 price-detail font-15">
+                      {{ item.title }}
+                    </div>
+                    <div class="col-5 price-detail text-right font-15">
+                      {{ item.price | currencyMoney: '' }}
+                      <span class="text-underline">đ</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row p-10 border-top">
+            <div class="container-fluid price-detail text-right">
+              Tổng tiền:
+              <span class="price font-weight-bold">
+                {{ totalPrice | currencyMoney: '' }}
+                <span class="text-underline">đ</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

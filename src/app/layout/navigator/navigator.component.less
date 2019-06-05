@@ -1,0 +1,55 @@
+@import "_variables.less";
+
+.navigator {
+
+  .panel.panel-desktop {
+    .panel-heading {
+      border-bottom: 1px solid @gray-18;
+      padding: 15px;
+
+      > .panel-title,
+      > .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: @gray-2;
+      }
+    }
+  }
+
+  .account-menu {
+    > li {
+      padding: 10px 15px;
+      color: @gray-2;
+
+      > a {
+        display: block;
+        font-weight: 500;
+
+        > .normal {
+          display: inline-block;
+        }
+        > .hover {
+          display: none;
+        }
+
+        img{
+          margin-right: 5px;
+        }
+      }
+
+      &.active, &:hover, &:active, &.focus {
+        background-color: @green-2;
+        color: @white;
+
+        > a {
+          > .normal {
+            display: none;
+          }
+          > .hover {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+}

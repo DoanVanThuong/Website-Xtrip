@@ -1,0 +1,62 @@
+<div class="payment-result payment-result-mobile">
+  <section class="row header">
+    <div class="col-2">
+      <a class="pointer" (click)="backToHome()">
+        <img class="size-24x24" cdn-src="assets/images/icon/icon-close-orange.svg" alt="icon"/>
+      </a>
+    </div>
+  </section>
+
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-12" *ngIf="isError">
+        <section class="row m-t-30">
+          <div class="col-12 text-center">
+            <img class="size-64x64" cdn-src="assets/images/payment/desktop/pay-error.svg" alt="image"/>
+            <div class="font-20 font-bold m-t-10 text-danger">
+              Đặt chỗ không thành công
+            </div>
+          </div>
+
+        </section>
+
+        <section class="payment-note row m-t-20">
+          <div class="col-12 text-center" *ngIf="!routeParams.errorMessage">
+            Có lỗi xảy ra vui lòng thử lại !
+          </div>
+          <div class="col-12 text-center" *ngIf="!!routeParams.errorMessage">
+            {{routeParams.errorMessage}}
+          </div>
+        </section>
+      </div>
+
+      <div class="col-12 p-l-30 p-r-30" *ngIf="!isError">
+
+        <loading [show]="!verifyPayment.message.title && !verifyPayment.message.content"></loading>
+
+        <section class="row m-t-10" *ngIf="!!verifyPayment.message.title">
+          <div class="col-12 text-center">
+            <img class="size-72x72" cdn-src="assets/images/payment/desktop/success-pay.svg" alt="image"/>
+            <div class="text-green font-20 font-bold m-t-10">
+              <span>{{ verifyPayment.message.title }}</span>
+            </div>
+          </div>
+        </section>
+        <div class="p-b-60" *ngIf="!!verifyPayment.message.content" [innerHTML]="verifyPayment.message.content | safeHTML"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer - start -->
+  <div class="payment-footer footer fixed-bottom">
+    <div class="" *ngIf="!isError">
+      <button class="btn btn-main-v2 btn-block p-10" (click)="gotoMyBooking()">Xem đặt chỗ của tôi</button>
+    </div>
+    <div class="" *ngIf="isError">
+      <button class="btn btn-main-v2 btn-block p-10" (click)="backToHome()">Xong</button>
+      <!-- <button class="btn btn-main-v2 btn-block p-10" (click)="checkRePayment()">Thanh toán lại</button> -->
+    </div>
+  </div>
+  <!-- Footer - end -->
+
+</div>

@@ -1,0 +1,62 @@
+<div class="tour-favorite-mobile"
+     infinite-scroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="150"
+     (scrolled)="onScrollDown()">
+
+  <div class="tours.length">
+    <div class="favorite-item" *ngFor="let tour of tours; trackBy: trackByFn; let i = index">
+
+      <div class="favorite-image">
+        <a (click)="onOpenFavoriteItem(tour)">
+          <img class="img-fix"
+               src="{{tour.photo.src}}"
+               onerror="this.src='assets/images/no-thumbnail.png'"
+               alt="tour name"/>
+        </a>
+        <div class="icon-heart">
+          <a (click)="onSelectFavorite(tour, i)">
+            <i class="fa fa-heart"></i>
+          </a>
+        </div>
+      </div>
+      <div class="favorite-content">
+        <div class="row">
+          <div class="col-12">
+            <a (click)="onOpenFavoriteItem(tour)">
+              <div class="d-table tbl-layout-fixed">
+                <div class="d-table-cell w-30">
+                  <div class="d-block size-32x32">
+                    <img class="mx-w-full img-fix p-t-10" src="{{tour.supplier.logo.src}}" alt="icon"/>
+                  </div>
+                </div>
+                <div class="d-table-cell p-l-10">
+                  <div class="title text-truncate w-80pc">{{ tour.name }}</div>
+                  <div class="description">
+                    <div class="d-inline-block m-r-10">
+                      <img class="size-14x14" cdn-src="assets/images/icon/icon-clock.svg" alt="icon"/>
+                      {{tour.days}}N{{tour.nights}}Đ
+                    </div>
+                    <div class="d-inline-block m-r-10">
+                      <img class="size-13x13" cdn-src="assets/images/icon/icon-comment.svg" alt="icon"/>
+                      {{tour.reviews}}
+                    </div>
+                    <div class="d-inline-block rating">
+                      <img class="size-13x13" cdn-src="assets/images/icon/icon-review.svg" alt="icon"/>
+                      {{tour.rating}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-empty-screen [show]="!tours.length"
+                    [heading]="'Chưa có danh sách yêu thích'"
+                    [description]="'Nhiều tour nổi bật đang chờ bạn khám phá'"
+                    [isRetry]="false"></app-empty-screen>
+</div>

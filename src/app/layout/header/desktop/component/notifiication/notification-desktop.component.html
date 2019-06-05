@@ -1,0 +1,42 @@
+<div class="notification-box" (clickOutside)="onClickedOutside($event, 'notification')">
+
+  <a class="pointer d-block position-relative"
+     title="Thông báo"
+     (click)="openNotification()">
+    <img class="size-24x24"
+         cdn-src="assets/images/icon/icon-bell.svg"
+         alt="Thông báo"/>
+    <span class="badge badge-danger"
+          *ngIf="!!notificationBadge">{{ notificationBadge }}</span>
+  </a>
+
+  <div class="notification-dropdown notification-desktop animated fadeIn" *ngIf="isShowNotification">
+    <perfect-scrollbar>
+      <loading [show]="!notifications.length && isLoading"></loading>
+
+      <div *ngIf="!isLoading && notifications.length"
+           class="notification-content">
+        <div class="title">Thông báo</div>
+        <ul class="list-unstyled list-notification">
+          <li class="bg-white pointer" data-toggle="toolip"
+              *ngFor="let item of notifications; trackBy: trackByFn; let i = index">
+            <a (click)="onRead(item)" class="d-block">
+              <div class="font-15" title="{{item.body}}">{{item.body}}</div>
+              <span class="date m-r-10"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+              <span class="date">{{item.createdDate | moment:'time_ago' }}</span>
+              <div class="seen-icon" *ngIf="!item.opened">
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+            </a>
+
+          </li>
+        </ul>
+      </div>
+
+      <app-empty-screen [show]="!notifications.length && !isLoading"
+                        [heading]="'Thông báo'"
+                        [description]="'Hiện bạn chưa có thông báo'"
+                        [isRetry]="false"></app-empty-screen>
+    </perfect-scrollbar>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+<div class="payment-method {{ class }}" *ngIf="payments.length">
+  <h4 class="title" *ngIf="!hideTitle">Hình thức thanh toán</h4>
+  <div class="panel card panel-desktop">
+    <div class="panel-body card-body">
+
+      <div class="payment-countdown">
+        <span>Lưu ý:</span> Bạn vui lòng thanh toán trước
+        <span>{{ (selectedPayment.holdExpiry || payments[0].holdExpiry) | moment:'HH:mm DD/MM/YYYY' }}</span>
+      </div>
+
+      <ul class="payment-list m-t-10">
+        <li *ngFor="let payment of payments; trackBy: trackByFn;">
+          <a class="pointer d-flex justify-content-start align-items-center py-2"
+             (click)="onSelectPaymentMethod(payment)">
+            <img class="m-b-none size-24x24 m-r-10"
+                 [src]="selectedPayment.code === payment.code ?  'assets/images/icon/icon-checked-circle.svg' : 'assets/images/icon/icon-uncheck-circle.svg'"
+                 align="img"/>
+            <img class="m-b-none size-36x36 m-r-10"
+                 [src]="payment.photo"
+                 [alt]="payment.code"/>
+            <div class="payment-title">
+              <div class="font-bold">
+                {{ payment.name }}
+                <!--<payment-countdown class="m-l-10" [time]="payment.holdExpiry"></payment-countdown>-->
+              </div>
+              <div class="font-13 text-green">
+                {{ !!payment.detail && payment.detail.paymentFee === 0 ? 'Miễn phí thanh toán' : ''}}
+                <span
+                  *ngIf="!!payment.detail && payment.detail.paymentFee > 0">Phí thanh toán: {{ payment.detail.paymentFee | currencyMoney: '' }}
+                  <span class="text-underline">đ</span>
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <div class="payment-options"
+               *ngIf="selectedPayment.code === payment.code">
+            <div class="description font-13"
+                 *ngIf="selectedPayment.code === payment.code">
+              <span [class.discount]="payment.discountPercentage"
+                    [innerHTML]="payment.description | newline"></span>
+              <a class="pointer btn btn-link text-main font-13" *ngIf="payment.detailLink" target="_blank"
+                 [href]="payment.detailLink.value">{{ payment.detailLink.text }}</a>
+            </div>
+
+            <!-- detail of COD -->
+            <div *ngIf="payment.code === METHOD.COD">
+              <cod-form (changes)="onCODChange($event)"></cod-form>
+            </div>
+
+            <!-- detail of office -->
+            <div *ngIf="payment.code === METHOD.OFFICE">
+              <ul class="payment-office">
+                <li *ngFor="let option of payment.options; trackBy: trackByFn; ">
+                  {{ option.name }} - Địa chỉ: {{ option.sub }}
+                </li>
+              </ul>
+            </div>
+
+            <!-- detail of ATM -->
+            <div *ngIf="payment.code === METHOD.ATM">
+              <ul class="payment-atm">
+                <li *ngFor="let option of payment.options; trackBy: trackByFn; ">
+                  <a class="pointer d-flex justify-content-center align-content-center"
+                     [class.active]="selectedBank.code === option.code"
+                     (click)="onSelectBank(option)"
+                     [title]="option.name">
+                    <img class="m-b-none" [src]="option.photo" [alt]="option.name"/>
+                  </a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+
+            <!--
+            <div *ngIf="showWith(payment.code, [METHOD.STORE])">
+              <ul class="payment-store">
+                <li *ngFor="let option of payment.options; trackBy: trackByFn; ">
+                  <a class="d-flex justify-content-center align-content-center"
+                     [class.active]="selectedBank.code === option.code"
+                     [title]="option.name">
+                    <img class="m-b-none" [src]="option.photo" [alt]="option.name"/>
+                  </a>
+                </li>
+              </ul>
+            </div>-->
+
+            <!-- detail of Transfer -->
+            <div *ngIf="payment.code === METHOD.TRANSFER">
+
+              <ul class="payment-transfer">
+                <li *ngFor="let option of payment.options; trackBy: trackByFn; ">
+                  <a class="pointer d-flex justify-content-center align-content-center"
+                     [class.active]="selectedBank.code === option.code"
+                     (click)="onSelectBank(option)"
+                     [title]="option.name">
+                    <img class="m-b-none" [src]="option.photo" [alt]="option.name"/>
+                  </a>
+                </li>
+              </ul>
+
+              <div class="clearfix"></div>
+
+              <loading [show]="isLoadPaymentDetail"></loading>
+              <div *ngIf="!!transferDetail && !isLoadPaymentDetail">
+                <payment-transfer-detail [bank]="transferDetail"></payment-transfer-detail>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

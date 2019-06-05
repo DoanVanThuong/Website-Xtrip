@@ -1,0 +1,78 @@
+<div class="identity">
+  <div class="row">
+    <div class="col-12">
+      <a class="identity-heading" (click)="showForm()">
+        CMND
+        <span class="pull-right">
+          <img class="size-20x20"
+               [src]="isShow ? 'assets/images/icon/icon-subtract-orange.svg': 'assets/images/icon/icon-plus-orange.svg'"
+               alt="icon"/>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="row"
+       *ngIf="isShow">
+    <div class="col-12">
+      <form class="form"
+            [formGroup]="form"
+            (submit)="onSubmit()">
+        <div class="list-group list-group-flush">
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-5">Số CMND</div>
+              <div class="col-7">
+                <mat-form-field class="w-full"
+                                    [floatLabel]="'never'">
+                  <input matInput
+                         placeholder="Nhập số CMND"
+                         [formControl]="identityCard"/>
+                  <mat-error align="left" class="error" *ngIf="identityCard.dirty">
+                    <span *ngIf="identityCard.errors | equalError:'length'">Không hợp lệ</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="list-group-item">
+            <div class="row ">
+              <div class="col-5">Quốc gia cấp</div>
+              <div class="col-7">
+                <mat-form-field class="w-full" [floatLabel]="'never'">
+                  <input [formControl]="identityCardCountry"
+                         #countryScroll
+                         matInput
+                         placeholder="Chọn quốc gia"
+                         mbsc-scroller
+                         [mbsc-options]="scrollerOptions"/>
+                  <i matSuffix class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+                  <mat-error align="left" class="error" *ngIf="identityCardCountry.dirty">
+                    <span *ngIf="identityCardCountry.errors | equalError:'required'">Không hợp lệ</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="list-group-item">
+            <div class="row ">
+              <div class="col-5">Ngày cấp</div>
+              <div class="col-7">
+                <mat-form-field class="w-full"
+                                    [floatLabel]="'never'">
+                  <input [textMask]="{mask: mask}"
+                         [formControl]="identityCardDate"
+                         matInput
+                         placeholder="Vd: 01/01/2030">
+                  <mat-error align="left" class="error" *ngIf="identityCardDate.dirty">
+                    <span *ngIf="identityCardDate.errors | equalError:'date'">Không hợp lệ</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="preview-booking p-b-60">
+  <app-header [heading]="'Chi tiết chuyến bay'" [back]="true" [fixed]="true" [version]="3"></app-header>
+
+  <div class="wrapper">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <flight-review-item *ngFor="let flight of flights; trackBy: trackByFn; let i = index"
+                            [mode]="'search'"
+                            [flight]="flight"
+                            [heading]="i > 0 ? 'Chuyến bay chiều về' : 'Chuyến bay chiều đi' ">
+        </flight-review-item>
+
+        <flight-rule-fare-item [flight]="flights"></flight-rule-fare-item>
+
+        <div class="p-t-10 p-l-10 p-r-10">
+          <button (click)="bookingFlight()" class="btn btn-main btn-block">Đặt chỗ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

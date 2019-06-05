@@ -1,0 +1,56 @@
+<!--component html goes here -->
+<div class="hotel-booking-desktop" [booking-step]="1">
+
+  <div class="main-body m-t-30">
+    <div class="container">
+
+      <div class="row">
+
+        <section class="col-lg-8 left-section">
+
+          <signin-request-desktop></signin-request-desktop>
+
+          <hotel-room-detail [room]="room"></hotel-room-detail>
+
+          <div class="m-t-30 animated zoomIn">
+            <contact-info
+              [data]="contact"
+              (changes)="onContactChange($event)"
+              [invalid]="isInvalid">
+            </contact-info>
+          </div>
+
+          <div class="m-t-30">
+            <book-other [title]="'Đặt phòng cho người khác'"
+                        [data]="representer"
+                        (changes)="onBookOtherChange($event)"
+                        [invalid]="isInvalid"></book-other>
+          </div>
+
+
+          <hotel-cancellation-policy class="m-t-30" [room]="room"></hotel-cancellation-policy>
+
+          <hotel-instruction class="m-t-30" [room]="room"></hotel-instruction>
+
+        </section>
+
+        <section class="col-lg-4 right-section">
+
+          <hotel-room-remaining></hotel-room-remaining>
+
+          <div class="m-t-30 animated zoomIn position-relative h-full" *ngIf="!!priceSummary">
+
+            <price-detail-box [disabled]="detectDisableSubmit()"
+                              [totalPrice]="totalPrice"
+                              [summaryPrice]="priceSummary"
+                              [point]="point"
+                              (submit)="onBookingHotel($event)"></price-detail-box>
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+</div>

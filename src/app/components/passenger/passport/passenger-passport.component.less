@@ -1,0 +1,49 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.passport {
+  &.passport-mobile {
+    background-color: @white;
+
+    .passport-heading {
+
+      font-size: 15px;
+      color: @black;
+      padding: 8px 15px;
+      display: block;
+
+      img {
+        margin-bottom: 0;
+        margin-top: -3px;
+      }
+    }
+  }
+
+  &.passport-desktop {
+    color: @gray-2;
+
+    .form {
+      &.form-desktop
+      .form-control {
+        font-weight: 400;
+        color: @black;
+      }
+    }
+
+    .dropdown-menu {
+      width: 100%;
+      .border-radius(0px);
+
+      .dropdown-item {
+        outline: none;
+        color: @gray-1;
+        font-weight: 500;
+
+        &.active, &:active, &:hover, &:focus {
+          color: @gray-2;
+          background-color: @gray-6;
+        }
+      }
+    }
+  }
+}

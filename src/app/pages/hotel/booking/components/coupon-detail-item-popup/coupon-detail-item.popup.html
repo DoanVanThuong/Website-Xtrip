@@ -1,0 +1,34 @@
+<div bsModal #popup="bs-modal" class="modal fade detail-coupon-popup animated fadeInUp" role="dialog"
+  (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header p-none">
+        <div class="header-coupon-detail">
+          <a (click)="hide()" class="d-block size-24x24 text-center icon-close">
+            <img class="size-16x16" cdn-src="assets/images/icon/icon-close-green.svg">
+          </a>
+          <img src="assets/images/coupon/bg-detail-coupon.svg" alt="" class="img-fluid w-full">
+        </div>
+      </div>
+      <div class="modal-body" *ngIf="!!data && !isLoading">
+        <div class="m-t-20">
+          <div class="name">{{data.summary}}</div>
+          <div class="m-t-15">
+            <img cdn-src="assets/images/icon/icon-calendar-gray.svg" alt="" class="size-16x16">
+            <span class="text-light-gray m-l-10 font-15">Hết hạn đến: {{data.time | moment: 'DD/MM/YYYY'}}</span>
+          </div>
+          <div class="font-bold font-16 m-b-10 m-t-30">Điều kiện & điều khoản</div>
+          <ul class="list-unstyled list-rules" *ngIf="!!data.rules.length">
+            <li *ngFor="let rule of data.rules; let i = index; trackBy: trackByFn">{{rule}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="coupon-footer">
+          <button class="btn btn-main-v3 btn-apply font-medium font-16 w-full" (click)="applyCoupon(data)"
+            [ngClass]="!isApply ? 'btn-main-v3' : 'btn-cencel-apply'">{{isApply ? 'Sử dụng sau' : 'Sử dụng mã'}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

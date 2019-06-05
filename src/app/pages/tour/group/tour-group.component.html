@@ -1,0 +1,92 @@
+<div class="tour-group-booking">
+  <app-header [back]="true" [heading]="'Đặt tour theo đoàn'" [fixed]="true"></app-header>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-12">
+        <div class="row ">
+          <div class="col-12">
+            <div class="p-10 font-13">
+              Thông tin tour
+            </div>
+          </div>
+          <div class="col-12 bg-white">
+            <form [formGroup]="form"
+                  class="form form-mobile"
+                  novalidate>
+              <div class="list-group list-group-flush">
+                <div class="list-group-item">
+                  <mat-form-field>
+                    <img matPrefix
+                         class="size-24x24 m-t-n-10 m-r-10"
+                         cdn-src="assets/images/tour/input/place.svg"
+                         alt="icon"/>
+                    <input type="text"
+                           matInput
+                           placeholder="Điểm đến"
+                           [formControl]="arrivalPlace"
+                           formControlName="arrivalPlace"/>
+                  </mat-form-field>
+                </div>
+                <div class="list-group-item">
+                  <mat-form-field>
+                    <img matPrefix
+                         class="size-24x24 m-t-n-10 m-r-10"
+                         cdn-src="assets/images/tour/input/fl.svg"
+                         alt="icon"/>
+                    <input type="text"
+                           matInput
+                           placeholder="Điểm khởi hành"
+                           [formControl]="departPlace"/>
+                  </mat-form-field>
+                </div>
+                <div class="list-group-item">
+                  <mat-form-field>
+                    <img matPrefix
+                         class="size-24x24 m-t-n-10 m-r-10"
+                         cdn-src="assets/images/tour/input/month.svg"
+                         alt="icon"/>
+                    <input type="text"
+                           mbsc-scroller
+                           matInput
+                           placeholder="Tháng khởi hành"
+                           [mbsc-options]="scrollOptions"
+                           (onSet)="onSetMonth($event)"
+                           [formControl]="localDate"/>
+                    <img matSuffix class="size-18x18" cdn-src="assets/images/dropdown.svg" alt="icon"/>
+                  </mat-form-field>
+                </div>
+                <div class="list-group-item">
+                  <mat-form-field>
+                    <img matPrefix
+                         class="size-24x24 m-t-n-10 m-r-10"
+                         cdn-src="assets/images/tour/input/price.svg"
+                         alt="icon"/>
+                    <input type="number"
+                           matInput
+                           placeholder="Chi phí dự kiến"
+                           [formControl]="estimatedcost">
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <contact-info (changes)="onContactChange($event)"></contact-info>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="tour-group-footer fixed-bottom">
+          <button (click)="onSubmit(form.value)"
+                  [disabled]="form.invalid || contactForm.invalid"
+                  class="btn btn-main w-full font-medium font-18">
+            Gửi yêu cầu
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

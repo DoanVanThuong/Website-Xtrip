@@ -1,0 +1,62 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.tour-date-selector {
+  position: relative;
+  .tour-date-selector-header {
+    padding: 11px 14px;
+    background-color: @white;
+    &.fixed-header {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      .transition(all .5s linear);
+    }
+    .title-time {
+      color: @gray-1;
+      font-weight: 700;
+      font-size: 12px;
+      margin-top: 21px;
+    }
+    .time-range {
+      color: @gray-2;
+      font-size: 20px;
+      font-weight: 700;
+      padding-bottom: 11px;
+    }
+    .shadow-header {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+  .tour-date-selector-body {
+    margin-top: 125px;
+    margin-bottom: 85px;
+  }
+  .tour-date-selector-footer {
+    padding: 8px;
+    background-color: @white;
+    .btn {
+      padding: 10px 15px;
+    }
+    .shadow-bottom {
+      box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.1);
+      &.pos-btn {
+        margin: 0 -8px;
+        height: 72px;
+        padding: 0 15px;
+        padding-top: 18px;
+      }
+    }
+    .b-r-56 {
+      border-radius: 56px;
+    }
+    &.fixed-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+}

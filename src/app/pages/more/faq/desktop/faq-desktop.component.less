@@ -1,0 +1,101 @@
+@import '_variables.less';
+.title {
+    font-size: 16px;
+    font-weight: 600;
+    color: @gray-2;
+    letter-spacing: -0.5px;
+}
+
+.not-found {
+    height: 350px;
+    text-align: center;
+    color: @red;
+    font-size: 20px;
+}
+.panel{
+    border-radius:10px;
+}
+.faq-wp {
+    border-radius: 10px;
+    -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+    .panel {
+        margin-bottom: 0;
+        .panel-heading {
+            padding: 12px 15px;
+        }
+        .panel-title {
+            font-weight: 400;
+            color: @black;
+            font-size: 15px;
+            letter-spacing: 0;
+            position: relative;
+            padding-right: 10px;
+            line-height: 18px;
+            img {
+                &.active {
+                    display: none;
+                }
+                &.unactive {
+                    display: inline-block;
+                }
+            }
+            .heading-icon {
+                position: absolute;
+                right: 10px;
+                top: 0px;
+                i {
+                    font-size: 24px;
+                }
+                .fa.unactive {
+                    display: inline-block;
+                }
+                .fa.active {
+                    display: none;
+                }
+            }
+        }
+        .answer {
+            font-weight: 400;
+            font-size: 15px;
+            text-align: justify;
+            color: @gray-2;
+            display: table;
+            line-height: 18px;
+        }
+        &.panel-open {
+            .panel-heading {
+                .panel-title {
+                    font-weight: 500;
+                    color: @green-2;
+                    .fa {
+                        &.unactive {
+                            display: none;
+                        }
+                        &.active {
+                            display: inline-block;
+                        }
+                    }
+                    img {
+                        &.unactive {
+                            display: none;
+                        }
+                        &.active {
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+        .panel-collapse {
+            .card-body {
+                padding: 15px 15px;
+            }
+            &.show {
+                .panel-body {
+                    background: @gray-17;
+                }
+            }
+        }
+    }
+}

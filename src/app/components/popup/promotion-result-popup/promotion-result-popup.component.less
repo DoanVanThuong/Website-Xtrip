@@ -1,0 +1,38 @@
+// component css goes here
+@import "_variables.less";
+
+.popup-promotion-result {
+  .modal-body {
+    padding: 0 !important;
+    .receive-text {
+      color: @gray-2
+    }
+    .price {
+      color: @orange-2;
+    }
+    .border {
+      border: 1px solid @gray-3;
+      border-radius: 10px;
+    }
+    .code-bg {
+      background-color: @orange-2;
+      padding: 5px 10px;
+    }
+    .code-price {
+      color: @orange-2;
+    }
+    .item {
+      .item-col {
+        &:nth-child(odd) {
+          margin-left: 20px;
+        }
+        &:nth-child(even) {
+          margin-right: 20px;
+        }
+      }
+    }
+    .p-27-35 {
+      padding: 27px 35px;
+    }
+  }
+}

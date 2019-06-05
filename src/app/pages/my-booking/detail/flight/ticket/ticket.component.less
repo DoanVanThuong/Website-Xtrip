@@ -1,0 +1,96 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.flight-booked-ticket-detail {
+  color: @gray-2;
+
+  .ticket-pnr {
+    .sub-label {
+      font-style: italic;
+      font-weight: @font-medium;
+      color: @gray-9;
+      font-size: 13px;
+    }
+  }
+
+  .passenger-info {
+    margin-left: 20px;
+
+    li {
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        top: 50%;
+        left: -10px;
+        .transform(translate(-50%, -50%));
+        background-color: @green-2;
+        .border-radius(50%);
+      }
+
+      &:first-child {
+        margin: 0;
+      }
+    }
+  }
+
+  &.flight-booked-ticket-detail-desktop {
+
+    .title {
+      background-color: @gray-17;
+      padding: 10px;
+      font-size: 15px;
+      font-weight: @font-normal;
+      margin: 0px;
+      color: @black
+    }
+  }
+
+  &.flight-booked-ticket-detail-mobile {
+
+    background-color: @gray-41;
+    .pnr-info {
+      .note {
+        color: @gray-9;
+      }
+    }
+    .title {
+      font-size: 15px;
+      margin: 0;
+      padding: 9px 0;
+      color: @black;
+      font-weight: @font-medium;
+    }
+
+    .line-time {
+      border-top: 1px solid @gray-18;
+    }
+
+    .panel {
+      .border-radius(10px);
+      .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+      border-width: 0;
+      margin: 0;
+
+      .panel-body {
+        padding: 10px;
+
+        ul.list-group {
+
+          .list-group-item {
+            padding: 15px 0px;
+
+            &:first-child {
+              border-top-width: 0px;
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+}

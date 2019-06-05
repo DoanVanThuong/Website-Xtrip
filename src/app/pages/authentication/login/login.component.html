@@ -1,0 +1,78 @@
+<div class="login-page">
+  <div class="row">
+    <div class="col-12">
+      <a (click)="goBack()">
+        <img class="m-b-0 size-24x24" cdn-src="assets/images/icon/icon-back-left-green.svg" alt="icon"/>
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h4 class="title">
+        Đăng nhập
+      </h4>
+    </div>
+  </div>
+
+  <div class="form-box no-bg-form-box">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6 col-12 p-l-none p-r-none">
+        <form class="form form-mobile"
+              [formGroup]="form"
+              (submit)="onSubmit(form.value)">
+          <div class="form-group">
+            <mat-form-field class="w-full">
+              <input type="text"
+                     matInput
+                     [formControl]="username"
+                     [placeholder]="isProduction ? 'Email *' : 'Email hoặc số điện thoại *'" />
+              <img matSuffix class="size-24x24"
+                   cdn-src="assets/images/signin/icon-email-gray.svg"
+                   alt="icon"
+                   *ngIf="isProduction"/>
+              <mat-error *ngIf="username.dirty || !!error.username">
+                <span *ngIf="username.errors | equalError:'required'">Email hoặc số điện thoại được yêu cầu</span>
+                <span *ngIf="username.errors | equalError:'isNotEmail'">Email không hợp lệ</span>
+                <span *ngIf="username.errors | equalError:'email'">Email không hợp lệ</span>
+                <span *ngIf="username.errors | equalError:'isNotPhone'">Số điện thoại không hợp lệ</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="w-full">
+              <input [type]="isPassword ? 'password' : 'text'"
+                     [formControl]="password"
+                     matInput
+                     placeholder="Mật khẩu *"/>
+              <a matSuffix (click)="isPassword = !isPassword">
+                <img class="size-24x24"
+                     cdn-src="assets/images/signin/icon-password-{{isPassword ? 'hide' : 'see'}}.svg"
+                     alt="icon"/>
+              </a>
+              <mat-error *ngIf="password.dirty">
+                <span *ngIf="password.errors | equalError:'required'">Mật khẩu được yêu cầu</span>
+                <span *ngIf="password.errors | equalError:'minlength'">Mật khẩu phải lớn hơn 6 ký tự</span>
+                <span *ngIf="password.errors | equalError:'maxlength'">Mật khẩu phải nhỏ hơn 36 ký tự</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="m-t-20">
+            <button class="btn btn-signin btn-main-v2" [disabled]="form.invalid">Đăng nhập</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="position-absolute pos-link-btn">
+      <div class="row">
+        <div class="container-fluid text-center">
+          <a class="btn btn-main-link" [routerLink]="['/authentication/forgot']">
+            Quên mật khẩu?
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,18 @@
+<div class="favorite-mobile-page favorite-style">
+  <app-header [back]="true" [heading]="'Yêu thích'" [fixed]="true" [version]="3">
+
+    <tabset [justified]="true" [type]="'tabs'" class="tab-mobile">
+      <tab [heading]="'Khách sạn'" [active]="tab === 'hotel'" (selectTab)="onSelectTab($event, 'hotel')"></tab>
+      <tab [heading]="'Tour'" [active]="tab === 'tour'" (selectTab)="onSelectTab($event, 'tour')"></tab>
+    </tabset>
+  </app-header>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <favorite-hotel-mobile *ngIf="tab === 'hotel'"></favorite-hotel-mobile>
+        <favorite-tour-mobile *ngIf="tab === 'tour'"></favorite-tour-mobile>
+      </div>
+    </div>
+  </div>
+</div>

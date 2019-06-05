@@ -1,0 +1,169 @@
+<div class="block block-last-tour {{ class }}" *ngIf="!!tours.length">
+
+  <!-- desktop -->
+  <div class="last-tour last-tour-desktop" *ngIf="isDesktop">
+    <div class="container">
+      <div class="row">
+        <div class="container-fluid">
+          <h4 class="block-title">{{ heading || 'Tour giá sốc' }}</h4>
+          <div class="block-body">
+            <div class="row">
+              <div class="col-xl-5 left">
+                <div class="last-tour-item first-item">
+                  <a class="pointer d-block"
+                     [title]="tours[0].name"
+                     [routerLink]="[tours[0].href]"
+                     [queryParams]="generateQueryParams(tours[0])">
+                    <div class="tour-image">
+                      <img class="img-fix"
+                           defaultImage="assets/images/no-thumbnail.png"
+                           errorImage="assets/images/no-thumbnail.png"
+                           [lazyLoad]="tours[0].photo.src | size:300"
+                           [offset]="80"
+                           [useSrcset]="true"
+                           onerror="this.src='assets/images/no-thumbnail.png'"
+                           [alt]="tours[0].name"/>
+
+                      <div class="tour-countdown">
+                        <home-countdown [time]="tours[0].flashDeal.to" (submit)="getTours()"></home-countdown>
+                      </div>
+
+                      <div class="tour-info">
+                        <div class="tour-name d-flex align-items-start text-truncate-2lines">{{tours[0].name}}</div>
+                        <div class="tour-depart m-t-10">
+                          <img class="m-t-n-3 size-24x24 m-r-5"
+                               cdn-src="assets/images/icon/icon-calendar-white-outline.svg"
+                               alt="icon"/>
+                          Khởi hành: {{ tours[0].departDate | moment: 'DD/MM/YYYY' }} ({{tours[0].days}}
+                          N{{tours[0].nights}}Đ)
+                        </div>
+                        <div class="tour-price">
+                          <span class="font-medium">Chỉ còn</span>
+                          <app-price class="font-18 font-bold" [price]="tours[0].sellingPrice"></app-price>
+                          <app-price class="text-line-through font-13" [price]="tours[0].originalPrice"></app-price>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-xl-7 right">
+                <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-dots-green', 'owl-nav-black']"
+                              [items]="tours"
+                              [options]="carouselOptions">
+                  <div class="list-tour-group"
+                       *ngFor="let group of pushListWith(tours.slice(1,tours.length), 2); trackBy: trackByFn">
+                    <div class="last-tour-item"
+                         *ngFor="let tour of group; trackBy: trackByFn">
+                      <a class="pointer d-flex"
+                         [title]="tour.name"
+                         [routerLink]="[tour.href]"
+                         [queryParams]="generateQueryParams(tour)">
+                        <div class="tour-image">
+                          <img class="img-fix"
+                               defaultImage="assets/images/no-thumbnail.png"
+                               errorImage="assets/images/no-thumbnail.png"
+                               [lazyLoad]="tour.photo.src | size:300"
+                               [offset]="80"
+                               [useSrcset]="true"
+                               onerror="this.src='assets/images/no-thumbnail.png'"
+                               [alt]="tour.name"/>
+                        </div>
+                        <div class="tour-info w-full">
+                          <div class="tour-name text-truncate-2lines">{{tour.name}}</div>
+                          <div class="tour-depart m-t-10">
+                            <img class="m-t-n-3 size-24x24"
+                                 cdn-src="assets/images/icon/icon-calendar-green-outline.svg"
+                                 alt="icon"/>
+                            Khởi hành: {{ tour.departDate | moment: 'DD/MM/YYYY' }} ({{tour.days}}N{{tour.nights}}Đ)
+                          </div>
+                          <div class="tour-countdown m-t-10">
+                            <home-countdown [time]="tour.flashDeal.to" (submit)="getTours()"></home-countdown>
+                          </div>
+                          <div class="tour-price">
+                            <span class="font-medium">Chỉ còn</span>
+                            <app-price class="font-18 font-bold" [price]="tour.sellingPrice"></app-price>
+                            <app-price class="text-line-through font-13" [price]="tour.originalPrice"></app-price>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </owl-carousel>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="last-tour last-tour-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="block-title m-b-none d-flex justify-content-center align-items-center">
+          <h4 class="m-b-none">{{ heading || 'Tour giờ chót' }}</h4>
+          <a class="pointer ml-auto" [routerLink]="['/']">
+            <img class="size-16x16 scale-one-half"
+                 cdn-src="assets/images/icon/icon-angle-right-green.svg"
+                 alt="icon"/>
+          </a>
+        </div>
+        <div class="block-description">
+          Mức giá đầy hấp dẫn, thời điểm cận ngày khởi hành
+        </div>
+        <div class="block-body m-t-10">
+          <div class="scroll-container hidden-scrollbar">
+            <div class="scroll-area">
+              <div class="scroll-item last-tour-item"
+                   *ngFor="let tour of tours; trackBy: trackByFn">
+                <a class="pointer d-block"
+                   [title]="tour.name"
+                   [routerLink]="[tour.href]"
+                   [queryParams]="generateQueryParams(tour)">
+                  <div class="tour-image">
+                    <img class="img-fix"
+                         defaultImage="assets/images/no-thumbnail.png"
+                         errorImage="assets/images/no-thumbnail.png"
+                         [lazyLoad]="tour.photo.src | size:300"
+                         [offset]="80"
+                         [useSrcset]="true"
+                         onerror="this.src='assets/images/no-thumbnail.png'"
+                         [alt]="tour.name"/>
+
+                    <div class="tour-countdown">
+                      <home-countdown [time]="tour.flashDeal.to" (submit)="getTours()"></home-countdown>
+                    </div>
+                  </div>
+                  <div class="tour-info d-flex flex-column justify-content-start">
+                    <div class="m-b-10">
+                      <div class="tour-name text-truncate-2lines">{{tour.name}}</div>
+                      <div class="tour-depart d-flex flex-wrap m-t-10">
+                        <div class="flex-fill">
+                          <img class="m-t-n-3 size-14x14"
+                               cdn-src="assets/images/icon/icon-calendar-gray.svg"
+                               alt="icon"/>
+                          Khởi hành: {{ tour.departDate | moment: 'DD/MM/YYYY' }}
+                        </div>
+                        <div class="flex-fill">
+                          <img class="m-t-n-3 size-14x14"
+                               cdn-src="assets/images/icon/icon-clock.svg"
+                               alt="icon"/>
+                          Thời gian: {{tour.days}}N{{tour.nights}}Đ
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tour-price mt-auto">
+                      <app-price [price]="tour.sellingPrice"></app-price>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

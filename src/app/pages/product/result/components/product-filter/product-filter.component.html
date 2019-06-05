@@ -1,0 +1,85 @@
+<!--component html goes here -->
+<div class="product-filter-desktop-page">
+  <div class="bg-white b-r-10 filter-shadow m-t-3">
+    <div class="p-16">
+      <div class="row">
+        <div class="col-lg-6 title">Bộ lọc</div>
+        <div class="col-lg-6 text-right reset">
+          <a class="d-block pointer" (click)="onReset()">Đặt lại</a>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="p-16 mn-h-filter-area" *ngIf="!!productFilter">
+
+      <div class="price-slider" *ngIf="labelSlider.price.min != labelSlider.price.max">
+        <div class="row m-t-4 position-relative">
+          <div class="col-md-12 title animated fadeInUp">
+            Khoảng giá
+          </div>
+          <div class="col-md-12 text-right position-absolute animated fadeIn">
+            <span class="bg-price-range">
+              {{labelSlider.price.min | currencyMoney: ''}} <span class="text-underline">đ</span> -
+              {{labelSlider.price.max | currencyMoney: ''}} <span class="text-underline">đ</span>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <nouislider class="p-0-8 m-t-22"
+              [config]="sliderPriceConfig"
+              [min]="sliderPriceConfig.range.min"
+              [max]="sliderPriceConfig.range.max"
+              (change)="onPriceChange($event)"
+              (update)="onUpdatePrice($event)"
+              [(ngModel)]="filter.prices">
+            </nouislider>
+          </div>
+        </div>
+      </div>
+
+      <div class="options">
+        <div class="row m-t-30">
+          <div class="col-md-12 title animated fadeInUp">
+            Lọc theo
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="d-flex flex-wrap m-t-10">
+              <li class="options-item" *ngFor="let item of getArrayDataField(productFilter, 'options')" [class.active]="checkIsExist(filter.options, item.code)">
+                <a class="d-block" (click)="onSelectOptions(item.code)">{{item.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="categories">
+        <div class="row m-t-30">
+          <div class="col-md-12 title animated fadeInUp">
+            Danh mục
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of getArrayDataField(productFilter, 'categories')">
+                <a class="d-block pointer" (click)="onSelectCategories(item.code)">
+                  {{item.name}}
+                  <span class="pull-left p-r-10">
+                    <img *ngIf="checkIsExist(filter.categories, item.code)" class="m-l-5 m-b-none m-t-n-3 size-16x16 animated fadeIn" cdn-src="assets/images/icon/icon-checked-green.svg"
+                      alt="img" />
+                    <img *ngIf="!checkIsExist(filter.categories, item.code)" class="m-l-5 m-b-none m-t-n-3 size-16x16 animated fadeIn"
+                      cdn-src="assets/images/icon/icon-uncheck-gray.svg" alt="img" />
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

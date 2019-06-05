@@ -1,0 +1,38 @@
+@import "_variables.less";
+.modal.popup-charge-fee {
+  &.show {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+  .modal-dialog {
+    &.fullscreen {
+      padding-top: calc(~"100vh - 220px");
+    }
+    .modal-content {
+      .modal-header {
+        padding: 0;
+        .title {
+          color: @gray-1;
+          background-color: @gray-29;
+          font-size: 14px;
+          padding: 5px 10px;
+        }
+      }
+      .modal-body {
+        padding: 10px 16px;
+        .line {
+          height: 1px;
+          width: 100%;
+          background-color: @gray-3;
+          margin-top: 10px;
+        }
+      }
+      .modal-footer {
+        padding: 0;
+        .btn-main-v2 {
+          border-radius: 0;
+          padding: 16px 0;
+        }
+      }
+    }
+  }
+}

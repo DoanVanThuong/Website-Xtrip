@@ -1,0 +1,71 @@
+<div class="flight-result flight-search-desktop">
+
+  <app-flight-search-bar></app-flight-search-bar>
+
+  <section class="main-body p-t-20">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-12 left-section">
+          <app-flight-filter [data]="filter"
+                             (submit)="onSubmitFilter($event)">
+
+          </app-flight-filter>
+        </div>
+        <div class="col-lg-8 col-12 right-section">
+
+          <div class="m-b-20" @item *ngIf="isReturnTurn">
+            <a class="pointer animated fadeIn"
+               (click)="backToDepartWay()">
+              <app-flight-item-desktop [carriers]="carriers"
+                                       [airports]="airports"
+                                       [showDetail]="false"
+                                       [flight]="departTicket">
+                <div class="flight-title">
+                  <img class="m-b-none m-t-n-3 size-24x24 m-r-10"
+                       cdn-src="assets/images/icon/icon-flight-up-gray.svg"
+                       alt="icon"/> Chuyến bay chiều đi
+                </div>
+              </app-flight-item-desktop>
+            </a>
+          </div>
+
+          <app-flight-sortable [sort]="filter.sort"
+                               (select)="onSelectSort($event)">
+            <div class="flight-title" *ngIf="!isReturnTurn">
+              <img class="m-b-none m-t-n-3 size-24x24 m-r-10"
+                   cdn-src="assets/images/icon/icon-flight-up-white.svg"
+                   alt="icon"/> Chuyến bay chiều đi
+            </div>
+            <div class="flight-title" *ngIf="isReturnTurn">
+              <img class="m-b-none m-t-n-3 size-24x24 m-r-10"
+                   cdn-src="assets/images/icon/icon-flight-down-white.svg"
+                   alt="icon"/> Chuyến bay chiều về
+            </div>
+          </app-flight-sortable>
+
+          <div class=" m-t-20">
+
+            <div class="empty text-center"
+                 *ngIf="!flights.length && !isLoading">Không tìm thấy chuyến bay nào
+            </div>
+
+            <loading [show]="isLoading"
+                     [title]="'Đang tìm vé máy bay'"
+                     [description]="'Vui lòng đợi trong giây lát'"></loading>
+
+            <ul class="flight-list" *ngIf="flights.length">
+              <li *ngFor="let flight of flights; trackBy: trackByFn">
+                <app-flight-item-desktop [carriers]="carriers"
+                                         [airports]="airports"
+                                         [flight]="flight"
+                                         [round-trip]="isRoundTrip"
+                                         (select)="onSelectFlight(flight)"></app-flight-item-desktop>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

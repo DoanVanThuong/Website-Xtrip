@@ -1,0 +1,86 @@
+// component css goes here
+@import "_variables.less";
+@import './_mixins.less';
+
+.product-search-form-page {
+  &.focused {
+    position: relative;
+
+    &:before {
+      content: '';
+      .rgba(@black, .6s);
+      position: fixed;
+      z-index: 200;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  .form-group {
+    margin: 0 -15px;
+    .form-control {
+      border-radius: 5px;
+      font-size: 15px;
+      color: @black;
+      position: absolute;
+      z-index: 500;
+    }
+  }
+  .result-search-product {
+    height: 458px;
+    width: calc(~"100%");
+    position: absolute;
+    background-color: @white;
+    margin-left: -15px;
+    overflow-x: hidden;
+    z-index: 1050;
+    border-radius: 10px;
+    top: 50px;
+    .heading {
+      height: 30px;
+      background-color: @gray-13;
+      color: @gray-1;
+      padding: 4px 10px;
+      font-size: 14px;
+    }
+    .data-box {
+      padding: 0 10px;
+      .list-group-item {
+        padding: 11px 0;
+        overflow: hidden;
+        .main-text {
+          font-weight: 500;
+          color: @gray-2;
+        }
+        .sub-text {
+          color: @gray-9;
+        }
+      }
+    }
+    .location-history {
+      .data-box {
+        padding: 0 5px;
+      }
+      .his-item {
+        padding: 3px 10px;
+        border-radius: 5px;
+        line-height: 2;
+        margin: 10px 5px;
+        cursor: pointer;
+        border: 1px solid @green-2;
+        background-color: @white;
+        color: @green-2;
+        -webkit-transition: all .25s linear;
+        transition: all .25s linear;
+        &:hover {
+          background-color: @green-2;
+          color: @white;
+          border-color: transparent;
+          -webkit-transition: all .25s linear;
+          transition: all .25s linear;
+        }
+      }
+    }
+  }
+}

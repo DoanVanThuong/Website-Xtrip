@@ -1,0 +1,119 @@
+<div class="combo-info combo-info-mobile" *ngIf="isMobile && !!combo">
+  <div class="panel panel-desktop">
+    <div class="panel-body p-10">
+      <div class="combo-name font-bold text-black">{{ combo.productName }}</div>
+      <div class="line"></div>
+      <div class="combo-description">
+        <div class="row">
+          <div class="col-4">
+            <div class="info-label">Ngày đi</div>
+            <div class="info-value">{{ combo.date }}</div>
+          </div>
+          <div class="col-4">
+            <div class="info-label">Thời lượng</div>
+            <div class="info-value text-truncate">{{ combo.duration }}</div>
+          </div>
+          <div class="col-4">
+            <div class="info-label">Số người</div>
+            <div class="info-value">{{ combo.totalPax }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="combo-info m-t-20 font-13">
+        <div class="font-bold text-black">{{ combo.optionName }}</div>
+        <div class="combo-note" [innerHTML]="combo.notes | newline"></div>
+      </div>
+    </div>
+    <div class="panel-footer p-10">
+      <div class="row" *ngIf="isCollapsed">
+        <div class="col-12">
+          <div *ngIf="priceSummary.detailItems">
+            <div class="d-flex justify-content-center align-items-center p-5-0" *ngFor="let item of priceSummary.detailItems; trackBy: trackByFn;">
+              <div class="font-15 mr-auto">
+                {{ item.title }}
+              </div>
+              <div class="text-right font-15">
+                {{ item.price | currencyMoney: '' }} <span class="text-underline">đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-start align-items-center p-5-0">
+        <div class="font-bold text-black mr-auto">Tổng tiền</div>
+        <div class="">
+          <div class="text-main font-bold">
+            {{ totalPrice | currencyMoney:'' }} <span class="text-underline">đ</span>
+
+            <div class="btn-collapse m-l-10" [class.collapsed]="isCollapsed">
+              <a class="icon-collapse active" (click)="isCollapsed = !isCollapsed">
+                <i aria-hidden="true" class="fa fa-caret-up "></i>
+              </a>
+              <a class="icon-expand unactive" (click)="isCollapsed = !isCollapsed">
+                <i aria-hidden="true" class="fa fa-caret-down "></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="combo-info combo-info-desktop " *ngIf="isDesktop && !!combo">
+  <div class="title">Thông tin đặt combo</div>
+  <div class="combo-info-wp animated zoomIn shadow p-20 b-r-10  bg-white">
+    <div class="row">
+      <div class="col-3">
+        <div class="img-combo">
+          <img class="img-fix m-b-none w-full h-full b-r-10"
+               [src]="combo.productPhoto.src | size: 140" onerror="this.src = 'assets/images/no-thumbnail.png'"
+            [alt]="" />
+        </div>
+      </div>
+      <div class="col-6 info p-l-5 p-r-none">
+        <h4 class="combo-name">{{combo.productName}}</h4>
+        <div>
+          <span class="m-r-4">
+            <i class="fa fa-map-marker text-main" aria-hidden="true"></i>
+          </span>
+          <span class="font-14">{{combo.address}} </span>
+          <span class="m-l-8">
+            <a class="link-view-map pointer" (click)="viewMap()">Xem bản đồ</a>
+          </span>
+        </div>
+        <div class="combo-detail-wp d-flex justify-content-between align-items-center m-t-15 p-b-15 mx-w-260">
+          <div class="depart-date">
+            <div class="title-detail">Ngày đi</div>
+            <div class="font-15">{{ combo.date }}</div>
+          </div>
+          <div>
+            <div class="title-detail">Thời lượng</div>
+            <div class="font-15">{{ combo.duration }}</div>
+          </div>
+          <div>
+            <div class="title-detail">Số nguời</div>
+            <div class="font-15">{{ combo.totalPax }}</div>
+          </div>
+        </div>
+        <div class="font-bold font-16 m-t-15">{{combo.optionName}}</div>
+        <ul class="list-unstyled list-detail-info ">
+          <li *ngFor="let note of notes">
+            {{note}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-3 m-t-20">
+        <div class="text-right">
+          <a class="text-underline view-detail pointer" (click)="viewDetailNote()"> Xem chi tiết</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <detail-note-popup [combo]="combo" [notes]="notes"></detail-note-popup>
+  <full-screen-map-popup *ngIf="!!combo.latitude && !!combo.longitude" [name]="combo.name" [latitude]="combo.latitude"
+    [longitude]="combo.longitude"></full-screen-map-popup>
+
+</div>

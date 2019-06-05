@@ -1,0 +1,125 @@
+<div class="hotel-detail-desktop">
+  <!-- Search bar -->
+  <app-hotel-search-bar-desktop [mode]="1"
+                                [hotel]="hotel"
+                                (submit)="submitSearchHotel($event)">
+
+    <div class="bg-white scroll-to hotel-sub-search-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="quick-menu-wp">
+              <ul class="list-unstyled list-inline">
+                <li *ngFor="let item of scrollToItem; trackBy: trackByFn" class="item font-15 font-medium pointer"
+                    [class.active]="item.value === selectedScrollTo" (click)="triggerScrollTo(item.value)">
+                  {{item.display}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-hotel-search-bar-desktop>
+
+  <!-- Scroll to -->
+  <div class="main-body">
+
+    <!-- Scroll to -->
+
+    <section class="main-content">
+      <div class="container mn-h-400">
+
+        <!-- Breadcrumb -->
+        <section class="row" *ngIf="!!hotel">
+          <div class="col-12 m-t-10 m-b-10">
+            <!-- <app-hotel-breadcrumb [params]="params" [step]="'detail'" [hotel]="hotel"></app-hotel-breadcrumb> -->
+            <app-breadcrumb-desktop [items]="breadcrumbs"></app-breadcrumb-desktop>
+          </div>
+        </section>
+        <!-- Breadcrumb -->
+
+        <div class="row">
+
+          <div class="col-md-12 text-center">
+            <loading [show]="isLoading"></loading>
+          </div>
+
+          <section class="col-lg-4 left-section">
+            <!-- Basic data -->
+            <app-hotel-detail-basic *ngIf="!isLoading" [hotel]="hotel" [code]="code"></app-hotel-detail-basic>
+            <!-- Basic data -->
+          </section>
+
+          <!-- Carousel -->
+          <section class="col-lg-8 right-section" *ngIf="!isLoading">
+            <app-hotel-carousel [hotel]="hotel" [code]="code" [data]="imageCategory"></app-hotel-carousel>
+          </section>
+          <!-- Carousel -->
+
+          <!-- Rooms List -->
+          <section [id]="scrollToItem[0].value" class="col-lg-12" *ngIf="rooms.length > 0 && !isLoading">
+            <app-hotel-room-desktop *ngFor="let room of rooms; trackBy: trackByFn; let i = index" [hotel]="hotel"
+                                    [params]="params"
+                                    [nights]="nights" [room]="room">
+            </app-hotel-room-desktop>
+          </section>
+          <section [id]="scrollToItem[0].value" class="col-lg-12 p-r-none m-b-20 m-t-20"
+                   *ngIf="rooms.length === 0 && !isLoading">
+            <div class="shadow b-r-10 bg-white p-10" [ngx-scroll-to]="'#header'">
+              <div class="row">
+                <div class="col-12 text-center">
+                  <img class="m-b-0" cdn-src="assets/images/hotel/desktop/empty-room.svg" alt="img">
+                </div>
+                <div class="col-12 text-center title-research-room" (click)="reClickSearch = !reClickSearch">
+                  <div class="font-weight-bold">Xtrip rất tiếc, Phòng bạn chọn đã hết.</div>
+                  Bạn có thể <span class="text-main pointer">tìm khách sạn này với ngày khác</span> hoặc <span
+                  class="text-main pointer">tìm
+                  ngày
+                  này với khách sạn khác</span>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Rooms List -->
+
+          <!-- Intro -->
+          <section [id]="scrollToItem[1].value" class="col-lg-12" *ngIf="!isLoading && !!hotel.description">
+            <app-hotel-facilities-desktop [code]="code" [hotel]="hotel" [mode]="'intro'">
+            </app-hotel-facilities-desktop>
+          </section>
+          <!-- Intro -->
+
+          <!-- Facilities -->
+          <section [id]="scrollToItem[2].value" class="col-lg-12" *ngIf="!isLoading">
+            <app-hotel-facilities-desktop [code]="code" [hotel]="hotel" [mode]="'facilities'">
+            </app-hotel-facilities-desktop>
+          </section>
+          <!-- Facilities/Policy -->
+
+          <!-- Policy -->
+          <section [id]="scrollToItem[3].value" class="col-lg-12" *ngIf="!isLoading">
+            <app-hotel-policy-desktop [code]="hotel.code"></app-hotel-policy-desktop>
+          </section>
+
+          <!-- Reviews -->
+          <section [id]="scrollToItem[4].value" class="col-lg-12" *ngIf="!isLoading">
+            <app-hotel-reviews [code]="hotel.code">
+            </app-hotel-reviews>
+          </section>
+          <!-- Reviews -->
+
+          <!-- Equivalent -->
+          <section id="equivalent" class="col-lg-12" *ngIf="!isLoading">
+            <app-hotel-equivalent-desktop [params]="params" [code]="hotel.code" [searchInfo]="searchInfo">
+            </app-hotel-equivalent-desktop>
+          </section>
+          <!-- Equivalent -->
+
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</div>

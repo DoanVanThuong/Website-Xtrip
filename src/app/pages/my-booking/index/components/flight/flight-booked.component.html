@@ -1,0 +1,54 @@
+<!-- for mobile -->
+<div class="booked-flight booked-flight-mobile booked-flight-style" *ngIf="isMobile">
+  <div infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <app-booking-empty-screen [show]="!isLoading && !flights.length"
+                              [image]="'assets/images/booked-flight-empty.png'"
+                              [title]="'BẠN CHƯA CÓ THÔNG TIN ĐẶT VÉ'"
+                              [description]="'Săn ngay vé máy bay giá rẻ với những chặng bay linh hoạt.'"
+                              (click)="bookFlightNow()">
+    </app-booking-empty-screen>
+
+    <ul class="list-unstyled"
+        *ngIf="flights.length">
+      <li class="booked-flight-item"
+          *ngFor="let flight of flights; trackBy: trackByFn">
+        <my-booking-flight-detail-item [flight]="flight"
+                                       [airports]="airports">
+        </my-booking-flight-detail-item>
+    </ul>
+
+    <loading [show]="isLoading"></loading>
+  </div>
+</div>
+
+<!-- for desktop -->
+<div class="booked-flight-style" *ngIf="isDesktop">
+  <div infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <booking-empty [show]="!isLoading && !flights.length"
+                   [heading]="'Không có đặt chỗ'"
+                   [description]="'Mọi chỗ bạn đặt sẽ được hiển thị tại đây.'"></booking-empty>
+
+    <div *ngIf="!isLoading && flights.length">
+      <div @list *ngFor="let flight of flights; trackBy: trackByFn; let i = index">
+        <my-booking-flight-detail-item @item
+                                       class="m-t-20"
+                                       [flight]="flight"
+                                       [airlines]="airlines"
+                                       [airports]="airports">
+        </my-booking-flight-detail-item>
+      </div>
+    </div>
+
+    <loading [show]="isLoading"
+             [title]="'Đang tải dữ liệu'"
+             [description]="'Vui lòng đợi trong giây lát'"></loading>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+.panel {
+  &.panel-desktop {
+    .border-radius(10px);
+    .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+    border-width: 0;
+    margin: 0;
+
+    .panel-heading,
+    .card-header {
+      .border-radiuses(10px, 0, 0, 10px);
+
+      > .panel-title,
+      > .card-title {
+
+      }
+    }
+
+    .panel-body,
+    .card-body {
+      padding: 20px;
+    }
+
+    .panel-footer,
+    .card-footer {
+      background-color: @white;
+      .border-radiuses(0, 10px, 10px, 0);
+    }
+  }
+}

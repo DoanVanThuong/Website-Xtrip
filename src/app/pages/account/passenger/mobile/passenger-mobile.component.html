@@ -1,0 +1,83 @@
+<div class="passenger-page passenger-mobile">
+
+  <app-header [back]="true" [heading]="'Thông tin hành khách'" [fixed]="true" *ngIf="!isDeleteMode" [version]="3"></app-header>
+
+  <div class="header header-mobile bg-green-linear p-b-10" *ngIf="isDeleteMode">
+    <div class="row">
+      <div class="col-2 text-center p-r-none">
+        <a class="text-white select-all" (click)="onSelectAll()">
+          <img class="size-24x24"
+               [class.active]="selectedPassengers.length === passengers.length"
+               [src]=" selectedPassengers.length === passengers.length ? 'assets/images/icon/icon-checked-circle-orange.svg' : 'assets/images/icon/icon-uncheck-circle-white.svg'"
+               alt="icon"/>
+          <div class="font-11 m-t-5">Tất cả</div>
+        </a>
+      </div>
+      <div class="col-8 text-center">
+        <div class="header-title">Xóa hành khách</div>
+      </div>
+      <div class="col-2 text-right">
+        <a class="text-white" (click)="onDeleteGroup()">
+          <img class="size-24x24" cdn-src="assets/images/icon/icon-trash.svg" alt="icon"/>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="wrapper" min-height>
+    <div class="container-empty-screen"
+         *ngIf="!passengers.length">
+      <div class="container-data-empty-screen">
+        <div class="row">
+          <div class="container-fluid text-center">
+            <div class="">
+              <img class="mx-w-200" cdn-src="assets/images/empty-screen.png" alt="image"/>
+            </div>
+            <div class="m-t-20">
+              <strong>Chưa có thông tin hành khách</strong>
+            </div>
+            <div class="text-center">
+              Tạo thông tin hành khách để đặt chỗ nhanh hơn
+            </div>
+            <div class="m-t-10" *ngIf="!!isRetry">
+              <button (click)="onLoadPassengers()" class="btn btn-main">Tạo ngay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="" *ngIf="passengers.length">
+      <ul class="passenger-list">
+        <li *ngFor="let passenger of passengers; trackBy: trackByFn; let i = index">
+          <div class="row">
+            <div class="col-9">
+              <a class="d-block passenger-name" (click)="onSelectPassenger(passenger)">
+                <div class="text-truncate">
+                  <span *ngIf="isDeleteMode">
+                    <img class="size-24x24"
+                         [src]="onIsSelected(passenger) ? 'assets/images/icon/icon-checked-circle-orange.svg' : 'assets/images/icon/icon-uncheck-circle-gray.svg'"
+                         alt="image"/>
+                  </span>
+                  <span class="m-l-5">
+                    {{ i + 1}}. {{utilityHelper.getPassengerTitle(passenger.title,passenger.type)}} {{passenger.lastName}} {{passenger.firstName}}</span>
+                </div>
+              </a>
+            </div>
+            <div class="text-right col-3 p-l-none">
+              <a class="text-main" (click)="onSelectEditor(passenger)">Chỉnh sửa</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <a class="btn btn-link btn-add-passenger"
+     *ngIf="!isDeleteMode"
+     [routerLink]="['/account/passenger/add']">
+    <img class="size-38x38"
+         cdn-src="assets/images/user-profile/addtthk.svg" alt="icon"/>
+  </a>
+</div>

@@ -1,0 +1,31 @@
+@import '_variables.less';
+.modal {
+  &.popup-confirm {
+    .modal-dialog {
+      width: 320px;
+      @media (max-width: 575px) {
+        width: auto;
+      }
+      .modal-content {
+        border-radius: 10px;
+        .modal-body {
+          padding: 15px;
+          .title {
+            font-size: 24px;
+            color: @gray-4;
+            padding: 0;
+          }
+          .content {
+            font-size: 15px;
+            color: @gray-4;
+          }
+          .btn {
+            padding: 8px 15px;
+            margin-right: 8px;
+            border-radius: 25px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,169 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.flight-detail {
+
+  display: none;
+  visibility: hidden;
+  transition: all .5s linear;
+
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  &.expanded {
+    display: block;
+    visibility: visible;
+  }
+
+  .flight-timeline {
+
+    .flight-timeline-group {
+      .flight-timeline-item {
+        position: relative;
+        clear: both;
+        line-height: 1.25;
+
+        .flight-time {
+          position: relative;
+          float: left;
+          left: 0;
+          top: 0;
+          width: 30%;
+          height: 100%;
+          text-align: right;
+          padding: 15px 20px 15px 0px;
+          color: @gray-2;
+        }
+
+        .flight-location {
+          float: right;
+          position: relative;
+          width: 70%;
+          text-align: left;
+          background-color: transparent;
+          padding: 15px 10px 15px 20px;
+          border-width: 0;
+          color: @gray-2;
+
+          // line
+          &:after {
+            content: '';
+            height: 100%;
+            border-left: 2px solid @green-2;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            transform: translateX(-50%);
+          }
+
+          // dot
+          &:before {
+            content: '';
+            height: 10px;
+            width: 10px;
+            background-color: @white;
+            border-radius: 50%;
+            border: 2px solid @green-2;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            transform: translateX(-50%);
+            z-index: 100;
+          }
+        }
+
+        &:after {
+          clear: both;
+        }
+
+        &.flight-pending {
+          .flight-location {
+            &:before {
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
+
+      &:first-child {
+        .flight-timeline-item {
+
+          &:first-child {
+            .flight-time {
+              padding-top: 0;
+            }
+            .flight-location {
+              padding-top: 0;
+              &:after {
+                top: 7px;
+                height: 120%;
+              }
+              &:before {
+                top: 7px;
+                background-color: @green-2;
+              }
+            }
+          }
+        }
+      }
+
+      &:last-child {
+
+        .flight-timeline-item {
+
+          &:last-child {
+            .flight-location {
+              &:after {
+                content: unset;
+              }
+              &:before {
+                background-color: @green-2;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .stop-step {
+    background-color: @green-10;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  .flight-condition {
+    padding: 20px;
+    background-color: @gray-18;
+    border-radius: 10px;
+
+    ul {
+      margin: 0px;
+
+      > li {
+        position: relative;
+        font-size: 14px;
+        color: @gray-2;
+        font-weight: 400;
+        padding: 3px 5px 3px 20px;
+
+        > img {
+          position: absolute;
+          top: 9px;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  .flight-point {
+    background-color: @green-10;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+}

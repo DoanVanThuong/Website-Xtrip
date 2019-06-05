@@ -1,0 +1,65 @@
+<div class="line-distance-area">
+  <div class="row bg-header-title">
+    <div class="title-large text-left gray-cl">{{heading}}</div>
+  </div>
+  <div class="distance-style">
+    <div class="row">
+      <div class="col-6 font-20">
+        {{flight.origin}}
+        <img class="m-b-0 m-t-n-2 size-28x28" cdn-src="assets/images/detailflighticon.png" alt="logo"/>
+        {{flight.destination}}
+      </div>
+      <div class="col-6 text-right font-13 p-l-none">
+        <div class="p-t-5 gray-cl">
+          <flight-stop [duration]="flight.flightDuration"
+                       [stop]="flight.legs.length - 1"
+                       [isStop]="false"></flight-stop>
+        </div>
+      </div>
+    </div>
+
+    <div class="row black">
+      <div class="col-12">Khởi hành: {{flight.departTime | startTime}}</div>
+    </div>
+
+    <div *ngFor="let leg of flight.legs; trackBy: trackByFn">
+      <div class="row p-t-10" *ngIf="leg.timePending > 0">
+        <div class="col-2">&nbsp;</div>
+        <div [innerHTML]="restTime(leg)" class="col-8 text-center stop-step"></div>
+        <div class="col-2">&nbsp;</div>
+      </div>
+      <div class="row p-t-20">
+        <div class="col-12">
+          <img class="size-24x24 m-t-n-3" [src]="getCarrierWith(leg.carrier, 'icon')"
+               alt="carrier"/>
+          <span
+              class="p-l-10">{{getCarrierWith(leg.carrier, 'name')}} - {{ leg.flightNumber }} {{ flight.ticketType }}</span>
+        </div>
+      </div>
+
+      <div class="p-t-10 row">
+        <div class="col-3">{{leg.departTime | moment: 'HH:mm'}}</div>
+        <div class="col-6 p-t-10 p-l-none p-r-none">
+          <div class="line-time"></div>
+        </div>
+        <div class="col-3 text-right">{{leg.landingTime | moment: 'HH:mm'}}</div>
+      </div>
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 text-center m-t-n-24">
+          <span class="bg-white font-12 p-6">{{ utilityHelper.durationTime(leg.flightDuration) }}</span>
+        </div>
+        <div class="col-2"></div>
+      </div>
+
+      <div class="row p-t-10 gray-cl">
+        <div class="col-6">{{getAirportWith(leg.origin, 'location')}}</div>
+        <div class="col-6 text-right">{{getAirportWith(leg.destination, 'location')}}</div>
+      </div>
+      <div class="row gray-cl">
+        <div class="col-6">{{leg.origin}}</div>
+        <div class="col-6 text-right">{{leg.destination}}</div>
+      </div>
+    </div>
+  </div>
+</div>

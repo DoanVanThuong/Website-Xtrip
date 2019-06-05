@@ -1,0 +1,40 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.tour-index {
+
+  .tour-list {
+    a {
+      position: relative;
+      padding-left: 15px;
+      .transition(all .3s linear 0s);
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: @green-3;
+        .border-radius(50%);
+      }
+
+      &:hover {
+        color: @orange-2;
+      }
+    }
+  }
+
+  .home-tour-item {
+    &.home-tour-item-desktop {
+      width: auto;
+      border-width: 0;
+
+      .tour-info {
+        padding: 10px;
+      }
+    }
+  }
+}

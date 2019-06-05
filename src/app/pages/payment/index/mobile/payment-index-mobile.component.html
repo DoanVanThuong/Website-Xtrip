@@ -1,0 +1,109 @@
+<div class="payment-page payment-mobile">
+  <app-header [heading]="'Thanh toán'" [confirm]="true" [fixed]="true" [version]="3">
+
+    <header-confirm-back>
+      <a class="back-to pointer" (click)="onConfirm()">
+        <img class="m-b-0 size-16x16" cdn-src="assets/images/icon-back.png" alt="icon"/>
+      </a>
+    </header-confirm-back>
+    <stepper-booking [step]="3" [mode]="module === 'tour' ? 'tour' : 'auto'"></stepper-booking>
+  </app-header>
+
+  <div class="wrapper bg-white p-t-10" min-height>
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-md-8 col-lg-6" *ngIf="!!payments.length">
+        <div class="p-l-15 p-r-15">
+          <payment-note [time]="selectedPayment.holdExpiry || payments[0].holdExpiry"></payment-note>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-8 col-lg-6 m-t-20">
+        <div class="p-l-15 p-r-15">
+          <div class="title font-20 font-black">Hình thức thanh toán</div>
+          <ul class="payment-list m-t-10 p-b-60">
+            <li *ngFor="let payment of payments; trackBy: trackByFn">
+              <a class="pointer d-flex justify-content-start align-items-center"
+                 (click)="selectPayment(payment)">
+                <span class="m-r-10"
+                      [ngSwitch]="selectedPayment.code">
+                  <img class="size-24x24"
+                       *ngSwitchCase="payment.code"
+                       cdn-src="assets/images/icon/icon-checked-circle.svg"
+                       align="img"/>
+                  <img class="size-24x24"
+                       *ngSwitchDefault
+                       cdn-src="assets/images/icon/icon-uncheck-circle.svg"
+                       align="img"/>
+                </span>
+                <img class="size-24x24 m-r-10"
+                     [src]="payment.photo"
+                     [alt]="payment.code"/>
+                <div class="payment-title">
+                  <div class="title w-full font-weight-bold">{{ payment.name }}</div>
+                  <div class="fee">
+                    {{ !!payment.detail && payment.detail.paymentFee === 0 ? 'Miễn phí thanh toán' : ''}}
+                    <span *ngIf="!!payment.detail && payment.detail.paymentFee > 0">Phí thanh toán: {{ payment.detail.paymentFee | currencyMoney: '' }}
+                      <span class="text-underline">đ</span>
+                    </span>
+                  </div>
+                </div>
+              </a>
+              <div class="description font-13 animated fadeIn m-l-68"
+                   *ngIf="selectedPayment.code === payment.code">
+                    <span [class.discount]="payment.discountPercentage"
+                          [innerHTML]="payment.description | newline"></span>
+                <a class="d-block pointer btn btn-link text-main font-13 text-left text-underline"
+                   *ngIf="utilityHelper.findInList(payment.code, [METHOD.STORE, METHOD.OFFICE])"
+                   (click)="onOpenPaymentDetail()">Xem chi tiết</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer payment-footer fixed-bottom">
+    <div class="row">
+      <div class="col-7 pricing">
+        <div class="title">
+          <a class="d-block" (click)="onOpenChargeFeePopup()">
+            Tổng tiền <span><img class="m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-arrowdown-gray.svg" alt="img" /></span>
+          </a>
+        </div>
+        <div class="price">
+          {{ !!selectedPayment.detail && selectedPayment.detail.totalPayment ? (selectedPayment.detail.totalPayment  | currencyMoney: '') : 0  }} <span class="text-underline">đ</span>
+        </div>
+      </div>
+      <div class="col-5">
+        <button class="btn btn-main-v2 btn-block" (click)="onPaymentSubmit()" [disabled]="!selectedPayment.code">
+          Thanh toán
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- popup danh sách ngân hàng chuyển khoản -->
+<transfer-popup [method]="selectedPayment"
+                [option]="selectedOption"
+                (select)="onSelectOption($event)"></transfer-popup>
+
+<!-- popup cửa hàng -->
+<store-popup [method]="selectedPayment"></store-popup>
+
+<!-- popup office -->
+<office-popup [method]="selectedPayment"></office-popup>
+
+<!-- popup atm -->
+<atm-popup [method]="selectedPayment" (confirm)="onSelectOption($event)"></atm-popup>
+
+<!--  popup COD -->
+<cod-popup (confirm)="onSubmitCOD($event)"></cod-popup>
+
+<!-- confirm popup -->
+<confirm-back-popup (submit)="onConfirmBack($event)"></confirm-back-popup>
+
+<!-- detail charge fee -->
+<app-charge-fee-popup [data]="selectedPayment" (onPay)="onPaymentSubmit()"></app-charge-fee-popup>

@@ -1,0 +1,25 @@
+<div class="row coupon-hotel-detail-item animated fadeIn">
+  <div class="col-lg-12 position-relative">
+    <img class="w-full img-fix mx-h-180 b-r-t-l-10 b-r-t-r-10"
+         defaultImage="assets/images/no-thumbnail.png"
+         [lazyLoad]="hotel.photo.url | size: 300"
+         [alt]="hotel.name"
+         [title]="hotel.name"
+         onerror="this.src='assets/images/no-thumbnail.png'">
+    <div class="row bor-hotel h-120">
+      <div class="font-bold font-15 name-height">{{hotel.name}}</div>
+      <div class="font-13 address">{{hotel.address}}</div>
+      <div class="m-t-10">
+        <span class="bg-fac">{{hotel.preferService || 'Bao gồm: bữa sáng'}}</span>
+      </div>
+    </div>
+    <div class="row position-absolute pos-reviews">
+      <div class="col-12">
+        <app-reviews-rating [rating]="hotel.rating" [reviews]="hotel.reviews"></app-reviews-rating>
+        <div class="review-star bg-stars" [class.m-l-10]="hotel.rating>0&&hotel.reviews>0">
+          {{hotel.star}}<img class="m-b-0 m-t-n-3 m-l-4" cdn-src="assets/images/hotel/desktop/star.svg" alt="img">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

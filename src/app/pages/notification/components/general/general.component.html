@@ -1,0 +1,26 @@
+<div class="general"
+     infinite-scroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="150"
+     (scrolled)="onScrollDown()">
+
+  <loading [show]="!notifications.length && isLoading"></loading>
+
+  <app-empty-screen [show]="!notifications.length && !isLoading"
+                    [heading]="'Thông báo'"
+                    [description]="'Hiện bạn chưa có thông báo'"></app-empty-screen>
+  <div class="notification-list" *ngIf="notifications.length">
+    <ul>
+      <li class="notification-item"
+          [class.read]="notification.opened"
+          *ngFor="let notification of notifications; let i = index">
+        <a (click)="onRead(notification)">
+          <div class=" text-justify"> {{ notification.subject }}</div>
+          <div class="time">
+            <i class="fa fa fa-clock-o m-r-10"></i>{{ notification.createdDate | moment:'time_ago' }}
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

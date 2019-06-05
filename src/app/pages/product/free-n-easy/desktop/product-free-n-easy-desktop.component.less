@@ -1,0 +1,79 @@
+// component css goes here
+@import "_variables.less";
+
+.product-free-n-easy-desktop-page,
+.product-activities-desktop-page {
+  .panel {
+    &.panel-desktop {
+      -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .bg-header {
+    &.bg-free-n-easy {
+      background-image: url('../../../../../assets/images/free-n-easy/bg-f-n-e-desktop.jpg');
+    }
+
+    &.bg-activities {
+      background-image: url('../../../../../assets/images/free-n-easy/bg-activities-desktop.jpg');
+    }
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 100%;
+
+    .title {
+      font-size: 42px;
+      font-weight: 900;
+      color: @white;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.5);
+      box-shadow: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      padding-top: 94px;
+    }
+  }
+
+  .owl-theme {
+    .owl-nav {
+      display: none;
+    }
+  }
+
+  .popular-location {
+    .main-pic {
+      height: 470px;
+    }
+
+    .sub-pic {
+      height: 230px;
+    }
+
+    .pos-loc {
+      height: 60px;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.65)));
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.65));
+      width: 100%;
+      bottom: 0;
+      font-size: 20px;
+      color: @white;
+      font-weight: 700;
+      padding-top: 20px;
+      padding-left: 10px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+  }
+
+  .suggestion-for-you, .popular-location, .top {
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+      color: @gray-2;
+      padding-top: 30px;
+    }
+  }
+}

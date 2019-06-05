@@ -1,0 +1,133 @@
+@import "_variables.less";
+@import './_mixins.less';
+
+.bg-search-bar {
+  min-height: 100px;
+  background-color: @dark-gray;
+  width: 100%;
+
+  &.fixed-top {
+    position: fixed !important;
+    z-index: 1000;
+  }
+}
+
+.tour-search-bar {
+  background-color: @dark-gray;
+  padding: 20px;
+  font-size: 16px;
+
+  .tour-search-form {
+    background-color: @white;
+    padding: 10px 20px;
+    border-radius: 10px;
+
+    .form {
+      display: -ms-grid;
+      display: grid;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    &.form.form-desktop {
+      .form-group {
+        margin: 0;
+        line-height: 1;
+
+        .form-control {
+          // padding: 0;
+          height: 22px;
+        }
+
+        .icon-addon {
+          .form-control-icon {
+            top: -4px;
+          }
+        }
+      }
+    }
+
+    .search-destination {
+      .result-tour-location {
+        left: -10px;
+
+        .international-tour, .domestic-tour {
+          .loc-item {
+            padding: 4px 5px;
+            transition: all .25s ease-in;
+
+            &:hover {
+              color: @white;
+              background-color: @green-2;
+              border-radius: 5px;
+              transition: all .25s ease-in;
+            }
+          }
+
+          .data-box {
+            padding: 10px;
+          }
+
+          .item-cell {
+            padding: 10px 0px;
+
+            &.border-top {
+              border-top: 1px solid @gray-13;
+            }
+
+            &.border-bottom {
+              border-bottom: 1px solid @gray-13;
+            }
+          }
+        }
+      }
+    }
+
+    .month-selector {
+      max-width: 200px;
+    }
+
+    .b-left {
+      padding-left: 20px;
+    }
+  }
+
+  .form-input {
+    > .label {
+      color: @gray-1 !important;
+      font-size: 12px;
+      padding: 0;
+      margin: 0;
+      font-weight: 400;
+      text-transform: initial;
+    }
+
+    > input {
+      font-weight: 900;
+      font-size: 16px;
+      width: 100%;
+      border-width: 0;
+      padding: 0;
+      margin: 0;
+      .placeholder(@black);
+    }
+  }
+
+  .btn-search-tour {
+    max-width: 150px;
+
+    button {
+      width: 100%;
+      padding: 10px 0px;
+      font-weight: 700;
+    }
+  }
+
+  .icon-calendar {
+    position: absolute;
+    top: 25%;
+    right: 25%;
+  }
+}

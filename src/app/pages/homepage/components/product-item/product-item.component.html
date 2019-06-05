@@ -1,0 +1,64 @@
+<!-- desktop -->
+<div class="product-item product-item-desktop">
+  <a class="pointer"
+     [title]="product.name"
+     [routerLink]="['/product', product.code, 'detail']"
+     [queryParams]="generateQueryParameters()">
+    <div class="product-image">
+      <img class="img-fix"
+           defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="product.photo.src | size:300"
+           [offset]="80"
+           [alt]="product.name"
+           [title]="product.name"
+           onerror="this.src='assets/images/no-thumbnail.png'"/>
+
+      <div class="product-tag">
+        <ul class="list-unstyled d-flex">
+          <li class="tag"
+              [class.tag-propose]="tag.type === 1"
+              [class.tag-buying]="tag.type === 2"
+              [class.tag-discount]="tag.type === 3"
+              *ngFor="let tag of product.tags; trackBy: trackByFn">
+            {{ tag.text }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="product-info d-flex flex-column align-items-start">
+      <div>
+        <div class="product-name text-truncate-2lines">
+          <a class="pointer export-now">
+            <img class="size-16x16 m-t-n-3" cdn-src="assets/images/icon/icon-flash-orange.svg" alt="item"/>
+          </a>
+          <div class="export-ticket-description">
+            Xuất vé ngay
+          </div>
+          {{ product.name }}
+        </div>
+
+        <div class="product-description m-t-10">
+          <ul>
+            <li *ngFor="let note of product.notes; trackBy: trackByFn">
+              {{ note }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-auto">
+        <div class="product-price m-t-10 d-flex justify-content-between align-items-start">
+          <app-price [price]="product.price"></app-price>
+
+          <div class="product-original-price m-l-10" *ngIf="product.price != product.originalPrice">
+            <app-price class="font-13 text-light-gray text-line-through" [price]="product.originalPrice"></app-price>
+          </div>
+        </div>
+        <div class="product-note" [ngSwitch]="isToday">
+          <span class="now font-13" *ngSwitchDefault>Có thể đặt ngay hôm nay</span>
+          <span class="future font-13"
+                *ngSwitchCase="false">Có thể đặt vào ngày {{ product.dateNotice | moment:'DD/MM/YYYY' }}</span>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

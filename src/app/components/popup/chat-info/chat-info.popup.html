@@ -1,0 +1,35 @@
+<div bsModal #popup="bs-modal" class="modal fade popup-chat animated fadeInUp" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+      <div class="modal-content">
+          <div class="modal-header">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="text-center font-15 font-bold">Hỗ trợ
+                          <div class="float-right">
+                              <a (click)="hide()">
+                                  <img cdn-src="assets/images/hotel/desktop/close.svg" alt="">
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-body">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-12">
+                          <ul class="list-unstyled list-chat" *ngIf="!!chats.length">
+                              <li *ngFor="let item of chats; let i = index" class="text-center">
+                                  <a [href]="item.link">
+                                      <img [src]="item.icon" alt="" class="img-fluid img-fix size-24x24 m-r-10">
+                                      <span class="font-15">{{item.title}}</span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+
+.notification-box {
+  position: relative;
+  // border-left: 1px solid @gray-7;
+  padding: 15px 20px;
+
+  > a {
+    &.active, &:active, &:hover {
+      background-color: transparent;
+    }
+  }
+
+  &:hover {
+    background-color: transparent;
+
+    &:after {
+      content: unset;
+    }
+  }
+
+  .badge {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    font-size: 12px;
+    padding: 3px 5px;
+    border-radius: 10px;
+    font-weight: @font-normal;
+
+    &.badge-danger {
+      color: @white;
+      background-color: @red-2;
+    }
+  }
+
+  .notification-dropdown {
+    &.notification-desktop {
+      position: absolute;
+      top: 58px;
+      right: 15px;
+      z-index: 1001;
+      width: 390px;
+      background: @gray-17;
+      padding: 0px 20px 10px 20px;
+      border-radius: 0px 0px 10px 10px;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+
+      .container-empty-screen {
+        height: 300px;
+      }
+
+      .notification-content {
+        max-height: 310px;
+        text-align: left;
+
+        .title {
+          font-weight: 700;
+          font-size: 18px;
+          color: @gray-2;
+          padding: 10px 0px;
+        }
+
+        .list-notification {
+          .date {
+            color: @gray-1;
+            font-size: 13px;
+            font-weight: 400;
+          }
+
+          li {
+            padding: 8px 30px 0px 10px;
+            position: relative;
+            margin-bottom: 10px;
+            border-radius: 5px;
+
+            .seen-icon {
+              position: absolute;
+              right: 0px;
+              top: 7px;
+              right: 10px;
+
+              > .fa {
+                color: @green-3;
+                font-size: 10px;
+              }
+            }
+
+            &:hover {
+              -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+              -webkit-transition: all .2s;
+              transition: all .2s
+            }
+          }
+        }
+      }
+
+      .empty-screen {
+        img {
+          width: 150px;
+        }
+      }
+    }
+  }
+
+}
+

@@ -1,0 +1,22 @@
+<div class="hotel-heading">
+  <marquee>
+    <span class="slt-options font-18">{{ options.name }}</span>
+  </marquee>
+  <div class="text-center sub-heading m-t-n-12">
+    <div class="d-inline-block font-11">
+      <span>{{ options.checkIn | moment: 'DD/MM/YYYY'}}</span>
+    </div>
+
+    <div class="d-inline-block font-11">
+      <span>
+        <img class="size-12x12 m-b-0 m-t-n-3" cdn-src="assets/images/hotel/title-room.svg" alt="img"/>
+        <span>{{options.rooms}}</span>
+      </span>
+      <span class="m-l-5">
+        <img class="size-12x12 m-b-0 m-t-n-3" cdn-src="assets/images/hotel/title-customer.svg" alt="img"/>
+        <span>{{options.adults}}</span>
+      </span>
+    </div>
+
+  </div>
+</div>

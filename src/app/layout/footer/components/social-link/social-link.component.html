@@ -1,0 +1,26 @@
+<div class="social-contact-link" (clickOutside)="onClickOutSide()">
+  <div class="chat-with">
+    <a class="top-section" href="tel:{{ CAPP.HOTLINE }}" [class.show-social]="showSocial">
+      <div class="phone">
+        Tổng đài hỗ trợ 24/7
+      </div>
+      <div class="phone-number">
+        {{CAPP.HOTLINE}}
+      </div>
+    </a>
+    <a class="bot-section" (click)="showSocial =! showSocial" [class.show-social]="showSocial">
+      <div class="chat-with-social">
+        <span><img class="m-b-none m-r-4" src="assets/images/icon/icon-chat-social.svg" alt="img" /></span>Chat với Xtrip
+      </div>
+    </a>
+    
+    <div class="social-area d-flex animated fadeInRight" *ngIf="showSocial">
+      <a class="m-r-15" [href]="CAPP.MESSENGER_LINK" target="_blank" title="Gửi tin nhắn qua facebook">
+        <img class="size-60x60" cdn-src="assets/images/icon/icon-fb-messenger.svg" alt="icon" />
+      </a>
+      <a [href]="CAPP.ZALO_LINK" target="_blank" title="Gửi tin nhắn qua Zalo">
+        <img class="size-60x60" cdn-src="assets/images/icon/icon-zalo.png" alt="icon" />
+      </a>
+    </div>
+  </div>
+</div>

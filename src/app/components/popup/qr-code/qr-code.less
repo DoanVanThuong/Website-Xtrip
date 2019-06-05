@@ -1,0 +1,26 @@
+@import "_variables.less";
+
+.modal.qr-code-popup {
+
+  .modal-dialog {
+    @media (min-width: 576px) {
+      max-width: 600px;
+    }
+
+    .modal-content {
+
+      .modal-body {
+        font-size: 20px;
+
+        a {
+          font-size: 20px;
+          color: @green-2;
+
+          &:hover, &:focus, &:active {
+            color: @green-2;
+          }
+        }
+      }
+    }
+  }
+}

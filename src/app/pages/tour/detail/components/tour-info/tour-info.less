@@ -1,0 +1,102 @@
+@import "_variables.less";
+
+.tour-info-desktop-wp {
+  min-height: 350px;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+
+  .rating-point-wp {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    img {
+      vertical-align: sub;
+    }
+  }
+  .point {
+    max-width: 60px;
+    border-radius: 5px;
+    background-color: @green-2;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
+    justify-content: space-evenly;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 32px;
+    width: 60px;
+  }
+  .rating {
+    font-weight: 400;
+    font-size: 14px;
+    color: @black;
+    margin-left: 10px;
+  }
+  .title {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 500;
+    margin: 10px 0px;
+    letter-spacing: -0.8px;
+    color: @black;
+  }
+  .journey {
+    color: @gray-1;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+  .list-detail-info {
+    li {
+      font-size: 15px;
+      font-weight: 500;
+      padding-bottom: 10px;
+      &:before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: @green-2;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+      .title-detail {
+        color: @black;
+      }
+      .info {
+        color: @black;
+        font-weight: 400;
+      }
+      
+    }
+  }
+  .coupon {
+    padding: 8px 10px;
+    border-radius: 5px;
+    background-color: @gray-13;
+    font-size: 13px;
+    line-height: 1.8;
+    color: @black;
+    .code {
+      color: @white;
+      background-color: @orange-2;
+      padding: 2px 4px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+  }
+}

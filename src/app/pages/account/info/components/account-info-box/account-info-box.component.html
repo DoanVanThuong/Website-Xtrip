@@ -1,0 +1,81 @@
+<div class="account-info-box m-t-20">
+  <h4 class="title m-none m-b-10">Thông tin tài khoản</h4>
+
+  <div class="panel card panel-desktop">
+    <div class="panel-body card-body p-t-none p-b-none">
+      <div class="row">
+        <div class="container-fluid">
+          <form class="form form-desktop"
+                [formGroup]="form"
+                (submit)="onSubmit(form.value)">
+            <div class="list-group list-group-flush">
+              <div class="list-group-item">
+                <div class="row">
+                  <div class="col-5 text-black">Email</div>
+                  <div class="col-7 text-right">
+                    {{ profile.email }}
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item" *ngIf="!isPassword && profile.isLocalUser">
+                <div class="row">
+                  <div class="col-5 text-black">Mật khẩu</div>
+                  <div class="col-7 text-right">
+                    <a class="pointer d-block text-main font-medium" (click)="isPassword = !isPassword">Đổi mật khẩu</a>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item" *ngIf="isPassword && profile.isLocalUser">
+                <div class="row">
+                  <div class="col-5 text-black">Mật khẩu cũ</div>
+                  <div class="col-7">
+                    <div class="form-group">
+                      <input type="password"
+                             class="form-control"
+                             placeholder="Nhập mật khẩu"
+                             [formControl]="CurrentPassword"/>
+                      <div class="error" *ngIf="CurrentPassword.dirty">
+                        <span *ngIf="CurrentPassword.errors | equalError:'required'">Mật khẩu không được để trống</span>
+                        <span *ngIf="CurrentPassword.errors | equalError:'minlength'">Mật khẩu có ít nhất 6 ký tự</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item"
+                   [class.border-bottom]="isPassword"
+                   *ngIf="isPassword && profile.isLocalUser">
+                <div class="row ">
+                  <div class="col-5 text-black">Mật khẩu mới</div>
+                  <div class="col-7">
+                    <div class="form-group">
+                      <input type="password"
+                             class="form-control"
+                             placeholder="Nhập mật khẩu"
+                             [formControl]="NewPassword"/>
+                      <div class="error" *ngIf="NewPassword.dirty">
+                        <span *ngIf="NewPassword.errors | equalError:'required'">Mật khẩu không được để trống</span>
+                        <span *ngIf="NewPassword.errors | equalError:'minlength'">Mật khẩu có ít nhất 6 ký tự</span>
+                        <span *ngIf="NewPassword.errors | equalError:'equalPassword'">Mật khẩu trùng</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item"
+                   *ngIf="isPassword && profile.isLocalUser">
+                <button type="submit"
+                        class="btn btn-main-v2 mn-w-120 font-bold"
+                        [disabled]="!detectDisableButton()">
+                  Cập nhật
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<change-password-confirm-popup (accept)="redirectTo()"></change-password-confirm-popup>

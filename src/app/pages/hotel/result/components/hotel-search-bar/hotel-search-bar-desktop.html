@@ -1,0 +1,158 @@
+<div class="hotel-search-bar search-bar d-flex flex-fill align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="form form-desktop hotel-search-form ">
+          <div class="row">
+            <div class="col-8">
+              <div class="row">
+                <div class="col-7">
+                  <div class="search-destination" (clickOutside)="onClickedOutside($event, 'destination')"
+                    (click)="openDropdownSearch('destination')">
+                    <div class="form-group">
+                      <label class="control-label">Tên khách sạn hoặc địa điểm</label>
+                      <input type="text" class="form-control" placeholder="Chọn địa điểm" [(ngModel)]="destination"
+                        (ngModelChange)="onDestinationChange($event)" (focus)="onSelectInput($event)" />
+                    </div>
+                    <!-- Dropbox here -->
+                    <div class="result-flight-location shadow animated fadeIn" *ngIf="isDestinationShow">
+                      <perfect-scrollbar>
+
+                        <!-- found -->
+                        <div class="location-found" *ngIf="destination.length > 0">
+                          <div class="heading" *ngIf="!destinations.length && !isDestinationTyping">Không có kết quả
+                          </div>
+                          <loading [show]="!destinations.length && isDestinationTyping" [title]="'Đang tìm...'">
+                          </loading>
+                          <div class="heading" *ngIf="destinations.length">Kết quả tìm kiếm</div>
+                          <div class="data-box">
+                            <div class="list-group-group list-group-flush">
+                              <div class="list-group-item"
+                                *ngFor="let location of destinations; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location, 'departure')">
+                                  <div class="d-flex justify-content-start align-items-center">
+                                    <div class="">
+                                      <img class="size-28x28 m-0 m-t-5"
+                                        cdn-src="assets/images/hotel/des-type-{{location.destinationType === 'HOTEL' ? 'hotel' : 'pos'}}.svg"
+                                        alt="img" />
+                                    </div>
+                                    <div class="p-l-10">
+                                      <div class="text-truncate" [innerHTML]="location.name | highlight : destination">
+                                      </div>
+                                      <div class="text-truncate font-13 text-light-gray"
+                                        [innerHTML]=" (location.name + ', ' + location.countryName)  | highlight : destination">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- history -->
+                        <div class="location-history" *ngIf="!!selectedLocations.length && !destination.length">
+                          <div class="heading">Đã chọn gần đây</div>
+                          <div class="data-box">
+                            <div class="list-group-group list-group-flush">
+                              <div class="list-group-item"
+                                *ngFor="let location of selectedLocations | slice:0:3; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location, 'destination')">
+                                  <div class="d-flex justify-content-start align-items-center">
+                                    <div class="">
+                                      <img class="size-28x28 m-0 m-t-5"
+                                        cdn-src="assets/images/hotel/des-type-{{location.destinationType === 'HOTEL' ? 'hotel' : 'pos'}}.svg"
+                                        alt="img" />
+                                    </div>
+                                    <div class="p-l-10">
+                                      <div class="text-truncate" [innerHTML]="location.name | highlight : destination">
+                                      </div>
+                                      <div class="text-truncate font-13 text-light-gray"
+                                        [innerHTML]=" (location.name + ', ' + location.countryName)  | highlight : destination">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- favorite -->
+                        <div class="location-favorite" *ngIf="!destinations.length && !destination.length">
+                          <div class="heading">Địa điểm được yêu thích</div>
+                          <div class="data-box">
+                            <div class="list-group-group list-group-flush">
+                              <div class="list-group-item"
+                                *ngFor="let location of favoriteLocations; trackBy: trackByFn; let i = index">
+                                <a class="pointer" (click)="onSelectLocation(location, 'destination')">
+                                  <div class="d-flex justify-content-start align-items-center">
+                                    <div class="">
+                                      <img class="size-28x28 m-0 m-t-5"
+                                        cdn-src="assets/images/hotel/des-type-{{location.destinationType === 'HOTEL' ? 'hotel' : 'pos'}}.svg"
+                                        alt="img" />
+                                    </div>
+                                    <div class="p-l-10">
+                                      <div class="text-truncate" [innerHTML]="location.name | highlight : destination">
+                                      </div>
+                                      <div class="text-truncate font-13 text-light-gray"
+                                        [innerHTML]=" (location.name + ', ' + location.countryName)  | highlight : destination">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </perfect-scrollbar>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-5 b-left">
+                  <div class="date-selector">
+                    <div class="form-group">
+                      <label class="control-label">Ngày nhận - trả phòng</label>
+                      <input class="form-control" placeholder="Chọn ngày nhận - trả phòng" bsDaterangepicker
+                        [bsConfig]="datePickerOptions " value="{{ checkInOutTime }}" [bsValue]="checkIn"
+                        (bsValueChange)="onSelectedDate($event)" readonly />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 pos-relative" (clickOutside)="onClickedOutside($event, 'passenger')">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="" (click)="openDropdownSearch('passenger')">
+                  <div class="form-group">
+                    <label class="control-label">Số phòng - khách</label>
+                    <input type="text" class="form-control" placeholder="Chọn số phòng - khách"
+                      [(ngModel)]="passenger" />
+                  </div>
+
+                </div>
+                <div class="text-right">
+                  <button type="button" class="btn btn-main-v3 btn-search-hotel mn-w-150" [disabled]="onDisableSubmit()"
+                    (click)="onSearch()">
+                    Tìm khách sạn
+                  </button>
+                </div>
+              </div>
+              <!-- Dropbox here -->
+              <div class="room-passenger-box shadow animated fadeIn" *ngIf="isPassengerShow">
+                <div class="d-flex">
+                  <room-passenger-search [type]="selectedRoomType" (onSelect)="onChangeTypePassenger($event)">
+                  </room-passenger-search>
+                  <room-passenger-input *ngIf="isRoomShow" (onChange)="onChangeRoomNumber($event)">
+                  </room-passenger-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-content></ng-content>

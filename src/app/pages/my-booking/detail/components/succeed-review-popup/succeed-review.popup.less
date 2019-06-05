@@ -1,0 +1,35 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.modal {
+  &.succeed-review-popup {
+    .modal-dialog {
+      max-width: 440px;
+
+      .modal-content {
+        .border-radius(10px);
+
+        .modal-body {
+          .border-radius(10px);
+          color: @gray-2;
+          padding: 40px 35px;
+          background-color: @green-2;
+          position: relative;
+
+          > .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            margin: 0;
+            opacity: 1;
+          }
+
+          img.image {
+            width: 290px;
+            max-height: 100%
+          }
+        }
+      }
+    }
+  }
+}

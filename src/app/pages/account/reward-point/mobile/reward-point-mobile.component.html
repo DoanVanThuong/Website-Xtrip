@@ -1,0 +1,104 @@
+<div class="profile-reward-point profile-reward-point-mobile">
+
+  <app-header [back]="true" [heading]="'Điểm thưởng của tôi'" [fixed]="true" [version]="3"></app-header>
+
+  <div class="wrapper"
+       min-height
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+    <div class="profile-reward-point-slider">
+      <owl-carousel #owlElement [items]="sliders" [options]="carouselOptions">
+        <div class="profile-point-slider-item" *ngFor="let item of sliders">
+          <div class="row">
+            <div class="col-6 p-r-none">
+              <div class="item">
+                <div class="title ">{{ item.title }}</div>
+                <div class="content">
+                  {{ item.content }}
+                </div>
+                <a class="load-more" [href]="item.link">Tìm hiểu thêm</a>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="img">
+                <img [src]="item.url" alt="image"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </owl-carousel>
+    </div>
+
+    <div class="reward-point">
+      <div class="row">
+        <div class="col-6">
+          <div class="point-available">
+            <div class="title">
+              Điểm khả dụng
+            </div>
+            <div class="point available">
+              {{ available | number }}
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="point-pending">
+            <div class="title">
+              Điểm chờ duyệt
+              <span class="icon" (click)="openNotificationPopup()">
+                <img cdn-src="assets/images/icon/icon-info-circle.svg" alt="info"/>
+              </span>
+            </div>
+            <div class="point">
+              {{ pending | number }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reward-point-history">
+      <div class="title">Lịch sử</div>
+      <ul class="history-list">
+        <li *ngFor="let item of points; trackBy: trackByFn; let i = index">
+          <div class="description">
+            <div class="content" [ngSwitch]="item.type">
+              <div *ngSwitchCase="0">
+                <span>Bạn được <span class="point-positive">+{{ item.point | currencyMoney:'điểm' }}</span> vào chờ duyệt khi đặt {{ item.serviceName
+                  }} {{ item.name }}
+                </span>
+              </div>
+              <div *ngSwitchCase="1">
+                <span> Bạn được <span class="point-positive">+{{ item.point | currencyMoney:'điểm' }}</span> vào khả dụng khi đặt
+                  {{ item.serviceName }} {{ item.name }}
+                </span>
+              </div>
+              <div *ngSwitchCase="2">
+                <span>Bạn đã <span class="point-negative">-{{ item.point | currencyMoney:'điểm' }}</span> khi đặt {{ item.serviceName
+                  }} {{ item.name }}
+                </span>
+              </div>
+              <div *ngSwitchCase="3">
+                <span> Bạn mất <span class="point-negative">-{{ item.point | currencyMoney:'điểm' }}</span> khi hủy {{ item.serviceName
+                  }} {{ item.name }}
+                </span>
+              </div>
+              <div *ngSwitchCase="4">
+                <span> Bạn được hoàn <span class="point-positive">+{{ item.point | currencyMoney:'điểm' }}</span> do giao dịch không
+                  thành công từ đơn hàng #{{ item.orderCode }}
+                </span>
+              </div>
+            </div>
+            <div class="date">
+              {{ item.time | date:'HH:mm, dd/MM/yyyy'}}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<reward-point-popup></reward-point-popup>

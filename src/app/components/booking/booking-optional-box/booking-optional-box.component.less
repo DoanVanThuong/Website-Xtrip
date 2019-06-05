@@ -1,0 +1,56 @@
+@import '_variables.less';
+
+.booking-optional {
+
+  &.booking-optional-mobile {
+
+    color: @gray-2;
+
+    .title {
+      color: @gray-23;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .optionals{
+      > li {
+        padding: 10px 0;
+        font-weight: 700;
+      }
+    }
+  }
+
+  &.booking-optional-desktop {
+
+  }
+
+  .optionals {
+
+    .point-selected {
+      background-color: @gray-13;
+      min-width: 125px;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 13px;
+      color: @black;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+
+  .ng2-nouislider .noUi-target {
+    background-color: @green-2;
+  }
+
+  .optionals {
+    > li {
+      padding: 10px 0;
+
+      a.link-login {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

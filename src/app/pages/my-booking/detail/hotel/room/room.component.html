@@ -1,0 +1,310 @@
+<!-- for desktop -->
+<div class="hotel-booked-room-detail hotel-booked-room-detail-desktop" *ngIf="isDesktop">
+
+  <div class="row">
+    <div class="container-fluid">
+      <a class="pointer font-medium" (click)="back()">
+        <img class="m-b-none m-t-n-3 size-16x16"
+             cdn-src="assets/images/icon/icon-angle-left.svg"
+             alt="icon"/>
+        <span class="m-l-5">Quay lại</span>
+      </a>
+    </div>
+  </div>
+
+  <loading [show]="isLoading"></loading>
+
+  <div class="row m-t-20" *ngIf="!isLoading">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-between align-items-end">
+        <div>
+          <div class="font-18 font-bold text-dark-gray">{{ hotel.hotelName }}</div>
+          <div class="font-16 text-dark-gray">{{ hotel.hotelAddress }}</div>
+        </div>
+        <a class="pointer text-green font-medium"
+           *ngIf="utilityHelper.findInList(hotel.status, [STATUS.PAID])"
+           (click)="onOpenRequestEmail()">
+          <img class="size-16x16 m-r-5"
+               cdn-src="assets/images/icon/icon-flight-green.svg"
+               alt="icon"/>
+          Gửi thông tin vé qua mail
+        </a>
+      </div>
+    </div>
+
+    <div class="container-fluid m-t-10">
+
+      <div class="panel panel-desktop">
+        <div class="panel-body">
+
+          <div class="row ">
+            <div class="hotel-pnr container-fluid m-b-20"
+                 *ngIf="utilityHelper.findInList(hotel.status, [STATUS.WAITING, STATUS.PAID])">
+              <div class="font-medium text-light-gray font-13">Mã đặt phòng</div>
+              <div class="">
+                <span class="font-20 font-bold text-green">{{ hotel.pnr }}</span>&nbsp;
+                <span class="m-l-5 sub-label">(Mã dùng tại khách sạn)</span>
+              </div>
+            </div>
+
+            <div class="container-fluid">
+              <h4 class="title">Thông tin khách hàng</h4>
+
+              <div class="p-10 font-16 font-bold">
+                {{ hotel.presenter }}
+              </div>
+            </div>
+
+            <div class="container-fluid m-t-10 room-detail">
+              <h4 class="title">Thông tin đặt phòng</h4>
+
+              <div class="row">
+                <div class="col-xl-8 col-md-7">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div class="room-description d-flex justify-content-start align-items-start">
+                        <div class="mn-w-100">
+                          <div class="info-label">Nhận phòng</div>
+                          <div class="info-value">{{ hotel.checkIn | departDate }}</div>
+                          <div class="info-label">Lúc 14:00</div>
+                        </div>
+                        <div class="mn-w-50">
+                          <img alt="icon" class="m-t-25"
+                               cdn-src="assets/images/icon/icon-arrow-2.svg">
+                        </div>
+                        <div class="mn-w-100">
+                          <div class="info-label">Trả phòng</div>
+                          <div class="info-value">{{ hotel.checkOut | departDate }}</div>
+                          <div class="info-label">Lúc 12:00</div>
+                        </div>
+                        <div class="mn-w-90">
+                          <div class="info-label">Số đêm</div>
+                          <div class="info-value m-l-15">{{ hotel.nights }}</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="row">
+                        <div class="col-4 font-medium">Loại phòng</div>
+                        <div class="col-8">{{ hotel.roomName }} ({{ hotel.roomNumbers }}x)</div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="row">
+                        <div class="col-4 font-medium">Sức chứa</div>
+                        <div class="col-8  text-black">
+                          <span *ngIf="!!hotel.roomMaxAdults">{{ hotel.roomMaxAdults }} người lớn</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item"
+                        *ngIf="!!hotel.generalFacility && !!hotel.generalFacility.facilities.length">
+                      <div class="row">
+                        <div class="col-4 font-medium">Tiện nghi phòng</div>
+                        <div class="col-8">
+                          <ul class="facilities">
+                            <li [class.m-t-5]="i > 0"
+                                *ngFor="let item of hotel.generalFacility.facilities; trackBy: trackByFn; let i = index">
+                              {{ item.name }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item"
+                        *ngIf="!!hotel.characteristic.length || !!hotel.refundPolicies.length">
+                      <div class="row">
+                        <div class="col-4 font-medium">Bao gồm</div>
+                        <div class="col-8">
+                          <div class="characteristic"
+                               *ngIf="!!hotel.characteristic.length">
+                            <div class="badge badge-success d-inline-block"
+                                 *ngFor="let item of hotel.characteristic; trackBy: trackByFn; let i = index">{{ item }}
+                            </div>
+                          </div>
+                          <div class="cancellation-policy"
+                               *ngIf="!!hotel.refundPolicies.length">
+                            <div class="m-t-30 text-black">
+                              <div class="font-bold">Lưu ý:</div>
+                              <ul>
+                                <li *ngFor="let item of hotel.refundPolicies; trackBy: trackByFn; let i = index">
+                                  <img class="m-b-0 m-t-n-3 size-16x16" cdn-src="assets/images/hotel/desktop/li.svg">
+                                  {{ item }}
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-xl-4 col-md-5">
+                  <div class="m-t-15">
+                    <img class="m-b-none img-fix b-5 w-full h-180"
+                         defaultImage="assets/images/no-thumbnail.png"
+                         [lazyLoad]="hotel.photoRoom.src | size: 300"
+                         onerror="this.src = 'assets/images/no-thumbnail.png'"
+                         [title]="hotel.roomName"
+                         [alt]="hotel.roomName"/>
+                  </div>
+                  <div class="m-t-10 text-center" *ngIf="!!hotel.roomPhotos.length">
+                    <a class="pointer text-green text-underline font-16"
+                       (click)="onOpenGallery()">Chi tiết hình ảnh</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row m-t-20">
+                <div class="container-fluid">
+                  <a class="pointer text-green font-medium"
+                     [routerLink]="['/hotel', hotel.hotelCode, 'detail']"
+                     [queryParams]="generateQueryParams()">
+                    <img class="m-t-n-3 size-16x16"
+                         cdn-src="assets/images/icon/icon-hotel-green.svg"
+                         alt="icon"/>
+                    Xem thông tin chi tiết
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-hotel-gallery-popup [mode]="'room'"
+                           [room]="room"
+                           [images]="roomImages"></app-hotel-gallery-popup>
+</div>
+
+<!-- for mobile -->
+<div class="hotel-booked-room-detail hotel-booked-room-detail-mobile" *ngIf="isMobile">
+
+  <app-header [back]="true"
+              heading='Thông tin đặt phòng'
+              [version]="3"
+              [fixed]="true"
+              [filter]="true">
+    <header-filter>
+      <a class="pointer"
+         *ngIf="hotel && utilityHelper.findInList(hotel.status, [STATUS.PAID])"
+         (click)="onOpenReport()">
+        <img class="size-24x24" cdn-src="assets/images/icon/icon-flight-green.svg" alt="icon"/>
+      </a>
+    </header-filter>
+  </app-header>
+
+  <div class="wrapper p-15 animated fadeInUp" min-height>
+    <div class="container">
+      <loading [show]="isLoading"></loading>
+
+      <div class="row justify-content-center" *ngIf="!isLoading">
+
+        <div class="col-12 col-md-8 col-xl-6">
+
+          <div class="hotel-pnr m-b-15"
+               *ngIf="utilityHelper.findInList(hotel.status, [STATUS.WAITING, STATUS.PAID])">
+            <div class="panel">
+              <div class="panel-body">
+                <div class="font-12 text-light-gray font-bold">Mã đặt phòng</div>
+                <div class="">
+                  <span class="font-20 text-green font-bold"> {{ hotel.pnr }}</span>&nbsp;
+                  <span class="sub-label">(Mã dùng tại khách sạn)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- thông tin khách hàng -->
+          <div class="hotel-passenger">
+            <h4 class="title">Thông tin khách hàng</h4>
+
+            <div class="panel">
+              <div class="panel-body">
+                <div class="text-black">
+                  {{ hotel.presenter }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- thông tin khách sạn & phòng -->
+          <div class="hotel-room m-t-15">
+            <h4 class="title">Thông tin khách sạn &amp; phòng</h4>
+
+            <div class="panel">
+              <div class="panel-body">
+                <div class="font-17 font-bold">{{ hotel.hotelName }}</div>
+                <div class="font-13 text-light-gray">{{ hotel.hotelAddress }}</div>
+                <div class="hotel-description">
+                  <div class="d-flex">
+                    <div class="mn-w-100">
+                      <div class="info-label">Nhận phòng</div>
+                      <div class="info-value">{{ hotel.checkIn | departDate }}</div>
+                      <div class="info-label">Lúc 14:00</div>
+                    </div>
+                    <div class="mn-w-50">
+                      <img alt="icon" class="m-t-25"
+                           cdn-src="assets/images/icon/icon-arrow.svg">
+                    </div>
+                    <div class="mn-w-100">
+                      <div class="info-label">Trả phòng</div>
+                      <div class="info-value">{{ hotel.checkOut | departDate }}</div>
+                      <div class="info-label">Lúc 12:00</div>
+                    </div>
+                    <div class="mn-w-90">
+                      <div class="info-label">Số đêm</div>
+                      <div class="info-value m-l-15">{{ hotel.nights }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="room-detail">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="font-bold mx-w-80-pc">
+                      {{ hotel.roomName }}
+                    </div>
+                    <span class="badge">
+                      {{ hotel.roomNumbers }} phòng
+                    </span>
+                  </div>
+                  <div class="text-dark-gray font-13 m-t-5">
+                    <ul class="list-unstyled">
+                      <li *ngFor="let roomDescription of hotel.roomDescriptions; trackBy: trackByFn">
+                        <img class="m-t-n-3 size-16x16 img-fix m-r-5"
+                             [src]="roomDescription.icon.src"
+                             onerror="this.src = '/assets/images/no-thumbnail.png'"
+                             [alt]="roomDescription.description"/>
+                        {{ roomDescription.description }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="m-t-20">
+                  <a class="pointer text-green font-medium"
+                     [routerLink]="['/hotel', hotel.hotelCode, 'detail']"
+                     [queryParams]="generateQueryParams()">
+                    <img class="m-t-n-3 size-16x16"
+                         cdn-src="assets/images/icon/icon-hotel-green.svg"
+                         alt="icon"/>
+                    Xem thông tin chi tiết
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- report selection -->=
+  <booking-report-popup (select)="onSelectReport($event)"></booking-report-popup>
+
+</div>
+
+<!-- report pdf selection -->
+<booking-pdf-report-popup [heading]="isDesktop ? 'Gửi thông tin vé qua mail' : ''"
+                          [module]="MODULE.HOTEL"
+                          [code]="code"></booking-pdf-report-popup>

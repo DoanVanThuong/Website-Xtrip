@@ -1,0 +1,116 @@
+<!--component html goes here -->
+<div class="booking-hotel-detail-basic">
+  <div class="row" *ngIf="!!hotel">
+    <div class="col-lg-{{mode === 0 ? 6 : 12}}">
+      <div class="d-flex flex-column justify-content-center h-full {{mode === 1 ? 'm-l-20 m-r-20' : ''}}">
+        <h4 class="font-17 font-bold text-black m-none">{{ hotel.hotelName }}</h4>
+        <hotel-star [stars]="hotel.hotelStars"></hotel-star>
+        <div class="hotel-address font-13">{{ hotel.hotelAddress }}</div>
+      </div>
+    </div>
+    <div class="col-lg-6" *ngIf="mode === 0">
+      <div class="booking-time-box">
+        <div class="row">
+          <div class="col-6">
+            <div *ngIf="utilityHelper.findNotInList(hotel.status, [STATUS.PAID, STATUS.WAITING])">
+              <div class="text-light-gray font-13">Thời gian giữ chỗ còn:</div>
+              <div class="font-20 text-green font-bold">
+                <countdown [time]="hotel.holdExpiry" (submit)="onExpired()"></countdown>
+              </div>
+              <div class="font-13 text-light-gray">
+                Hết hạn {{ hotel.holdExpiry | moment:'HH:mm, DD/MM' }}
+              </div>
+            </div>
+            <div class="" *ngIf="utilityHelper.findInList(hotel.status, [STATUS.PAID, STATUS.WAITING])">
+              <div class="text-light-gray font-13">Mã đặt phòng:</div>
+              <div class="font-20 text-green font-bold">
+                {{ hotel.pnr }}
+              </div>
+              <div class="font-12 text-light-gray">
+                (Mã dùng tại Khách sạn)
+              </div>
+            </div>
+          </div>
+          <div class="col-6 b-l text-right">
+            <div *ngIf=" hotel.paymentDetail.method === METHOD.STORE">
+              <div class="text-light-gray font-medium font-13">Mã thanh toán Payoo:</div>
+              <div class="font-20 text-green font-bold">{{ hotel.paymentDetail.transactionNo }}</div>
+              <div class="font-12 font-medium text-light-gray">
+                Mã đặt chỗ: <span class="text-green">{{ hotel.code }}</span>
+              </div>
+            </div>
+            <div *ngIf="hotel.paymentDetail.method !== METHOD.STORE">
+              <div class="text-light-gray font-13">Mã đặt chỗ</div>
+              <div class="font-20 text-green font-bold">
+                {{ hotel.code }}
+              </div>
+              <div class="font-13 text-light-gray">
+                (Mã dùng tại Xtrip)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="list-group list-group-flush m-t-20" *ngIf="!!hotel">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Tình trạng</div>
+        <div class="col-8">
+          <booking-status [status]="hotel.status" [border]="true"></booking-status>
+          <span *ngIf="hotel.isReviewed" class="status status-box status-success mn-w-110">Đã nhận xét</span>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Người nhận phòng</div>
+        <div class="col-8">
+          {{ hotel.presenter }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Nhận phòng</div>
+        <div class="col-8">
+          {{ hotel.checkIn | moment:'14:00, DD/MM/YYYY' }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Trả phòng</div>
+        <div class="col-8">
+          {{ hotel.checkOut | moment:'12:00, DD/MM/YYYY' }} - {{ hotel.nights }} đêm
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Phòng đã đặt</div>
+        <div class="col-8">
+          {{ hotel.roomName }} ({{ hotel.roomNumbers }}x)
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Tổng tiền</div>
+        <div class="col-8">
+          {{ hotel.totalPrice | currencyMoney: '' }} <span class="text-underline">đ</span>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item" *ngIf="mode === 1">
+      <div class="row">
+        <div class="col-4 font-bold">Hình thức thanh toán</div>
+        <div class="col-8">
+          {{ currentPayment }}
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

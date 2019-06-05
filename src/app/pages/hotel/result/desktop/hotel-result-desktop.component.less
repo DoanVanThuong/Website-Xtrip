@@ -1,0 +1,37 @@
+@import "_variables.less";
+.hotel-result-desktop {
+  .main-body {
+    position: relative;
+    // top: 65px;
+    .title-list {
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+    .left-section {
+      padding-right: 30px;
+      border-right: 1px solid @gray-3;
+    }
+    .right-section {
+      padding-left: 30px;
+      .pos-chang-view {
+        right: 15px;
+        top: 5px;
+        cursor: pointer;
+      }
+    }
+    .shadow {
+      border: 1px solid transparent;
+      box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2) !important;
+    }
+  
+    .hover {
+      &:hover {
+        border-color: @orange-2;
+        transition: all .25s linear;
+      } 
+    }
+    .reset-btn {
+      color: @orange-2;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@import '_variables.less';
+
+.tour-policy-detail-popup, .tour-term-detail-popup {
+  .mat-tab-labels {
+    .mat-tab-label {
+      width: calc(~"100%/3");
+    }
+  }
+  p {
+    font-size: 15px;
+  }
+  .list-surcharges{
+    padding:20px 30px;
+    li{
+      position: relative;
+      &:before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: @green-2;
+        position: absolute;
+        top: 10px;
+        left: -8px;
+      }
+      >div{
+        margin-left: 4px;
+      }
+    }
+  }
+}

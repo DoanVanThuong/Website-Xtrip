@@ -1,0 +1,27 @@
+<div class="booking-detail-e-ticket justify-content-center" *ngIf="!!product && links.length">
+
+  <app-header [back]="true" [heading]="'Vé điện tử'" [fixed]="true" [version]="3"></app-header>
+
+  <div class="wrapper booking-detail-comment-body bg-white p-10" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12" *ngIf="isViewMode">
+        <loading [show]="isLoading"></loading>
+
+        <pdf-viewer [src]="selectedLink.link"
+                    [autoresize]="true"
+                    [fit-to-page]="true"
+                    style="display: block;"></pdf-viewer>
+      </div>
+      <div class="col-12" *ngIf="!isViewMode">
+        <div class="row">
+          <div class="col-6 m-b-10" *ngFor="let item of links; trackBy: trackByFn">
+            <button class="btn btn-white-outline btn-block text-truncate"
+                    (click)="onSelectLink(item)">{{ item.name }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

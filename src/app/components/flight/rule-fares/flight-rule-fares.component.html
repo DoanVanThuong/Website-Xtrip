@@ -1,0 +1,12 @@
+<div class="rule-fares">
+  <div class="row" *ngFor="let rule of rules">
+    <div class="col-12">
+      <a class="d-block rule-fare-item" href="{{rule.url}}" target="_blank">
+        Điều kiện vé {{rule.carrierName}}
+        <span class="pull-right">
+          <img class="size-16x16 m-0" cdn-src="assets/images/dropdown.svg" />
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

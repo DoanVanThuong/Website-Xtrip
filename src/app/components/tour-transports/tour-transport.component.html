@@ -1,0 +1,114 @@
+<div class="row tour-transport-desktop" *ngIf="isDesktop">
+  <div class="col-12">
+    <div class="info-transport">
+      <ul class="d-flex"
+          [ngClass]="package.hotels.length > 0 ? 'list-unstyled list-transport border-right' : 'list-unstyled list-transport' ">
+        <li class="transport-item clearfix">
+          <div class="item-heading">
+            <img [src]="package.departInfo.transportTypeIcon.src"
+                 alt=""
+                 class="size-20x20 m-b-5"
+                 onerror="this.src='assets/images/no-thumbnail.png'">
+            <span class="m-l-5">
+              Chiều đi: {{package.departInfo.departTime | moment: 'DD/MM/YYYY'}}</span>
+          </div>
+          <div class="item-content clearfix d-flex">
+            <img class="size-32x32 m-t-5 fluid"
+                 *ngIf="!!package.departInfo.transportSupplier.logo.src"
+                 [cdn-src]="package.departInfo.transportSupplier.logo.src | size:100" alt=""
+                 onerror="this.src='assets/images/no-thumbnail.png'">
+            <div class=" m-l-10">
+              <div class="time" *ngIf="!!package.departInfo.transportNumber">
+                {{package.departInfo.departTime | moment: 'HH:mm'}} - {{package.departInfo.arrivalTime | moment: 'HH:mm'}}
+              </div>
+              <div class="name">{{package.departInfo.transportSupplier.name}}
+                {{!package.departInfo.transportNumber ? '' : '-' + package.departInfo.transportNumber}}
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="transport-item clearfix">
+          <div class="item-heading">
+            <img [src]="package.returnInfo.transportTypeIcon.src"
+                 alt=""
+                 class="size-20x20 m-b-5"
+                 onerror="this.src='assets/images/no-thumbnail.png'">
+            <span class="m-l-5">Chiều về: {{package.returnInfo.arrivalTime | moment:
+              'DD/MM/YYYY'}}
+                        </span>
+          </div>
+          <div class="item-content clearfix  d-flex ">
+            <img class="size-32x32 m-t-5 fluid"
+                 *ngIf="!!package.returnInfo.transportSupplier.logo.src"
+                 [cdn-src]="package.returnInfo.transportSupplier.logo.src | size: 100" alt=""
+                 onerror="this.src='assets/images/no-thumbnail.png'">
+            <div class=" m-l-10">
+              <div class="time" *ngIf="!!package.returnInfo.transportNumber">
+                {{package.returnInfo.departTime | moment: 'HH:mm'}}
+                - {{package.returnInfo.arrivalTime | moment: 'HH:mm'}}
+              </div>
+              <div class="name">{{package.returnInfo.transportSupplier.name}}
+                {{!package.returnInfo.transportNumber ? '' : '-' + package.returnInfo.transportNumber}}
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- mobile -->
+<div class="row tour-transport-mobile" *ngIf="isMobile">
+  <div class="col-12">
+    <div class="transport-wp-mobile m-t-22">
+      <div class="content ">
+        <div>
+          <span>
+              <img [src]="package.departInfo.transportTypeIcon.src" alt="" class="size-20x20 m-b-none m-t-n-3">
+          </span>
+          <span class="font-medium font-14">
+              Chiều đi: {{package.departInfo.departTime | moment: 'DD/MM/YYYY'}}
+          </span>
+        </div>
+        <div class="m-l-25 d-flex m-t-12 align-items-center">
+          <img [src]="package.departInfo.transportSupplier.logo.src | size: 100" alt="" class="size-32x32 img-fix"
+               onerror="this.src='assets/images/no-thumbnail.png'">
+          <div class="m-l-10">
+            <div class="font-medium font-15" *ngIf="!!package.departInfo.transportNumber">
+              {{package.departInfo.departTime | moment: 'HH:mm'}} - {{package.departInfo.arrivalTime |
+              moment: 'HH:mm'}}
+            </div>
+            <div class="font-13">
+              {{package.departInfo.transportSupplier.name}}
+              {{!package.departInfo.transportNumber ? '' : '-' + package.departInfo.transportNumber}}
+            </div>
+          </div>
+        </div>
+        <div class="m-t-22">
+          <span>
+              <img [src]="package.returnInfo.transportTypeIcon.src" alt=""
+                   class="size-20x20 m-b-none m-t-n-3">
+          </span>
+          <span class="font-medium font-14">
+              Chiều về: {{package.returnInfo.departTime | moment: 'DD/MM/YYYY'}}
+          </span>
+        </div>
+        <div class="m-l-25 d-flex m-t-12 align-items-center">
+          <img [cdn-src]="package.returnInfo.transportSupplier.logo.src" alt="" class="size-32x32 img-fix"
+               onerror="this.src='assets/images/no-thumbnail.png'">
+          <div class="m-l-10">
+            <div class="font-medium font-15" *ngIf="!!package.returnInfo.transportNumber">
+              {{package.returnInfo.departTime | moment: 'HH:mm'}} - {{package.returnInfo.arrivalTime |
+              moment: 'HH:mm'}}
+            </div>
+            <div class="font-13">
+              {{package.returnInfo.transportSupplier.name}}
+              {{!package.returnInfo.transportNumber ? '' : '-' + package.returnInfo.transportNumber}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

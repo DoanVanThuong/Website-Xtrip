@@ -1,0 +1,81 @@
+<div class="tour-detail-item-mobile-page b-r-10 shadow">
+  <a class="pointer"
+     [routerLink]="[tour.href]"
+     [queryParams]="generateQueryParams()">
+    <div class="tour-detail-image">
+      <img class="img-fix m-b-none"
+           defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="tour.photo.src | size: 300"
+           [offset]="80"
+           [alt]="tour.name"
+           [title]="tour.name"
+           onerror="this.src='assets/images/no-thumbnail.png'">
+      <div class="tour-code">
+        Mã tour: {{ tour.code }}
+      </div>
+    </div>
+    <div class="tour-detail-info position-relative" [class.bor-bottom]="!tour.coupon">
+      <div class="row">
+        <div class="col-12">
+          <div class="tour-detail-name m-b-10">{{ tour.name }}</div>
+          <!-- <div class="tour-detail-desc">{{ tour.journey }}</div> -->
+          <app-tour-highlight [data]="tour.highlights" [length]="mode === 'carousel' ? 2 : ''"
+                              [mode]="mode === 'carousel' ? 'hidden' : 'scroll'"></app-tour-highlight>
+        </div>
+        <div class="col-12">
+          <div class="m-t-10">
+            <img class="m-b-none m-t-n-2 m-r-5"
+                 cdn-src="assets/images/icon/icon-location-green.svg"
+                 alt="img"/>
+            <span class="depart-title">Khởi hành: {{ tour.departPlace }}</span>
+          </div>
+          <div class="m-t-5">
+            <img class="m-b-none m-t-n-2 m-r-5"
+                 cdn-src="assets/images/icon/icon-calendar-green.svg"
+                 alt="img"/>
+            <span class="depart-title">
+              Ngày khởi hành: {{ tour.departDate | moment: 'DD/MM/YYYY' }} ({{tour.days}}N{{tour.nights}}Đ)
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row m-t-15">
+        <div class="col-9">
+          <!-- <div class="ori-price text-line-through" *ngIf="tour.originalPrice !== tour.sellingPrice">
+            <span>{{ tour.originalPrice | currencyMoney:'' }} </span>
+            <span class="text-underline">đ</span>
+          </div> -->
+          <div class="price-point-item">
+            <span class="sell-price">{{ tour.sellingPrice | currencyMoney:'' }} <span class="sell-price text-underline">đ</span></span>
+            <span class="m-l-10 ori-price text-line-through"
+                  *ngIf="tour.originalPrice !== tour.sellingPrice">{{ tour.originalPrice | currencyMoney:'' }} <span
+              class="text-underline">đ</span></span>
+          </div>
+        </div>
+        <div class="position-absolute pos-available">
+          <span class="available "
+                [class.low-available-text]="tour.fakeAvailable <= 3"
+                [class.low-available-border]="tour.fakeAvailable <= 3">{{!!tour.fakeAvailable ? 'Còn ' + tour.fakeAvailable + ' chỗ' : 'Hết chỗ'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="coupon bor-bottom position-relative"
+         *ngIf="!!tour.coupon && !!tour.coupon.couponCode && !!tour.coupon.available && mode != 'carousel'">
+      Nhập mã <span class="code">{{ tour.coupon.couponCode }}</span> giảm ngay
+
+      <span *ngIf="tour.coupon.usePercentage">
+        <span class="font-weight-bold">{{ tour.coupon.discountPercentage }}%</span>
+      </span>
+
+      <span *ngIf="!tour.coupon.usePercentage">
+        <span class="font-weight-bold">{{ tour.coupon.discountAmount | currencyMoney: '' }}
+          <span class="text-underline">đ</span>
+        </span>
+      </span>
+
+      <div class="end-date" *ngIf="innerWidth > 320">
+        Hết hạn: <span class="text-black">{{ tour.coupon.endDate | moment: 'DD/MM/YYYY' }}</span>
+      </div>
+    </div>
+  </a>
+</div>

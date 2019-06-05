@@ -1,0 +1,22 @@
+<!--component html goes here -->
+<div class="request-support-desktop-page">
+
+  <app-faq-banner></app-faq-banner>
+
+  <div class="main-body p-t-20">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <app-faq-navigator [params]="params" (onChangeGuide)="onChangeGuide($event)"
+                             (onChangeFaq)="onChangeFaq($event)"></app-faq-navigator>
+        </div>
+        <div class="col-lg-8">
+          <app-request-ticket-desktop [title]="'Gửi yêu cầu hỗ trợ'" [showTypes]="false">
+          </app-request-ticket-desktop>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

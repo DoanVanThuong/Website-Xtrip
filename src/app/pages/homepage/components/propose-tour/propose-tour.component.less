@@ -1,0 +1,115 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.block {
+  &.block-propose-tour {
+
+    .propose-tour {
+
+      &.propose-tour-desktop {
+
+        .propose-tour-item {
+
+          .tour-image {
+            width: auto;
+            height: 220px;
+
+            .border-radius(10px);
+          }
+
+          .tour-price {
+            width: 110px;
+            height: 80px;
+            font-size: 15px;
+            padding: 10px 20px;
+
+            > div {
+              font-size: 20px;
+            }
+          }
+        }
+
+      }
+
+      &.propose-tour-mobile {
+
+        .scroll-container {
+          margin-left: -15px;
+          margin-right: -15px;
+
+          .scroll-area {
+            padding: 0 15px;
+          }
+        }
+      }
+
+      .propose-tour-item {
+
+        .tour-image {
+          width: 150px;
+          height: 220px;
+          .border-radius(10px);
+          position: relative;
+          overflow: hidden;
+          .border-radius(5px);
+        }
+
+        img {
+          height: 100%;
+          width: 100%
+        }
+
+        .tour-price {
+          background-image: url('../../../../../assets/images/bg-oval-price.svg');
+          background-color: transparent;
+          background-position: bottom right;
+          background-size: cover;
+          background-repeat: no-repeat;
+
+          font-size: 13px;
+          line-height: 1.1;
+          color: @white;
+          width: 78px;
+          height: 61px;
+          padding: 10px;
+          padding-left: 15px;
+          position: absolute;
+          top: 0;
+          right: 0;
+          .border-radiuses(5px, 0, 0, 0);
+
+          > div {
+            font-size: 15px;
+          }
+        }
+
+        .tour-info {
+          color: @white;
+          background-image: url('../../../../../assets/images/bg-paint.png');
+          background-color: transparent;
+          background-position: left center;
+          background-size: contain;
+          background-repeat: no-repeat;
+
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 15px;
+          padding: 6px 10px;
+          height: 52px;
+
+          .tour-name {
+            font-family: "UTM Flavour", sans-serif;
+            font-size: 24px;
+            line-height: 1.2;
+          }
+
+          .tour-description {
+            font-size: 12px;
+            line-height: 1.1;
+          }
+        }
+      }
+    }
+  }
+}

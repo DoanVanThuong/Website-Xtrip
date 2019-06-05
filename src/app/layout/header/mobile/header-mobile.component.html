@@ -1,0 +1,52 @@
+<div class="header header-mobile"
+     [class.theme-white]="version == 2"
+     [class.theme-green-v3]="version == 3"
+     [class.shadow]="shadow"
+     scroll>
+  <div class="row">
+    <div class="col-2 p-r-none">
+
+      <a class="back-to"
+         *ngIf="isBack && !type"
+         title="Quay lại"
+         (click)="backTo()"
+         [ngSwitch]="version">
+        <img class="m-b-none size-24x24"
+             *ngSwitchCase="2"
+             cdn-src="assets/images/icon/icon-back.svg"
+             alt="icon"/>
+        <img class="m-b-none size-24x24"
+             *ngSwitchCase="3"
+             cdn-src="assets/images/icon/icon-back-white.svg"
+             alt="icon"/>
+        <img class="m-b-none size-16x16"
+             *ngSwitchDefault
+             cdn-src="assets/images/icon-back.png"
+             alt="icon"/>
+      </a>
+
+      <a class="back-to" *ngIf="!!type" (click)="backTo()">
+        <img class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-close.svg" alt="icon"/>
+      </a>
+
+      <ng-content select="header-confirm-back" *ngIf="isConfirm"></ng-content>
+    </div>
+    <div class="col-8 text-center p-none">
+      <div class="header-title">
+        <div class="text-truncate" *ngIf="!!heading">{{ heading }}</div>
+        <ng-content select="header-title" *ngIf="!heading"></ng-content>
+      </div>
+    </div>
+    <div class="col-2 text-right" *ngIf="!!isFilter">
+      <ng-content select="header-filter"></ng-content>
+    </div>
+  </div>
+
+  <div class="sub-header">
+    <div class="row">
+      <div class="col-12">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

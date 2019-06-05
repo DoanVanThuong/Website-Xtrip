@@ -1,0 +1,23 @@
+<!--component html goes here -->
+<div class="product-switch-type-mobile-page">
+  <div class="row" dropdown (onShown)="onChangeDropdown()" (onHidden)="onChangeDropdown()">
+    <div class="col-12 bor-item" dropdownToggle>
+      {{typeProduct(params)}}
+      <span>
+        <img [class.rotate-180]="isShowDropDown" class="m-b-none" cdn-src="assets/images/product/result/drop-down.svg" alt="img" />
+      </span>
+      <ul class="dropdown-menu animated fadeIn" *dropdownMenu id="dropdown-basic" role="menu" aria-labelledby="button-basic">
+        <li class="row m-b-5" (click)="selectType('all')">
+          <div class="col-6">Hoạt động</div>
+          <div class="col-6 text-right text-green">Xem tất cả</div>
+        </li>
+        <li class="p-10-0 font-weight-normal" (click)="selectType(type.code)" *ngFor="let type of types">
+          <img class="m-b-none m-t-n-3" cdn-src="assets/images/product/result/{{type.code}}.svg" alt="img" /> {{type.display}}
+          <span class="float-right" *ngIf="type.code === params.type">
+            <img class="m-b-none" cdn-src="assets/images/product/result/check.svg" alt="img" />
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

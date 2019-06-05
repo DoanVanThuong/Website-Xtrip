@@ -1,0 +1,72 @@
+<div class="payment-result payment-result-desktop" [booking-step]="3">
+
+  <div class="main-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="panel panel-desktop m-t-50">
+
+            <!-- payment successfully -->
+            <div class="panel-body" *ngIf="!isError">
+              <loading [show]="!verifyPayment.message.title && !verifyPayment.message.content"></loading>
+              <!-- /header -->
+              <section class="row m-t-30" *ngIf="!!verifyPayment.message.content && !!verifyPayment.message.title">
+                <div class="col-12 text-center">
+                  <img class="size-64x64" cdn-src="assets/images/payment/desktop/success-pay.svg" alt="image"/>
+                  <div class="text-green font-20 font-bold m-t-10">
+                    <span>{{ verifyPayment.message.title }}</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="payment-note row m-t-20"
+                       *ngIf="!!verifyPayment.message.content && !!verifyPayment.message.title">
+                <div class="col-12 p-l-30 p-r-30">
+                  <div [innerHTML]="verifyPayment.message.content | safeHTML"></div>
+                </div>
+
+                <div class="col-12 text-center m-t-10">
+                  <button class="btn btn-main-v2 mn-w-200 font-medium p-10" (click)="gotoMyBooking()">
+                    Xem đặt chỗ của tôi
+                  </button>
+                </div>
+              </section>
+            </div>
+
+            <!-- payment failed -->
+            <div class="panel-body" *ngIf="isError">
+
+              <!-- /header -->
+              <section class="row m-t-30">
+                <div class="col-12 text-center">
+                  <img class="size-64x64" cdn-src="assets/images/payment/desktop/pay-error.svg" alt="image"/>
+                  <div class="font-20 font-bold m-t-10 text-danger">
+                    Đặt chỗ không thành công
+                  </div>
+                </div>
+
+              </section>
+              <section class="payment-note row m-t-20">
+                <div class="col-12 font-bold text-center" *ngIf="!routeParams.errorMessage">
+                  Có lỗi xảy ra vui lòng thử lại !
+                </div>
+                <div class="col-12 font-bold text-center" *ngIf="!!routeParams.errorMessage">
+                  {{routeParams.errorMessage}}
+                </div>
+                <div class="col-12 text-center m-t-10">
+                  <button class="btn btn-main-v2 mn-w-200 font-medium p-10 m-t-20 pointer" (click)="backToHome()">
+                    Xong
+                  </button>
+                  <!-- <button class="btn btn-main-v2 mn-w-200 font-medium p-10 m-t-20 pointer" (click)="checkRePayment()">
+                    Thanh toán lại
+                  </button> -->
+                </div>
+              </section>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

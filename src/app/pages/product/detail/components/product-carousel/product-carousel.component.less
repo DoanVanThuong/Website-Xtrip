@@ -1,0 +1,57 @@
+@import "_variables.less";
+.product-carousel {
+  
+  .owl-carousel {
+    position: relative;
+    .owl-item{
+      
+    }
+    .owl-dots {
+      display: none;
+      .owl-dot {
+        &:hover,
+        &.active {
+          span {
+            background-color: @green-2;
+          }
+        }
+      }
+    }
+    .owl-nav {
+      height: 0px;
+      @media (max-width: 479px) {
+        display: none;
+      }
+      .owl-next,
+      .owl-prev {
+        background: transparent;
+        border-radius: 50%;
+        text-align: center;
+        color: hsla(0, 0%, 100%, .6);
+        position: absolute;
+        top: 47%;
+        outline: none;
+        margin: 0;
+        &:hover {
+          color: @white;
+        }
+      }
+      .owl-next {
+        right: 20px;
+      }
+      .owl-prev {
+        left: 20px;
+      }
+    }
+  }
+  .pos-img-view {
+    right: 35px;
+    bottom: 20px;
+    z-index: 1;
+    background-color: @white;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}

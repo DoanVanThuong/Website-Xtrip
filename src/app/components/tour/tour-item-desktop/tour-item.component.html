@@ -1,0 +1,73 @@
+<div class="tour-item tour-item-desktop">
+  <a class="pointer"
+     [title]="tour.name"
+     [routerLink]="[tour.href]"
+     [queryParams]="generateTourParams(tour)">
+    <div class="tour-image">
+      <img defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="tour.photo.src | size: 300"
+           [offset]="80"
+           [title]="tour.name"
+           [alt]="tour.name"
+           onerror="this.src='assets/images/no-thumbnail.png'"
+           class="m-b-none">
+      <div class="tour-review d-flex justify-content-around ">
+        <div class="bg-green m-r-10" *ngIf="!!tour.rating && !!tour.reviews">
+        <span class="m-r-5" *ngIf="!!tour.rating">
+          <img class="m-b-none m-t-n-3"
+               cdn-src="assets/images/hotel/desktop/rating.svg"
+               alt="icon"/>
+              {{ tour.rating | number: '1.1'}}
+          </span>
+          <span *ngIf="!!tour.reviewed">
+            <img class="m-b-none m-t-n-3"
+                 cdn-src="assets/images/hotel/desktop/cmt.svg"
+                 alt="img"/>
+           {{ tour.reviews | number: '1.1'}}
+        </span>
+        </div>
+        <div class=""
+             [class.bg-main]="isDepartTime"
+             [class.bg-green]="!isDepartTime">
+          {{tour.days}}N{{tour.nights}}Đ
+        </div>
+      </div>
+    </div>
+    <div class="tour-info">
+      <h5 class="tour-name m-none font-bold">{{ tour.name }}</h5>
+      <p class="tour-journey m-none text-truncate"
+         [class.m-t-10]="isDepartTime"
+         [class.m-t-5]="!isDepartTime">
+        {{ tour.journey}}</p>
+      <div class="m-t-12 depart-time" *ngIf="isDepartTime">
+        Khởi hành: {{ checkTypeDateTour(tour.type, tour.departDate, tour.departDates.length > 0 ? tour.departDates : [])
+        }}
+        <div class="d-inline-block num-depart-date"
+             *ngIf="tour.type != TOUR_TYPE.EVERYDAY && tour.departDates.length > 1 ">
+          +{{ tour.departDates.length - 1 }}
+        </div>
+
+      </div>
+      <div class="d-flex justify-content-between align-items-end m-t-20">
+        <div class="tour-price">
+          <div class="original-price font-13 text-light-gray text-line-through mn-h-20">
+            <span class="" *ngIf="tour.originalPrice !== tour.sellingPrice">
+            {{ tour.originalPrice | currencyMoney: '' }} <span class="text-underline">đ</span>
+            </span>
+          </div>
+          <div class="sell-price text-green font-bold font-16">
+            {{ tour.sellingPrice | currencyMoney: '' }} <span class="text-underline">đ</span>
+
+            <div class="price-sale-off" *ngIf="!!tour.percentDiscount">
+              <span class="font-12 font-medium">Giảm đến</span>
+              <div class="font-bold">{{ tour.percentDiscount }}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="point text-light-gray font-13">
+          +{{ tour.points | currencyMoney:'' }} điểm
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

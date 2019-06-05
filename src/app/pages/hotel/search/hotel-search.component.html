@@ -1,0 +1,97 @@
+<div class="hotel-search-mobile-page">
+
+  <app-header [back]="true" [heading]="'Tìm khách sạn'" [fixed]="true" [version]="3" [shadow]="false"></app-header>
+
+  <div class="wrapper" min-height>
+    <!-- Form Search Hotel -->
+    <div class="bg-area position-relative">
+        <form [formGroup]="form" novalidate>
+          <div class="position-relative">
+            <mat-form-field (click)="openLocationSelector()">
+              <input matInput placeholder="Tên khách sạn hoặc địa điểm" type="text" readonly [formControl]="destination">
+            </mat-form-field>
+            <img class="m-b-none search-icon" cdn-src="assets/images/icon/icon-lookup-gray.svg" alt="img" />
+            <img class="m-b-none pos-icon" cdn-src="assets/images/icon/icon-position-gray.svg" alt="img" (click)="getCurrentPosition()" />
+          </div>
+
+          <ul class="">
+            <li class="d-flex">
+              <div class="half-width bor-right cell d-flex justify-content-center align-items-center">
+                <a class="d-inline-block mn-w-110" (click)="onShowDatePicker()">
+                  <div class="title">Ngày nhận phòng</div>
+                  <div class="d-flex m-t-n-8">
+                    <div class="large-num">{{ selectedDate.start | moment: 'DD' }}</div>
+                    <div class="text-date">
+                      <div class="text-day">{{ selectedDate.start | dateOfWeek : false }}</div>
+                      <div class="text-month">Tháng {{ selectedDate.start | moment: 'MM' }}</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="half-width cell d-flex justify-content-center align-items-center">
+                <a class="d-inline-block mn-w-110" (click)="onShowDatePicker()">
+                  <div class="title">Ngày trả phòng</div>
+                  <div class="d-flex m-t-n-8">
+                    <div class="large-num">{{ selectedDate.end | moment: 'DD' }}</div>
+                    <div class="text-date">
+                      <div class="text-day">{{ selectedDate.end | dateOfWeek : false }}</div>
+                      <div class="text-month">Tháng {{ selectedDate.end | moment: 'MM' }}</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li class="d-flex">
+              <div class="half-width bor-right cell d-flex justify-content-center align-items-center">
+                <a class="d-inline-block mn-w-110" (click)="showRoomAdult()">
+                  <div class="title">Số phòng</div>
+                  <div class="m-t-n-8">
+                    <div class="large-num"><span>0</span>{{ !!roomsAdults.roomOccupancies ? roomsAdults.rooms : 1 }}</div>
+                  </div>
+                </a>
+              </div>
+              <div class="half-width cell d-flex justify-content-center align-items-center">
+                <a class="d-inline-block mn-w-110" (click)="showRoomAdult()">
+                  <div class="title">
+                    {{roomsAdults.sumAdults || 1}} người lớn
+                    <span *ngIf="!!roomsAdults.sumChildren">, {{roomsAdults.sumChildren}} trẻ em</span>
+                  </div>
+                  <div class="m-t-n-8">
+                    <div class="large-num"><span *ngIf="!roomsAdults.roomOccupancies || !!roomsAdults && roomsAdults.adults < 10">0</span>{{ !!roomsAdults.roomOccupancies ? roomsAdults.adults : 1 }}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </form>
+      <div class="btn-pos">
+        <button (click)="onSubmit()" [disabled]="!form.valid" class="btn btn-main-v3 btn-block font-16 font-weight-bold">
+          Tìm kiếm
+        </button>
+      </div>
+    </div>
+    <!-- Form Search Hotel -->
+
+    
+
+    <!-- History search -->
+    <div class="history-search">
+      <app-hotel-history-search [title]="'Tìm kiếm gần đây'" (select)="emitLocationHistory($event)"></app-hotel-history-search>
+    </div>
+    <!-- History search -->
+
+  </div>
+</div>
+
+<!-- location selector -->
+<hotel-location-selector-popup (select)="emitLocation($event)"></hotel-location-selector-popup>
+
+<!-- date selector -->
+<app-hotel-date-picker-popup 
+  [date]="selectedDate"
+  (submit)="onSelectDate($event)">
+</app-hotel-date-picker-popup>
+
+<!-- room, adult -->
+<hotel-room-popup (onChange)="emitRoomAdult($event)"></hotel-room-popup>

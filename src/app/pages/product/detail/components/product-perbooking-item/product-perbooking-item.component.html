@@ -1,0 +1,35 @@
+<div class="product-perbooking-item-wp" [class.p-none]="isDesktop" [class.p-none]="item.inputType === 1">
+    <div class="form-group list-group-item p-none" *ngIf="item.addons && item.required && item.inputType === 1">
+        <div class="position-relative">
+            <select class="form-control b-none" (ngModelChange)="onChangePerbooking($event)" [(ngModel)]="selectedOPtion"
+                name="selectedOPtion">
+                <option *ngFor="let i of item.items" [ngValue]="i" [disabled]="i === 0">{{i.label}} {{!!i.price ? '- '
+                    + i.price : ''}}</option>
+            </select>
+            <div class="quote-text font-bold" *ngIf="!selectedOPtion.value">Vui lòng chọn</div>
+        </div>
+    </div>
+
+    <div *ngIf="item.addons && !item.required && item.inputType !== 1" class="list-item-input-5">
+        <div class="row">
+            <div class="col-8" [class.p-none]="isMobile">
+                <div class="font-bold name-addon">{{item.name}}</div>
+                <div class="selling-price clearfix m-r-15">{{item.price | currencyMoney: ''}}
+                    <span class="text-underline ">đ</span>
+                    <span class=""> / người</span>
+                </div>
+            </div>
+            <div class="col-4 text-right p-none" *ngIf="isMobile">
+                <div class="h-full d-flex justify-content-center align-items-center">
+                    <app-counter [min]="0" [max]="100" [iconAdd]="iconAdd" [iconMinus]="iconMinus" value="" (change)="onOptionChange($event, item)"></app-counter>
+                </div>
+            </div>
+            <div class="col-4 text-right p-r-none" *ngIf="isDesktop">
+                <div class="h-full d-flex justify-content-center align-items-center">
+                    <app-counter [min]="0" [max]="100" (change)="onOptionChange($event, item)"></app-counter>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

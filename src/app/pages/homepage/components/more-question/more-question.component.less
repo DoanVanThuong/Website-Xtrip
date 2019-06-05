@@ -1,0 +1,121 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.knowledge {
+
+  .knowledge-item {
+
+    .knowledge-info {
+      color: @white;
+      text-align: left;
+
+      .title {
+        font-size: 18px;
+        font-weight: @font-bold;
+      }
+
+      .description {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .circle-bg {
+    position: absolute;
+    top: 20px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: @white;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+  }
+
+  &.knowledge-desktop {
+
+    .knowledge-item {
+
+      width: 100%;
+      padding: 15px 20px;
+      min-width: 110px;
+      min-height: 110px;
+      padding: 15px;
+
+      @media (max-width: 991px) {
+        margin-bottom: 30px;
+      }
+
+      .knowledge-info {
+        .title {
+          font-size: 30px;
+        }
+
+        .description {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  &.knowledge-mobile {
+
+    .block-title {
+      font-size: 16px;
+      font-weight: @font-medium;
+    }
+
+    .block-description {
+      font-size: 14px;
+      color: @gray-1;
+    }
+
+    .scroll-container {
+      margin-left: -15px;
+      margin-right: -15px;
+
+      .scroll-area {
+        padding: 0 15px;
+      }
+    }
+  }
+
+  .knowledge-item {
+    padding: 15px 20px;
+    background-image: url('../../../../../assets/images/more/coupon/bg-knowledge.png');
+    background-size: cover;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    color: @gray-2;
+
+    .knowledge-image {
+      margin-right: 10px;
+
+      .border-radius(50%);
+      min-width: 80px;
+      min-height: 80px;
+      background-color: @white;
+      padding: 10px;
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    .knowledge-info {
+      text-align: left;
+
+      .title {
+        font-family: "UTM Flavour", sans-serif;
+        font-size: 24px;
+        font-weight: @font-normal;
+      }
+
+      .description {
+        font-size: 13px;
+        font-weight: @font-thin;
+      }
+    }
+  }
+}

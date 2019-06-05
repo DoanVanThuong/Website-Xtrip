@@ -1,0 +1,36 @@
+@import '_variables.less';
+
+.apply-coupon {
+  .title {
+    font-weight: 500;
+  }
+  &.p-20-16 {
+    padding: 20px 16px;
+  }
+
+  .mat-form-field {
+
+    .mat-form-field-wrapper {
+      .mat-form-field-infix {
+        color: @gray-10;
+        font-size: 14px;
+
+        .mat-input-element {
+          color: @black;
+        }
+      }
+
+      .mat-form-field-underline {
+        background-color: @gray-10;
+        height: 1px;
+      }
+    }
+  }
+
+  .errors-mes {
+    color: @orange-2;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+}

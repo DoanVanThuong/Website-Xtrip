@@ -1,0 +1,73 @@
+// component css goes here
+@import "_variables.less";
+.product-sortable-desktop-page {
+
+  .mobile {
+    .pos-sort {
+      padding: 5px 10px 12px;
+    }
+    .bor-sort-item {
+      border: 1px solid transparent;
+      padding: 6px 10px;
+      border-radius: 50px;
+      background-color: @gray-41;
+      color: @gray-23;
+      font-size: 12px;
+      transition: all .25s linear;
+      &.active {
+        border: 1px solid @green-2;
+        background-color: @white;
+        color: @green-2;
+      }
+      &:active {
+        transition: all .25s linear;
+      }
+    }
+    .w-33-pc {
+      width: 33%;
+    }
+    .m-0-5 {
+      margin: 0 2px;
+    }
+  }
+
+  .desktop {
+    .shortable-shadow {
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+    }
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .sub-title {
+      font-size: 14px;
+    }
+    .h-48 {
+      height: 48px;
+    }
+    .b-r-st {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .de-bor-sort-item {
+      border: 1px solid transparent;
+      border-radius: 5px;
+      padding: 6px 10px;
+      margin-top: -6px;
+      font-size: 14px;
+      color: @black;
+      transition: all .25s linear;
+      &.active {
+        border: 1px solid @orange-2;
+        color: @orange-2;
+        font-weight: 500;
+      }
+      &:hover {
+        border: 1px solid @orange-2;
+        color: @orange-2;
+        transition: all .25s linear;
+      }
+    }
+  }
+
+}

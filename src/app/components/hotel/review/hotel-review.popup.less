@@ -1,0 +1,50 @@
+@import "_variables.less";
+
+.modal {
+  &.hotel-review-popup {
+
+    .modal-dialog {
+
+      &.fullscreen {
+
+        .modal-content {
+
+          .modal-header {
+            background-color: @green-2;
+          }
+
+          .modal-body {
+            padding: 15px !important;
+            color: @black;
+
+            .circle-score-reviews {
+              background-color: @green-3;
+              color: @white;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              padding: 10px 5px;
+              text-align: center;
+              font-size: 15px;
+            }
+
+            .review-rating {
+              color: @green-3;
+
+              &.review-danger {
+                color: @red-2;
+              }
+            }
+          }
+
+          .modal-footer {
+            padding: 7px;
+            display: block;
+            align-items: unset;
+            line-height: 1;
+          }
+        }
+      }
+    }
+  }
+}

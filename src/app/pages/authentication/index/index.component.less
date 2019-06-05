@@ -1,0 +1,168 @@
+@import '../../../../less/_variables.less';
+
+.authentication-page,
+.login-page,
+.register-page,
+.forgot-password-page {
+
+  &.bg-img {
+    background-image: url("../../../../assets/images/signin/bg-login.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 550px;
+  }
+  background-color: @white;
+
+  height: 100vh;
+  position: relative;
+  padding: 15px 20px;
+
+  .intro {
+    color: @white;
+    .title {
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+    .description {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 900;
+    color: @black;
+    margin-top: 20px;
+  }
+
+  .form-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+
+    .pos-link-btn {
+      bottom: 20px;
+      left: 0;
+      right: 0;
+    }
+
+    &.no-bg-form-box {
+      position: unset;
+    }
+
+    .btn {
+      &.b-r-56 {
+        border-radius: 56px;
+      }
+      &.btn-register-by-phone {
+        border-radius: 56px;
+      }
+      &.btn-main-link {
+        color: @orange-2;
+        text-decoration: underline;
+        font-size: 16px;
+      }
+    }
+
+    .form {
+      .mat-form-field {
+        color: @black;
+        width: 100%;
+        margin-top: 5px;
+
+        .mat-form-field-wrapper {
+          padding-bottom: 20px;
+
+          .mat-form-field-label {
+            color: @gray-9;
+          }
+
+          .mat-form-field-underline {
+            background-color: @gray-7;
+
+            .mat-form-field-ripple {
+              background-color: transparent;
+            }
+          }
+        }
+
+        &.mat-focused {
+
+          .mat-form-field-placeholder {
+            color: @white;
+          }
+
+          .mat-form-field-underline {
+            .mat-form-field-ripple {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .push-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form {
+
+    .form-group {
+      margin-bottom: 15px;
+
+      .mat-form-field {
+        color: @gray-2;
+
+        .mat-input-wrapper {
+          margin-bottom: 5px;
+
+          img {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      &.has-error {
+        .mat-form-field {
+          .mat-input-wrapper {
+            .mat-input-underline {
+              border-color: @red-2;
+            }
+          }
+        }
+      }
+    }
+
+    .error, .error-message {
+      color: @red-2;
+      font-size: 12px;
+    }
+  }
+
+  .btn-signin,
+  .btn-signup,
+  .btn-forgot-password {
+    background-color: @orange-2;
+    color: @white;
+    padding: 9px 15px;
+    width: 100%;
+    border-radius: 56px;
+    font-size: 16px;
+    font-weight: 500;
+
+    &:disabled {
+      opacity: .75;
+    }
+  }
+}

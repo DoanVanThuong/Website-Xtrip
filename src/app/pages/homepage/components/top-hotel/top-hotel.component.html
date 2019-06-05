@@ -1,0 +1,45 @@
+<div class="block block-top-hotel bg-gray" *ngIf="!!hotels.length">
+
+  <!-- desktop -->
+  <div class="hot-hotel hot-hotel-desktop" *ngIf="isDesktop">
+    <div class="container">
+      <div class="row">
+        <div class="container-fluid">
+          <h3 class="block-title">
+            Bạn đã đặt phòng cho kỳ nghỉ sắp tới?
+          </h3>
+          <div class="block-body">
+            <div class="row">
+              <div class="col-xl-3 col-lg-4 col-md-6"
+                   [class.m-t-20]="i/itemsPerRow >= 1"
+                   [class.p-l-10]="i%itemsPerRow > 0"
+                   [class.p-r-10]="i%itemsPerRow < itemsPerRow - 1"
+                   *ngFor="let hotel of hotels | slice:0:4; trackBy: trackByFn; let i = index">
+                <hotel-item-desktop [hotel]="hotel" [params]="params"></hotel-item-desktop>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="hot-hotel hot-hotel-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title">Khách sạn đề xuất</h3>
+        <div class="block-body">
+          <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-stage-full']"
+                        [items]="hotels"
+                        [options]="carouselOptions">
+            <div class="popular-hotel-item"
+                 *ngFor="let hotel of hotels; trackBy: trackByFn">
+              <home-hotel-item [hotel]="hotel" [params]="params"></home-hotel-item>
+            </div>
+          </owl-carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

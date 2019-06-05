@@ -1,0 +1,43 @@
+<div class="block block-tour-hot {{ class }}" *ngIf="!!tours.length">
+
+  <div class="hot-tour hot-tour-desktop" *ngIf="isDesktop">
+    <div class="container">
+      <h3 class="block-title text-danger">
+        <img class="size-32x32 m-r-10 m-t-n-3"
+             cdn-src="assets/images/icon/icon-fire-red.svg"
+             alt="icon"/>Tour Hot
+      </h3>
+      <div class="block-body">
+        <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']"
+                      [items]="tours"
+                      [options]="carouselOptions">
+          <div class="hot-tour-item"
+               *ngFor="let tour of tours; trackBy: trackByFn">
+            <home-tour-item [tour]="tour"></home-tour-item>
+          </div>
+        </owl-carousel>
+      </div>
+    </div>
+  </div>
+
+  <div class="hot-tour hot-tour-mobile m-b-15" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title text-white">
+          <img class="size-24x24 m-r-5 m-t-n-3"
+               cdn-src="assets/images/icon/icon-fire-red.svg"
+               alt="icon"/>Tour Hot
+        </h3>
+        <div class="block-body">
+          <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-nav-hover']"
+                        [items]="tours"
+                        [options]="carouselOptions">
+            <div class="hot-tour-item" *ngFor="let tour of tours; trackBy: trackByFn">
+              <home-tour-item [tour]="tour"></home-tour-item>
+            </div>
+          </owl-carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

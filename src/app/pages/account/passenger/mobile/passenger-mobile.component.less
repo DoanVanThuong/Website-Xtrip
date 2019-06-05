@@ -1,0 +1,47 @@
+@import "_variables.less";
+
+.passenger-page {
+  &.passenger-mobile {
+    position: relative;
+
+    ul.passenger-list {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+
+      > li {
+        padding: 10px;
+        background-color: @white;
+        margin-top: 8px;
+        font-size: 15px;
+        font-weight: 400;
+        color: @black;
+        line-height: 2;
+
+        &:first-child {
+          margin: 0;
+        }
+
+        a {
+          font-size: inherit;
+        }
+
+        img {
+          margin-bottom: 0;
+          margin-top: -3px;
+        }
+      }
+    }
+
+    .btn-add-passenger {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 500;
+      padding: 0;
+      display: inline-block;
+      width: auto;
+      height: auto;
+    }
+  }
+}

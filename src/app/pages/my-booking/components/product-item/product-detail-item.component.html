@@ -1,0 +1,91 @@
+<!-- for mobile -->
+<div class="booking-product-detail-item booking-detail-item booking-detail-item-mobile animated fadeInUp"
+     *ngIf="isMobile">
+  <a [routerLink]="['/my-booking/product', product.code]">
+    <div class="booking-img">
+      <img class="img-responsive img-fix"
+           defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="product.productPhoto.src | size: 300"
+           [alt]="product.productName"
+           [title]="product.productName"
+           onerror="this.src = 'assets/images/no-thumbnail.png'"/>
+    </div>
+    <div class="booking-info">
+      <div class="booking-name">
+        {{ product.productName }}
+      </div>
+      <div class="booking-status">
+        <booking-status [status]="product.status" [fill]="true" [icon]="true"></booking-status>
+      </div>
+      <div class="booking-description">
+        <div class="row">
+          <div class="col-5 booking-time p-r-none">
+            <div class="info-label font-11">Ngày đi</div>
+            <div class="font-20">{{ product.departDate | departDate }}</div>
+          </div>
+          <div class="col-4 booking-duration">
+            <div class="info-label font-11">Thời lượng</div>
+            <div class="font-20 text-truncate">{{ product.duration }}</div>
+          </div>
+          <div class="col-3 booking-passenger">
+            <div class="info-label font-11">Số người</div>
+            <div class="font-20">{{ product.totalPax }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- for desktop -->
+<div class="booking-tour-detail-item booking-tour-detail-item-desktop m-t-20" *ngIf="isDesktop">
+  <div class="date">Ngày đặt {{ product.bookingDate | moment: 'DD/MM/YYYY' }}</div>
+  <div class="panel card panel-desktop m-t-10">
+    <div class="d-flex">
+      <div class="mn-w-200 w-200 mn-h-170">
+        <a class="pointer d-block h-full w-full" (click)="onOpenBookingDetail()">
+          <img class="m-b-none tour-item-image"
+               defaultImage="assets/images/no-thumbnail.png"
+               [lazyLoad]="product.productPhoto.src | size: 300"
+               [alt]="product.productName"
+               [title]="product.productName"
+               onerror="this.src = 'assets/images/no-thumbnail.png'"/>
+        </a>
+      </div>
+      <div class="w-full">
+        <div class="panel-heading card-header text-black">
+          Mã đặt chỗ: <span class="font-bold">{{ product.code }}</span>
+          <booking-status class="pull-right" [status]="product.status"></booking-status>
+        </div>
+        <div class="panel-body card-body">
+          <a class="pointer" (click)="onOpenBookingDetail()">
+            <div class="d-flex align-items-center justify-content-center flex-row">
+              <div class="mr-auto">
+                <h4 class="font-16 font-bold m-none over-hidden">{{ product.productName }}</h4>
+                <div class="d-flex m-t-20">
+                  <div class="m-r-20">
+                    <div class="font-13 text-light-gray">Ngày đi</div>
+                    <div class="font-18 text-black">{{ product.departDate | departDate }}</div>
+                  </div>
+                  <div class="m-r-20">
+                    <div class="font-13 text-light-gray">Số người</div>
+                    <div class="font-18 text-black">
+                      {{ product.totalPax }}
+                    </div>
+                  </div>
+                  <div class="">
+                    <div class="font-13 text-light-gray">Thời lượng tham quan</div>
+                    <div class="font-18 text-black">{{ product.duration }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="font-18 font-medium mn-w-100 text-right m-l-15">
+                {{ product.totalPrice | currencyMoney:''}} <span class="text-underline">đ</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

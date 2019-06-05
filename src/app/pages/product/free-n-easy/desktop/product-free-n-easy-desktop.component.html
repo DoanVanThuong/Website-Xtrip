@@ -1,0 +1,39 @@
+<!--component html goes here -->
+<div class="product-free-n-easy-desktop-page">
+
+  <div class="main-body">
+    <div class="bg-header bg-free-n-easy">
+      <div class="container">
+        <h1 class="title m-none">
+          Tour Free & Easy
+        </h1>
+        <div class="search-form">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+              <app-product-search-form [title]="'Tìm điểm đến, hoạt động vui chơi…'"
+                                       [type]="PRODUCT_TYPE.FREE_AND_EASY"></app-product-search-form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header -->
+
+    <div class="container">
+
+      <section class="popular-location">
+        <app-product-popular-location [title]="'Điểm đến phổ biến'"
+                                      [type]="PRODUCT_TYPE.FREE_AND_EASY"></app-product-popular-location>
+      </section>
+
+      <!-- <section class="suggestion-for-you">
+        <app-product-suggestion [title]="'Gợi ý cho bạn'" [type]="PRODUCT_TYPE.FREE_AND_EASY" [options]="carouselOptions"></app-product-suggestion>
+      </section> -->
+
+      <!-- <section class="top">
+        <app-product-top [title]="'Top Free &amp; Easy'" [type]="PRODUCT_TYPE.FREE_AND_EASY" [options]="carouselOptions"></app-product-top>
+      </section> -->
+
+    </div>
+  </div>
+</div>

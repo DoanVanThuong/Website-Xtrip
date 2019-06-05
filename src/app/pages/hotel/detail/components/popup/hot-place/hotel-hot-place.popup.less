@@ -1,0 +1,33 @@
+@import '_variables.less';
+
+.hotel-hot-place-popup {
+
+    .list-place-hotel {
+        li {
+            font-weight: 400;
+            font-size: 13px;
+            position: relative;
+            letter-spacing: 0;
+            margin-left: 4px;
+            border-bottom: 1px solid @gray-38;
+            padding:7px 0px;
+
+            &:before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: @green-2;
+                position: absolute;
+                top: 13px;
+                left: -8px;
+            }
+
+            .distance {
+                width: 150px;
+                text-align: right;
+            }
+        }
+
+    }
+}

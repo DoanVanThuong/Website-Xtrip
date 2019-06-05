@@ -1,0 +1,41 @@
+<div class="datepicker calendar">
+  <table>
+    <thead class="heading">
+      <tr class="date-controls">
+        <th class="prev">
+          <div class="">
+            <a class="pointer" (click)="onSelectNextMonth('prev')" *ngIf="onButtonShow(true)">
+              <i class="fa fa-angle-left"></i>
+            </a>
+          </div>
+        </th>
+        <th class="title-heading" colspan="5">
+          Tháng {{ month | moment:'MM'}}, {{ month | moment:'YYYY'}}
+        </th>
+        <th class="next">
+          <a class="pointer" (click)="onSelectNextMonth('next')" *ngIf="onButtonShow(true)">
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </th>
+      </tr>
+      <tr class="week-title">
+        <th *ngFor="let day of headers; trackBy: trackByFn; let i = index">{{ day }}</th>
+      </tr>
+    </thead>
+    <tbody class="calendar">
+      <tr class="week" *ngFor="let row of convertNumberToArray(rows); trackBy: trackByFn; let i = index">
+        <td class="date" *ngFor="let col of convertNumberToArray(headers.length); trackBy: trackByFn; let j = index">
+          <a [class.disabled]="onDisabledDate(dates[row][col])" [class.today]="onCurrentDate(dates[row][col].date)"
+             (click)="onSelectDate(dates[row][col])">
+            <span>
+              {{ dates[row][col].date | moment: 'DD' }}
+            </span>
+            <div class="price animated fadeIn" *ngIf="dates[row][col].price > 0" [class.lowest]="dates[row][col].isLowest">
+              {{ dates[row][col].price | currencyMoney:'' }}
+            </div>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

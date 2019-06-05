@@ -1,0 +1,319 @@
+<!-- for mobile -->
+<div class="contact-info contact-info-mobile {{ class }}"
+     [class.ver-2]="version === 2"
+     *ngIf="isMobile">
+
+  <div class="row" *ngIf="version === 2">
+    <div class="col-12">
+      <h4 class="title title-color">{{ heading || 'Thông tin liên hệ' }}</h4>
+      <div>
+        <form class="form form-desktop" [formGroup]="form" novalidate>
+          <div class="form-group">
+            <label class="control-label">Danh xưng: </label>
+            <div class="vocatives m-t-10">
+              <button class="btn btn-main-outline"
+                      type="button"
+                      [class.active]="title === vocative"
+                      *ngFor="let vocative of vocatives; trackBy: index; let i = index"
+                      (click)="onSelectVocative(vocative)">
+                {{ vocative }}
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Họ:</label>
+            <input type="text"
+                   class="form-control underline"
+                   placeholder="Nhập họ"
+                   [formControl]="lastName"/>
+            <div class="error" *ngIf="lastName.dirty || isInvalid">
+              <span *ngIf="lastName.errors | equalError:'required'">Vui lòng nhập họ</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Tên:</label>
+            <input type="text"
+                   class="form-control underline"
+                   placeholder="Nhập tên"
+                   [formControl]="firstName"/>
+            <div class="error" *ngIf="firstName.dirty || isInvalid">
+              <span *ngIf="firstName.errors | equalError:'required'">Vui lòng nhập tên</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Số điện thoại:</label>
+            <input type="text"
+                   class="form-control underline"
+                   placeholder="Nhập số điện thoại"
+                   [formControl]="phone"/>
+            <div class="error" *ngIf="phone.dirty || isInvalid">
+              <span *ngIf=" phone.errors | equalError:'required'">SĐT không được để trống</span>
+              <span *ngIf=" phone.errors | equalError:'phone'">Vui lòng nhập SĐT hợp lệ</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Email (Nhận vé điện tử):</label>
+            <input type="text"
+                   class="form-control underline"
+                   placeholder="Nhập email"
+                   [formControl]="email"/>
+            <div class="error" *ngIf="email.dirty || isInvalid">
+              <span *ngIf=" email.errors | equalError:'required'">Email không được để trống</span>
+              <span *ngIf=" email.errors | equalError:'email'">Vui lòng nhập email hợp lệ</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="version === 1">
+    <div class="col-12">
+      <div class="m-t-10 p-l-10 p-r-10">
+        <div class="title-color title font-13">{{ heading || 'Thông tin liên hệ' }}</div>
+      </div>
+      <div class="m-t-10 bg-white">
+        <form class="form"
+              [formGroup]="form"
+              novalidate>
+          <div class="list-group list-group-flush booking">
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Họ:</div>
+                <div class="col-7">
+                  <mat-form-field class="d-block" floatLabel="never">
+                    <input matInput
+                           placeholder="* Nhập họ"
+                           type="text"
+                           [formControl]="lastName"/>
+                    <mat-error class="error" align="start" *ngIf="lastName.dirty || isInvalid">
+                      <span *ngIf="lastName.errors | equalError:'required'">Vui lòng nhập họ</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Tên đệm & tên:</div>
+                <div class="col-7">
+                  <mat-form-field class="d-block" floatLabel="never">
+                    <input matInput
+                           placeholder="* Nhập Tên đệm & tên"
+                           type="text"
+                           [formControl]="firstName"/>
+                    <mat-error class="error" align="start" *ngIf="firstName.dirty || isInvalid">
+                      <span *ngIf="firstName.errors | equalError:'required'">Vui lòng nhập tên đệm và tên</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Điện thoại:</div>
+                <div class="col-7">
+                  <mat-form-field class="d-block" floatLabel="never">
+                    <input matInput
+                           placeholder="* +84 123 456 78"
+                           type="tel"
+                           [formControl]="phone">
+                    <mat-error class="error" align="start" *ngIf="phone.dirty || isInvalid">
+                      <span *ngIf=" phone.errors | equalError:'required'">SĐT không được để trống</span>
+                      <span *ngIf=" phone.errors | equalError:'phone'">Vui lòng nhập SĐT hợp lệ</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Email:</div>
+                <div class="col-7">
+                  <mat-form-field class="d-block" floatLabel="never">
+                    <input matInput
+                           placeholder="* Nhập e-mail"
+                           type="email"
+                           [formControl]="email">
+                    <mat-error class="error" align="start" *ngIf="email.dirty || isInvalid">
+                      <span *ngIf=" email.errors | equalError:'required'">Email không được để trống</span>
+                      <span *ngIf=" email.errors | equalError:'email'">Vui lòng nhập email hợp lệ</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- for desktop -->
+<div class="contact-info contact-info-desktop  {{ class || 'm-t-20' }} animated zoomIn"
+     [class.ver-2]="version === 2"
+     *ngIf="isDesktop">
+  <h4 class="title">{{ heading }}</h4>
+
+  <div class="panel panel-desktop" *ngIf="version == 2">
+    <div class="panel-body">
+      <form class="form form-desktop"
+            [formGroup]="form"
+            novalidate>
+        <div class="form-group">
+          <label class="control-label">Danh xưng: </label>
+          <div class="vocatives m-t-10">
+            <button class="btn btn-main-outline"
+                    type="button"
+                    [class.active]="title === vocative"
+                    *ngFor="let vocative of vocatives; trackBy: index; let i = index"
+                    (click)="onSelectVocative(vocative)">
+              {{ vocative }}
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Họ:</label><span class="text-red"> *</span>
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập họ"
+                     [formControl]="lastName"/>
+              <div class="error" *ngIf="lastName.dirty || isInvalid">
+                <span *ngIf="lastName.errors | equalError:'required'">Vui lòng nhập họ</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Tên:</label><span class="text-red"> *</span>
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập tên"
+                     [formControl]="firstName"/>
+              <div class="error" *ngIf="firstName.dirty || isInvalid">
+                <span *ngIf="firstName.errors | equalError:'required'">Vui lòng nhập tên</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Email (Nhận vé điện tử):</label><span class="text-red"> *</span>
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập email"
+                     [formControl]="email"/>
+              <div class="error" *ngIf="email.dirty || isInvalid">
+                <span *ngIf=" email.errors | equalError:'required'">Email không được để trống</span>
+                <span *ngIf=" email.errors | equalError:'email'">Vui lòng nhập email hợp lệ</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Số điện thoại:</label><span class="text-red"> *</span>
+              <input type="text"
+                     class="form-control underline"
+                     placeholder="Nhập số điện thoại"
+                     [formControl]="phone"/>
+              <div class="error" *ngIf="phone.dirty || isInvalid">
+                <span *ngIf=" phone.errors | equalError:'required'">SĐT không được để trống</span>
+                <span *ngIf=" phone.errors | equalError:'phone'">Vui lòng nhập SĐT hợp lệ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="panel panel-desktop" *ngIf="version == 1">
+    <div class="card-body panel-body">
+
+      <div class="row" *ngIf="isLoggedIn && !isEdit">
+        <div class="col-md-10">
+          <div class="d-flex h-full">
+            <img class="m-t-none size-42x42 m-r-20"
+                 cdn-src="assets/images/icon/icon-user-orrange.svg" alt="icon"/>
+            <div>
+              <div class="font-bold font-16">{{ profile.fullName }}</div>
+              <div class="font-14">{{ profile.email }} - {{ profile.phone }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="d-flex align-items-center justify-content-end h-full">
+            <a class="pointer text-main text-underline font-16 font-medium"
+               (click)="isEdit = true">Thay đổi</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!isLoggedIn || isEdit">
+        <div class="container-fluid">
+          <form class="form form-desktop">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Họ:</label><span class="text-red"> *</span>
+                  <input type="text"
+                         placeholder="Nhập họ"
+                         class="form-control underline"
+                         [formControl]="lastName"/>
+                  <div class="error" *ngIf="lastName.dirty || isInvalid">
+                    <span *ngIf="lastName.errors | equalError:'required'">Vui lòng không để trống</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Tên đệm & tên:</label><span class="text-red"> *</span>
+                  <input type="text"
+                         placeholder="Nhập tên đệm & tên"
+                         class="form-control underline"
+                         [formControl]="firstName"/>
+                  <div class="error" *ngIf="firstName.dirty || isInvalid">
+                    <span *ngIf="firstName.errors | equalError:'required'">Vui lòng không để trống</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Email</label><span class="text-red"> *</span>
+                  <input type="email"
+                         placeholder="Nhập email"
+                         class="form-control underline"
+                         [formControl]="email"/>
+                  <div class="error" align="start" *ngIf="email.dirty || isInvalid">
+                    <span *ngIf=" email.errors | equalError:'required'">Vui lòng không để trống</span>
+                    <span *ngIf=" email.errors | equalError:'email'">Vui lòng nhập email hợp lệ</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Số điện thoại:</label><span class="text-red"> *</span>
+                  <input type="text"
+                         placeholder="Nhập số điện thoại"
+                         class="form-control underline"
+                         [formControl]="phone"/>
+                  <div class="error" align="start" *ngIf="phone.dirty || isInvalid">
+                    <span *ngIf=" phone.errors | equalError:'required'">Vui lòng không để trống</span>
+                    <span *ngIf=" phone.errors | equalError:'phone'">Vui lòng nhập SĐT hợp lệ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

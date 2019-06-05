@@ -1,0 +1,97 @@
+<div bsModal #popup="bs-modal"
+     class="modal fade tour-advisory-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog"
+       [class.fullscreen]="isMobile"
+       [class.modal-dialog-centered]="isDesktop">
+    <div class="modal-content"
+         [class.b-10]="isDesktop">
+      <div class="modal-header">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-2" *ngIf="!isDesktop">
+              <a class="pointer" (click)="hide()">
+                <img class="size-20x20" cdn-src="assets/images/icon/icon-close-green.svg" alt="icon"/>
+              </a>
+            </div>
+            <div class="col-8">Tư vấn tour</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+          <div class="col-12">
+            <div class="bg-light-green b-10 font-14 p-10-15 text-dark-gray">
+              <p class="m-none">
+                Cảm ơn bạn đã quan tâm tới tour <span class="font-bold">{{ tour.name }} - Giá {{ tour.originalPrice | currencyMoney:"" }} VND.</span>
+              </p>
+              <p class="m-none">
+                Bạn vui lòng cung cấp đầy đủ các thông tin. Bộ phận chăm sóc khách hàng sẽ phản hồi sớm nhất trong ngày
+                làm việc.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-12 m-t-20">
+            <form class="form"
+                  (submit)="onSubmit(form.value)"
+                  [formGroup]="form"
+                  novalidate>
+              <mat-form-field floatLabel="always">
+                <mat-label>Họ & Tên</mat-label>
+                <input matInput
+                       placeholder="Nhập họ & tên"
+                       type="text"
+                       [formControl]="name"/>
+                <mat-error *ngIf="name.dirty || name.touched">
+                  <span *ngIf="name.errors | equalError:'required'">Không để trống</span>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field floatLabel="always">
+                <mat-label>Số điện thoại</mat-label>
+                <input matInput placeholder="Nhập số diện thoại"
+                       type="text"
+                       [formControl]="phone"/>
+                <mat-error *ngIf="phone.dirty || phone.touched">
+                  <span *ngIf="phone.errors | equalError:'required'">Không để trống</span>
+                  <span *ngIf="phone.errors | equalError:'phone'">Số điện thoại không hợp lệ</span>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field floatLabel="always">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Nhập email"
+                       type="email"
+                       [formControl]="email"/>
+                <mat-error *ngIf="email.dirty || email.touched">
+                  <span *ngIf="email.errors | equalError:'required'">Không để trống</span>
+                  <span *ngIf="email.errors | equalError:'email'">Email không hợp lệ</span>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field [floatLabel]=" isDesktop ? 'always' : 'never'">
+                <mat-label [ngClass]="!isDesktop ? 'text-light-gray font-normal' : ''">Lời nhắn</mat-label>
+                <textarea matInput
+                          rows="1"
+                          placeholder="Nhập nội dung"
+                          [formControl]="content"></textarea>
+                <mat-error *ngIf="content.dirty || content.touched">
+                  <span *ngIf="content.errors | equalError:'required'">Không để trống</span>
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit"
+                class="btn btn-main-v2 btn-block"
+                (click)="onSubmit(form.value)"
+                [disabled]="form.invalid">
+          Gửi thông tin
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

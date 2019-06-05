@@ -1,0 +1,36 @@
+<div class="product-item product-item-mobile">
+  <a class="pointer"
+     [title]="product.name"
+     [routerLink]="['/product/', product.id, 'detail']"
+     [queryParams]="generateProductParams(product)">
+    <div class="product-image">
+      <img defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="product.photo.src | size: 300"
+           [offset]="80"
+           [title]="product.name"
+           [alt]="product.name"
+           onerror="this.src='assets/images/no-thumbnail.png'"
+           class="m-b-none"/>
+      <div class="product-location">
+        <img class="m-b-none m-t-n-3"
+             cdn-src="assets/images/icon/icon-location-white.svg"
+             alt="icon"/>
+        {{ product.destination.name }}, {{ product.destination.address }}
+      </div>
+      <div class="product-discount" *ngIf="!!product.percentDiscount">
+        Giảm <span class="font-17 font-bold">{{ product.percentDiscount | number:'1.0-0' }}%</span>
+      </div>
+    </div>
+    <div class="product-info">
+      <h5 class="product-name m-none font-bold">{{ product.name }}</h5>
+      <div class="m-t-10">
+        <div class="product-price text-green font-bold font-16">
+          {{ product.sellingPrice | currencyMoney: '' }} <span class="text-underline">đ</span>
+        </div>
+        <div class="product-point text-light-gray font-13">
+          + {{ product.points | currencyMoney:'' }} điểm
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

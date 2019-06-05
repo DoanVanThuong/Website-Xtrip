@@ -1,0 +1,48 @@
+<!--component html goes here -->
+<div class="coupon-list-desktop m-t-10">
+  <div class="coupon-item shadow b-r-20">
+    
+    <a (click)="selectCoupon()">
+      <div class="bg-item position-relative {{checkTypeCoupon(coupon.type)}}">
+      <div class="row">
+        <div class="col-9 p-l-30 p-t-10">
+          <div class="font-24 text-white font-weight-bold name-area">
+            {{coupon.name}}
+          </div>
+          <div class="font-15 font-medium text-white m-t-n-6">
+            Tối đa: {{coupon.maxDiscount | currencyMoney: ''}}<span class="text-underline">đ</span>
+          </div>
+        </div>
+        <!-- <div class="col-3 p-r-30 p-t-18 text-right" *ngIf="coupon.count > 0">
+          <span class="circle-count">x{{coupon.count}}</span>
+        </div> -->
+      </div>
+      <div class="row">
+        <div class="col-12 position-absolute pos-detail-coupon">
+          <ul class="text-white font-15 m-l-30 font-medium">
+            <li>{{coupon.summary}}</li>
+            <li>Hết hạn: {{remainingTime(coupon.time)}}</li>
+          </ul>
+        </div>
+        <div class="position-absolute point left"></div>
+        <div class="position-absolute point right"></div>
+      </div>
+      </div>
+    </a>
+    
+    <div class="bg-white content-item">
+      <div class="inner-content p-l-15 p-r-15">
+        <div class="row">
+          <div class="col-lg-5 col-7 font-weight-bold gray-color m-t-15">Sao chép mã</div>
+          <div class="col-lg-7 col-5 text-right m-t-15">
+            <span class="coupon-code">{{coupon.code}}
+            </span>
+            <span class="pointer" ngxClipboard [cbContent]="coupon.code" (cbOnSuccess)="onClipboardSuccess(coupon.code)">
+              <img class="m-b-none m-l-10" cdn-src="assets/images/more/coupon/copy.svg" alt="img" />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

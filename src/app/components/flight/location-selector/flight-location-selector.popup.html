@@ -1,0 +1,110 @@
+<div bsModal #popup="bs-modal" class="modal fade popup-location-selector " role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header fixed-header header bg-green-linear">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-2">
+              <a (click)="onClose()">
+                <img class="m-0 size-16x16" cdn-src="assets/images/icon-back.png" alt="back"/>
+              </a>
+            </div>
+            <div class="col-8 text-center font-20">Chọn địa điểm</div>
+            <div class="col-2"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body over-y">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="row">
+              <div class="col-12">
+                <div class="form">
+                  <mat-form-field>
+                    <input type="text"
+                           matInput
+                           autofocus
+                           [(ngModel)]="keyword"
+                           (ngModelChange)="onChange($event)"
+                           placeholder="Nhập địa điểm(ít nhất 2 ký tự)">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="sources.length == 0 && isTyping">
+              <div class="row large-title">
+                <div class="col-12 text-left">Không có kết quả</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="text-left">
+                  <div *ngIf="sources.length > 0&&!!keyword ">
+                    <div class="row large-title">
+                      <div class="col-12">Kết quả tìm kiếm</div>
+                    </div>
+                    <ul class="list-unstyled">
+                      <li class="m-t-10" *ngFor="let item of sources" (click)="onSelect(item, 'result')">
+                        <div class="clearfix flex-middle">
+                          <div class="float-left">
+                            <img class="size-28x28 m-0" cdn-src="assets/images/plane-icon.svg" alt="icon"/>
+                          </div>
+                          <div class="float-left p-l-10">
+                            <span [innerHTML]="item.name | highlight : keyword"></span>
+                            (<span [innerHTML]="item.code | highlight : keyword"></span>)
+                            <div class="sub-color" [innerHTML]="item.location | highlight : keyword"></div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div *ngIf="(!!history.length && !isTyping && !keyword.length)">
+                    <div class="row large-title">
+                      <div class="col-12">Đã chọn gần đây</div>
+                    </div>
+                    <ul class="list-unstyled">
+                      <li class="m-t-10" *ngFor="let item of history" (click)="onSelect(item, 'history')">
+                        <div class="clearfix flex-middle">
+                          <div class="float-left">
+                            <img class="size-28x28 m-0" cdn-src="assets/images/plane-icon.svg" alt="icon"/>
+                          </div>
+                          <div class="float-left p-l-10">
+                            <div>{{item.name}} ({{ item.code }})</div>
+                            <div class="sub-color">{{item.location}}</div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="!keyword.length&&sourcesFavorite.length > 0">
+                    <div class="favorite-location p-t-10">
+                      <div class="row large-title">
+                        <div class="col-12">Địa điểm phổ biến</div>
+                      </div>
+                    </div>
+                    <ul class="list-unstyled">
+                      <li class="m-t-10" *ngFor="let item of sourcesFavorite" (click)="onSelect(item, 'result')">
+                        <div class="clearfix flex-middle">
+                          <div class="float-left">
+                            <img class="size-28x28 m-0" cdn-src="assets/images/plane-icon.svg" alt="icon"/>
+                          </div>
+                          <div class="float-left p-l-10">
+                            <div>{{item.name}} ({{ item.code }})</div>
+                            <div class="sub-color">{{item.location}}</div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

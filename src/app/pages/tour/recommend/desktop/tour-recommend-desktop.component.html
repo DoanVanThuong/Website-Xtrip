@@ -1,0 +1,28 @@
+<div class="tour-recommend tour-recommend-desktop">
+  <div class="main-body p-t-20"
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <div class="container">
+      <div class="" *ngIf="!!tours.length">
+        <h4 class="title">{{ heading }}</h4>
+        <div class="row">
+          <div class="col-xl-3 col-lg-4 col-md-6"
+               [class.m-t-20]="i/itemsPerRow >= 1"
+               [class.p-l-10]="i%itemsPerRow > 0"
+               [class.p-r-10]="i%itemsPerRow < itemsPerRow - 1"
+               *ngFor="let tour of tours; trackBy: trackByFn; let i = index">
+            <home-tour-item [tour]="tour"></home-tour-item>
+          </div>
+        </div>
+      </div>
+
+      <loading [show]="isLoading"
+               [title]="'Đang tải dữ liệu'"
+               [description]="'Vui lòng đợi trong giây lát'"></loading>
+
+    </div>
+  </div>
+</div>

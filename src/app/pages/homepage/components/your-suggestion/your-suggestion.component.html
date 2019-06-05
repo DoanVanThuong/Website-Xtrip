@@ -1,0 +1,23 @@
+<div class="block block-your-activities"
+     infinite-scroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="150"
+     (scrolled)="onScrollDown()"
+     *ngIf="!!products.length">
+  <div class="row">
+    <div class="container-fluid">
+      <h3 class="block-title">Gợi ý cho bạn</h3>
+      <div class="block-body">
+        <div class="row">
+          <div class="col-6"
+               [class.m-t-10]="i/2 >= 1"
+               [class.p-l-4]="i%2 > 0"
+               [class.p-r-4]="i%2 < 2 - 1"
+               *ngFor="let product of products; trackBy: trackByFn; let i = index">
+            <home-product-item-mobile [product]="product"></home-product-item-mobile>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

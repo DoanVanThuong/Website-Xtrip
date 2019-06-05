@@ -1,0 +1,42 @@
+<div class="flight-detail-item animated fadeIn">
+  <div class="flight-carrier position-relative">
+    <img class="rounded m-t-n-3 m-r-5" [src]="carrier.icon" [alt]="carrier.name"/>
+    <span class="flight-carrier-name font-12">{{ carrier.name }}</span> -
+    <span class="flight-number font-12">{{ flight.flightNumber }}</span>
+    <span class="flight-type font-12">{{ flight.ticketType }}</span>
+    <div *ngIf="flight.isCoupled && isRoundTrip" class="position-absolute best-combo-item">Best Combo</div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-3">
+          <strong>{{flight.departTime | moment: 'HH:mm' }}</strong>
+        </div>
+        <div class="col-6 text-center m-t-n-6">
+          <div class="position-relative">
+            <div *ngIf="flight.stops > 0" class="position-absolute number-stop-point">{{flight.stops}}</div>
+            <div class="position-absolute">
+              <img class="arrow img-responsive m-b-0 m-t-5" cdn-src="assets/images/arrow.png">
+            </div>
+          </div>
+        </div>
+        <div class="col-3 p-l-0">
+          <strong>{{ flight.landingTime | moment: 'HH:mm'}}</strong>
+        </div>
+      </div>
+      <div class="row flight-info">
+        <div class="col-12">
+          <flight-stop [duration]="flight.flightDuration" [stop]="flight.stops" [lock]="false"></flight-stop>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 text-right">
+      <div>
+        <span class="price font-18">{{ flight.totalPrice | currencyMoney: '' }}
+          <span class="text-underline">đ</span>
+        </span>
+      </div>
+      <div *ngIf="flight.points" class="flight-point">+ {{ flight.points }} điểm</div>
+    </div>
+  </div>
+</div>

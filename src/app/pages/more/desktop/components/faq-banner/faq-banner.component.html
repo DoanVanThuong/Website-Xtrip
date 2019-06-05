@@ -1,0 +1,24 @@
+<div class="faq-banner">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="bg-banner">
+        <div class="main-title">
+          Chào bạn, Xtrip có thể giúp gì cho bạn
+        </div>
+        <div class="sub-text">
+          Để tiết kiệm thời gian, bạn có thể nhập từ khoá muốn tìm để được hỗ trợ nhanh hơn
+        </div>
+        <div class="form-input-search">
+          <form class="form" #f="ngForm" (ngSubmit)="onSearch(f)" novalidate>
+            <div class="form-group inner-addon right-addon m-b-none">
+              <input type="text" class="form-control" placeholder="Từ khoá muốn tìm…" [(ngModel)]="keyword" name="keyword" />
+              <a class="icon-addon position-absolute pos-icon pointer" role="button" type="submit">
+                <img class="m-b-none" cdn-src="assets/images/more/icon-find.svg" alt="icon" />
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

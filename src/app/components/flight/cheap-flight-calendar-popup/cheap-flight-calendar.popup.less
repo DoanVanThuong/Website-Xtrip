@@ -1,0 +1,122 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.modal.cheap-flight-calendar-popup {
+
+  .modal-dialog {
+
+    @media (min-width: 576px) {
+      max-width: 420px;
+    }
+
+    .modal-content {
+      .border-radius(10px);
+
+      .modal-header {
+        .modal-title {
+          font-size: 16px;
+          font-weight: 700;
+        }
+        .btn-group {
+          .btn {
+            .border-radius(5px);
+            color: @white;
+            padding: 2px 8px;
+            font-size: 18px;
+            line-height: 1;
+            + .btn {
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+
+      .modal-body {
+
+        ul.noted {
+          > li {
+            font-size: 14px;
+            padding-left: 10px;
+            position: relative;
+
+            &:after {
+              position: absolute;
+              top: 7px;
+              left: 0;
+              content: '';
+              width: 6px;
+              height: 6px;
+              .border-radius(50%);
+              background-color: @green-2;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .full-calendar {
+    margin-bottom: 0;
+
+    .calendar-row {
+
+      &.calendar-heading {
+        > .calendar-col {
+          padding: 7px 10px;
+          font-size: 14px;
+          background-color: @green-2;
+        }
+      }
+
+      > .calendar-col {
+        &.calendar-day {
+          padding: 2px;
+          min-height: 60px;
+
+          > a {
+            cursor: pointer;
+
+            .date {
+              font-size: 13px;
+              text-align: right;
+              padding: 0 3px;
+              color: @black;
+            }
+
+            .price {
+              font-weight: 500;
+              &.lowest {
+                background-color: transparent;
+                color: @red-6;
+                font-weight: 500;
+              }
+            }
+
+            &:hover {
+              background-color: @green-2;
+              .border-radius(5px);
+
+              .date, .price {
+                color: @white;
+              }
+
+              &.disabled {
+                .date {
+                  color: @gray-7;
+                }
+              }
+            }
+
+            &.disabled {
+              .date {
+                color: @gray-7;
+              }
+
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+}

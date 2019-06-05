@@ -1,0 +1,47 @@
+<div bsModal #popup="bs-modal" class="modal fade hotel-apply-coupon-popup animated fadeInUp" role="dialog"
+  (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="bg-green-gradient header header-mobile">
+          <div class="row">
+            <div class="col-2 d-flex align-items-center justify-content-center">
+              <a class="d-block" (click)="hide()">
+                <img class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-back-white.svg" alt="icon" />
+              </a>
+            </div>
+            <div class="col-10 p-l-none">
+              <div class="search-coupon-content">
+                <input type="text" placeholder="Nhập mã của bạn" class="form-control form-search-coupon">
+                <div class="pos-lookup">
+                  <img alt="img" class="m-b-none size-16x16" cdn-src="assets/images/icon/icon-lookup-gray.svg">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="list-coupon-wp m-t-10">
+          <ul class="list-unstyled list-coupons" *ngIf="!!data.length">
+            <li class="list-coupon-item " *ngFor="let coupon of data; let i = index; trackBy: trackByFn">
+              <a class="d-block" (click)="viewDetail(coupon)">
+                <div class="quantity-wp">x{{coupon.count}}</div>
+                <div class="font-15 name">{{coupon.summary}}</div>
+                <div class="m-t-10">
+                  <img cdn-src="assets/images/icon/icon-calendar-gray.svg" alt="" class="size-16x16">
+                  <span class="text-light-gray m-l-5 font-12">Hết hạn đến: {{coupon.time | moment: 'DD/MM/YYYY'}}</span>
+                </div>
+              </a>
+              <div class="text-green font-medium font-15 text-right">
+                <a (click)="applyCoupon(coupon)">Áp dụng mã</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<coupon-detail-item [code]="selectedCouponCode" (onChange)="onApplyCoupon($event)"></coupon-detail-item>

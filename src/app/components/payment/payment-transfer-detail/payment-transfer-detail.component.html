@@ -1,0 +1,101 @@
+<div class="payment-transfer-detail">
+
+  <div class="row">
+    <div class="col-12">
+      <!-- <div class="">
+        <div class="button-group">
+          <button class="btn btn-main-outline font-bold"
+                  [class.active]="isAccountNo"
+                  (click)="isAccountNo = !isAccountNo">
+            Theo số tài khoản
+          </button>
+          <button class="btn btn-main-outline font-bold" *ngIf="!!bank.cardNo"
+                  [class.active]="!isAccountNo"
+                  (click)="isAccountNo = !isAccountNo">
+            Theo số thẻ
+          </button>
+        </div>
+      </div> -->
+      <ul class="list-group list-group-flush m-t-10">
+        <li class="list-group-item" *ngIf="bank.accountNo">
+          <div class="row">
+            <div class="col-4 font-bold">Số tài khoản:</div>
+            <div class="col-8 text-right">
+              {{ bank.accountNo }}
+              <a class="pointer"
+                 ngxClipboard
+                 [cbContent]="bank.accountNo"
+                 (cbOnSuccess)="onClipboardSuccess('Đã sao lưu số tài khoản thành công.')">
+                <img class="m-b-none m-t-n-3"
+                     cdn-src="assets/images/icon/icon-copy-orange.svg" alt="icon"/>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" *ngIf="bank.cardNo">
+          <div class="row">
+            <div class="col-4 font-bold">Số thẻ:</div>
+            <div class="col-8 text-right">
+              {{ bank.cardNo }}
+              <a class="pointer"
+                 ngxClipboard
+                 [cbContent]="bank.cardNo"
+                 (cbOnSuccess)="onClipboardSuccess('Đã sao lưu số thẻ thành công.')">
+                <img class="m-b-none m-t-n-3"
+                     cdn-src="assets/images/icon/icon-copy-orange.svg" alt="icon"/>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-4 font-bold">Tên tài khoản:</div>
+            <div class="col-8 text-right">
+              {{ bank.accountName }}
+              <a class="pointer"
+                 ngxClipboard
+                 [cbContent]="bank.accountName"
+                 (cbOnSuccess)="onClipboardSuccess('Đã sao tên tài khoản thành công.')">
+                <img class="m-b-none m-t-n-3"
+                     cdn-src="assets/images/icon/icon-copy-orange.svg" alt="icon"/>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-4 font-bold">Chi nhánh:</div>
+            <div class="col-8 text-right">
+              {{ bank.branch }}
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-4 font-bold">Nội dung:</div>
+            <div class="col-8 text-right">
+              {{ bank.description }}
+              <a class="pointer"
+                 ngxClipboard
+                 [cbContent]="bank.description"
+                 (cbOnSuccess)="onClipboardSuccess('Đã sao lưu nội dung thành công.')">
+                <img class="m-b-none m-t-n-3"
+                     cdn-src="assets/images/icon/icon-copy-orange.svg" alt="icon"/>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-4 font-bold">Tổng tiền:</div>
+            <div class="col-8 text-right">
+              {{ bank.orderTotal | currencyMoney:''}} <span class="text-underline">đ</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,165 @@
+<div bsModal #popup="bs-modal"
+     class="modal fade passenger-popup"
+     role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header bg-green-linear">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-2">
+              <img class="m-none size-16x16 m-t-n-3"
+                   cdn-src="assets/images/icon/icon-back-white.svg"
+                   (click)="hide()">
+            </div>
+            <div class="col-8 text-center text-white font-20 p-l-none p-r-none">{{ heading }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="row">
+              <div class="col-12">
+
+                <div class="title-color p-10">Thông tin hành khách</div>
+                <form [formGroup]="form"
+                      class="form"
+                      (submit)="onSubmit()">
+
+                  <div class="list-group list-group-flush">
+                    <div class="vocative list-group-item">
+                      <div class="row">
+                        <div class="col-5">Danh xưng</div>
+                        <div class="col-7 ">
+                          <mat-form-field floatLabel="never">
+                            <input type="text"
+                                   matInput
+                                   mbsc-scroller
+                                   placeholder="* Danh xưng"
+                                   [mbsc-options]="scrollTitleOptions"
+                                   [formControl]="title"/>
+                            <mat-error *ngIf="title.dirty">
+                              <span *ngIf="title.errors | equalError:'required'">Vui lòng chọn danh xưng</span>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="row">
+                        <div class="col-5">Họ</div>
+                        <div class="col-6">
+                          <mat-form-field floatLabel="never">
+                            <input matInput
+                                   [formControl]="lastName"
+                                   placeholder="* Nhập họ"
+                                   type="text"/>
+                            <mat-error *ngIf="lastName.dirty">
+                              <span *ngIf="lastName.errors | equalError:'required'">Vui lòng nhập họ</span>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-1 p-l-none text-right">
+                          <a class="pointer" (click)="onOpenFormPassenger()">
+                            <img cdn-src="assets/images/add-passenger.svg" alt="icon"/>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="row">
+                        <div class="col-5">Tên đệm & tên</div>
+                        <div class="col-7">
+                          <mat-form-field floatLabel="never">
+                            <input matInput
+                                   [formControl]="firstName"
+                                   placeholder="* Nhập tên"
+                                   type="text"/>
+                            <mat-error *ngIf="firstName.dirty">
+                              <span *ngIf="firstName.errors | equalError:'required'">Vui lòng nhập tên</span>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-group-item" *ngIf="isDOBShow">
+                      <div class="row">
+                        <div class="col-5">Ngày sinh</div>
+                        <div class="col-7">
+                          <mat-form-field floatLabel="never">
+                            <input matInput
+                                   [formControl]="dateOfBirth"
+                                   placeholder="* DD/MM/YYYY"
+                                   [textMask]="{mask: mask}"/>
+                            <mat-hint class="text-danger"
+                                      *ngIf="dateOfBirth.dirty || dateOfBirth.touched || dateOfBirth.invalid || isInvalid">
+                              <div *ngIf="dateOfBirth.errors | equalError:'required'">Không để trống</div>
+                              <div *ngIf="dateOfBirth.errors | equalError:'date'">Ngày sinh không hợp lệ</div>
+                              <div class="font-8"
+                                   *ngIf="dateOfBirth.errors | equalError:'range_age'">
+                                <span class="" *ngIf="passenger.type === 'child'">
+                                  Ngày sinh phải từ {{ rangeAge.from }} đến {{ rangeAge.to }} tuổi</span>
+                                <span class="" *ngIf="passenger.type === 'infant'">
+                                  Ngày sinh phải dưới {{ rangeAge.to }} tuổi</span>
+                              </div>
+                            </mat-hint>
+                          </mat-form-field>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+              <div class="col-12">
+                <booking-passport *ngIf="isInternational"
+                                  [passenger]="passenger"
+                                  [invalid]="isInvalid"
+                                  (passportChange)="onPassportChange($event)">
+                </booking-passport>
+              </div>
+
+              <div class="col-12 bg-white" *ngIf="!!segments.length && isBaggageShow">
+                <div class="title-color ">Hành lý ký gửi</div>
+
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"
+                      *ngFor="let segment of segments; trackBy: trackByFn; let i = index">
+                    <div class=" d-flex justify-content-center align-items-center"
+                         mbsc-scroller
+                         [mbsc-options]="baggageOptions[i]"
+                         (onSet)="onSetBaggage($event, i)">
+                      <div class="">
+                        <img [src]="segment.flightIcon"
+                             class="size-24x24 m-t-n-3 m-r-5" alt="logo"/>
+                        <span class="font-14">{{segment.flightCode}}</span>
+                      </div>
+                      <div class="weight-color ml-auto">
+                        {{ selectedBaggages[i].weight }} {{ selectedBaggages[i].unit}}
+                        (+{{ selectedBaggages[i].price | currencyMoney:'' }} <span class="text-underline">đ</span>)
+                        <img class="size-10x10 m-t-n-3 m-l-5" cdn-src="assets/images/dropdown.svg" alt="arrow"/>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-block">
+        <button [disabled]="detectDisabledSubmit()"
+                (click)="onSubmit()"
+                class="btn btn-main w-full font-bold">
+          Lưu thông tin
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- passenger selector -->
+<passenger-selector-popup (submit)="onSelectPassenger($event)"></passenger-selector-popup>

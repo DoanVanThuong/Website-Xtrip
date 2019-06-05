@@ -1,0 +1,71 @@
+<div class="block block-top-tour" *ngIf="!!tours.length">
+
+  <!-- desktop -->
+  <div class="hot-tour hot-tour-desktop" *ngIf="isDesktop">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title">Điểm đến hàng đầu</h3>
+        <div class="block-body">
+          <div class="row m-t-10">
+
+            <div class="col-4 hot-tour-item"
+                 [class.m-t-20]="i/3 >= 1"
+                 [class.p-l-10]="i%3 > 0"
+                 [class.p-r-10]="i%3 < 2"
+                 *ngFor="let tour of tours; trackBy: trackByFn; let i = index">
+              <a class="pointer"
+                 [title]="tour.name"
+                 [routerLink]="['/tour/result']"
+                 [queryParams]="generateParams(tour)">
+                <div class="tour-image">
+                  <img class="img-fix h-230 w-full"
+                       defaultImage="assets/images/no-thumbnail.png"
+                       [lazyLoad]="tour.photo.src | size:400"
+                       [offset]="80"
+                       [alt]="tour.name"
+                       [title]="tour.name"
+                       onerror="this.src='assets/images/no-thumbnail.png'">
+                  <div class="tour-location">
+                    <img class="m-b-none m-t-n-3 size-24x24" cdn-src="assets/images/homepage/possition.svg" alt="icon"/>
+                    <span class="name-pos-desktop zindex">{{tour.name}}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="hot-tour hot-tour-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="f-16 font-medium">Điểm đến phổ biến</div>
+      </div>
+      <div class="scroll-container">
+        <div class="scroll-area">
+          <div class="scroll-item"
+               *ngFor="let tour of tours; trackBy: trackByFn; let i = index">
+
+            <a class="pointer"
+               [routerLink]="['/tour',  tour.code, 'departure']"
+               [queryParams]="{title: tour.name}">
+              <div class="tour-image">
+                <img class="img-fix size-150x180"
+                     defaultImage="assets/images/no-thumbnail.png"
+                     [lazyLoad]="tour.photo.src | size:300"
+                     [offset]="80"
+                     [alt]="tour.name"
+                     [title]="tour.name"
+                     onerror="this.src='assets/images/no-thumbnail.png'"/>
+                <div class="tour-location text-truncate">{{ tour.name }}</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

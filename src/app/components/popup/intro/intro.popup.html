@@ -1,0 +1,37 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade intro-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" (click)="hide()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-start">
+          <div class="w-full">
+            <h3 class="font-black text-dark-gray">Xtrip nền tảng du lịch mới</h3>
+            <ul class="content m-t-10">
+              <li>Đặt tour</li>
+              <li>Vé máy bay</li>
+              <li>Vé tham quan</li>
+              <li>Phòng khách sạn</li>
+            </ul>
+            <div class="text-center">
+              <button class="btn btn-main-v2 font-bold" (click)="hide()">Trải nghiệm ngay</button>
+            </div>
+
+          </div>
+        </div>
+        <div class="develop-by">
+          Được phát triển bởi <img class="img-fix m-l-5 m-t-n-3"
+                                   cdn-src="assets/images/logo-by-xtrip.png"
+                                   alt="vietmaptravel" title="VietmapTravel"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

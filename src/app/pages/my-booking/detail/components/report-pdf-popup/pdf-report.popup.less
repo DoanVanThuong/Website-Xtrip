@@ -1,0 +1,69 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.modal {
+  &.pdf-report-popup {
+    .modal-dialog {
+
+      @media (min-width: 575px) {
+        max-width: 400px;
+      }
+
+      .modal-content {
+
+        .modal-header {
+          padding: 10px 15px;
+
+          @media (min-width: 575px) {
+            padding: 20px;
+            background-color: @gray-17;
+          }
+
+          .modal-title {
+            font-weight: @font-medium;
+            font-size: 15px;
+
+            @media (min-width: 575px) {
+              font-size: 18px;
+            }
+          }
+        }
+
+        .modal-body {
+          padding: 15px;
+
+          @media (min-width: 575px) {
+            padding: 20px;
+          }
+
+          .form.form-desktop {
+            .form-group {
+
+              &:last-child {
+                margin: 0;
+              }
+
+              .control-label {
+                color: @orange-2;
+                font-size: 12px;
+              }
+
+              .form-control {
+                color: @black;
+                padding-top: 0;
+              }
+            }
+          }
+        }
+
+        .modal-footer {
+          @media (min-width: 575px) {
+            padding-left: 20px;
+            padding-right: 20px;
+          }
+        }
+      }
+    }
+
+  }
+}

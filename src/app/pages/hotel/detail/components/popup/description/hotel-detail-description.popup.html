@@ -1,0 +1,23 @@
+<div bsModal #popup="bs-modal" class="modal fade hotel-description-popup animated fadeInUp" role="dialog"
+  (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content tour-detail-desktop">
+      <div class="modal-header p-t-none">
+        <div class="row m-t-20">
+          <div class="col-2">
+            <a (click)="hide()" class="d-block size-24x24 text-center">
+              <img class="size-16x16" cdn-src="assets/images/icon/icon-close-green.svg">
+            </a>
+          </div>
+          <div class="col-8">
+            <div class="text-center font-17 font-bold">Thông tin khách sạn
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body bg-white">
+        <p [innerHTML]="data" class="text-justify"></p>
+      </div>
+    </div>
+  </div>
+</div>

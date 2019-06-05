@@ -1,0 +1,100 @@
+<div class="block block-discover" *ngIf="!!blogs.length">
+
+  <!-- desktop -->
+  <div class="discover discover-desktop" *ngIf="isDesktop">
+    <div class="row">
+      <div class="container-fluid p-r-10">
+        <h3 class="block-title">Khám phá cùng Xtrip</h3>
+        <div class="block-body">
+          <div class="panel panel-desktop">
+            <div class="panel-body">
+              <owl-carousel [items]="blogs"
+                            [carouselClasses]="['owl-theme', 'owl-dots-black', 'sliding']"
+                            [options]="carouselOptions">
+                <div class="row" *ngFor="let blog of blogs; trackBy: trackByFn">
+                  <div class="col-12">
+                    <a class="pointer" [routerLink]="['/blog', blog.code, blog.alias]">
+                      <div class="position-relative blog-img">
+                        <img class="img-fix b-r-10 m-b-0 pointer"
+                             defaultImage="assets/images/no-thumbnail.png"
+                             [lazyLoad]="blog.photo.src | size:800"
+                             [alt]="blog.name"
+                             [title]="blog.name"
+                             onerror="this.src='assets/images/no-thumbnail.png'"/>
+                        <div class="bg-mask position-absolute"></div>
+                        <div
+                          class="description-text position-absolute d-flex justify-content-center align-blogs-center">
+                          {{blog.name}}
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </owl-carousel>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="discover discover-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="block-title m-none d-flex justify-content-center align-items-center">
+          <h4 class="m-none">Cảm hứng du lịch</h4>
+          <a class="pointer ml-auto">
+            <img class="size-16x16 scale-one-half"
+                 cdn-src="assets/images/icon/icon-angle-right-green.svg" alt="icon"/>
+          </a>
+        </div>
+        <div class="block-description">
+          Những địa danh không thể bỏ qua khi đi du lịch
+        </div>
+        <div class="block-body m-t-10">
+          <!-- full item -->
+          <div class="blog-item blog-first-item">
+            <a class="d-block"
+               [routerLink]="['/blog', blogs[0].code, blogs[0].alias]">
+              <div class="blog-image">
+                <img class="img-fix b-r-5"
+                     defaultImage="assets/images/no-thumbnail.png"
+                     [lazyLoad]="blogs[0].photo.src | size:300"
+                     [alt]="blogs[0].name"
+                     [title]="blogs[0].name"
+                     onerror="this.src='assets/images/no-thumbnail.png'"/>
+                <div class="blog-name text-truncate-2lines">
+                  {{ blogs[0].name }}
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="scroll-container hidden-scrollbar m-t-10">
+            <div class="scroll-area">
+              <div class="blog-item scroll-item"
+                   *ngFor="let blog of blogs | slice:1:blogs.length; trackBy: trackByFn;">
+                <a class="d-block" [routerLink]="['/blog', blog.code, blog.alias]">
+                  <div class="d-flex justify-content-center align-items-center">
+                    <div class="blog-image">
+                      <img class="img-fix b-r-5"
+                           defaultImage="assets/images/no-thumbnail.png"
+                           [lazyLoad]="blog.photo.src | size:300"
+                           [alt]="blog.name"
+                           [title]="blog.name"
+                           onerror="this.src='assets/images/no-thumbnail.png'"/>
+                      <div class="blog-name text-truncate-2lines">
+                        {{ blog.name }}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

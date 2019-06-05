@@ -1,0 +1,64 @@
+<!--component html goes here -->
+<div class="faq-navigator-page">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <!-- FAQ -->
+      <div class="shadow bg-white b-r-10">
+        <div class="title p-10-15">
+          <span><img class="m-b-none m-t-n-3" cdn-src="assets/images/more/icon-faq.svg" alt="img"/></span> Câu hỏi thường
+          gặp
+        </div>
+        <div class="line"></div>
+        <div class="item-label">
+          <ul class="p-b-10">
+            <li [class.active]="selectedFaq === item"
+                *ngFor="let item of faqItems; trackBy: trackByFn">
+              <a class="pointer" (click)="onSelectFaqItem(item)">
+                {{item.display}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- FAQ -->
+
+      <!-- Guide -->
+      <div class="shadow bg-white b-r-10 m-t-20">
+        <div class="title p-10-15">
+          <span><img class="m-b-none m-t-n-3" cdn-src="assets/images/more/icon-guide.svg" alt="img"/></span> Hướng dẫn
+        </div>
+        <div class="line"></div>
+        <div class="item-label">
+          <ul class="p-b-10">
+            <li *ngFor="let item of guideItems; trackBy: trackByFn" (click)="onSelectGuide(item)"
+                [class.active]="selectedGuide === item">{{item.display}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Guide -->
+
+      <!-- Request support -->
+      <div class="shadow bg-white b-r-10 m-t-20">
+        <div class="title p-10-15 pointer request-ticket" [class.activeTab]="params.type === 'request-support'">
+          <a [routerLink]="['/more/request-support']">
+            <span>
+              <img class="m-b-none m-t-n-3"
+                   cdn-src="assets/images/more/icon-request{{params.type === 'request-support' ? '_active' : ''}}.svg"
+                   alt="img"/>
+            </span> Gửi yêu cầu hỗ trợ
+            <span class="float-right">
+              <img class="m-b-none m-t-n-3"
+                   cdn-src="assets/images/more/icon-arrow-right{{params.type === 'request-support' ? '_active' : ''}}.svg"
+                   alt="img"/>
+            </span>
+          </a>
+
+        </div>
+      </div>
+      <!-- Request support -->
+
+    </div>
+  </div>
+</div>

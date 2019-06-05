@@ -1,0 +1,73 @@
+<div class="tour-booking-page">
+  <app-header [heading]="'Thông tin đặt tour'" [fixed]="true" [confirm]="true" [version]="3">
+
+    <header-confirm-back>
+      <a class="back-to pointer" (click)="openConfirmBack()">
+        <img class="m-b-0 size-16x16" cdn-src="assets/images/icon-back.png" alt="icon"/>
+      </a>
+    </header-confirm-back>
+
+    <stepper-booking [step]="1" [mode]="'tour'"></stepper-booking>
+  </app-header>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+
+        <!-- suggest signin -->
+        <signin-request-mobile></signin-request-mobile>
+        <!-- suggest signin -->
+
+        <!-- contact info -->
+        <contact-info [data]="contact"
+                      (changes)="onContactChange($event)"
+                      [invalid]="isInvalid"></contact-info>
+        <!-- contact info -->
+
+        <!-- Passenger Info -->
+        <passenger-info *ngIf="priceSummary"
+                        [adults]="bookingTour.adults"
+                        [rangeAdult]="bookingTour.rangeAdult"
+                        [children]="bookingTour.children"
+                        [rangeChildren]="bookingTour.rangeChildren"
+                        [infants]="bookingTour.infants"
+                        [rangeInfant]="bookingTour.rangeInfant"
+                        [international]="isInternational"
+                        [data]="passengers"
+                        (submit)="onUpdatePassenger($event)"
+                        [invalid]="isInvalid"
+                        [isAdditionalInfoShow]="true"
+                        [isAdditionalInfo]="bookingTour.isAdditionalInfo"
+                        (submitAdditionalInfo)="onFollowingInfo($event)">
+        </passenger-info>
+        <!-- Passenger Info -->
+
+        <!-- BookingOptionalComponent (Coupon, Point) -->
+        <booking-optional [error]="error"
+                          [selectedPoint]="selectedPoint"
+                          [couponCode]="couponCode"
+                          (submitCoupon)="onSubmitCoupon($event)"
+                          (submitPoint)="onSubmitPoint($event)">
+        </booking-optional>
+        <!-- BookingOptionalComponent (Coupon, Point) -->
+
+        <!-- Bill -->
+        <!--<bill-info [data]="bill" (changes)="onChangeBill($event)"></bill-info>-->
+        <!-- bill -->
+
+      </div>
+    </div>
+
+    <booking-footer [totalPrice]="totalPrice"
+                    [summaryPrice]="priceSummary"
+                    (submitGotoPreview)="onOpenDepositPopup()"
+                    [disabled]="detectDisableSubmit()">
+    </booking-footer>
+
+
+  </div>
+</div>
+
+<confirm-back-popup (submit)="onSubmitConfirm($event)"></confirm-back-popup>
+
+<app-tour-deposit-popup [data]="tourDepositItems" (submit)="onSubmitDeposit($event)"></app-tour-deposit-popup>

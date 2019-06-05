@@ -1,0 +1,95 @@
+<!--component html goes here -->
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade change-payment-method-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-8">
+            <div class="row m-title">
+              <div class="col-8">
+                <div class="title">Đổi hình thức thanh toán</div>
+              </div>
+              <div class="col-4">
+                <a class="pointer pull-right m-t-n-10" (click)="hide()">
+                  <img class="m-b-none size-42x42 bor-arrow pointer" cdn-src="assets/images/hotel/desktop/close-2.svg"
+                       alt="img"/>
+                </a>
+              </div>
+            </div>
+
+            <div class="container">
+              <payment-method-box [delay]="500"
+                                  [moduleType]="module"
+                                  [hideTitle]="true"
+                                  (changes)="onUpdateCOD($event)"
+                                  (select-method)="onSelectPaymentMethod($event)">
+              </payment-method-box>
+
+              <div class="row">
+                <div class="col-md-12 text-center m-t-20">
+                  <button (click)="onPayment()"
+                          class="btn btn-main-v2 mn-w-200"
+                          [disabled]="detectDisableSubmit()">
+                    Đổi thanh toán
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 m-t-n-5 p-r-none" *ngIf="data">
+            <div class="bg-white h-100vh shadow" [ngSwitch]="module">
+              <div class="panel-title" *ngIf="!!module">
+                Thông tin {{module === MODULE.FLIGHT ? 'vé' : module === MODULE.HOTEL ? 'phòng' : 'tour'}}
+              </div>
+
+              <!-- flight -->
+              <section class="flight-detail m-t-20"
+                       *ngSwitchCase="MODULE.FLIGHT">
+
+                <app-booking-flight-basic-detail [flight]="data"
+                                                 [airports]="airports"
+                                                 [currentPayment]="utilityHelper.getTextPaymentByCode(data.paymentDetail.method)"
+                                                 [mode]="1"></app-booking-flight-basic-detail>
+              </section>
+
+              <!-- hotel -->
+              <section class="hotel-detail m-t-20 m-b-15"
+                       *ngSwitchCase="MODULE.HOTEL">
+                  <app-booking-hotel-basic-detail [hotel]="data"
+                                                  [mode]="1"
+                                                  [currentPayment]="utilityHelper.getTextPaymentByCode(data.paymentDetail.method)">
+                  </app-booking-hotel-basic-detail>
+              </section>
+
+              <!-- tour -->
+              <section class="tour-detail m-t-20 m-b-15"
+                       *ngSwitchCase="MODULE.TOUR">
+                <app-booking-tour-basic-detail [tour]="data"
+                                               [currentPayment]="utilityHelper.getTextPaymentByCode(data.paymentDetail.method)"
+                                               [mode]="1"></app-booking-tour-basic-detail>
+
+              </section>
+
+              <section class="tour-detail m-t-20"
+                       *ngIf="!!data && module===MODULE.PRODUCT">
+                <div class="m-b-15">
+
+                  <app-booking-product-basic-detail [product]="data"
+                                                    [currentPayment]="utilityHelper.getTextPaymentByCode(data.paymentDetail.method)"
+                                                    [mode]="1"></app-booking-product-basic-detail>
+
+                </div>
+              </section>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+@import "_variables.less";
+
+.profile-reward-point {
+
+  &.profile-reward-point-desktop {
+
+    .title {
+      font-size: 24px;
+      color: @gray-23;
+      font-weight: 900;
+    }
+
+    .available-card, .pending-card {
+      font-weight: 700;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      align-content: center;
+      flex-direction: column;
+      min-height: 100px;
+
+      background-position: 100% 0%;
+      background-size: contain;
+      background-repeat: no-repeat;
+
+      .point {
+        line-height: 1;
+      }
+    }
+
+    // lg
+    @media (min-width: 992px) {
+      .left {
+        padding-right: 5px;
+      }
+
+      .right {
+        padding-left: 5px;
+      }
+    }
+
+    .available-card {
+      background-image: url('../../../../../assets/images/point-available.png');
+    }
+
+    .pending-card {
+      background-image: url('../../../../../assets/images/point-pending.png');
+
+      .point {
+        color: @gray-7;
+      }
+    }
+
+    ul.history-list {
+      margin-left: 20px;
+      list-style-image: url("../../../../../assets/images/icon/icon-dot-gray.svg");
+
+      > li {
+        position: relative;
+
+        & + li {
+          margin-top: 15px;
+        }
+
+        .status {
+          position: absolute;
+          top: 23px;
+          left: 8px;
+          font-size: 10px;
+          color: @gray-10;
+          &.new {
+            color: @green-1
+          }
+        }
+        .description {
+          > .content {
+            font-size: 15px;
+            .point-negative {
+              color: @orange-2;
+            }
+            .point-positive {
+              color: @green-2;
+            }
+          }
+          > .date {
+            color: @gray-9;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,140 @@
+<div class="flight-search">
+  <app-header [back]="true" [heading]="'Tìm chuyến bay'" [fixed]="true" [version]="3">
+    <!-- Tabs -->
+    <div class="sub-header">
+      <tabset class="tab-mobile" [justified]="true">
+        <tab [active]="!isRoundTrip" [heading]="'Một chiều'" (selectTab)="onSelectMethod(1)"></tab>
+        <tab [active]="isRoundTrip" [heading]="'Khứ hồi'" (selectTab)="onSelectMethod(2)"></tab>
+      </tabset>
+    </div>
+    <!-- Tabs -->
+  </app-header>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+
+        <!-- Group Booking Flight -->
+        <div class="row flight-group">
+          <div class="col-12 bg-white p-10-30-10">
+            <a [routerLink]="['/flight/group']">
+              <div class="title d-inline-block">Tôi muốn đặt vé cho đoàn hơn 10 người</div>
+              <div class="m-t-n-5 pull-right">
+                <img class="size-20x20" cdn-src="assets/images/dropdown.svg" alt="image"/>
+              </div>
+            </a>
+          </div>
+        </div>
+        <!-- Group Booking Flight -->
+
+        <!-- Form Search Flight -->
+        <div class="row p-t-10">
+          <div class="col-12 bg-white">
+            <div class="p-8-16">
+              <div class="form form-mobile">
+                <ul class="list-group list-group-flush">
+
+                  <!-- Origin Input -->
+                  <div class="list-group-item">
+                    <a (click)="showLocationPopup('origin')">
+                      <mat-form-field floatLabel="auto">
+                        <img matPrefix
+                             class="size-30x30 m-t-n-12 m-r-10"
+                             cdn-src="assets/images/planeup.svg" alt="icon"/>
+                        <input type="text"
+                               [(ngModel)]="dataObj.start"
+                               matInput
+                               placeholder="Chọn điểm khởi hành"
+                               readonly/>
+                      </mat-form-field>
+                    </a>
+
+                    <a class="btn-switch" (click)="clickSwap()">
+                      <img class="size-30x30" cdn-src="assets/images/swicth.svg" alt="icon"/>
+                    </a>
+                  </div>
+                  <!-- Origin Input -->
+
+                  <!-- Destination Input -->
+                  <div class="list-group-item">
+                    <a (click)="showLocationPopup('destination')">
+                      <mat-form-field floatLabel="auto">
+                        <img matPrefix="" class="size-30x30 m-t-n-12 m-r-10"
+                             cdn-src="assets/images/planedown.svg" alt="planedown"/>
+                        <input matInput
+                               [(ngModel)]="dataObj.end"
+                               placeholder="Chọn điểm đến"
+                               type="text"
+                               readonly/>
+                      </mat-form-field>
+                    </a>
+                  </div>
+                  <!-- Destination Input -->
+
+                  <!-- Date Picker -->
+                  <div class="list-group-item">
+                    <a (click)="onShowDatePicker()">
+                      <mat-form-field floatLabel="auto">
+                        <img matPrefix class="size-30x25 m-t-n-12 m-r-10"
+                             cdn-src="assets/images/date.svg"
+                             alt="date"/>
+                        <input type="text"
+                               matInput
+                               placeholder="{{ isRoundTrip ? 'Chọn ngày đi - về' : 'Chọn ngày khởi hành' }}"
+                               readonly
+                               [(ngModel)]="dataObj.placeholderDate"/>
+                      </mat-form-field>
+                    </a>
+                  </div>
+                  <!-- Date Picker -->
+
+                  <!-- Passenger -->
+                  <div class="list-group-item">
+                    <mat-form-field [floatLabel]="'always'">
+                      <img matPrefix
+                           class="size-30x25 m-t-n-12 m-r-10"
+                           cdn-src="assets/images/passenger.svg"
+                           alt="passenger"/>
+                      <input mbsc-scroller
+                             matInput
+                             placeholder="Số hành khách"
+                             [(ngModel)]="numberPassenger"
+                             [mbsc-options]="passengerScrollerOptions"
+                             (onChange)="onChangePassenger($event)"
+                             (onSet)="onSetPassenger($event)">
+                    </mat-form-field>
+                  </div>
+                  <!-- Passenger -->
+
+                </ul>
+              </div>
+
+              <!-- Button Search -->
+              <div class="row">
+                <div class="col-12 text-right p-10">
+                  <button (click)="onSearchTicket()" [disabled]="!onDisable()"
+                          class="btn btn-main w-full font-bold font-18 button-search">
+                    Tìm chuyến bay
+                  </button>
+                </div>
+              </div>
+              <!-- Button Search -->
+
+            </div>
+          </div>
+        </div>
+        <!-- Form Search Flight -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Origin-->
+<flight-location-selector-popup #popupOriginLocation [type]="type"
+                                (select)="onSelectStart($event)"></flight-location-selector-popup>
+<!--Origin-->
+
+<date-selector-popup [options]="dateOptions"
+                     [date]="selectedDate"
+                     (submit)="onSelectDate($event)"></date-selector-popup>

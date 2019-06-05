@@ -1,0 +1,147 @@
+<div class="block block-favourite-destination" *ngIf="!!destinations.length">
+
+  <div class="favorite-destination favorite-destination-desktop" *ngIf="isDesktop">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title">Điểm đến yêu thích</h3>
+        <div class="block-body">
+          <div class="row">
+            <div class="col-5 p-r-5">
+              <div class="destination-item first-item">
+                <a class="pointer d-block"
+                   [title]="destination.name"
+                   [class.m-t-6]="i > 0"
+                   *ngFor="let destination of destinations | slice:0:1; trackBy: trackByFn; let i = index"
+                   (click)="onSearch(destination)">
+                  <div class="destination-image">
+                    <img class="img-fix"
+                         defaultImage="assets/images/no-thumbnail.png"
+                         [lazyLoad]="destination.photo.src | size:400"
+                         [offset]="80"
+                         [title]="destination.name"
+                         [alt]="destination.name"
+                         onerror="this.src='assets/images/no-thumbnail.png'">
+                    <div class="destination-location">
+                      <img class="img-fix m-t-n-3 size-26x26"
+                           cdn-src="assets/images/icon/icon-location-white.svg"
+                           alt="icon"/>
+                      {{destination.name}}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-7 p-l-5">
+              <div class="row"
+                   [class.m-t-10]="i > 0"
+                   *ngFor="let item of [destinations | slice:1:3, destinations | slice:3:5]; trackBy: trackByFn; let i = index">
+                <div class="col-6"
+                     [class.p-r-5]="j%2 === 0"
+                     [class.p-l-5]="j%2 !== 0"
+                     *ngFor="let destination of item; trackBy: trackByFn; let j = index">
+                  <div class="destination-item">
+                    <a class="pointer d-block"
+                       [title]="destination.name"
+                       (click)="onSearch(destination)">
+                      <div class="destination-image">
+                        <img class="img-fix"
+                             defaultImage="assets/images/no-thumbnail.png"
+                             [lazyLoad]="destination.photo.src | size:400"
+                             [offset]="80"
+                             [alt]="destination.name"
+                             [title]="destination.name"
+                             onerror="this.src='assets/images/no-thumbnail.png'">
+                        <div class="destination-location">
+                          <img class="img-fix m-t-n-3 size-26x26"
+                               cdn-src="assets/images/icon/icon-location-white.svg"
+                               alt="icon"/>
+                          {{destination.name}}
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="favorite-destination favorite-destination-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <h3 class="block-title">Điểm đến yêu thích</h3>
+        <div class="block-body">
+          <div class="row">
+            <div class="col-6 p-r-3">
+              <a class="pointer d-block"
+                 [title]="destination.name"
+                 [class.m-t-6]="i > 0"
+                 *ngFor="let destination of destinations | slice:0:2; trackBy: trackByFn; let i = index"
+                 (click)="onSearch(destination)">
+                <div class="destination-image">
+                  <img class="img-fix"
+                       defaultImage="assets/images/no-thumbnail.png"
+                       [lazyLoad]="destination.photo.src | size:400"
+                       [offset]="80"
+                       [ngStyle]="{'height.px': ((width * 3 + distance)/ 2)}"
+                       [alt]="destination.name"
+                       [title]="destination.name"
+                       onerror="this.src='assets/images/no-thumbnail.png'">
+                  <div class="destination-location">
+                    {{destination.name}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 p-l-3">
+              <a class="pointer d-block"
+                 [title]="destination.name"
+                 [class.m-t-6]="i > 0"
+                 *ngFor="let destination of destinations | slice:2:5; trackBy: trackByFn; let i = index"
+                 (click)="onSearch(destination)">
+                <div class="destination-image">
+                  <img class="img-fix"
+                       [ngStyle]="{'height.px': width}"
+                       defaultImage="assets/images/no-thumbnail.png"
+                       [lazyLoad]="destination.photo.src | size:400"
+                       [offset]="80"
+                       [title]="destination.name"
+                       [alt]="destination.name"
+                       onerror="this.src='assets/images/no-thumbnail.png'">
+                  <div class="destination-location">
+                    {{destination.name}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 m-t-6"
+                 *ngFor="let destination of destinations | slice:5:destinations.length; trackBy: trackByFn">
+              <a class="pointer d-block"
+                 [title]="destination.name"
+                 (click)="onSearch(destination)">
+                <div class="destination-image">
+                  <img class="img-fix"
+                       [ngStyle]="{'height.px': width}"
+                       defaultImage="assets/images/no-thumbnail.png"
+                       [lazyLoad]="destination.photo.src | size:400"
+                       [offset]="80"
+                       [alt]="destination.name"
+                       [title]="destination.name"
+                       onerror="this.src='assets/images/no-thumbnail.png'">
+                  <div class="destination-location">
+                    {{destination.name}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

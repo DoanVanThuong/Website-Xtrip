@@ -1,0 +1,39 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade date-selector-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header bg-green-linear">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-2">
+              <a (click)="hide()">
+                <img alt="icon" class="size-24x24 m-b-none" cdn-src="assets/images/back.svg">
+              </a>
+            </div>
+            <div class="col-8 text-center text-white font-18">Chọn ngày</div>
+            <div class="col-2"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <app-date-picker [options]="options"
+                             [data]="selected"
+                             (change)="onChange($event)" [available]="available"></app-date-picker>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" *ngIf="showButton">
+        <button class="btn btn-main btn-block"
+                [disabled]="onDisableSubmit()"
+                (click)="onSubmit()">
+          Chọn ngày này
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

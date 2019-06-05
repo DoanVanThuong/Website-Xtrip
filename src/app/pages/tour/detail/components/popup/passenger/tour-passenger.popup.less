@@ -1,0 +1,70 @@
+@import '_variables.less';
+
+.tour-passenger-popup {
+  &.show {
+    overflow-y: hidden !important;
+  }
+  .modal-dialog {
+    &.fullscreen {
+      top: 60px !important;
+
+    }
+    
+    .modal-content {
+      border-top-left-radius: 20px !important;
+      border-top-right-radius: 20px !important;
+      .modal-header {
+        padding: 10px 14px;
+        .line-header {
+          width: 52px;
+          height: 5px;
+          border-radius: 100px;
+          background-color: @gray-2;
+          margin: 0px auto;
+        }
+      }
+      .modal-body {
+        .list-group-item {
+          padding: 5px 15px;
+        }
+      }
+    }
+  }
+  .passenger-content {
+    .intro {
+      font-size: 13px;
+    }
+    .price,
+    > span {
+      font-size: 13px;
+      font-weight: 400;
+      color: @orange-2;
+    }
+    .counter {
+      margin-top: 10px;
+    }
+  }
+  .modal-footer {
+    .footer-detail {
+      .btn-footer {
+        padding: 7px;
+        background-image: linear-gradient(to right, @orange-4, @orange-5);
+        button {
+          background: transparent;
+          color: @white;
+        }
+      }
+      .price-info {
+        > div {
+          color: @gray-1;
+          font-size: 13px;
+        }
+        .price {
+          font-weight: 700;
+          font-size: 20px;
+          color: @gray-2;
+        }
+      }
+    }
+  }
+}

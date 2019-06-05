@@ -1,0 +1,168 @@
+<div class="position-relative h-full w-full">
+
+  <div class="price-detail-box animated zoomIn" *ngIf="!summaryPrice.isDeposited">
+    <h4 class="title">Chi tiết giá</h4>
+    <div class="panel panel-desktop card m-b-none">
+      <div class="panel-body card-body text-black">
+
+        <!-- for other -->
+        <div *ngIf="summaryPrice.detailItems">
+          <div class="row"
+               [class.m-t-10]="i > 0"
+               *ngFor="let item of summaryPrice.detailItems; trackBy: trackByFn; let i = index">
+            <div class="col-7">
+              {{ item.title }}
+            </div>
+            <div class="col-5 text-right font-medium">
+              <span>{{ item.price | currencyMoney: '' }} <span class="text-underline">đ</span></span>
+            </div>
+          </div>
+          <div class="row m-t-10" *ngIf="!!fee.detail && fee.detail.paymentFee > 0">
+            <div class="col-6 text-main font-weight-bold">Phí thanh toán</div>
+            <div class="col-6 text-right font-medium">{{ fee.detail.paymentFee | currencyMoney: '' }} <span class="text-underline">đ</span></div>
+          </div>
+        </div>
+
+        <!-- for flight ticket -->
+        <div *ngIf="summaryPrice.summaries">
+          <div class="row"
+               [class.m-t-10]="i > 0"
+               *ngFor="let item of summaryPrice.summaries; trackBy: trackByFn; let i = index ">
+            <div class="container-fluid">
+              <div class="title p-t-5 p-b-5 font-15 text-main">{{ item.name }}</div>
+              <div class="row p-t-5 p-b-5"
+                   *ngFor="let item of item.groupItem.detailItems; trackBy: trackByFn">
+                <div class="col-7 font-15">
+                  {{ item.title }}
+                </div>
+                <div class="col-5 p-l-none text-right font-15">
+                  {{ item.price | currencyMoney: '' }} <span class="text-underline">đ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row m-t-10" *ngIf="!!fee.detail && fee.detail.paymentFee > 0">
+            <div class="col-6 text-main font-weight-bold">Phí thanh toán</div>
+            <div class="col-6 text-right font-medium">{{ fee.detail.paymentFee | currencyMoney: '' }} <span class="text-underline">đ</span></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="container-fluid">
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="row p-t-5 p-b-5">
+          <div class="col-7 font-bold">Tổng tiền: </div>
+          <div class="col-5 text-right p-l-none">
+          <span class="price font-15 font-bold" *ngIf="!fee.detail">{{ totalPrice | currencyMoney:'' }}
+            <span class="underline">đ</span>
+          </span>
+          <span class="price font-15 font-bold" *ngIf="!!fee.detail && fee.detail.paymentFee === 0">{{ totalPrice | currencyMoney:'' }}
+            <span class="underline">đ</span>
+          </span>
+          <span class="price font-15 font-bold" *ngIf="!!fee.detail && fee.detail.paymentFee > 0">{{ fee.detail.totalPayment | currencyMoney:'' }}
+            <span class="underline">đ</span>
+          </span>
+          </div>
+        </div>
+
+        <div class="point m-t-10" *ngIf="!!point">
+          <img alt="icon" class="m-b-none m-t-n-3 size-16x16" cdn-src="assets/images/icon/icon-point.svg"/>
+          Nhận được <span class="font-bold">{{ point | currencyMoney:'' }}</span> điểm
+        </div>
+
+        <div class="m-t-30" *ngIf="isBook">
+          <button class="btn btn-main-v2 btn-block" [ngClass]="{'disabled': disabled }" (click)="onSubmit()">
+            Tiến hành thanh toán
+          </button>
+        </div>
+
+        <div class="m-t-30" *ngIf="isPay">
+          <div class="font-13">
+            Bằng việc chạm nút bên dưới, bạn đã đồng ý với các
+            <a class="pointer text-main text-underline" href="/pages/policy.html" target="_blank">
+              Điều kiện và Chính sách</a> của Xtrip.
+          </div>
+
+          <button class="btn btn-main-v2 btn-block m-t-20" [disabled]="disabled" (click)="onPay()">
+            Thanh toán
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="price-detail-box animated zoomIn" *ngIf="!!summaryPrice.isDeposited">
+    <h4 class="title">Chi tiết giá</h4>
+    <mat-accordion *ngIf="!summaryPrice.isVerified">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="row text-black">
+                <div class="col-6">Tổng giá tour</div>
+                <div class="col-6 text-right font-medium">{{totalPrice | currencyMoney: ''}}
+                  <span class="text-underline">đ</span>
+                </div>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div *ngIf="summaryPrice.detailItems">
+            <div class="row p-5-0" [class.m-t-10]="i > 0" *ngFor="let item of summaryPrice.detailItems; trackBy: trackByFn; let i = index">
+              <div class="col-7">
+                {{ item.title }}
+              </div>
+              <div class="col-5 text-right font-medium">
+                <span>{{ item.price | currencyMoney: '' }} <span class="text-underline">đ</span></span>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <div class="panel panel-desktop card m-b-none m-t-20">
+        <div class="panel-body card-body text-black" *ngIf="!!summaryPrice.paymentDetail">
+          <div class="row">
+            <div class="col-6">{{summaryPrice.paymentDetail.title}}</div>
+            <div class="col-6 text-right font-medium">{{summaryPrice.paymentDetail.amount | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+          </div>
+          <div class="row m-t-10" *ngIf="!!fee.detail && fee.detail.paymentFee > 0">
+            <div class="col-6">Phí thanh toán</div>
+            <div class="col-6 text-right font-medium">{{ fee.detail.paymentFee | currencyMoney: '' }} <span class="text-underline">đ</span></div>
+          </div>
+          <div class="row">
+            <div class="container-fluid">
+              <div class="line"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 text-weight-bold">Tổng tiền:</div>
+            <div class="col-6 text-right text-weight-bold text-main">{{fee.detail.totalPayment | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+          </div>
+          <div class="point m-t-10" *ngIf="!!point">
+            <img alt="icon" class="m-b-none m-t-n-3 size-16x16" cdn-src="assets/images/icon/icon-point.svg" />
+            Nhận được <span class="font-bold">{{ point | currencyMoney:'' }}</span> điểm
+          </div>
+          <div class="m-t-30" *ngIf="isBook">
+            <button class="btn btn-main-v2 btn-block" [ngClass]="{'disabled': disabled }" (click)="onSubmit()">
+              Tiến hành thanh toán
+            </button>
+          </div>
+
+          <div class="m-t-30" *ngIf="isPay">
+            <div class="font-13">
+              Bằng việc chạm nút bên dưới, bạn đã đồng ý với các
+              <a class="pointer text-main text-underline" href="/pages/policy.html" target="_blank">
+                Điều kiện và Chính sách</a> của Xtrip.
+            </div>
+
+            <button class="btn btn-main-v2 btn-block m-t-20" [disabled]="disabled" (click)="onPay()">
+              Thanh toán
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+</div>

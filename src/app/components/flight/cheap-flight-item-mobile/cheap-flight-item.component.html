@@ -1,0 +1,36 @@
+<div class="cheap-flight-item cheap-flight-item-mobile">
+  <a class="pointer"
+     (click)="onSelectTicket(flight)"
+     [routerLink]="['/flight/cheap-flight/result']"
+     [queryParams]="generateCheapFlightParams(flight)"
+     [title]="flight.title">
+    <div class="cheap-flight-image">
+      <img defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="flight.photo.src | size:300"
+           [offset]="80"
+           onerror="this.src='assets/images/no-thumbnail.png'"
+           [title]="flight.title"
+           [alt]="flight.title"/>
+    </div>
+    <div class="cheap-flight-info">
+      <div class="flight-location d-flex flex-column">
+        <div class="location">
+          <img class="m-b-none m-t-n-3 size-14x14"
+               cdn-src="assets/images/icon/icon-circle-green.svg" align="icon"/>
+          {{ flight.originAirport.location}}
+        </div>
+        <div class="location">
+          <img class="m-b-none m-t-n-3 size-14x14"
+               cdn-src="assets/images/icon/icon-location-green.svg" align="icon"/>
+          {{ flight.destinationAirport.location}}
+        </div>
+      </div>
+      <div class="flight-price m-t-10">
+        <div class="text-green font-bold">
+          {{ flight.price | currencyMoney: '' }} <span class="text-underline">đ</span>
+        </div>
+      </div>
+
+    </div>
+  </a>
+</div>

@@ -1,0 +1,30 @@
+<div class="flight-index">
+  <app-flight-search-bar></app-flight-search-bar>
+
+  <section class="main-body p-t-20">
+
+    <h1 class="invisible h-none m-none">Đặt vé máy bay trực tuyến giá rẻ trong nước và quốc tế</h1>
+    <div class="container">
+      <section>
+        <div class="" *ngIf="flights.length">
+          <h4 class="title">Săn vé máy bay giá rẻ</h4>
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6"
+                 [class.m-t-20]="i/itemsPerRow >= 1"
+                 [class.p-l-10]="i%itemsPerRow > 0"
+                 [class.p-r-10]="i%itemsPerRow < itemsPerRow-1"
+                 *ngFor="let flight of flights; trackBy: trackByFn; let i = index">
+              <cheap-flight-item-desktop [flight]="flight"
+                                         (select)="onSelectFlight($event)"></cheap-flight-item-desktop>
+            </div>
+          </div>
+        </div>
+        <loading [show]="isLoading" [title]="'Đang tải dữ liệu'"
+                 [description]="'Vui lòng đợi trong giây lát'"></loading>
+      </section>
+
+    </div>
+  </section>
+</div>
+
+<cheap-flight-calendar-popup (select)="onSelectDate($event)"></cheap-flight-calendar-popup>

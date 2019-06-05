@@ -1,0 +1,159 @@
+<div class="hotel-preview">
+  <app-header [back]="true" [heading]="'Thông tin đặt phòng'" [fixed]="true" [version]="3">
+    <stepper-booking [step]="2"></stepper-booking>
+  </app-header>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-12">
+        <div class="hotel">
+          <div class="title">Thông tin khách sạn</div>
+          <div class="content">
+            <div class="row">
+              <div class="col-12 font-16 font-medium text-black">
+                {{ hotel.name}}
+              </div>
+              <div class="col-12">
+                <hotel-star [stars]="hotel.stars"></hotel-star>
+              </div>
+              <div class="col-12 font-13">
+                <img class="size-16x16" cdn-src="assets/images/hotel/des-type-pos.svg" alt="icon"/>
+                {{ hotel.fullAddress }}
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="font-11 font-thin">Nhận phòng</div>
+                    <div class="font-18 text-black font-thin">{{ bookingRoom.checkIn | departDate }}</div>
+                    <div class="font-13">Lúc 14:00</div>
+                  </div>
+                  <div class="col-4 p-t-10">
+                    <div class="text-center font-13 m-b-n-10">
+                      {{ utilityHelper.calcDay(bookingRoom.checkIn, bookingRoom.checkOut)}} đêm
+                    </div>
+                    <img class="w-full" cdn-src="assets/images/hotel/book/arrow-night.svg">
+                  </div>
+                  <div class="col-4 text-right">
+                    <div class="font-11">Trả phòng</div>
+                    <div class="font-18 text-black font-thin">{{ bookingRoom.checkOut | departDate }}</div>
+                    <div class="font-13">Lúc 12:00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="row">
+              <div class="col-12 font-16 font-medium text-black">Phòng: {{ room.roomName }}</div>
+              <div class="col-12 font-13">Tối đa: {{ room.limitedAdults }} người</div>
+              <div class="col-12 m-t-5">
+                <a class="text-main" (click)="openPolicy()">Chính sách hủy đặt phòng</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="passenger">
+          <div class="title">Thông tin hành khách</div>
+          <div class="content">
+            <div class="row">
+              <div class="col-6" [class.border-right]="!!booker.representer">
+                <div class="font-13 text-black">
+                  Người liên hệ
+                </div>
+                <div class="font-medium font-16 text-black">
+                  {{ booker.contact.LastName }} {{ booker.contact.FirstName }}
+                </div>
+                <div class="font-13">
+                  <div>{{ booker.contact.Email }}</div>
+                  <div>{{ booker.contact.MobileNumber }}</div>
+                </div>
+              </div>
+              <div class="col-6" *ngIf="!!booker.representer">
+                <div class="font-13 text-black ">
+                  Người nhận phòng
+                </div>
+                <div class="font-medium text-black font-16">
+                  {{ booker.representer }}
+                </div>
+              </div>
+            </div>
+            <div class="row m-t-5">
+              <div class="col-12">
+                <a class="text-main" (click)="redirectToBooking()">
+                  <img class="size-16x16 m-r-5" cdn-src="assets/images/hotel/book/edit.svg" alt="icon"/>
+                  Chỉnh sửa thông tin
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="e-bill" *ngIf="bookingRoom.invoiced">
+          <div class="title">Thông tin xuất hóa đơn điện tử</div>
+          <div class="content">
+            <div class="row">
+              <div class="col-12">
+                <div class="">{{ bookingRoom.vatInvoiceInfo.companyName }}</div>
+                <div class="">MST: {{ bookingRoom.vatInvoiceInfo.taxIdentificationNo }}</div>
+                <div class="">Đ/c công ty: {{ bookingRoom.vatInvoiceInfo.companyAddress }}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <a class="text-main" (click)="redirectToBooking()">
+                  <img class="size-16x16 m-r-5" cdn-src="assets/images/hotel/book/edit.svg" alt="icon"/>
+                  Chỉnh sửa thông tin
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="price" *ngIf="!!priceSummary">
+          <div class="title">Tổng tiền</div>
+          <div class="content">
+            <div class="row">
+              <div class="col-12">
+                <div class="row"
+                     *ngFor="let item of priceSummary.detailItems; trackBy: trackByFn;">
+                  <div class="col-7">{{item.title}}</div>
+                  <div class="col-5 text-right">
+                    <span class="">{{ item.price | currencyMoney:'' }}</span>
+                    <span class="text-underline">đ</span>
+                  </div>
+                </div>
+                <div class="line"></div>
+                <div class="row">
+                  <div class="col-7">Tổng tiền</div>
+                  <div class="col-5 text-right">
+                    <span class="price"> {{ totalPrice | currencyMoney:'' }} <span
+                        class="text-underline">đ</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hotel-preview-footer fixed-bottom footer">
+    Bằng việc chạm vào nút bên dưới, bạn đã đồng ý với các
+    <a class="text-main font-normal" [routerLink]="['/more/policy']">Điều khoản và Chính sách</a> của Xtrip.
+
+    <div class="m-t-10">
+      <button class="btn btn-main btn-block"
+              [disabled]="!priceSummary"
+              (click)="onPayment()">Thanh toán ngay
+      </button>
+    </div>
+  </div>
+</div>
+
+<hotel-more-popup [title]="hotel.name"
+                  [code]="hotel.code"
+                  [tab]="'policy'"></hotel-more-popup>

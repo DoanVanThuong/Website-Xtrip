@@ -1,0 +1,55 @@
+<!-- mobile -->
+<div class="passenger-box passenger-box-mobile {{ class }}"
+     *ngIf="isMobile && passengers.length">
+  <h4 class="title">
+    Hành khách <span class="pull-right">{{onDetectUpdatedCounter()}}/{{ passengers.length }}</span>
+  </h4>
+
+  <div class="passenger-list m-t-20">
+
+    <div class="panel panel-desktop"
+         *ngFor="let passenger of passengers; trackBy: trackByFn; let i = index">
+      <div class="panel-body">
+        <a class="d-block" (click)="onSelectPassenger(passenger, i)">
+          <div class="d-flex justify-content-start">
+            <div class="m-r-10">
+              <img class="size-24x24 m-t-n-3"
+                   *ngIf="!passenger.isUpdated"
+                   cdn-src="assets/images/icon/icon-uncheck-gray-circle.svg"
+                   alt="uncheck"/>
+              <img class="size-24x24 m-t-n-3"
+                   *ngIf="passenger.isUpdated"
+                   cdn-src="assets/images/icon/icon-checked-circle-orange.svg"
+                   alt="uncheck"/>
+            </div>
+            <div class="text-main font-medium">
+              Khách hàng {{ getPassengerTitle(passenger) }}
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Fill Passenger -->
+  <booking-passenger-info-popup (submit)="onUpdatePassenger($event)"
+                                [passenger]="selectedPassenger">
+  </booking-passenger-info-popup>
+</div>
+
+<!-- desktop -->
+<div class="passenger-box passenger-box-desktop {{ class }}"
+     *ngIf="isDesktop && passengers.length">
+
+  <h4 class="title">
+    Thông tin khách
+  </h4>
+
+  <div [class.m-t-20]="i > 0"
+       *ngFor="let passenger of passengers; trackBy: trackByFn; let i = index">
+    <passenger-info-item [passenger]="passenger"
+                         [delay]="1000"
+                         [invalid]="isInvalid"
+                         (changes)="onPassengerChange($event, i)"></passenger-info-item>
+  </div>
+</div>

@@ -1,0 +1,223 @@
+.booking-detail {
+  position: relative;
+  .booking-header {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    padding: 15px;
+    transition: all .25s ease-in;
+    .tour-name-header,
+    .hotel-name-header {
+      display: none;
+    }
+    .back {
+      > img {
+        width: 16px;
+        height: 16px;
+        margin-bottom: 0;
+      }
+    }
+    &.scroll {
+      background-color: @green-2;
+      position: fixed;
+      .tour-name-header,
+      .hotel-name-header {
+        display: block;
+        transition: all .25s ease-in;
+      }
+    }
+  }
+}
+
+// tour booked with detail - comment-popup
+.booking-detail-comment {
+  .booking-detail-comment-body {
+    background-color: @white;
+    padding: 15px;
+
+    .introduction {
+    }
+
+    .rating-list {
+      margin-top: 10px;
+      > li {
+        font-size: 15px;
+        padding: 12px 0;
+        .br {
+          &.br-default {
+            margin: 0;
+            .br-units {
+              margin-top: -7px;
+              > .br-unit {
+                height: 24px;
+                font-size: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .comment {
+      min-height: 250px;
+      margin-top: 30px;
+      .mat-form-field {
+        width: 100%;
+      }
+      .mat-input-underline {
+        border-color: @gray-8;
+      }
+    }
+    .action {
+    }
+  }
+}
+
+// tour booked with detail - passenger
+.booking-detail-passenger {
+  .booking-detail-passenger-body {
+    background-color: @white;
+    .passenger-information {
+      .passenger-name {
+        color: @green-2;
+        font-size: 15px;
+        padding: 12px 15px;
+        font-weight: 700;
+      }
+      .passenger-detail {
+        padding: 0 25px;
+        > .row {
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
+      }
+    }
+  }
+}
+
+// tour booked with detail - price
+.booking-detail-price {
+  .booking-detail-price-body {
+    padding: 0px 15px;
+    //background-color: @white;
+    .box-price {
+      background-color: @white;
+      border-radius: 10px;
+      padding: 0 10px;
+      margin-top: 20px;
+    }
+    .row {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      &:last-child {
+        padding-bottom: 10px;
+      }
+    }
+    .total-price {
+      border-top: 1px solid @gray-8;
+    }
+    .font-normal {
+      font-weight: 400;
+    }
+  }
+}
+
+.booking-detail-qrcode {
+  .booking-detail-qrcode-body {
+    background-color: @green-2;
+    font-size: 15px;
+    color: @white;
+    padding: 15px;
+    .qrcode {
+      margin-top: 80px;
+      > img {
+        width: 150px;
+        margin-bottom: 0;
+      }
+    }
+    .title,
+    .description {
+      color: @white;
+    }
+    .title {
+      font-weight: 700;
+    }
+  }
+}
+
+.booking-detail-description {
+  .description-header {
+    padding: 15px;
+    background-color: @white;
+    .header-title {
+      font-size: 20px;
+    }
+  }
+  .tab-container {
+    .nav.nav-justified {
+      background-color: @white;
+      > .nav-item {
+        > .nav-link {
+          color: @gray-11;
+          font-size: 15px;
+          padding: 10px;
+          margin: 0;
+        }
+        &.active {
+          > .nav-link {
+            color: @orange-2;
+            border-bottom: 2px solid @orange-2;
+          }
+        }
+      }
+    }
+    .tab-content {
+      /* height: 85vh;
+overflow: auto;*/
+      background-color: @white;
+      .booking-detail-intro,
+      .booking-detail-journey,
+      .booking-detail-term,
+      .booking-detail-policy {
+        padding: 15px;
+        .title {
+          color: @green-2;
+          font-size: 16px;
+        }
+        .description {
+          font-size: 15px;
+          img {
+            max-width: 100%;
+          }
+          p {
+            font-size: 15px;
+          }
+        }
+      }
+      .booking-detail-facility {
+        font-size: 15px;
+        .facility-group {
+          .title {
+            padding: 5px 15px;
+            background-color: @gray-6;
+          }
+          .facility-list {
+            padding: 5px 15px;
+            .col-6 {
+              position: relative;
+              > .dot {
+                position: absolute;
+                top: 7px;
+                left: 15px;
+                font-size: 8px;
+                color: @gray-10;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

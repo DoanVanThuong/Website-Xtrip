@@ -1,0 +1,262 @@
+<div class="booking-product-detail booking-product-detail-desktop"
+     *ngIf="!!product">
+
+  <div class="back">
+    <a class="pointer font-medium" (click)="back()">
+      <img class="m-b-none m-t-n-3 size-16x16"
+           cdn-src="assets/images/icon/icon-angle-left.svg"
+           alt="icon"/>
+      <span class="m-l-5">Quay lại danh sách</span>
+    </a>
+  </div>
+
+  <section class="product-detail m-t-20">
+    <div class="panel card panel-desktop m-b-15">
+      <div class="panel-body panel-body">
+
+        <app-booking-product-basic-detail [product]="product"
+                                          [mode]="0"></app-booking-product-basic-detail>
+
+        <div class="m-t-20"
+             *ngIf="utilityHelper.findNotInList(product.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])">
+          <button class="btn btn-main-v2 mn-w-200 font-18"
+                  (click)="showPopupChangePayment()">
+            Đổi thanh toán
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <accordion>
+
+    <!-- vé điện tử -->
+    <accordion-group panelClass="panel-desktop"
+                     (isOpenChange)="onOpenETicket()"
+                     *ngIf="!!product.vouchers.length">
+      <div class="pointer" accordion-heading>
+        Vé điện tử
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+
+      <div class="row animated fadeIn">
+        <div class="col-12" *ngIf="isViewMode">
+
+          <div class="row" *ngIf="!links.length">
+            <div class="col-12">
+              <a class="pointer font-medium" (click)="isViewMode = !isViewMode">
+                <img class="m-b-none m-t-n-3 size-16x16"
+                     cdn-src="assets/images/icon/icon-angle-left.svg"
+                     alt="icon"/>
+                <span class="m-l-5">Quay lại</span>
+              </a>
+            </div>
+          </div>
+
+          <perfect-scrollbar>
+            <pdf-viewer [src]="selectedLink.link"
+                        [autoresize]="true"
+                        [original-size]="false"
+                        [render-text]="true"
+                        [show-all]="true"
+                        [zoom]="1"
+                        [fit-to-page]="false"
+                        style="position: relative; display: block; max-height: 800px; width: 100%"></pdf-viewer>
+          </perfect-scrollbar>
+        </div>
+
+        <div class="col-12" *ngIf="!isViewMode">
+
+          <div class="row m-t-10">
+            <div class="col-6 m-b-10" *ngFor="let item of links; trackBy: trackByFn">
+              <button class="btn btn-white-outline btn-block text-truncate"
+                      (click)="onSelectLink(item)">
+                {{ item.name }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </accordion-group>
+
+    <!-- note -->
+    <accordion-group panelClass="panel-desktop">
+      <div class="pointer" accordion-heading>
+        Thông tin lưu ý
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+
+      <ul class="product-notice animated fadeIn">
+        <li *ngFor="let item of onHandleContent(product.notes); trackBy: trackByFn">
+          {{ item }}
+        </li>
+      </ul>
+    </accordion-group>
+
+    <!-- more -->
+    <accordion-group panelClass="panel-desktop"
+                     *ngIf="product.bookingOptions.length">
+      <div class="pointer" accordion-heading>
+        Thông tin bổ sung
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+
+      <ul class="product-notice animated fadeIn">
+        <li *ngFor="let item of product.bookingOptions; trackBy: trackByFn">
+          <div class="">
+            {{ item.name }}:
+            <span class="" *ngIf="!utilityHelper.isUrlify(item.value)">{{ item.value }}</span>
+            <span class="m-t-5" *ngIf="!!utilityHelper.isUrlify(item.value)">
+                <img class="mx-w-full img-fix"
+                     [src]="item.value"
+                     [alt]="item.name"
+                     onerror="this.src='assets/images/no-thumbnail.png'"/>
+              </span>
+          </div>
+        </li>
+      </ul>
+    </accordion-group>
+
+    <!-- passenger -->
+    <accordion-group class="passenger-box"
+                     panelClass="panel-desktop"
+                     *ngIf="!!product.passengers.length">
+      <div class="pointer" accordion-heading>
+        Hành khách
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+      <div class="row animated fadeIn">
+        <div class="col-lg-9">
+          <div class="row"
+               *ngFor="let passenger of product.passengers; trackBy: trackByFn;">
+            <div class="col-12">
+              <div class="text-green font-medium p-t-5 p-b-5">
+                Hành khách {{ utilityHelper.getPassengerTypeLabel(passenger.paxType) }}
+              </div>
+              <div class="p-5" *ngFor="let item of passenger.properties; trackBy: trackByFn">
+                <div class="row">
+                  <div class="col-6">{{ item.name }}</div>
+                  <div class="col-6 text-right">{{ item.value }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </accordion-group>
+
+    <!-- cancellation policy -->
+    <accordion-group panelClass="panel-desktop">
+      <div class="pointer" accordion-heading>
+        Chính sách hoàn hủy
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+
+      <ul class="product-notice animated fadeIn">
+        <li *ngFor="let item of onHandleContent(product.cancellationPolicy); trackBy: trackByFn">{{ item }}</li>
+      </ul>
+    </accordion-group>
+
+    <!-- price -->
+    <accordion-group class="price-box" panelClass="panel-desktop">
+      <div class="pointer" accordion-heading>
+        Chi tiết giá
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+
+      <div class="row text-black animated fadeIn">
+        <div class="col-lg-9">
+          <div class="row"
+               *ngFor="let item of product.priceSummary.detailItems; trackBy: trackByFn; let i = index">
+            <div class="col-7 font-15">
+              {{ item.title }}
+            </div>
+            <div class="col-5 text-right font-15">
+              <span>{{ item.price | currencyMoney: '' }} <span class="underline">đ</span></span>
+            </div>
+          </div>
+          <div class="line"></div>
+          <div class="row">
+            <div class="col-7 font-bold">Tổng tiền:</div>
+            <div class="col-5 text-right">
+              {{ product.totalPrice | currencyMoney:'' }} <span class="text-underline">đ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </accordion-group>
+
+    <!-- payment guide -->
+    <accordion-group panelClass="panel-desktop"
+                     *ngIf="utilityHelper.findNotInList(product.status, [STATUS.CANCEL, STATUS.PAID, STATUS.WAITING])">
+      <div class="pointer" accordion-heading>
+        Hướng dẫn thanh toán
+        <span class="pull-right">
+          <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+               cdn-src="assets/images/icon/icon-angle-down-green.svg"
+               alt="icon"/>
+          <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+               cdn-src="assets/images/icon/icon-angle-up-green.svg"
+               alt="icon"/>
+        </span>
+      </div>
+      <div class="animated fadeIn">
+        <payment-guide-detail [module]="'product'"
+                              [delay]="500"
+                              [code]="code"></payment-guide-detail>
+      </div>
+    </accordion-group>
+  </accordion>
+</div>
+
+<succeed-review-popup></succeed-review-popup>
+
+<app-change-payment-popup
+    *ngIf="!!product && utilityHelper.findNotInList(product.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])"
+    [module]="'product'"
+    [reservationCode]="code"
+    [data]="product"
+    (submit)="submitChangePayment()"></app-change-payment-popup>

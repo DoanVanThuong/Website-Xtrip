@@ -1,0 +1,48 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade pdf-report-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-10">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ heading || 'Gửi PDF qua email' }}
+          <a class="pull-right pointer" (click)="hide()">
+            <img alt="close"
+                 class="m-b-none size-24x24"
+                 cdn-src="assets/images/icon/icon-close-gray.svg">
+          </a>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <form class="form form-desktop"
+                  [formGroup]="form"
+                  (submit)="onSubmit(form.value)">
+              <div class="form-group">
+                <label class="control-label">Nhập email</label>
+                <input class="form-control underline"
+                       placeholder="Email"
+                       [formControl]="email"/>
+                <div class="error" *ngIf="email.dirty || email.touched">
+                  <span *ngIf="email.errors | equalError:'required'">Không để trống</span>
+                  <span *ngIf="email.errors | equalError:'email'">Không hợp lệ</span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit"
+                class="btn btn-main-v2 btn-block font-16 p-10"
+                [disabled]="form.invalid"
+                (click)="onSubmit(form.value)">
+          Gửi email
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

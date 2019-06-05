@@ -1,0 +1,92 @@
+<div class="block block-product {{ class }}" *ngIf="!!products.length">
+
+  <!-- desktop -->
+  <div class="free-tour--product-desktop" *ngIf="isDesktop">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center">
+          <h4 class="block-title m-none">{{ heading }}</h4>
+          <a class="pointer font-medium text-green"
+             [routerLink]="['/product/result']"
+             [queryParams]="generateQueryParams()">
+            <span class="d-none d-lg-block">Xem thêm</span>
+            <span class="d-lg-none">
+              <img class="size-16x16 scale-one-half"
+                   cdn-src="assets/images/icon/icon-angle-right-green.svg" alt="icon"/>
+            </span>
+          </a>
+        </div>
+        <div class="block-body m-t-10">
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-sm-6"
+                 [class.m-t-20]="i/itemsPerRow >= 1"
+                 [class.p-l-10]="i%itemsPerRow > 0"
+                 [class.p-r-10]="i%itemsPerRow < itemsPerRow - 1"
+                 *ngFor="let product of products; trackBy: trackByFn; let i = index">
+              <home-product-item [product]="product" [queryParams]="generateQueryParams(product)"></home-product-item>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="free-tour--product-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="block-title m-none ">
+          <a class="pointer  d-flex justify-content-center align-items-center"
+             [routerLink]="['/product/result']"
+             [queryParams]="generateQueryParams()">
+            <h4 class="m-none">{{ heading }}</h4>
+            <img class="size-16x16 scale-one-half ml-auto"
+                 cdn-src="assets/images/icon/icon-angle-right-green.svg" alt="icon"/>
+          </a>
+        </div>
+        <div class="block-description">
+          {{ description }}
+        </div>
+        <div class="block-body m-t-10">
+
+          <div class="row">
+            <div class="col-4 product-item"
+                 [class.m-t-10]="i >= 3"
+                 [class.p-r-5]="i % 3 < 2"
+                 [class.p-l-5]="i % 3 > 0"
+                 *ngFor="let product of products; trackBy: trackByFn; let i = index">
+              <a class="pointer"
+                 [title]="product.name"
+                 [routerLink]="['/product', product.code, 'detail']"
+                 [queryParams]="generateQueryParams(product)">
+                <div class="product-image">
+                  <img class="img-fix"
+                       defaultImage="assets/images/no-thumbnail.png"
+                       [lazyLoad]="product.photo.src | size:250"
+                       [offset]="80"
+                       [alt]="product.name"
+                       [title]="product.name"
+                       onerror="this.src='assets/images/no-thumbnail.png'"/>
+                  <div class="product-discount" *ngIf="!!product.discount">
+                    Giảm <span class="font-bold">{{ product.discount }}%</span>
+                  </div>
+                </div>
+                <div class="product-info m-t-10 d-flex flex-column">
+                  <div>
+                    <div class="product-name text-truncate-2lines">
+                      {{ product.name }}
+                    </div>
+                  </div>
+                  <div class="product-price mt-auto">
+                    <app-price class="text-green font-bold" [price]="product.price"></app-price>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

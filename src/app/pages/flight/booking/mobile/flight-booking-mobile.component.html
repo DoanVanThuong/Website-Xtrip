@@ -1,0 +1,75 @@
+<div class="flight-booking flight-booking-mobile">
+
+  <!-- HeaderDesktopComponent -->
+  <app-header [heading]="'Thông tin đặt vé'" [confirm]="true" [fixed]="true" [version]="3">
+
+    <header-confirm-back>
+      <a class="back-to pointer" (click)="openConfirmBack()">
+        <img class="m-b-none size-16x16" cdn-src="assets/images/icon-back.png" alt="icon"/>
+      </a>
+    </header-confirm-back>
+
+    <!-- Stepper -->
+    <stepper-booking [step]="1"></stepper-booking>
+    <!-- Stepper -->
+  </app-header>
+  <!-- HeaderDesktopComponent -->
+
+  <div class="wrapper">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+
+        <!-- Sign-in -->
+        <signin-request-mobile></signin-request-mobile>
+        <!-- Sign-in -->
+
+        <!-- Contact Info -->
+        <contact-info [data]="contact"
+                      (changes)="onContactChange($event)"
+                      [invalid]="isInvalid">
+        </contact-info>
+        <!-- Contact Info -->
+
+        <!-- Passenger Info -->
+        <passenger-info *ngIf="summaryPrice"
+                        [data]="passengers"
+                        [international]="isInternational"
+                        [adults]="bookingFlight.Adult"
+                        [children]="bookingFlight.Child"
+                        [infants]="bookingFlight.Infant"
+                        [segments]="segments"
+                        [invalid]="isInvalid"
+                        (submit)="onSubmitUpdatedPassenger($event)">
+        </passenger-info>
+        <!-- Passenger Info -->
+
+        <!-- Optional (Coupon, Point) -->
+        <booking-optional [error]="error"
+                          [selectedPoint]="selectedPoint"
+                          [couponCode]="couponCode"
+                          (submitCoupon)="onSubmitCoupon($event)"
+                          (submitPoint)="onSubmitPoint($event)">
+        </booking-optional>
+        <!-- Optional (Coupon, Point) -->
+
+        <!-- Bill -->
+        <booking-bill-info [data]="bill"
+                           (changes)="onChangeBill($event)">
+        </booking-bill-info>
+        <!-- Bill -->
+
+        <!-- Footer -->
+        <booking-footer [totalPrice]="totalPrice"
+                        [summaryPrice]="summaryPrice"
+                        [disabled]="detectDisableSubmit()"
+                        (submitGotoPreview)="goToPreviewTicket($event)">
+        </booking-footer>
+        <!-- Footer -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Back -->
+<confirm-back-popup (submit)="onSubmitConfirm($event)"></confirm-back-popup>

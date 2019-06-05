@@ -1,0 +1,167 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.booking-hotel-detail {
+  &.booking-hotel-detail-desktop {
+
+    .border-left {
+      border-color: @gray-29;
+    }
+
+    .line {
+      width: 100%;
+      height: 1px;
+      .box-shadow(0, -0.5px, 0, @gray-8);
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .hotel-code {
+      background-color: @gray-13;
+      padding: 3px 10px;
+      color: @green-2;
+      font-weight: @font-medium;
+      .border-radius(3px);
+
+      &:hover {
+        color: @green-2;
+      }
+    }
+
+    .hotel-setting {
+      .btn-link {
+        color: @green-2;
+        font-weight: @font-medium;
+      }
+
+      .btn-main-v2 {
+        padding: 3px 10px;
+        .border-radius(5px);
+        font-weight: @font-bold;
+        font-size: 16px;
+      }
+    }
+
+    .panel-group {
+      .panel {
+        margin: 0;
+        box-shadow: none;
+        background-color: transparent;
+
+        .panel.panel-desktop {
+          margin-top: 10px;
+          color: @gray-2;
+          background-color: @white;
+          .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+
+          .panel-heading,
+          .card-header {
+            padding: 15px 20px;
+            background-color: @white;
+            color: @gray-2;
+            .border-radius(10px);
+
+            > span {
+              color: @green-2;
+              margin: 0;
+              display: inline-block;
+            }
+
+            .panel-title,
+            .card-title {
+              font-size: 18px;
+              font-weight: 700;
+            }
+
+            .icon-collapse {
+              display: inline-block;
+            }
+            .icon-expand {
+              display: none;
+            }
+          }
+
+          .panel-body,
+          .card-body {
+            padding: 20px;
+            transition: height .5s linear;
+
+            .list-group.list-group-flush {
+              .list-group-item {
+                padding-left: 0;
+                padding-right: 0;
+
+                &:first-child {
+                  border-top-width: 0;
+                }
+              }
+            }
+          }
+        }
+
+        &.panel-open {
+
+          .panel.panel-desktop {
+
+            .panel-heading,
+            .card-header {
+              background-color: @gray-17;
+              .border-radiuses(10px, 0, 0, 10px);
+
+              .icon-collapse {
+                display: none;
+              }
+              .icon-expand {
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+
+      .price-box {
+        .panel-body, .card-body {
+          padding: 20px 30px !important;
+          line-height: 2;
+        }
+
+        .line {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          height: 1px;
+          width: 100%;
+          border-top: 1px solid @gray-8;
+        }
+      }
+
+      .room-box {
+
+        ul.facilities {
+          > li {
+            position: relative;
+            padding-left: 15px;
+            margin-top: 5px;
+
+            &:first-child {
+              margin: 0;
+            }
+
+            &:before {
+              content: '';
+              position: absolute;
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background-color: @gray-7;
+              top: 7px;
+              left: 3px;
+            }
+          }
+        }
+
+
+      }
+
+    }
+  }
+}

@@ -1,0 +1,72 @@
+<!--component html goes here -->
+<div class="faq-index-page">
+
+  <app-faq-banner [keyword]="keyword"></app-faq-banner>
+
+  <div class="main-body p-t-20">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <app-faq-navigator [params]="params"
+                             (onChangeGuide)="onChangeGuide($event)"
+                             (onChangeFaq)="onChangeFaq($event)"></app-faq-navigator>
+        </div>
+        <div class="col-lg-8">
+          <div class="title m-b-20"
+               *ngIf="isSearch">Kết quả tìm kiếm "{{keyword}}"
+          </div>
+          <div class="faq-wp bg-white"
+               *ngIf="!!questions && questions.length > 0 || !isSearch">
+            <div class="faq-content"
+                 *ngFor="let questionItem of questions; trackBy: trackByFn">
+              <accordion [closeOthers]="true">
+                <accordion-group *ngFor="let question of questionItem.questions; trackBy: trackByFn">
+                  <div accordion-heading class="question-wp d-flex pointer p-r-20">
+                    <img class="m-b-none p-r-10 active"
+                         cdn-src="assets/images/faq/flight/question-active.svg">
+                    <img class="m-b-none p-r-10 unactive"
+                         cdn-src="assets/images/faq/flight/question.svg">
+                    {{ question.question }}
+                    <div class="heading-icon ">
+                      <i class="fa fa-lg fa-angle-down unactive"></i>
+                      <i class="fa fa-lg fa-angle-up active"></i>
+                    </div>
+                  </div>
+                  <img cdn-src="assets/images/faq/flight/answer.svg" class="m-b-none float-left m-r-10">
+                  <div [innerHTML]="question.answer" class="answer">
+                  </div>
+                </accordion-group>
+              </accordion>
+            </div>
+          </div>
+
+          <!-- search result -->
+          <div class="faq-wp bg-white" *ngIf="isSearch">
+            <div *ngIf="questions.length === 0" class="not-found p-t-20">Không tìm thấy từ khóa cần tìm</div>
+            <accordion [closeOthers]="true">
+              <accordion-group *ngFor="let question of questions; trackBy: trackByFn">
+                <div accordion-heading class="question-wp d-flex pointer p-r-20">
+                  <img class="m-b-none m-t-n-3 p-r-10 active"
+                       cdn-src="assets/images/faq/flight/question-active.svg">
+                  <img class="m-b-none p-r-10 m-t-n-3 unactive"
+                       cdn-src="assets/images/faq/flight/question.svg">
+                  {{ question.question }}
+                  <div class="heading-icon ">
+                    <i class="fa fa-lg fa-angle-down unactive"></i>
+                    <i class="fa fa-lg fa-angle-up active"></i>
+                  </div>
+                </div>
+                <img cdn-src="assets/images/faq/flight/answer.svg" class="m-b-none float-left m-r-10 m-t-n-3">
+                <div [innerHTML]="question.answer" class="answer">
+                </div>
+              </accordion-group>
+            </accordion>
+          </div>
+          <!-- /search resuls -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

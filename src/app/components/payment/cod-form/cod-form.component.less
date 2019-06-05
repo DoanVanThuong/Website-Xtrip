@@ -1,0 +1,43 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.cod-form {
+
+  .form.form-desktop {
+    .form-group {
+      .form-control {
+        font-weight: 400 !important;
+        color: @black !important;
+      }
+    }
+  }
+
+  .note {
+    .rgba(@gray-3, .34);
+    padding: 15px;
+    border-radius: 10px;
+    color: @gray-2;
+
+    ul {
+      margin-left: 10px;
+      li {
+        padding: 5px;
+        font-size: 15px !important;
+        color: @gray-2;
+        position: relative;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 11px;
+          left: -8px;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: @green-1;
+        }
+
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@import '_variables.less';
+@import './_mixins.less';
+
+.my-booking {
+  &.my-booking-desktop {
+
+    .button-group {
+      .btn {
+        margin-right: 10px;
+        margin-bottom: 10px;
+
+        &.btn-white {
+          min-width: 120px;
+          color: @green-2;
+          border-radius: 5px;
+          font-weight: 700;
+          font-size: 18px;
+          transition: all .5s linear;
+
+          &:hover, &:active, &:focus, &.active {
+            background-color: @green-2;
+            color: @white;
+            .box-shadow(0, 0, 5px, rgba(0, 0, 0, .2));
+          }
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

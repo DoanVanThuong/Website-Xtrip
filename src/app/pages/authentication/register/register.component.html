@@ -1,0 +1,93 @@
+<div class="register-page">
+  <div class="row">
+    <div class="col-12">
+      <a (click)="goBack()">
+        <img class="size-24x24 m-b-0" cdn-src="assets/images/icon/icon-close-green.svg" alt="icon"/>
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h4 class="title">
+        Tạo tài khoản
+    </h4>
+  </div>
+
+  <div class="form-box no-bg-form-box">
+    <div class="row justify-content-center m-b-20">
+      <div class="col-lg-4 col-md-6 col-12">
+        <form class="form"
+              [formGroup]="form"
+              (submit)="onSubmit(form.value)">
+          <div class="form-group">
+            <mat-form-field>
+              <input type="email" [formControl]="email" matInput placeholder="Email *"/>
+              <!-- <img matSuffix class="size-24x24" cdn-src="assets/images/signin/icon-email-gray.svg" alt="icon"/> -->
+              <mat-error *ngIf="email.dirty || !!error.email">
+                <span *ngIf="email.errors | equalError:'required'">Yêu cầu nhập Email</span>
+                <span *ngIf="email.errors | equalError:'email'">Email không hợp lệ</span>
+                <span *ngIf="email.errors | equalError:'existingEmail'">Email đã tồn tại</span>
+                <!-- <span *ngIf="!!error.email">Email đã tồn tại</span> -->
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <input type="text" [formControl]="phone" matInput placeholder="Số điện thoại *"/>
+              <!-- <img matSuffix class="size-24x24" cdn-src="assets/images/signin/icon-email-gray.svg" alt="icon"/> -->
+              <mat-error *ngIf="phone.dirty || !!error.phone">
+                <span *ngIf="phone.errors | equalError:'required'">Yêu cầu nhập số điện thoại</span>
+                <span *ngIf="phone.errors | equalError:'phone'">Số điện thoại không hợp lệ</span>
+                <span *ngIf="phone.errors | equalError:'existingPhone'">Số điện thoại đã tồn tại</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="w-full">
+              <input [type]="isPassword ? 'password' : 'text'" [formControl]="password" matInput
+                     placeholder="Mật khẩu *"/>
+              <a matSuffix (click)="isPassword = !isPassword">
+                <img class="size-24x24"
+                     cdn-src="assets/images/signin/icon-password-{{isPassword ? 'hide' : 'see'}}.svg"
+                     alt="icon"/>
+              </a>
+              <mat-error *ngIf="password.dirty">
+                <span *ngIf="password.errors | equalError:'required'">Yêu cầu nhập Mật khẩu</span>
+                <span *ngIf="password.errors | equalError:'minlength'">Mật khẩu phải có tối thiểu 6 ký tự</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- <div class="form-group">
+            <mat-form-field class="w-full">
+              <input [type]="isConfirmPassword ? 'password' : 'text'"
+                     [formControl]="confirmPassword"
+                     matInput
+                     placeholder="Nhập lại mật khẩu*"/>
+              <a matSuffix (click)="isConfirmPassword = !isConfirmPassword">
+                <img class="size-24x24"
+                     cdn-src="assets/images/signin/icon-password-{{isConfirmPassword ? 'hide' : 'see'}}.svg"
+                     alt="icon"/>
+              </a>
+              <mat-error *ngIf="confirmPassword.dirty">
+                <span *ngIf="confirmPassword.errors | equalError:'equalPassword'">Mật khẩu chưa chính xác</span>
+              </mat-error>
+            </mat-form-field>
+          </div> -->
+          <div class=" m-t-20">
+            <button class="btn btn-signup" [disabled]="onDisable()">Tạo tài khoản</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="row position-absolute pos-link-btn">
+      <div class="container-fluid text-center font-14">
+        Bằng việc đăng ký, bạn đã đồng ý với các
+        <a [routerLink]="['/more/policy']" class="text-main text-underline d-inline-block">
+        Điều kiện và Chính sách bảo mật</a> của Xtrip
+      </div>
+    </div>
+  </div>
+</div>

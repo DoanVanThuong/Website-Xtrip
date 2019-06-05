@@ -1,0 +1,73 @@
+<div class="product-booking product-booking-mobile">
+  <app-header [fixed]="true" [heading]="'Đặt chỗ'" [confirm]="true" [version]="3">
+    <header-confirm-back>
+      <a class="back-to pointer" (click)="openConfirmBack()">
+        <img class="m-b-none size-16x16" cdn-src="assets/images/icon-back.png" alt="icon"/>
+      </a>
+    </header-confirm-back>
+  </app-header>
+
+  <div class="wrapper" min-height>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+
+        <product-combo-info [combo]="combo"
+                            [totalPrice]="totalPrice"
+                            [priceSummary]="priceSummary"></product-combo-info>
+
+        <contact-info [data]="contact"
+                      class="m-t-30"
+                      [heading]="'Thông tin người đặt'"
+                      [version]="2"
+                      (changes)="onContactChange($event)"
+                      [invalid]="isInvalid"></contact-info>
+
+        <booking-passenger-box class="m-t-10"
+                              [data]="passengers"
+                               [adults]="passenger.adults"
+                               [children]="passenger.children"
+                               [infants]="passenger.infants"
+                               [seniors]="passenger.seniors"
+                               (changes)="onPassengerChange($event)"
+                               [invalid]="isInvalid"></booking-passenger-box>
+
+        <booking-pickup class="m-t-20"
+                        (changes)="onMessageChange($event)"></booking-pickup>
+
+        <booking-additional-info [delay]="1000"
+                                 class="m-t-30"
+                                 [invalid]="isInvalid"
+                                 (changes)="onAdditionalInfoChange($event)"></booking-additional-info>
+
+        <booking-optional-box [coupon]="couponCode"
+                              [points]="selectedPoint"
+                              [error]="error"
+                              class="m-t-30"
+                              (applyCoupon)="onSubmitCoupon($event)"
+                              (applyPoint)="onSubmitPoint($event)"></booking-optional-box>
+
+        <!--<div class="m-t-30">
+          <booking-bill-info [data]="bill"
+                             (changes)="onVATChange($event)">
+          </booking-bill-info>
+        </div>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="product-booking-footer fixed-bottom">
+    Bằng việc chạm vào nút bên dưới, bạn đã đồng ý với các
+    <a class="text-main font-normal" [routerLink]="['/more/policy']">Điều khoản và Chính sách</a> của Xtrip.
+    <div class="m-t-10">
+      <button class="btn btn-main-v2 btn-block font-bold font-16 p-10"
+              (click)="onPayment()"
+              [disabled]="onDisabledSubmit()">
+        Thanh toán
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Back -->
+<confirm-back-popup (submit)="onSubmitConfirm($event)"></confirm-back-popup>

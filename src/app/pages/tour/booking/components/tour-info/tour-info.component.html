@@ -1,0 +1,51 @@
+<div class="tour-info-booking ">
+  <h4 class="title m-b-10">Thông tin đặt tour</h4>
+  <div class="tour-info-wp-booking animated zoomIn ">
+    <div class="row">
+      <div class="col-3 p-r-5">
+        <div class="img-tour">
+          <img class="img-fix m-b-none h-full"
+               defaultImage="assets/images/no-thumbnail.png"
+               [src]="tour.photo.src | size: 200"
+               onerror="this.src = 'assets/images/no-thumbnail.png'"
+               [alt]="tour.name"
+               [title]="tour.name"/>
+        </div>
+      </div>
+      <div class="col-6 info p-r-5">
+        <h4 class="tour-name">{{tour.name}}</h4>
+        <div class="tour-detail-wp d-flex justify-content-between align-items-center ">
+          <div class="depart-date">
+            <div class="title-detail">Ngày khởi hành</div>
+            <div>{{bookingInfo.departDate | moment: 'DD/MM/YYYY'}}</div>
+          </div>
+          <div>
+            <div class="title-detail">Số người</div>
+            <div>{{totalPassengers}}</div>
+          </div>
+          <div>
+            <div class="title-detail">Thời gian tour</div>
+            <div>{{tour.days}}N{{tour.nights}}Đ</div>
+          </div>
+        </div>
+        <ul class="list-unstyled list-detail-info ">
+          <li>
+            <span class="m-l-5">Nơi khởi hành:</span>
+            <span class="">{{tour.departPlace}}</span>
+          </li>
+          <!-- <li>
+            <span class="m-l-5">Nhà tổ chức: </span>
+            <span class="">{{tour.supplier.name}}</span>
+          </li> -->
+        </ul>
+      </div>
+      <div class="col-3">
+        <div class="text-right">
+          <a class="text-underline view-detail pointer text-main" (click)="viewDetailTourBooking()"> Xem chi tiết</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <tour-detail-popup [journey]="journey" [tour]="tour" [package]="package"></tour-detail-popup>
+
+</div>

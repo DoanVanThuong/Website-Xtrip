@@ -1,0 +1,26 @@
+<div class="booking-footer fixed-bottom footer">
+  <div class="row">
+    <div class="col-6 text-left price-info">
+      <div>
+        <a class="pointer d-block" (click)="showPriceDetail(upArrow)">
+          <span class="font-13">Tổng tiền</span>
+          <img *ngIf="upArrow" class="m-b-0" cdn-src="assets/images/icon/dropdown-arrow-down.svg" alt="icon"/>
+          <img *ngIf="!upArrow" class="m-b-0 rotate-180" cdn-src="assets/images/icon/dropdown-arrow-down.svg" alt="icon"/>
+        </a>
+      </div>
+      <div class="font-20 m-t-5">
+        {{ totalPrice | currencyMoney: '' }} <span class="text-underline">đ</span>
+      </div>
+    </div>
+    <div class="col-6">
+      <button [ngClass]="{'disabled': disabled }"
+              (click)="goToPreviewTicket()"
+              class="btn btn-main btn-block font-medium font-18 mn-h-44">
+        Tiếp tục
+      </button>
+    </div>
+  </div>
+</div>
+
+<price-detail-popup #priceDetail [summaryPrice]="summaryPrice" [totalPrice]="totalPrice"
+                    (event)="event($event)"></price-detail-popup>

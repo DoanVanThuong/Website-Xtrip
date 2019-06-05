@@ -1,0 +1,37 @@
+<div bsModal #popup="bs-modal" class="modal fade z-index-2004" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header fixed-header header bg-green-linear p-b-20">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-2">
+              <img class="m-0 size-16x16" cdn-src="assets/images/icon/icon-back-white.svg" (click)="hide()">
+            </div>
+            <div class="col-8 text-center text-white">{{ heading }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body p-none">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <app-empty-screen
+              [show]="!isLoading && !passengers.length"
+              [heading]="''"
+              [description]="'Không tìm thấy thông tin hành khách'"
+              (retry)="getPassengers()">
+            </app-empty-screen>
+            <div *ngIf="!isLoading && !!passengers.length">
+              <div class="list-group list-group-flush">
+                <div class="list-group-item" *ngFor="let passenger of passengers; trackBy: trackByFn; let i = index">
+                  <a class="d-block" (click)="onSelect(passenger)">
+                    {{passenger.title}} {{passenger.lastName}} {{passenger.firstName}}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

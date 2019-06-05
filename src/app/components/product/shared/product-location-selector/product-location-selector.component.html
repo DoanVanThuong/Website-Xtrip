@@ -1,0 +1,122 @@
+<!--component html goes here -->
+<div bsModal #popup="bs-modal" class="modal product-location-selector-popup" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header fixed-header header">
+        <div class="modal-title">
+          <div class="d-flex">
+            <div class="m-r-10 m-t-12">
+              <a (click)="onClose()">
+                <img class="m-b-none size-24x24" cdn-src="assets/images/icon/{{ icon === 'isClose' ? 'icon-close-green' : 'icon-back-left-green' }}.svg" alt="back" />
+              </a>
+            </div>
+            <div class="w-full">
+              <div class="position-relative">
+                <div class="form-group m-l-25">
+                  <input class="input-style form-control" type="text" placeholder="Tìm điểm đến, hoạt động vui chơi…"
+                    [(ngModel)]="keyword" (ngModelChange)="onChange($event)" />
+                </div>
+                <div class="position-absolute pos-icon">
+                  <span class="bg-icon">
+                    <i class="fa fa-search icon-color" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body over-y">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div *ngIf="(!sourcesDestination.length && !sourcesProduct.length) && !!keyword">
+              <div class="row line">
+                <div class="col-12">
+                  <app-empty-screen [show]="true"
+                                    [heading]="'Hãy tìm kiếm với từ khóa khác'"
+                                    [description]="''"
+                                    [isRetry]="false"></app-empty-screen>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="text-left">
+                  <div *ngIf="sourcesDestination.length > 0 && !!keyword">
+                    <div class="row large-label">
+                      <div class="col-12">Điểm đến</div>
+                    </div>
+                    <ul class="list-unstyled">
+                      <li class="line-item" *ngFor="let item of sourcesDestination; trackBy: trackByFn">
+                        <a (click)="onSelectLocation(item, 'result')">
+                          <div [innerHTML]="item.name | highlight : keyword"></div>
+                          <div class="sub-history" [innerHTML]="item.address | highlight : keyword"></div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="sourcesProduct.length > 0 && !!keyword">
+                    <div class="row large-label">
+                      <div class="col-12">Hoạt động</div>
+                    </div>
+                    <ul class="list-unstyled">
+                      <li class="line-item" *ngFor="let item of sourcesProduct; trackBy: trackByFn">
+                        <a class="d-flex" [routerLink]="['/product/' + item.id + '/detail']">
+                          <div>
+                            <img class="size-36x36 b-r-3 m-t-2 img-fix" [src]="item.photo.src" alt="img" onerror="this.src='assets/images/no-thumbnail.png'" />
+                          </div>
+                          <div class="m-l-10">
+                            <div class="text-truncate w-text-truncate" [innerHTML]="item.name | highlight : keyword"></div>
+                            <div class="sub-history" [innerHTML]="item.address | highlight : keyword"></div>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="!!history.length && !isTyping && !keyword">
+                    <div class="history-location">
+                      <div class="row large-label">
+                        <div class="col-12">
+                          Đã chọn gần đây
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="list-unstyled">
+                      <li class="line-item" *ngFor="let item of history; trackBy: trackByFn">
+                        <a (click)="onSelectLocation(item, 'history')">
+                          <div>{{item.name}}</div>
+                          <div class="sub-history">{{item.address}}</div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="!keyword.length&&sourcesFavorite.length > 0">
+                    <div class="favorite-location">
+                      <div class="row large-label">
+                        <div class="col-12">
+                          Điểm đến phổ biến
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="list-unstyled">
+                      <li class="line-item" *ngFor="let item of sourcesFavorite; trackBy: trackByFn">
+                        <a (click)="onSelectLocation(item, 'result')">
+                          {{item.name}}, {{item.address}}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

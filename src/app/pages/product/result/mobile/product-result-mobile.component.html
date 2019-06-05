@@ -1,0 +1,169 @@
+<!--component html goes here -->
+<div class="product-result product-result-mobile-page">
+
+  <!-- Header -->
+  <div class="header header-mobile">
+    <div class="bg-green-linear">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="d-flex">
+              <span class="pos-arrow">
+                <a class="d-block" (click)="backTo()">
+                  <img class="m-b-none" cdn-src="assets/images/icon/icon-back-white.svg" alt="img"/>
+                </a>
+              </span>
+              <span class="bg-location">
+                <a (click)="onOpenLocationSelecttor()" class="d-block">
+                  <span class="m-l-5">{{getLocation(params)}}</span>
+                  <span class="float-right"><img class="m-b-none"
+                                                  cdn-src="assets/images/icon/icon-arrow-down-gray.svg"/></span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Switch mode -->
+      <!-- <app-product-switch-type [params]="params"></app-product-switch-type> -->
+      <!-- Switch mode -->
+    
+      <!-- Filter panel -->
+      <div class="row filter-panel">
+        <div class="col-6 p-8-0 font-14 text-center text-white">
+          <a class="d-block b-r-filter" (click)="onOpenFilterPopup()">
+            <span><img class="m-b-none m-t-n-3 m-r-8 size-14x14" cdn-src="assets/images/icon/icon-filter-white.svg" alt="img" /></span> Bộ lọc
+          </a>
+        </div>
+        <div class="col-6 p-8-0 position-static font-14 text-center text-white">
+          <div class="dropdown" dropdown>
+            <a dropdownToggle>
+              <img class="m-b-none m-t-n-3 m-r-8 size-14x14" cdn-src="assets/images/icon/icon-sort-white.svg" alt="img" /> Sắp xếp
+            </a>
+            <ul class="dropdown-menu pos-dropdown" *dropdownMenu id="dropdown-basic" role="menu" aria-labelledby="button-basic">
+              <li class="" *ngFor="let sort of sorts; trackBy: trackByFn; let i = index">
+                <a class="" (click)="onSelectSort(sort.value)">
+                  <div class="row">
+                    <div class="col-10 sort-item {{!!params.sortIndex ? activeSort(sort.value) : i === 0 ? 'active' : ''}}">
+                      {{sort.display}}
+                    </div>
+                    <div class="col-2 text-right" *ngIf="!!params.sortIndex ? activeSort(sort.value) : i === 0 ? true : false">
+                      <img class="m-b-none m-t-n-5" cdn-src="assets/images/product/result/check.svg" alt="img" />
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Filter panel -->
+    </div>
+    
+    <!-- Quick Pickup Category -->
+    <div class="row quick-pickup-item m-none position-relative" *ngIf="!isShowDropdown">
+      <div class="col-12 m-t-10">
+        <ul class="over-item">
+          <li class="item font-13" *ngFor="let item of quickCategories" [class.active]="checkIsExist(params.categories, item.code)">
+            <a class="d-block" (click)="selectCategoryItem(item.code)">{{item.name}}</a>
+          </li>
+          <li class="p-l-30"></li>
+        </ul>
+      </div>
+      <div class="position-absolute pos-arrow" (click)="isShowDropdown = !isShowDropdown">
+        <img class="m-b-none size-16x16 m-l-20 m-t-15" cdn-src="assets/images/icon/icon-angle-down-green.svg" alt="img" />
+      </div>
+    </div>
+
+    <div class="row quick-pickup-drop p-15-0 m-none" *ngIf="isShowDropdown">
+      <div class="col-6 title">Danh mục</div>
+      <div class="col-6 text-right">
+        <a class="d-block" (click)="isShowDropdown = !isShowDropdown">
+          <img class="m-b-none size-16x16 r-180" cdn-src="assets/images/icon/icon-angle-down-green.svg" alt="img" />
+        </a>
+      </div>
+      <div class="col-12 m-t-10 over-drop-item">
+        <ul class="flex-wrap d-flex">
+          <li class="item font-13" *ngFor="let item of quickCategories" [class.active]="checkIsExist(params.categories, item.code)">
+            <a class="d-block" (click)="selectCategoryItem(item.code)">{{item.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Quick Pickup Category -->
+
+  </div>
+  <!-- Header -->
+
+  <!-- Container -->
+  <div class="container wrapper p-15 p-t-none"
+       min-height
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+    <div class="row justify-content-center bg-white">
+      <div class="col-12 col-md-8 col-lg-6 pos-container" [class.focused]="isShowDropdown">
+
+        <loading [show]="!isDone"></loading>
+        <app-empty-screen-product
+          [show]="isDone && products.length === 0 && !!checkIsHaveFilter()"
+          [originalFilter]="originalFilterData"
+          [params]="params">
+        </app-empty-screen-product>
+
+        <div class="empty-screen" *ngIf="isDone && products.length === 0 && !checkIsHaveFilter()">
+          <img class="img-fluid w-full pos-empty" cdn-src="assets/images/empty-screen.png" alt="img"/>
+          <div class="label-empty">
+            Hãy tìm kiếm với địa điểm khác
+          </div>
+        </div>
+
+        <!-- List item -->
+        <section>
+          <div *ngFor="let product of products; trackBy: trackByFn">
+            <app-product-result-item [product]="product"></app-product-result-item>
+          </div>
+        </section>
+        <!-- List item -->
+
+        <!-- List related product -->
+        <section class="related-product" *ngIf="isDone && products.length === 0 && relatedProducts.length > 0">
+          <div class="title">
+            Có thể bạn quan tâm
+          </div>
+          <div *ngFor="let relatedProduct of relatedProducts; trackBy: trackByFn">
+            <app-product-result-item [product]="relatedProduct"></app-product-result-item>
+          </div>
+        </section>
+        <!-- List related product -->
+
+      </div>
+    </div>
+
+    <!-- Filter Button  -->
+    <!-- <div class="filter-btn" [@scrollAnimation]="stateIconMap">
+      <a class="d-block" (click)="onOpenFilterPopup()">
+        <span class="bg-filter">
+          <span><img class="m-b-none size-20x20" cdn-src="assets/images/icon/icon-filter-white.svg" alt="img"/>
+          </span>Bộ lọc
+        </span>
+      </a>
+    </div> -->
+    <!-- Filter Button  -->
+
+  </div>
+  <!-- Container -->
+
+  <!-- OthersComponent Component -->
+  <product-location-selector-popup (select)="onSelectLocation($event)"
+                                   [type]="params.type"></product-location-selector-popup>
+  <app-product-filter-popup
+    [params]="params"
+    (categoryData)="getCategoryData($event)"
+    (submit)="onSubmitFilter($event)"
+    (originalFilter)="getOriginalFilter($event)"></app-product-filter-popup>
+  <!-- OthersComponent Component -->
+
+</div>

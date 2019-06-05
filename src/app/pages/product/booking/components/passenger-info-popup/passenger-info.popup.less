@@ -1,0 +1,94 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.modal.booking-passenger-info-popup {
+
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        .modal-title {
+          background-color: @green-2;
+          color: @white;
+          font-size: 20px;
+          font-weight: 500;
+          text-align: center;
+        }
+      }
+
+      .modal-body {
+        .form {
+          .form-group {
+            margin-bottom: 10px;
+
+            .control-label {
+              font-size: 13px;
+              color: @orange-2;
+            }
+
+            .mat-form-field {
+              .mat-form-field-wrapper {
+                .mat-form-field-underline {
+                  height: 1px;
+                  background-color: @gray-33;
+                }
+
+                .mat-form-field-label-wrapper {
+                  .mat-form-field-label {
+                    color: @orange-2;
+                    font-size: 15px;
+                    font-weight: 500;
+                  }
+                }
+              }
+            }
+
+            &.form-sex {
+              .btn {
+                margin-right: 10px;
+                border-radius: 25px;
+                padding: 10px 20px;
+                min-width: 90px;
+                font-weight: 500;
+                transition: background 0.5s linear;
+
+                &.active, &:hover, &:focus {
+                  background-color: @orange-2;
+                  background-image: linear-gradient(to right, @orange-4, @orange-2);
+                  color: @white;
+                  .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+                }
+              }
+            }
+          }
+        }
+
+        .uploader-container {
+          padding: 10px;
+          background-color: @gray-17;
+          border: 1px dashed @gray-46;
+          .border-radius(5px);
+
+          label {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            input[type=file] {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .modal-footer {
+        background-color: @gray-6;
+        padding: 20px 15px;
+
+        .btn {
+          padding: 10px 20px;
+        }
+      }
+    }
+  }
+
+}

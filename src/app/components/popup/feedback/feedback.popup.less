@@ -1,0 +1,42 @@
+@import "_variables.less";
+
+.modal.popup-feedback-app {
+
+  .modal-dialog {
+    @media (min-width: 375px) {
+      max-width: 320px;
+    }
+
+    .modal-content {
+
+      .modal-body {
+        .title {
+          font-size: 15px;
+          font-weight: 700;
+          color: @black;
+          margin-bottom: 10px;
+        }
+        .content {
+          .mat-form-field {
+            width: 100%;
+            font-size: 15px;
+            color: @gray-8;
+            .mat-input-wrapper {
+              textarea {
+                color: @gray-4;
+              }
+              .mat-input-underline {
+                display: none !important
+              }
+            }
+          }
+          .phone-number {
+            color: @green-1;
+            font-weight: 400;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}

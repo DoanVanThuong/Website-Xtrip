@@ -1,0 +1,37 @@
+@import '_variables.less';
+
+.hotel-room-popup {
+  &.show {
+    overflow-y: hidden !important;
+  }
+  .modal-dialog {
+    &.fullscreen {
+      top: 60px !important;
+    }
+    
+    .modal-content {
+      border-top-left-radius: 20px !important;
+      border-top-right-radius: 20px !important;
+      .modal-header {
+        padding: 10px 14px;
+        .line-header {
+          width: 52px;
+          height: 5px;
+          border-radius: 100px;
+          background-color: @gray-2;
+          margin: 0px auto;
+        }
+      }
+      .modal-body {
+        background: @gray-41;
+        padding: 0 8px;
+      }
+    }
+  }
+  
+  .modal-footer {
+    .btn-footer{
+      margin: 15px;
+    }
+  }
+}

@@ -1,0 +1,207 @@
+<div class="flight-search flight-group">
+
+  <app-header [back]="true" [heading]="'Đặt vé theo đoàn'" [fixed]="true" [version]="3">
+    <div class="sub-header">
+      <tabset class="tab-mobile" [justified]="true">
+        <tab [active]="!isRoundTrip" [heading]="'Một chiều'" (selectTab)="onSelectMethod(1)"></tab>
+        <tab [active]="isRoundTrip" [heading]="'Khứ hồi'" (selectTab)="onSelectMethod(2)"></tab>
+      </tabset>
+    </div>
+  </app-header>
+
+  <div class="wrapper">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="row m-t-10">
+          <div class="col-12">
+            <div class="title p-l-10 p-r-10">Thông tin chuyến bay</div>
+          </div>
+          <div class="col-12 m-t-10 bg-white">
+            <div class="p-8-16">
+              <div class="form form-mobile">
+                <div class="list-group list-group-flush">
+
+                  <!-- Origin Input -->
+                  <div class="list-group-item">
+                    <a (click)="showLocationPopup('origin')">
+                      <mat-form-field floatLabel="auto">
+                        <img matPrefix
+                             class="size-30x30 m-t-n-12 m-r-10"
+                             cdn-src="assets/images/planeup.svg" alt="icon"/>
+                        <input type="text"
+                               [(ngModel)]="dataObj.start"
+                               matInput
+                               placeholder="Chọn điểm khởi hành"
+                               readonly/>
+                      </mat-form-field>
+                    </a>
+                    <a class="btn-switch" (click)="clickSwap()">
+                      <img class="size-30x30" cdn-src="assets/images/swicth.svg" alt="icon"/>
+                    </a>
+                  </div>
+                  <!-- Origin Input -->
+
+                  <!-- Destination Input -->
+                  <div class="list-group-item">
+                    <a (click)="showLocationPopup('destination')">
+
+                      <mat-form-field>
+                        <img matPrefix
+                             class="size-30x30 m-t-n-12 m-r-10"
+                             cdn-src="assets/images/planedown.svg" alt="icon"/>
+                        <input type="text"
+                               matInput
+                               [(ngModel)]="dataObj.end"
+                               placeholder="Chọn điểm đến"
+                               readonly/>
+                      </mat-form-field>
+                    </a>
+                  </div>
+                  <!-- Destination Input -->
+
+                  <!-- Date Picker -->
+                  <div class="list-group-item">
+                    <a (click)="onShowDatePicker()">
+                      <mat-form-field>
+                        <img matPrefix
+                             class="size-30x25 m-t-n-12 m-r-10"
+                             cdn-src="assets/images/date.svg" alt="icon"/>
+                        <input type="text"
+                               matInput
+                               placeholder="{{ isRoundTrip ? 'Chọn ngày đi - về' : 'Chọn ngày khởi hành' }}"
+
+                               readonly
+                               [(ngModel)]="dataObj.placeholderDate"/>
+                      </mat-form-field>
+                    </a>
+                  </div>
+                  <!-- Date Picker -->
+
+                  <!-- Passenger -->
+                  <div class="list-group-item">
+                    <mat-form-field>
+                      <img matPrefix
+                           class="size-30x25 m-t-n-12 m-r-10"
+                           cdn-src="assets/images/passenger.svg" alt="icon"/>
+                      <input type="number"
+                             matInput
+                             placeholder="Số hành khách"
+                             [(ngModel)]="dataObj.numberPassenger"/>
+                    </mat-form-field>
+                  </div>
+                  <!-- Passenger -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Form Information Flight -->
+
+        <!-- User Information -->
+        <div class="row m-t-10">
+          <div class="col-12">
+            <div class="title p-l-10 p-r-10">Thông tin liên hệ</div>
+          </div>
+          <div class="col-12 m-t-10 bg-white">
+            <div class="p-8-16">
+              <form class="form form-mobile"
+                    [formGroup]="form" novalidate>
+                <div class="list-group list-group-flush">
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-5">Họ:</div>
+                      <div class="col-7">
+                        <mat-form-field>
+                          <input matInput placeholder="{{lastName.value != ''  ? '' : '* Nhập họ'}}" type="text"
+                                 [formControl]="lastName">
+                          <mat-error class="m-b-n-15 cl-red" align="start"
+                                     *ngIf="lastName.invalid && lastName.touched">
+                            <strong>Vui lòng nhập họ</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-5">Tên đệm & Tên:</div>
+                      <div class="col-7">
+                        <mat-form-field>
+                          <input type="text"
+                                 matInput
+                                 placeholder="{{firstName.value != ''  ? '' : '* Nhập Tên đệm & tên'}}"
+
+                                 [formControl]="firstName">
+                          <mat-error class="m-b-n-15 cl-red" align="start"
+                                     *ngIf="firstName.invalid && firstName.touched">
+                            <strong>Vui lòng nhập tên đệm và tên</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-5">Điện thoại:</div>
+                      <div class="col-7">
+                        <mat-form-field>
+                          <input matInput placeholder="{{mobileNumber.value != ''  ? '' : '* +84 123 456 78'}}"
+                                 type="tel"
+                                 [formControl]="mobileNumber">
+                          <mat-error class="m-b-n-15 cl-red" align="start" *ngIf="mobileNumber.invalid">
+                            <strong>Vui lòng nhập SĐT hợp lệ</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-5">E-mail:</div>
+                      <div class="col-7">
+                        <mat-form-field>
+                          <input matInput placeholder="{{email.value != ''  ? '' : '* Nhập e-mail'}}" type="email"
+                                 [formControl]="email">
+                          <mat-error class="m-b-n-15 cl-red" align="start" *ngIf="email.invalid">
+                            <strong>Vui lòng nhập e-mail hợp lệ</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- User Information -->
+
+        <!-- Button Send -->
+        <div class="row m-t-20 m-b-20">
+          <div class="col-12 text-right">
+            <button (click)="onSendRequest()" [disabled]="!onDisable()" class="btn btn-main w-full font-bold">
+              Gửi yêu cầu
+            </button>
+          </div>
+        </div>
+        <!-- Button Send -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--Origin-->
+<flight-location-selector-popup #popupOriginLocation
+                                (select)="onSelectStart($event)"></flight-location-selector-popup>
+<!--Origin-->
+
+<!--Destination-->
+<flight-location-selector-popup #popupDestinationLocation
+                                (select)="onSelectEnd($event)"></flight-location-selector-popup>
+<!--Destination-->
+
+<date-selector-popup [options]="dateOptions"
+                     [date]="selectedDate"
+                     (submit)="onSelectDate($event)"></date-selector-popup>

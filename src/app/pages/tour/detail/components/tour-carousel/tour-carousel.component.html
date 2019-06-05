@@ -1,0 +1,34 @@
+<div class="row tour-carousel animated fadeIn">
+  <div class="col-12 b-r-10 position-relative">
+    <div class="position-absolute pos-like">
+      <a class="pointer"
+         (click)="onFavouriteTour()"
+         [ngSwitch]="isFavorite">
+        <img class="m-b-0" cdn-src="assets/images/hotel/desktop/unlike.svg" *ngSwitchDefault/>
+        <img class="m-b-0" cdn-src="assets/images/hotel/desktop/like.svg" *ngSwitchCase="true"/>
+      </a>
+    </div>
+    <owl-carousel #owlElement
+                  [items]="images"
+                  [options]="carouselOptions">
+      <div class="row" *ngFor="let item of images"
+           (click)="onOpenPopupImages(images)">
+        <div class="col-12">
+          <img class="img-fix b-r-10 m-b-0"
+               [ngStyle]="{'height.px': height}"
+               [src]="item.src"
+               [alt]="item.name"
+               onerror="this.src='assets/images/no-thumbnail.png'"/>
+        </div>
+      </div>
+    </owl-carousel>
+    <div class="position-absolute pos-img-view">
+      <a (click)="onOpenPopupImages(images)">
+        <img class="m-b-0 m-t-n-3 size-24x24" cdn-src="assets/images/hotel/desktop/img-view.svg"/>
+        Hình ảnh ({{images.length}})
+      </a>
+    </div>
+  </div>
+</div>
+
+<tour-gallery-popup [images]="images" [tour]="tour"></tour-gallery-popup>

@@ -1,0 +1,23 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade reference-price-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="container-fluid">
+            <div class="title text-center"> Lưu ý</div>
+            <div class="content">
+              Giá tham khảo dựa trên dữ kiệu kết quả tìm kiếm trong vòng 48 tiếng và có thể thay đổi
+            </div>
+          </div>
+          <div class="container-fluid m-t-20 text-center">
+            <button class="btn btn-link" (click)="hide()">Tôi đã hiểu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

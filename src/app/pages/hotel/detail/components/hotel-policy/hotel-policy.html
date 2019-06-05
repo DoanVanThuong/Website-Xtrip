@@ -1,0 +1,23 @@
+<!--component html goes here -->
+<div class="hotel-detail-policy animated zoomIn">
+  <div class="row m-t-n-12 b-r-10 custom-shadow m-l-none">
+
+    <div class="col-12 bg-white b-r-10">
+      <div class="p-18-0">
+        <section class="row">
+          <div class="col-lg-4 bo-r">
+            <h2 class="title font-24 font-weight-bold">Chính sách khách sạn</h2>
+          </div>
+          <div class="col-lg-8 p-l-30 p-r-30">
+            <ul>
+              <li class="m-b-10 gray-text" *ngFor="let item of policy">
+                {{item}}
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+  </div>
+</div>

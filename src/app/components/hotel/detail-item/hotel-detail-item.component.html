@@ -1,0 +1,49 @@
+<div class="hotel-detail-item bg-white">
+  <div class="item d-flex">
+    <div class="hotel-img">
+      <img class="img-fix img-fluid" defaultImage="assets/images/no-thumbnail.png"
+      [lazyLoad]="hotel.photo.url | resizeImage: 300"
+      [alt]="hotel.name"
+      [title]="hotel.name"
+      onerror="this.src='assets/images/no-thumbnail.png'" />
+    </div>
+    <div class="hotel-detail">
+      <div class="hotel-name">
+        <span class="stars">{{hotel.stars}} <span><img class="m-b-none size-10x10 m-t-n-3 m-l-n-2" cdn-src="assets/images/icon/icon-star-white.svg" alt="img" /></span></span> {{hotel.name}}
+      </div>
+      <div class="hotel-address text-truncate">
+        <span><img class="m-b-none m-t-n-3 size-14x14" cdn-src="assets/images/icon/icon-location-gray.svg" alt="img" /></span> 
+        {{hotel.fullAddress}}
+      </div>
+      <div class="prefer-service" *ngIf="!!hotel.preferServices">
+        <ul class="d-flex overflow-hidden">
+          <li *ngFor="let item of hotel.preferServices">{{item}}</li>
+        </ul>
+      </div>
+      <div class="hotel-price" *ngIf="!hotel.isSoldOut">
+        {{hotel.salePrice | currencyMoney: ''}} <span class="text-underline">đ</span>
+      </div>
+      <div class="hotel-sold-out" *ngIf="hotel.isSoldOut">
+        <div class="large-text">Hết phòng</div>
+        <div class="war-text">Bạn đã lỡ phòng này</div>
+      </div>
+    </div>
+  </div>
+  <div class="coupon-item" *ngIf="!!hotel.coupon && !!hotel.coupon.available">
+    <div class="row">
+      <div class="col-7 p-r-none font-12">
+        <div class="p-l-16" *ngIf="!hotel.coupon.usePercentage">
+          Nhập <span class="text-uppercase font-weight-bold text-green">{{hotel.coupon.couponCode}}</span> giảm ngay {{hotel.coupon.discountAmount | currencyMoney: ''}} <span class="text-underline">đ</span>
+        </div>
+        <div class="p-l-16" *ngIf="!!hotel.coupon.usePercentage">
+          Nhập <span class="text-uppercase font-weight-bold text-green">{{hotel.coupon.couponCode}}</span> giảm ngay {{hotel.coupon.discountPercentage}}%
+        </div>
+      </div>
+      <div class="col-5 p-l-none font-10 text-right">
+        <div class="p-r-16">
+          Hạn chót: {{ hotel.coupon.endDate | moment: 'DD/MM/YYYY' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

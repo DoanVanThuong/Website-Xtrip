@@ -1,0 +1,14 @@
+<div class="stepper-booking">
+  <div class="steps">
+    <div class="steps-row">
+      <div class="steps-step"
+           [class.active]="step >= (i + 1)"
+           *ngFor="let item of steps; trackBy: trackByFn; let i = index">
+        <div class="steps-item">
+          <span class="steps-num">{{ i + 1 }}</span>
+          <span class="steps-label">{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<!--component html goes here -->
+<div class="tour-favorite-desktop"
+     infinite-scroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="150"
+     (scrolled)="onScrollDown()">
+  <div class="row m-t-20 animated fadeIn" *ngIf="tours.length > 0" @list>
+    <div class="col-4 m-b-20 pointer"
+         *ngFor="let tour of tours; trackBy: trackByFn; let i = index" @item>
+      <div class="tour-item shadow b-r-10 position-relative">
+        <a (click)="onOpenFavoriteItem(tour)">
+          <img class="w-full h-img bor-img img-fix"
+               defaultImage="assets/images/no-thumbnail.png"
+               [lazyLoad]="tour.photo.src | size: 300"
+               [alt]="tour.name"
+               [title]="tour.name"
+               onerror="this.src='assets/images/no-thumbnail.png'"/>
+        </a>
+        <div class="p-10 h-115">
+          <a (click)="onOpenFavoriteItem(tour)">
+            <div class="name tour">
+              {{tour.name}}
+            </div>
+            <div class="reviews-rating position-absolute top-15">
+              <app-reviews-rating [rating]="tour.rating" [reviews]="tour.reviews"></app-reviews-rating>
+              <span class="days-nights">{{tour.days}}N{{tour.nights}}Đ</span>
+            </div>
+            <div class="supplier m-t-10">
+              <span class="m-r-5">
+                <img class="w-24 m-b-none"
+                     defaultImage="assets/images/no-thumbnail.png"
+                     [lazyLoad]="tour.supplier.logo.src"
+                     [alt]="tour.supplier.name"
+                     [title]="tour.supplier.name"
+                     [src]="tour.supplier.logo.src" alt="img"
+                     onerror="this.src='assets/images/no-thumbnail.png'"></span>{{tour.supplier.name}}
+            </div>
+            <div class="row" *ngIf="!!tour.sellingPrice&&tour.points">
+              <div class="col-7 p-r-none position-absolute bottom-5">
+                <div class="price text-main">
+                  {{tour.sellingPrice | currencyMoney: ''}} <span class="text-underline">đ</span>
+                </div>
+              </div>
+              <div class="col-5 p-l-none position-absolute pos-points">
+                <div class="points">
+                  +{{tour.points | currencyMoney: ''}} điểm
+                </div>
+              </div>
+            </div>
+          </a>
+          <div class="like position-absolute top-10 right-10">
+            <a (click)="onSelectFavorite(tour, i)">
+              <img class="m-b-none favorite-icon" cdn-src="assets/images/hotel/desktop/like.svg" alt="img"/>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-t-20" *ngIf="tours.length === 0">
+    <app-favorite-empty-screen></app-favorite-empty-screen>
+  </div>
+</div>

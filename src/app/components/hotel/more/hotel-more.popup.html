@@ -1,0 +1,54 @@
+<div bsModal #popup="bs-modal" class="modal fade hotel-more-popup" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title text-truncate">
+          <a (click)="hide()"><img class="size-16x16 m-b-0 m-t-n-5 m-r-15" cdn-src="assets/images/icon/icon-close.svg"></a>
+          {{ title }}
+        </div>
+        <div class="modal-sub-title">
+          <tabset [justified]="true" [type]="'tabs'" class="tab-mobile-white">
+            <tab [heading]="'Giới thiệu'" [active]="tab === 'intro'" (selectTab)="onSelectTab($event, 'intro')"></tab>
+            <tab [heading]="'Tiện nghi'" [active]="tab ==='facility'" (selectTab)="onSelectTab($event, 'facility')"></tab>
+            <tab [heading]="'Chính sách'" [active]="tab === 'policy'" (selectTab)="onSelectTab($event, 'policy')"></tab>
+          </tabset>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="content">
+          <div class="hotel-intro p-t-15" *ngIf="tab === 'intro'" [innerHTML]="intro"></div>
+          <div class="hotel-facility" *ngIf="tab === 'facility'">
+            <div class="facility-group" *ngFor="let group of facilities; let i = index">
+              <div class="title">
+                {{ group.name }}
+              </div>
+              <div class="row">
+                <div class="facility-item col-6" *ngFor="let facility of group.facilities; let j = index">
+                  <span class="m-l-10 d-block">
+                    <span>
+                      <img *ngIf="facility.imageHost != '' && facility.imagePath != ''" class="m-r-5 m-b-none m-t-n-3 size-16x16" [src]="facility.imageHost + facility.imagePath"
+                        alt="icon" />
+                      <img *ngIf="facility.imageHost == '' && facility.imagePath == ''" class="m-r-5 m-b-none m-t-n-3 size-16x16" cdn-src="assets/images/hotel/desktop/li-gray.svg"
+                        alt="icon" />
+                    </span>
+                    {{ facility.name }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-t-10 m-b-5">
+              <div class="col-12">
+                <div class="font-medium text-main">(*) Tiện nghi có phụ thu khi sử dụng</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="hotel-policy p-t-15" *ngIf="tab === 'policy'">
+            <div *ngFor="let policy of policies; let i = index" [innerHTML]="policy"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

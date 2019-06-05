@@ -1,0 +1,49 @@
+<div class="faq-page">
+    <app-header [back]="true" [heading]="'Câu hỏi thường gặp'" [fixed]="true" [version]="3"></app-header>
+  
+    <div class="wrapper" min-height>
+      <!--<div class="position-relative w-full h-full">
+        <iframe class="position-absolute w-full h-full"
+                src="http://dev.web.xtravel.vn/pages/faq.html"
+                frameborder="0" allowfullscreen></iframe>
+      </div>-->
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <tabset class="bg-white" [justified]="true" [type]="'tabs'">
+            <tab [active]="tab === questionItem.key"
+                 (selectTab)="onSelectTab($event, questionItem.key)"
+                 *ngFor="let questionItem of questions; trackBy: trackByFn; let i = index">
+              <ng-template tabHeading>
+                <img *ngIf="questionItem.icon" [src]="questionItem.icon" alt="icon"/>
+                <span>{{ questionItem.heading }}</span>
+              </ng-template>
+  
+              <div class="">
+                <div class="row"
+                     *ngFor="let questionGroup of questionItem.groups; trackBy: trackByFn">
+                  <div class="col-12">
+                    <div class="title">
+                      <img *ngIf="questionGroup.icon" [src]="questionGroup.icon" alt="icon"/>
+                      <span>{{questionGroup.title}}</span>
+                    </div>
+                    <accordion>
+                      <accordion-group *ngFor="let question of questionGroup.questions; trackBy: trackByFn">
+                        <div accordion-heading>
+                          {{ question.question }}
+                          <div class="heading-icon">
+                            <i class="fa fa-lg fa-angle-down unactive"></i>
+                            <i class="fa fa-lg fa-angle-up active"></i>
+                          </div>
+                        </div>
+                        <div [innerHTML]="question.answer"></div>
+                      </accordion-group>
+                    </accordion>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>

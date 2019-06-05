@@ -1,0 +1,134 @@
+<div class="account-info account-info-mobile">
+  <app-header [back]="true" [heading]="'Thông tin tài khoản'" [fixed]="true" [version]="3"></app-header>
+  <div class="wrapper" min-height>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-12">
+
+        <form class="form form-mobile"
+              [formGroup]="form"
+              (submit)="onSubmit(form.value)">
+          <div class="account-info">
+            <div class="title">Thông tin cá nhân</div>
+            <div class="list-group list-group-flush">
+              <div class="list-group-item">
+                <div class="row">
+                  <div class="col-5">Họ</div>
+                  <div class="col-7">
+                    <mat-form-field [floatLabel]="'never'">
+                      <input type="text"
+                             matInput
+                             placeholder="Nhập họ"
+                             [formControl]="LastName"/>
+                      <mat-error *ngIf="LastName.dirty">
+                        <span *ngIf="LastName.errors | equalError:'required'">Không được để trống</span>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="row">
+                  <div class="col-5">Tên đệm & tên</div>
+                  <div class="col-7">
+                    <mat-form-field [floatLabel]="'never'">
+                      <input type="text"
+                             matInput placeholder="Nhập tên"
+                             [formControl]="FirstName"/>
+                      <mat-error *ngIf="FirstName.dirty">
+                        <span *ngIf="FirstName.errors | equalError:'required'">Không được để trống</span>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="row">
+                  <div class="col-5">Điện thoại</div>
+                  <div class="col-7">
+                    <mat-form-field [floatLabel]="'never'">
+                      <input type="text"
+                             matInput
+                             placeholder="Nhập SĐT"
+                             [formControl]="PhoneNumber" readonly/>
+                      <mat-error *ngIf="PhoneNumber.dirty">
+                        <span *ngIf="PhoneNumber.errors | equalError:'required'">Không được để trống</span>
+                        <span *ngIf="PhoneNumber.errors | equalError:'phone'">Không hợp lệ</span>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="account-info-more">
+            <div class="title">Thông tin tài khoản</div>
+            <div class="list-group list-group-flush">
+              <div class="list-group-item">
+                <div class="row">
+                  <div class="col-5">Email</div>
+                  <div class="col-7">
+                    {{ profile.email }}
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item" *ngIf="!isPassword && profile.isLocalUser">
+                <div class="row">
+                  <div class="col-5">Mật khẩu</div>
+                  <div class="col-7">
+                    <a class="d-block text-main font-thin" (click)="isPassword = !isPassword">Đổi mật khẩu</a>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item" *ngIf="isPassword && profile.isLocalUser">
+                <div class="row">
+                  <div class="col-5">Mật khẩu</div>
+                  <div class="col-7">
+                    <mat-form-field [floatLabel]="'never'">
+                      <input type="password"
+                             matInput placeholder="Nhập mật khẩu cũ"
+                             [formControl]="CurrentPassword"/>
+                      <mat-error *ngIf="CurrentPassword.dirty">
+                        <span *ngIf="CurrentPassword.errors | equalError:'required'">Mật khẩu không được để trống</span>
+                        <span *ngIf="CurrentPassword.errors | equalError:'minlength'">Mật khẩu có ít nhất 6 ký tự</span>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group-item" *ngIf="isPassword && profile.isLocalUser">
+                <div class="row">
+                  <div class="col-5"></div>
+                  <div class="col-7">
+                    <mat-form-field [floatLabel]="'never'">
+                      <input type="password"
+                             matInput
+                             placeholder="Nhập mật khẩu mới"
+                             [formControl]="NewPassword"/>
+                      <mat-error *ngIf="NewPassword.dirty">
+                        <span *ngIf="NewPassword.errors | equalError:'required'">Mật khẩu không được để trống</span>
+                        <span *ngIf="NewPassword.errors | equalError:'minlength'">Mật khẩu có ít nhất 6 ký tự</span>
+                        <span *ngIf="NewPassword.errors | equalError:'equalPassword'">Mật khẩu trùng</span>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="account-footer">
+        <button type="submit" class="btn btn-main btn-block"
+                [disabled]="!detectDisableButton()"
+                (click)="onSubmit(form.value)">
+          Cập nhật thông tin
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<change-password-confirm-popup (accept)="redirectTo()"></change-password-confirm-popup>

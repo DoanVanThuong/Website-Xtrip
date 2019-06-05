@@ -1,0 +1,32 @@
+<div class="flight-heading m-t-5">
+  <div class="text-center">
+    <span class="slt-options">{{ options.origin }}</span>
+    <span class="slt-options">
+      <img class="size-14x14 m-b-0 m-t-n-5 m-l-5 m-r-5 rotate-180" cdn-src="assets/images/icon-back.png" alt="arrow" />
+    </span>
+    <span class="slt-options">{{ options.destination }}</span>
+  </div>
+  <div class="text-center sub-heading m-t-n-8">
+    <div class="d-inline-block font-11" *ngIf="!options.returnDate">
+      <span>{{ options.departDate | moment: 'DD/MM/YYYY'}}</span>, 
+    </div>
+    <div class="d-inline-block font-11" *ngIf="!!options.returnDate">
+      <span>{{ options.departDate | moment: 'DD/MM' }}</span> -
+      <span>{{ options.returnDate | moment: 'DD/MM/YYYY'}}</span>, 
+    </div>
+    <div class="d-inline-block font-11">
+      <span *ngIf="!!options.adult">
+        <img class="size-12x12 m-t-n-3" cdn-src="assets/images/adult.svg" alt="adult" />
+        <span>{{options.adult}}</span>
+      </span>
+      <span class="m-l-5" *ngIf="options.children > 0">
+        <img class="size-12x12 m-t-n-3" cdn-src="assets/images/children.svg" alt="children" />
+        <span>{{options.children}}</span>
+      </span>
+      <span class="m-l-5" *ngIf="options.baby > 0">
+        <img class="size-12x12 m-t-n-3" cdn-src="assets/images/baby.svg" alt="baby" />
+        <span>{{options.baby}}</span>
+      </span>
+    </div>
+  </div>
+</div>

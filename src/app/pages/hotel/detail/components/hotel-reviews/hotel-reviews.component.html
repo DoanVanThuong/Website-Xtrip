@@ -1,0 +1,66 @@
+<div class="hotel-reviews-desktop animated zoomIn">
+    <div class="row m-t-20 shadow b-r-10 m-l-none">
+  
+      <div class="col-12 bg-white b-r-10">
+        <div class="p-18-0">
+
+          <section class="row">
+            <div class="col-lg-3">
+
+              <div class="review-rating font-34 font-bold" 
+                [class.review-danger]="generalReview.finalScore > 0 && generalReview.finalScore < 6"
+                [class.review-normal]="generalReview.finalScore >= 6">
+                {{generalReview.finalScore | number:'1.1'}}
+                  <span *ngIf="generalReview.finalScore > 0" class="font-20">{{generalReview.title}}</span>
+              </div>
+              
+              <div class="font-13 text-black m-t-n-5" *ngIf="generalReview.totalReviews > 0">
+                {{generalReview.totalReviews}} khách đã đánh giá khách sạn
+              </div>
+
+              <div class="font-13 text-black" *ngIf="generalReview.finalScore === 0">
+                {{generalReview.title}}
+              </div>
+
+            </div>
+            
+            <div class="col-lg-9" *ngIf="generalReview.finalScore > 0">
+              <div class="row">
+                <div class="col-lg-6 m-b-15" *ngFor="let item of generalReview.ratedCategories">
+                  <div class="progress">
+                    <div [ngStyle]="{'width.%': item.score*10}" class="progress-bar bg-green h-8"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">{{item.categoryName}}</div>
+                    <div class="col-6 text-right">{{item.score | number: '1.1'}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="row m-b-20" *ngFor="let item of moreReview.customerComments | slice:0:numberComment">
+            <div class="col-lg-3 position-relative">
+              <img class="m-b-0 img-fix size-42x42 b-50-pc" src="{{item.custAvatarHost}}{{item.custAvatar}}" alt="img" />
+              <div class="position-absolute pos-cmt">
+                <div class="font-16 font-medium gray-text">{{item.custName}}</div>
+                <div class="font-18 font-bold">{{item.ratingScore | number: '1.1'}} {{item.ratingTitle}}</div>
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="p-15 bg-gray b-r-10">
+                <div class="text-justify text-black">{{item.comment}}</div>
+                <div class="date-cmt m-t-20">Đã đánh giá lúc: {{item.createdDate | moment: 'HH:mm DD/MM/YYYY'}}</div>
+              </div>
+            </div>
+          </section>
+
+          <div class="m-t-40 text-center" *ngIf="moreReview.total > 4">
+            <button (click)="getAllCmt()" class="btn btn-main-v2 font-medium p-10">Xem thêm đánh giá</button>
+          </div>
+
+        </div>
+      </div>
+  
+    </div>
+  </div>

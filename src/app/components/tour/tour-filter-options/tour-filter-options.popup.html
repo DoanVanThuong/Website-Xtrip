@@ -1,0 +1,43 @@
+<div bsModal #popup="bs-modal" class="modal fade popup-hotel-filter-options animated fadeInUp" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-12 center-line">
+            <div class="line-header"></div>
+          </div>
+        </div>
+        <div class="row m-t-23">
+          <div class="col-12 m-t-5">
+            <a class="text-main font-medium" (click)="hide()"><img class="size-24x24 m-b-none m-t-n-3" cdn-src="assets/images/icon/icon-back.svg" alt="icon" /></a>
+          </div>
+          <div class="col-12 font-24 font-weight-bold m-t-10 color-42">
+            {{ title }}
+          </div>
+        </div>
+      </div>
+      <div class="modal-body p-none">
+        <div class="row justify-content-center custom-list">
+          <div class="col-12 col-md-8 col-lg-6">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of values; trackBy: trackByFn; let i = index">
+                <a class="d-block" [class.active]="isSelected(item)" (click)="onSelect(item)">
+                  <!-- <img *ngIf="!!item.icon" class="m-b-0 m-t-n-3 size-24x24 img-fix m-r-5" [src]="item.icon" onerror="this.src='assets/images/trans-img.jpg'" /> -->
+                  {{ item.name }}
+                  <span class="pull-right" >
+                    <img *ngIf="isSelected(item)" class="size-24x24 m-b-0 m-t-n-3 animated fadeIn" cdn-src="assets/images/icon/icon-checked-green.svg" alt="icon" />
+                    <img *ngIf="!isSelected(item)" class="size-24x24 m-b-0 m-t-n-3 animated fadeIn" cdn-src="assets/images/icon/icon-uncheck-gray.svg" alt="icon" />
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-main-v2 w-full" (click)="onSubmit()">Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>

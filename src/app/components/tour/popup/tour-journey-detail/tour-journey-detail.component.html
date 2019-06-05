@@ -1,0 +1,36 @@
+<div bsModal #popup="bs-modal" class="modal fade tour-journey-detail-popup" role="dialog">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-2" (click)="hide()">
+            <img class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-close-2.svg" alt="close" />
+          </div>
+          <div class="col-8 text-center font-17 font-weight-bold">
+            Chi tiết lịch trình
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12" *ngIf="!!data">
+            <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex" (selectedIndexChange)="selectedIndexChange($event)" disableRipple="false">
+              <mat-tab *ngFor="let tab of data.details" [label]="tab.title">
+                <div class="content" *ngFor="let item of tab.items">
+                  <img class="w-full b-r-5 m-10-0" *ngIf="!!item.image.src" [src]="item.image.src" alt="item.image.name" onerror="this.src='assets/images/no-thumbnail.png'" />
+                  <div class="text-justify custom-inner-html" [innerHTML]="item.text"></div>
+                </div>
+                <div class="options">
+                  <ul class="text-justify custom-inner-html">
+                    <li *ngFor="let ops of tab.options">{{ops.title}}: {{ops.value}}</li>
+                  </ul>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

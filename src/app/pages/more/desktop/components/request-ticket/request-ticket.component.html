@@ -1,0 +1,105 @@
+<!--component html goes here -->
+<div class="request-ticket-page">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="title">
+        {{title}}
+      </div>
+
+      <div class="shadow bg-white b-r-10 m-t-10 p-10-25-25">
+
+        <form class="form" [formGroup]="form" (submit)="onSubmit(form.value)">
+          <div class="list-group list-group-flush">
+            <div class="row">
+              <div class="col-lg-6 p-l-none p-r-none">
+                <div class="list-group-item" *ngIf="!isLoggedIn || fullName.value==''">
+                  <div class="row">
+                    <div class="col-lg-12 label-name">Họ & tên:</div>
+                    <div class="col-lg-12">
+                      <mat-form-field [floatLabel]="'never'">
+                        <input type="text" matInput placeholder="* Nhập họ tên" [formControl]="fullName" />
+                        <mat-error *ngIf="fullName.dirty">
+                          <span *ngIf="fullName.errors | equalError:'required'">Không được để trống</span>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 p-l-none p-r-none">
+                <div class="list-group-item" *ngIf="!isLoggedIn || fullName.value==''">
+                  <div class="row">
+                    <div class="col-lg-12 label-name">Email:</div>
+                    <div class="col-lg-12">
+                      <mat-form-field [floatLabel]="'never'">
+                        <input type="email" matInput placeholder="* Nhập email" [formControl]="email" />
+                        <mat-error *ngIf="email.dirty">
+                          <span *ngIf="email.errors | equalError:'required'">Không được để trống</span>
+                          <span *ngIf="email.errors | equalError:'email'">Email không hợp lệ</span>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 p-l-none p-r-none">
+                <div class="list-group-item" *ngIf="!isLoggedIn || fullName.value==''">
+                  <div class="row">
+                    <div class="col-lg-12 label-name">Số điện thoại</div>
+                    <div class="col-lg-12">
+                      <mat-form-field [floatLabel]="'never'">
+                        <input type="text" matInput placeholder="Nhập số điện thoại" [formControl]="phone" />
+                        <mat-error *ngIf="phone.dirty">
+                          <span *ngIf="phone.errors | equalError:'phone'">Số điện thoại không hợp lệ</span>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="{{!isLoggedIn || fullName.value=='' ? 'col-lg-6' : 'col-lg-12'}} p-l-none p-r-none">
+                <div class="list-group-item z-index-20" *ngIf="showTypes">
+                  <div class="row type-ticket">
+                    <div class="col-lg-12 label-name">Phân loại:</div>
+                    <div class="col-lg-12 pointer" dropdown>
+                      <div class="pointer dropdown-toggle line-custom" dropdownToggle>
+                        {{type.value}}
+                        <span class="position-absolute r-10">
+                          <img cdn-src="assets/images/more/icon-arrow-down.svg" class="m-b-none" alt="img">
+                        </span>
+                      </div>
+                      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                        <li role="menuitem" *ngFor="let type of types"><a (click)="onSelectType(type)" class="dropdown-item">{{type}}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 p-l-none p-r-none">
+                <div class="list-group-item">
+                  <div class="row">
+                    <div class="col-lg-12 label-name">Nội dung:</div>
+                    <div class="col-lg-12">
+                      <mat-form-field [floatLabel]="'never'">
+                        <textarea type="text" expand-height matInput rows="1" placeholder="* Nhập nội dung" [formControl]="content">
+                            </textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="send-request m-t-40">
+          <button type="submit" class="btn btn-main-v2 font-medium p-10 w-200" [disabled]="form.invalid" (click)="onSubmit(form.value)">
+            Gửi yêu cầu
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-success-request-popup></app-success-request-popup>

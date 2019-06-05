@@ -1,0 +1,21 @@
+<!--component html goes here -->
+<div bsModal #popup="bs-modal" class="modal fade success-request-popup" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12 text-right"><a (click)="hide()"><img class="m-b-none pointer" cdn-src="assets/images/more/icon-close.svg" alt="img"></a></div>
+          <div class="col-lg-12 text-center">
+            <img cdn-src="assets/images/more/icon-thanks.svg" alt="img" />
+          </div>
+          <div class="col-lg-12 text-center thanks-text m-t-25">
+            Cảm ơn bạn về những đóng góp!
+          </div>
+          <div class="col-lg-12 text-center m-b-15 thanks-text">
+            Xtrip sẽ phản hồi yêu cầu của bạn trong thời gian sớm nhất
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

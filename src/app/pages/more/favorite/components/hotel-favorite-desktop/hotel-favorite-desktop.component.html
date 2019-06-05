@@ -1,0 +1,61 @@
+<!--component html goes here -->
+<div class="hotel-favorite-desktop" 
+  infinite-scroll
+  [infiniteScrollDistance]="1"
+  [infiniteScrollThrottle]="150"
+  (scrolled)="onScrollDown()">
+  <div class="row animated fadeIn" *ngIf="hotels.length > 0" @list>
+    <div class="col-4 m-t-20 pointer p-r-5" *ngFor="let hotel of hotels; trackBy: trackByFn; let i = index" @item>
+      <div class="hotel-item shadow b-r-10 position-relative">
+        <a (click)="onOpenFavoriteItem(hotel)">
+          <img class="w-full h-img bor-img img-fix"
+               defaultImage="assets/images/no-thumbnail.png"
+               [lazyLoad]="hotel.photo.src | size: 300"
+               [alt]="hotel.name"
+               [title]="hotel.name"
+               onerror="this.src='assets/images/no-thumbnail.png'" />
+        </a>
+        <div class="p-10 h-120">
+          <a (click)="onOpenFavoriteItem(hotel)">
+            <div class="name">
+              {{hotel.name}}
+            </div>
+            <div class="stars m-t-5">
+              <hotel-star [stars]="hotel.stars" [isDesktop]="true"></hotel-star>
+            </div>
+            <div class="reviews-rating position-absolute top-15">
+              <app-reviews-rating [rating]="hotel.rating" [reviews]="hotel.reviews"></app-reviews-rating>
+            </div>
+            <div class="address m-t-8 font-13">
+              {{hotel.address}}
+            </div>
+            <div class="nights position-absolute bottom-28" *ngIf="!!hotel.nights">
+              Giá {{hotel.nights || 2}} đêm
+            </div>
+            <div class="row" *ngIf="!!hotel.sellingPrice&&!!hotel.points">
+              <div class="col-7 p-r-none position-absolute bottom-5">
+                <div class="price text-main">
+                  {{hotel.sellingPrice | currencyMoney: ''}} <span class="text-underline">đ</span>
+                </div>
+              </div>
+              <div class="col-5 p-l-none position-absolute pos-points">
+                <div class="points">
+                  +{{hotel.points | currencyMoney: ''}} điểm
+                </div>
+              </div>
+            </div>
+          </a>
+          <div class="like position-absolute top-10 right-10">
+            <a (click)="onSelectFavorite(hotel, i)">
+              <img class="m-b-none favorite-icon" cdn-src="assets/images/hotel/desktop/like.svg" alt="img" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-t-20" *ngIf="hotels.length === 0">
+    <app-favorite-empty-screen></app-favorite-empty-screen>
+  </div>
+</div>

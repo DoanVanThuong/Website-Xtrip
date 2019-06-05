@@ -1,0 +1,91 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade cod-popup "
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header header">
+        <div class="row">
+          <div class="col-2">
+            <a class="d-block" (click)="hide()">
+              <img class="size-16x16" cdn-src="assets/images/icon/icon-close-green.svg">
+            </a>
+          </div>
+          <div class="col-8 text-center">
+            <div class="font-20 font-black">Thông tin thu hộ</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-wrapper">
+          <div class="row">
+            <div class="col-12">
+              <form class="form form-mobile"
+                    [formGroup]="form"
+                    novalidate>
+                <mat-form-field>
+                  <input matInput
+                         type="text"
+                         placeholder="Họ & tên:"
+                         [formControl]="FullName"
+                         formControlName="FullName">
+                  <mat-error class="error" *ngIf="!FullName.valid && FullName.dirty">
+                    <span>Vui lòng nhập họ tên</span>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="number"
+                         matInput
+                         placeholder="Số điện thoại"
+                         [formControl]="MobileNumber"/>
+                  <mat-error *ngIf="!MobileNumber.valid && MobileNumber.dirty">
+                    <span>Vui lòng nhập số điện thoại</span>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text"
+                         matInput
+                         placeholder="Địa chỉ thu hộ"
+                         [formControl]="Address"/>
+                  <mat-error class="error" *ngIf="!Address.valid && Address.dirty">
+                    <span>Vui lòng nhập địa chỉ</span>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text"
+                         matInput
+                         placeholder="Lời nhắn:"
+                         [formControl]="Note"
+                         formControlName="Note">
+                </mat-form-field>
+              </form>
+            </div>
+            <div class="col-12  m-t-30">
+              <div class="note-wrapper">
+                <div class="note-title font-15 font-bold">Lưu ý:</div>
+                <ul>
+                  <li>Nhân viên thu hộ sẽ gọi cho bạn trước khi đến.</li>
+                  <li>Bạn sẽ nhận hoá đơn thu hộ (có mộc đỏ) ngay sau khi nhân viên thu tiền.</li>
+                  <li>Bạn sẽ nhận email chứa mã đặt vé, phòng hoặc tour trong vòng 3-6 tiếng kể từ lúc nhân viên thu
+                    tiền.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- /wrapper -->
+        </div>
+      </div>
+      <!-- /modal body -->
+      <div class="modal-footer">
+        <button class="btn btn-main-v2 btn-block"
+                type="button"
+                (click)="onSubmit($event)"
+                [disabled]="!form.valid">
+          Thanh toán
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

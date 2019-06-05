@@ -1,0 +1,83 @@
+<div class="combo-wp" *ngIf="!!data">
+  <accordion>
+    <accordion-group panelClass="panel-desktop" *ngFor="let item of data">
+      <div class="pointer heading" accordion-heading>
+        <div class="title-combo float-left" [class.mx-w-250]="isMobile" [class.mx-w-80-pc]="isDesktop">
+          {{item.title}}
+        </div>
+        <span class="float-right">
+          <div class="icon-collapse active">
+            <i class="fa fa-caret-up " aria-hidden="true"></i>
+          </div>
+          <div class="icon-expand unactive">
+            <i class="fa fa-caret-down " aria-hidden="true"></i>
+          </div>
+        </span>
+        <div class="heading-content clearfix" [class.isShowButton]="isShowButton">
+          <div class="float-left" *ngIf="isShowButton">
+            <button class="btn btn-main-v2 btn-select-combo" (click)="onSelectCombo(item)">Chọn</button>
+          </div>
+          <div class="price" [ngClass]="isShowButton ? 'float-right' : ''">
+            <div *ngIf="!isShowButton" class="d-flex">
+              <div class="selling-price clearfix m-r-15">{{item.sellingPrice | currencyMoney: ''}}
+                <span class="text-underline ">đ</span>
+                <span class=""> / người</span>
+              </div>
+              <div class="text-line-through original-price" *ngIf="item.originalPrice !== item.sellingPrice">{{item.originalPrice
+                | currencyMoney: ''}}
+                <span class="text-underline ">đ</span>
+              </div>
+            </div>
+
+            <div *ngIf="isShowButton">
+              <div class="text-line-through original-price"  *ngIf="item.originalPrice !== item.sellingPrice">{{item.originalPrice
+                | currencyMoney: ''}}
+                <span class="text-underline ">đ</span>
+              </div>
+              <div class="selling-price clearfix" [class.m-t-10]="item.originalPrice === item.sellingPrice">{{item.sellingPrice | currencyMoney: ''}}
+                <span class="text-underline ">đ</span>
+                <span class=""> / người</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="description" [innerHTML]="item.description | newline">
+        </div>
+        <div class="font-bold m-t-10 m-b-10">Lưu ý: </div>
+        <list-note [data]="item.notes"></list-note>
+
+        <div class="d-flex m-t-20" *ngIf="!isShowButton">
+          <div class="selling-price m-r-15" >
+            {{item.sellingPrice | currencyMoney: ''}}
+            <span class="text-underline ">đ</span>
+            <span class=""> / người</span>
+          </div>
+          <div class="text-line-through original-pricex" *ngIf="item.originalPrice !== item.sellingPrice">
+            {{item.originalPrice | currencyMoney: ''}}
+            <span class="text-underline ">đ</span>
+            <span class=""> / người</span>
+          </div>
+        </div>
+
+        <div *ngIf="isShowButton" class="m-t-20 m-b-20 clearfix">
+          <div class="float-left">
+            <button class="btn btn-main-v2 btn-select-combo" (click)="onSelectCombo(item)">Chọn</button>
+          </div>
+          <div class="price" class="float-right">
+            <div class="text-line-through original-price" *ngIf="item.originalPrice !== item.sellingPrice">{{item.originalPrice
+              | currencyMoney: ''}}
+              <span class="text-underline ">đ</span>
+              <span class=""> / người</span>
+            </div>
+            <div class="selling-price clearfix" [class.m-t-10]="item.originalPrice === item.sellingPrice">{{item.sellingPrice | currencyMoney: ''}}
+              <span class="text-underline ">đ</span>
+              <span class=""> / người</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </accordion-group>
+  </accordion>
+</div>

@@ -1,0 +1,182 @@
+<header class="header header-desktop">
+
+  <div class="header-heading" *ngIf="!isPayment">
+    <app-top-header></app-top-header>
+  </div>
+
+  <!-- main menu -->
+  <nav class="navbar navbar-expand-xl align-items-center justify-content-between">
+    <div class="navbar-brand d-flex align-items-center"
+         [class.mr-auto]="!isPayment"
+         [ngSwitch]="isVMTravel">
+      <button class="navbar-toggler"
+              type="button"
+              [class.active]="!isCollapsed"
+              (click)="isCollapsed = !isCollapsed"
+              [attr.aria-expanded]="!isCollapsed"
+              aria-controls="navbarCollapse">
+        <img class="img-fix size-32x32 bottom"
+             src="assets/images/icon/icon-close-black-big.svg"
+             alt="icon"/>
+        <img class="img-fix size-32x32 top"
+             src="assets/images/icon/icon-navbar.svg"
+             alt="icon"/>
+      </button>
+      <a [routerLink]="['/']" class="logo" title="Vietmap Travel"
+         *ngSwitchCase="true">
+        <img class="mx-w-230 w-full"
+             cdn-src="assets/images/logo-by-xtrip.png" alt="logo"/>
+      </a>
+      <a [routerLink]="['/']" class="logo" title="Xtrip"
+         *ngSwitchDefault>
+        <img class="mx-w-230 w-full"
+             cdn-src="assets/images/logo-by-vmtravel.png" alt="logo"/>
+      </a>
+    </div>
+
+    <div class="navbar-menu navbar-collapse"
+         id="navbarCollapse"
+         [collapse]="isCollapsed">
+      <ul class="navbar-nav flex-row" *ngIf="!isPayment">
+        <li class="nav-item"
+            *ngFor="let item of links; trackBy: trackByFn">
+          <a class="d-block pointer"
+             [title]="item.label"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}"
+             [routerLink]="[item.url]">
+            <img [alt]="item.label"
+                 class="size-32x32 unactive"
+                 cdn-src="assets/images/icon/{{ item.icon }}"
+                 [alt]="item.label"/>
+            <img [alt]="item.label"
+                 class="size-32x32 active"
+                 cdn-src="assets/images/icon/{{ item.iconActive }}"
+                 [alt]="item.label"/>
+            <div class="nav-text">
+              {{ item.label }}
+            </div>
+          </a>
+        </li>
+
+      </ul>
+
+      <div class="d-flex container justify-content-center" *ngIf="isPayment">
+        <div class="d-flex" *ngFor="let stepItem of steps; trackBy: trackByFn; let i = index">
+          <div class="{{step >= stepItem.code ? 'text-main' : 'title-main'}} m-r-15">
+            <div class="font-16 font-medium">{{stepItem.step}}</div>
+            <div class="font-14 {{stepItem.code > step ? 'title-sub' : ''}}">{{stepItem.description}}</div>
+          </div>
+          <div class="m-r-15" *ngIf="i < steps.length - 1">
+            <img class="m-b-none m-t-30"
+                 cdn-src="assets/images/hotel/desktop/arrow-{{step > stepItem.code ? 'orange' : 'gray'}}.svg"
+                 alt="img"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <div class="mn-w-200" *ngIf="!isAuthentication">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <div class="">Hotline hỗ trợ</div>
+          <div class="">
+            <a class="pointer font-25 text-green font-bold" href="tel:{{ CAPP.HOTLINE }}">
+              <img class="m-b-none m-t-n-3 size-28x28"
+                   cdn-src="assets/images/icon/icon-call-green.svg"
+                   alt="icon"/>
+              {{ CAPP.HOTLINE }}
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center"
+           *ngIf="isAuthentication">
+
+        <app-notification-desktop *ngIf="isLoggedIn"></app-notification-desktop>
+
+        <div class="sign-in mn-w-150"
+             *ngIf="!isLoggedIn">
+          <a class="pointer d-flex align-items-center justify-content-center"
+             (click)="onOpenSignInPopup()"
+             title="Đăng ký / Đăng nhập">
+            <img class="size-40x40 img-circle m-r-10"
+                 alt="user"
+                 cdn-src="assets/images/avatar-thumbnail.svg"/>
+            <div>
+              <div>Đặng nhập</div>
+              <div class="font-14 text-light-gray">Tạo tài khoản</div>
+            </div>
+
+          </a>
+        </div>
+        <div class="signed-in" *ngIf="isLoggedIn">
+          <div class="dropdown profile-dropdown" dropdown>
+            <a class="pointer" dropdownToggle>
+              <img class="size-40x40 img-circle"
+                   defaultImage="assets/images/avatar-thumbnail.svg"
+                   [lazyLoad]="profile.avatar"
+                   title="profile"
+                   alt="profile"
+                   onerror="this.src='assets/images/avatar-thumbnail.svg'"/>
+            </a>
+            <ul class="dropdown-menu animated fadeIn" *dropdownMenu role="menu">
+              <li>Tài khoản</li>
+              <li class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="pointer" [routerLink]="['/account/information']">
+                  <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-user-green.svg" alt="icon"/>
+                  <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-user-white.svg" alt="icon"/>
+                  Quản lý tài khoản
+                </a>
+              </li>
+              <li class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="pointer" [routerLink]="['/my-booking']">
+                  <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-booking-green.svg"
+                       alt="icon"/>
+                  <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-booking-white.svg" alt="icon"/>
+                  Đặt chỗ của tôi
+                </a>
+              </li>
+              <li class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="pointer" [routerLink]="['/more/favourite']">
+                  <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-favorite-green.svg"
+                       alt="icon"/>
+                  <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-favorite-white.svg"
+                       alt="icon"/>
+                  Danh sách yêu thích
+                </a>
+              </li>
+              <li class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="pointer" [routerLink]="['/account/reward']">
+                  <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-point-green.svg" alt="icon"/>
+                  <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-point-white.svg" alt="icon"/>
+                  Điểm thưởng của tôi
+                </a>
+              </li>
+              <li class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="pointer" [routerLink]="['/account/passenger']">
+                  <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-user-group-green.svg"
+                       alt="icon"/>
+                  <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-user-group-white.svg"
+                       alt="icon"/>
+                  Thông tin hành khách
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a class="pointer" (click)="onSignOut()">
+                  <img class="m-t-n-3 normal" cdn-src="assets/images/icon/icon-signout-green.svg"
+                       alt="icon"/>
+                  <img class="m-t-n-3 hover" cdn-src="assets/images/icon/icon-signout-white.svg" alt="icon"/>
+                  Đăng xuất
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+<sign-in-popup (callback)="onCallback($event)"></sign-in-popup>

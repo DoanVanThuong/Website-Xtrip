@@ -1,0 +1,195 @@
+<div class="product-detail-page bg-white">
+  <div class="loading-wrapper" *ngIf="isLoading">
+    <loading [show]="isLoading"></loading>
+  </div>
+  <div class="product-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-2">
+          <a class="d-block" (click)="back()">
+            <img class="size-16x16 m-b-none" cdn-src="assets/images/icon-back.png" alt="icon"/>
+          </a>
+        </div>
+        <div class="col-10 p-none">
+          <div class="product-name text-truncate">{{product.name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="scroll-to shadow">
+    <div class="quick-menu-wp">
+      <ul class="list-unstyled list-inline">
+        <li *ngFor="let item of scrollToItem; trackBy: trackByFn" class="item font-15 font-medium pointer"
+            [class.active]="item.value === selectedScrollTo" (click)="triggerScrollTo(item.value)">
+          {{item.display}}
+        </li>
+      </ul>
+    </div>
+  </section>
+  <div class="main-body">
+    <section class="image-header" [id]="scrollToItem[0].value">
+      <owl-carousel #owlElement
+                    [items]="product.photos"
+                    [carouselClasses]="['owl-theme', 'owl-dots-black', 'sliding']"
+                    [options]="carouselOptions">
+        <div class="row" *ngFor="let item of product.photos">
+          <div class="col-12">
+            <div class="position-relative">
+              <div class="slider-item">
+                <img class="m-b-0 b-r-img-10 pointer img-fix"
+                     defaultImage="assets/images/no-thumbnail.png"
+                     [lazyLoad]="item.src | size:400"
+                     [offset]="80"
+                     [alt]="item.name"
+                     [title]="item.name"
+                     onerror="this.src='assets/images/no-thumbnail.png'"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </owl-carousel>
+    </section>
+    <section class="description">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="name">{{product.name}}</div>
+            <ul class="list-unstyled list-descrption-info m-t-5">
+              <li>
+                <span class="font-medium">Số khách: </span>
+                <span class="info">ít nhất {{product.minPax}} khách, tối đa {{product.maxPax}} khách</span>
+              </li>
+              <li>
+                <span class="font-medium">Thời lượng: </span>
+                <span class="info">{{returnDuration(product.durationDays, product.durationHours,
+                                    product.durationMinutes) }}</span>
+              </li>
+              <li>
+                <span class="font-medium">Giờ mở cửa: </span>
+                <span class="info">{{!!product.openingHours ? product.openingHours : 'Không có thông tin'}}</span>
+              </li>
+            </ul>
+
+            <ul class="list-unstyled list-properties m-t-20">
+              <li *ngFor="let item of product.properties">
+                <img class="size-24x24 m-b-none m-t-n-3 img-fix"
+                     defaultImage="assets/images/no-thumbnail.png"
+                     [lazyLoad]="item.icon"
+                     [offset]="80"
+                     [alt]="item.name"
+                     [title]="item.name"
+                     onerror="this.src='assets/images/no-thumbnail.png'"/>
+                <span class="font-medium">{{item.name}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /description -->
+    <section class="detail-content" [id]="scrollToItem[1].value">
+      <div class="container">
+        <div class="row m-t-15">
+          <div class="col-12">
+            <div class="title">Thông tin Combo</div>
+            <app-combo-mobile [data]="options" [isShowButton]="isShowButtonCombo"></app-combo-mobile>
+          </div>
+        </div>
+        <div class="row highlight-wp m-t-15" [id]="scrollToItem[2].value">
+          <div class="col-12">
+            <div class="title">Điểm nổi bật</div>
+            <list-note [data]="product.highlights"></list-note>
+          </div>
+        </div>
+        <div class="row info-services-wp m-t-15" [id]="scrollToItem[3].value">
+          <div class="col-12">
+            <div class="title">Thông tin dịch vụ</div>
+            <div class="inlude-wp">
+              <div class="sub-title">Bao gồm:</div>
+              <list-note [data]="product.priceIncludes"></list-note>
+            </div>
+            <div class="exclude-wp" *ngIf="product.priceExcludes">
+              <div class="sub-title">Không bao gồm:</div>
+              <list-note [data]="product.priceExcludes"></list-note>
+            </div>
+            <div class="note-wp">
+              <div class="sub-title">Lưu ý:</div>
+              <div [innerHTML]="product.notes | newline"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row m-t-15" *ngIf="!!product.itinerarys">
+          <div class="col-12">
+            <div class="title">Lịch trình</div>
+            <div [innerHTML]="product.itinerarys | newline" class="text-justify"></div>
+          </div>
+        </div>
+        <div class="row m-t-15" [id]="scrollToItem[4].value">
+          <div class="col-12">
+            <div class="title">Mô tả</div>
+            <div [innerHTML]="product.description | newline" class="text-justify"></div>
+          </div>
+        </div>
+        <div class="row guide-wp m-t-15" [id]="scrollToItem[5].value">
+          <div class="col-12">
+            <div class="title">Hướng dẫn sử dụng</div>
+            <list-note [data]="product.guides"></list-note>
+          </div>
+        </div>
+        <div class="row mobile-map m-t-10">
+          <div class="col-12">
+            <div class="map">
+              <app-map [data]="product"></app-map>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="fixed-bottom footer  shadow bg-white">
+    <div class="container">
+      <div class="row">
+        <div class="w-full">
+          <div class="footer-detail-product d-flex justify-content-between align-items-center p-l-15">
+            <div class="price-info">
+              <div>Giá từ</div>
+              <div class="price">
+                {{ product.sellingPrice | currencyMoney: '' }}
+                <span class="text-underline">đ</span>
+              </div>
+            </div>
+            <div class="btn-footer">
+              <button class="btn btn-main font-black font-16"
+                      (click)="onShowDatePicker()">
+                Chọn ngày
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="icon-phone-fixed shadow text-white d-flex justify-content-center align-items-center">
+    <a [href]="'tel:' + product.feedbackContact.hotline">
+      <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="icon-chat-fixed bg-white shadow d-flex justify-content-center align-items-center">
+    <a (click)="openPopupChat()">
+      <img cdn-src="assets/images/icon/icon-chat.svg" alt="">
+      <div>Chat ngay</div>
+    </a>
+  </div>
+</div>
+
+<!-- social media -->
+<social-sharing *ngIf="!!product.name"
+                #SocialSharing
+                [title]="product.name"
+                [image]="product.photo.src"
+                [description]="product.description"></social-sharing>
+
+<date-selector-popup [options]="dateOptions" [date]="selectedDate" [showButton]="false"
+                     (submit)="onSelectDate($event)" [available]="tourDatesAvailable"></date-selector-popup>
+
+<chat-info-popup [contact]="product.feedbackContact"></chat-info-popup>

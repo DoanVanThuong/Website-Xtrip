@@ -1,0 +1,76 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.modal {
+  &.payment-change-popup {
+
+    .modal-dialog {
+      max-width: 420px;
+
+      @media (max-width: 575px) {
+        max-width: 300px;
+      }
+
+      .modal-content {
+        .border-radius(10px);
+
+        .modal-header {
+
+          @media (min-width: 992px) {
+            background-color: @gray-17;
+            padding: 20px;
+            .border-radiuses(10px, 0, 0, 10px);
+          }
+
+          .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: @gray-1;
+
+            .close {
+              line-height: 1;
+              padding: 20px;
+            }
+          }
+
+          @media (max-width: 575px) {
+            padding-bottom: 0;
+            .modal-title {
+              text-align: center;
+              color: @black;
+
+              .close {
+                display: none;
+              }
+            }
+          }
+        }
+
+        .modal-body {
+          @media (max-width: 575px) {
+            padding: 10px 20px;
+          }
+        }
+
+        .modal-footer {
+          padding: 0 20px 20px 20px;
+
+          .btn {
+            .border-radius(25px);
+            font-size: 16px;
+            font-weight: 700;
+            min-width: 160px;
+          }
+
+          @media (max-width: 575px) {
+            .btn {
+              font-size: 15px;
+              font-weight: 500;
+              min-width: 120px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

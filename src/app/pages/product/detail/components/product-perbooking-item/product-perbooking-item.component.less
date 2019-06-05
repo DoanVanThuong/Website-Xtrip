@@ -1,0 +1,46 @@
+@import '_variables.less';
+
+.product-perbooking-item-wp{
+    // padding: 0px 10px;
+    &.list-group{
+        .list-group-item{
+            background: transparent;
+            select{
+                border-radius:10px;
+            }
+            &.list-item-input-5{
+                padding:5px 10px;
+            }
+        }
+    }
+    .form-control {
+        &:focus {
+            border-color: @gray-14;
+            box-shadow: none;
+        }
+    }
+    select {
+        padding-top: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        &:active{
+            background: transparent;
+        }
+    }
+    .quote-text {
+        position: absolute;
+        color: @orange-2;
+        font-size: 12px;
+        bottom: -2px;
+        left: 15px;
+    }
+    .selling-price {
+        color: @orange-2;
+        font-size: 13px;
+        font-weight: 500;
+        >span {
+            color: @orange-2 !important;
+            font-weight: 500;
+        }
+    }
+}

@@ -1,0 +1,35 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade payment-change-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <span class="" [innerHTML]="title"></span>
+          <a class="pointer close pull-right" *ngIf="isClose" (click)="hide()">
+            <img class="size-16x16" cdn-src="assets/images/icon/icon-close.svg" alt="icon"/>
+          </a>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <div class="" [innerHTML]="message"></div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-6 text-right">
+            <button class="btn btn-main-v2"
+                    (click)="onAccept()">{{ btnAcceptLabel || 'Đồng ý' }}
+            </button>
+          </div>
+          <div class="col-6 text-left">
+            <button class="btn btn-main-outline"
+                    (click)="onCancel()">{{ btnCancelLabel || 'Hủy' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

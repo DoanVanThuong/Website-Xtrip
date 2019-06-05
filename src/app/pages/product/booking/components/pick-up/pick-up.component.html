@@ -1,0 +1,54 @@
+<div class="pick-up-info pick-up-info-mobile {{ class }}" *ngIf="!!combo && isMobile">
+  <h4 class="title">Điểm đón/ điểm hẹn</h4>
+  <div class="pick-up-description" *ngIf="!!combo.meetingLocation">
+    <div class="" [innerHTML]="combo.meetingLocation | newline"></div>
+  </div>
+  <div class="m-t-10">
+    <ul>
+      <li *ngIf="!!combo.meetingAddress">Địa chỉ: {{ combo.meetingAddress }}</li>
+      <li *ngIf="!!combo.meetingTime">Thời gian: {{ combo.meetingTime }}</li>
+    </ul>
+  </div>
+  <div class="m-t-10">
+    <div class="form form-desktop">
+      <div class="form-group">
+        <label class="control-label text-main font-medium font-12">Lời nhắn (không bắt buộc)</label>
+        <input type="text"
+               class="form-control underline font-normal"
+               placeholder="Để lại lời nhắn cho Xtrip"
+               [(ngModel)]="note" (change)="onNoteChange($event)"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pick-up-info pick-up-info-desktop {{ class }}" *ngIf="!!combo && isDesktop">
+  <h4 class="title">Điểm đón/ điểm hẹn</h4>
+  <div class="panel panel-desktop">
+    <div class="panel-body">
+      <div class="pick-up-description" *ngIf="!!combo.meetingLocation">
+        <div class="" [innerHTML]="combo.meetingLocation | newline"></div>
+      </div>
+      <div class="m-t-10">
+        <ul class="list-unstyled list-meeting">
+          <li *ngIf="!!combo.meetingAddress">Địa chỉ: {{ combo.meetingAddress }}</li>
+          <li *ngIf="!!combo.meetingTime">Thời gian: {{ combo.meetingTime }}</li>
+        </ul>
+      </div>
+      <div class="row m-t-10">
+        <div class="col-12 col-md-8">
+          <div class="form form-desktop">
+            <div class="form-group">
+              <label class="control-label font-medium font-13">Lời nhắn (không bắt buộc)</label>
+              <input type="text"
+                     class="form-control underline font-normal"
+                     placeholder="Để lại lời nhắn cho Xtrip"
+                     [(ngModel)]="note"
+                     (change)="onNoteChange($event)"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

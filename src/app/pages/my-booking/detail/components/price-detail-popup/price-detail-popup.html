@@ -1,0 +1,32 @@
+<div bsModal #popup="bs-modal" class="modal fade price-detail-popup" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-centered" *ngIf="!!data">
+    <div class="modal-content border-10">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ heading }}
+          <a class="pull-right pointer" (click)="hide()">
+            <img alt="close" class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-close-gray.svg">
+          </a>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <ul class="detail-item">
+          <li *ngFor="let item of data.priceSummary.detailItems">
+            <div class="row p-5-0">
+              <div class="col-6 font-medium">{{item.title}}</div>
+              <div class="col-6 text-right">{{item.price | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+            </div>
+          </li>
+        </ul>
+        <ul class="m-t-10">
+          <li *ngFor="let item of data.priceSummary.totalItems">
+            <div class="row p-5-0">
+              <div class="col-6 font-weight-bold">{{item.title}}</div>
+              <div class="col-6 text-right text-main font-weight-bold">{{item.price | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+@media only screen and (max-width: 480px) {
+  .main-body .page-wrapper {
+    padding: 0px !important;
+  }
+}
+
+.header-choosen1 {
+  background-color: #00bf8f;
+  color: #99E5D2;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  border-right: #00bf8f solid 1px;
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+.header-choosen1_active {
+  background-color: #00bf8f;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  border-bottom: #FF9000 solid 3px;
+  border-right: #00bf8f solid 1px;
+  /* position:relative;animation:animatetop 0.4s */
+}
+
+.header-choosen2 {
+  background-color: #00bf8f;
+  color: #99E5D2;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  border-left: #00bf8f solid 1px;
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+.header-choosen2_active {
+  background-color: #00bf8f;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  border-bottom: #FF9000 solid 3px;
+  border-left: #00bf8f solid 1px;
+  /* position:relative;animation:animatetop 0.4s */
+}
+
+.widget-statstic-card span {
+  background-color: white;
+}
+
+.header-popup {
+  margin: -5% -5% 0 -5%;
+  padding: 10px
+}
+
+.navigate-icon {
+  color: white;
+  text-align: center
+}
+
+.rowicon {
+  padding-left: 10px;
+  padding-top: 10px;
+
+}
+
+.rowicon img {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px
+}
+
+.rowicon span {
+  margin-left: 20px;
+  color: #000000;
+  font-size: 15px;
+}
+
+.rowicon a {
+  margin-left: 0px;
+  color: #000000;
+  font-size: 15px;
+}
+
+
+
+.gui {
+  color: #FFFFFF;
+  border-radius: 5px;
+  background-color: #F26522;
+  width: 110px;
+  height: 40px;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  display: inline-block
+}
+
+.bq {
+
+  color: #F26522;
+  font-size: 16px;
+  width: 50%;
+  text-align: center;
+  height: 50px;
+  padding: 15px;
+}
+
+.writefeedback {
+  display: flex
+}
+
+.custompopuploadmore {
+  background-color: #F6F7FB;
+  overflow-y: auto;
+  height: calc(100vh - 70px);
+}

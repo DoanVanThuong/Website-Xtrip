@@ -1,0 +1,44 @@
+<!-- for mobile -->
+<div class="booked-product booked-product-mobile p-10" *ngIf="isMobile">
+  <div infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <loading [show]="isLoading"></loading>
+
+    <app-booking-empty-screen [show]="isLoading === false && !products.length"
+                              [image]="'assets/images/booked-tour-empty.png'"
+                              [title]="'Không có đặt chỗ'"
+                              [description]="'Mọi chỗ bạn đặt sẽ được hiển thị tại đây.'"></app-booking-empty-screen>
+
+    <div *ngFor="let product of products; trackBy: trackByFn">
+      <product-booking-detail-item [product]="product"></product-booking-detail-item>
+
+    </div>
+  </div>
+</div>
+
+<!-- for desktop -->
+<div class="booked-product booked-product-desktop" *ngIf="isDesktop">
+  <div infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <booking-empty [show]="!isLoading && !products.length"
+                   [heading]="'Không có đặt chỗ'"
+                   [description]="'Mọi chỗ bạn đặt sẽ được hiển thị tại đây.'"></booking-empty>
+
+    <div *ngIf="products.length">
+      <div *ngFor="let product of products; trackBy: trackByFn">
+        <product-booking-detail-item [product]="product"
+                                     (select)="openDetail(product)"></product-booking-detail-item>
+      </div>
+    </div>
+
+    <loading [show]="isLoading"
+             [title]="'Đang tải dữ liệu'"
+             [description]="'Vui lòng đợi trong giây lát'"></loading>
+  </div>
+</div>

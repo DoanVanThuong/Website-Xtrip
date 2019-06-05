@@ -1,0 +1,59 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.modal {
+  &.booking-comment-popup {
+    .modal-dialog {
+      max-width: 440px;
+
+      .modal-content {
+        .border-radius(10px);
+        .modal-header {
+          padding: 15px 20px;
+          border-radius: inherit;
+          background-color: @gray-17;
+
+          .modal-title {
+            margin: 0;
+            font-weight: 700;
+          }
+        }
+
+        .modal-body {
+          color: @gray-2;
+          padding: 20px;
+          .rating-list {
+            margin-top: 10px;
+
+            > li {
+              font-size: 15px;
+              padding: 5px 0;
+              .br {
+                &.br-default {
+                  margin: 0;
+                  .br-units {
+                    > .br-unit {
+                      margin-right: 4px;
+                      font-size: 26px;
+                      margin-top: -10px;
+                      width: 22px;
+                      height: auto;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .form.form-desktop {
+      .form-group {
+        .form-control {
+          color: @black
+        }
+      }
+    }
+  }
+}

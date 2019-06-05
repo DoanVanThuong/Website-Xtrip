@@ -1,0 +1,104 @@
+@import "_variables.less";
+.hotel-detail-item-desktop {
+  .w-160 {
+    width: 160px;
+  }
+  .h-180 {
+    height: 180px;
+  }
+  .bg-stars {
+    background-image: linear-gradient(to right, @green-19, @green-20);
+    padding: 1px 5px;
+    color: @white;
+    border-radius: 3px;
+    margin-right: 4px;
+  }
+  .img-border {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .address {
+    color: @gray-1;
+    font-size: 13px;
+    margin-top: 4px;
+    &:hover {
+      color: @green-2;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+  .grid-price {
+    font-size: 20px;
+    color: @green-2;
+  }
+  .preferServies {
+    .bg-prefer-item {
+      background-color: @green-21;
+      padding: 1px 4px;
+      border-radius: 3px;
+      color: white;
+      font-size: 13px;
+    }
+  }
+  .coupon {
+    font-size: 14px;
+    .coupon-item {
+      background-color: @green-25;
+      border: 1px dashed @green-2;
+      padding: 2px 4px;
+    }
+  }
+  .line-break {
+    border-bottom: 1px solid @gray-3;
+    padding-bottom: 20px;
+    .mn-h-120 {
+      min-height: 120px;
+    }
+    .info-area {
+      width: 60%;
+      .name {
+        font-size: 16px;
+      }
+      .sold-out-small-text {
+        color: @red-2;
+        font-size: 13px;
+        background-color: @red-8;
+        margin-top: 16px;
+        padding: 5px 10px;
+        border-radius: 3px;
+      }
+    }
+    .price-area {
+      width: 40%;
+      text-align: right;
+      .prices {
+        background-image: linear-gradient(to right, @green-19, @green-20);
+        color: @white;
+        border-radius: 5px;
+        font-size: 20px;
+        padding: 6px 12px;
+      }
+      .nights {
+        font-size: 13px;
+        color: @gray-23;
+        margin-top: 4px;
+      }
+      .multi-book {
+        color: @red-2;
+        font-size: 14px;
+        background-color: @red-8;
+        padding: 5px 10px;
+        border-radius: 3px;
+      }
+    }
+    .sold-out {
+      width: 40%;
+      text-align: center;
+      .sold-text {
+        color: @red-2;
+        margin-top: 8px;
+      }
+    }
+  }
+  
+}

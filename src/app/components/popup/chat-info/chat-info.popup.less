@@ -1,0 +1,32 @@
+@import '_variables.less';
+.popup-chat {
+    &.show {
+        overflow-y: hidden !important;
+    }
+    .modal-dialog {
+        &.fullscreen {
+            padding-top: calc(100vh - 200px);
+        }
+    }
+    .modal-header {
+        background: @gray-17;
+    }
+    .modal-content{
+        .modal-body {
+            -webkit-box-flex: 0;
+            -ms-flex: 0;
+            flex: 0;
+            overflow: initial;
+            .list-chat {
+                li {
+                    padding: 10px 0px;
+                    border-bottom: 1px solid @gray-10;
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+    }
+    
+}

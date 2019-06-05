@@ -1,0 +1,427 @@
+<!--component html goes here -->
+<div class="faq-index-page">
+
+  <app-faq-banner></app-faq-banner>
+
+  <div class="main-body p-t-20">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <app-faq-navigator [params]="params" (onChangeGuide)="onChangeGuide($event)"
+                             (onChangeFaq)="onChangeFaq($event)"></app-faq-navigator>
+        </div>
+        <div class="col-lg-8 p-l-5">
+          <div class="title">
+            {{title}}
+          </div>
+          <div class="guideline m-t-10">
+            <div class="container">
+              <div class="plane-ticket-guide" *ngIf="selectedGuide.value === 'guide-flight'">
+                <div class="row justify-content-center">
+                  <div class="col-12 col-md-10">
+                    <div class="row step step-1">
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInLeft">
+                          <img src="./assets/images/guide/plane-ticket/1.png"/>
+                        </div>
+                        <div class="hint hint-1 animated zoomIn">
+                          <img src="./assets/images/guide/plane-ticket/1-hint.svg"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInRight">
+                          <h4 class="title">
+                            <strong>1.Tìm chuyến bay</strong>
+                          </h4>
+                          <div class="content">
+                            Nhập thông tin theo nhu cầu tìm kiếm của bạn vào các ô trống và click vào nút “Tìm
+                            chuyến bay”
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-2">
+                      <div class="col-sm-6 intro ">
+                        <div class="animated fadeInLeft">
+                          <h4 class="title">
+                            <strong>2. Danh sách chuyến bay phù hợp</strong>
+                          </h4>
+                          <div class="content">
+                            Hiển thị danh sách các chuyến bay (hãng, lịch bay, giá vé…) theo nhu cầu tìm kiếm
+                            của bạn.
+                            Click
+                            để lựa chọn chặng bay phù hợp nhất
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInRight">
+                          <img src="./assets/images/guide/plane-ticket/2.png"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-3">
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInLeft">
+                          <img src="./assets/images/guide/plane-ticket/3.png"/>
+                        </div>
+                        <div class="hint hint-3 animated zoomIn">
+                          <img src="./assets/images/guide/plane-ticket/3-hint.svg"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInRight">
+                          <h4 class="title">
+                            <strong>3. Thông tin chi tiết chuyến bay</strong>
+                          </h4>
+                          <div class="content">
+                            Xem lại thông tin chi tiết chuyến bay đã chọn bao gồm thông tin hãng bay, thời gian
+                            mỗi chặng
+                            bay, điểm khởi hành và các điểu khoản đi kèm trước khi tiến hành bước Đặt chỗ
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-4">
+                      <div class="col-sm-6 intro ">
+                        <div class="animated fadeInLeft">
+                          <h4 class="title">
+                            <strong>4. Điền thông tin đặt chỗ</strong>
+                          </h4>
+                          <div class="content">
+                            Điền thông tin người liên hệ và thông tin hành khách đặt chỗ cho chuyến bay. Bạn có
+                            thể lựa
+                            chọn
+                            xuất hóa đơn cho doanh nghiệp và sử dụng mã khuyến mãi (nếu có) hoặc điểm tích lũy
+                            để thanh
+                            toán
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInRight">
+                          <img src="./assets/images/guide/plane-ticket/4.png"/>
+                        </div>
+                        <div class="hint hint-4 animated zoomIn">
+                          <img src="./assets/images/guide/plane-ticket/4-hint.svg"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-5">
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInLeft">
+                          <img src="./assets/images/guide/plane-ticket/5.png"/>
+                        </div>
+                        <div class="hint hint-5 animated zoomIn">
+                          <img src="./assets/images/guide/plane-ticket/5-hint.svg"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInRight">
+                          <h4 class="title">
+                            <strong>5. Xem lại & Xác nhận thông tin</strong>
+                          </h4>
+                          <div class="content">
+                            Vui lòng kiểm tra kỹ để xác nhận tất cả thông tin đã đặt vé và click vào mục Thanh
+                            toán để lựa
+                            chọn phương thức thanh toán phù hợp.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-6">
+                      <div class="col-sm-6 intro ">
+                        <div class="animated fadeInLeft">
+                          <h4 class="title">
+                            <strong>6. Chọn phương thức thanh toán</strong>
+                          </h4>
+                          <div class="content">
+                            Lựa chọn phương thức thanh toán tiện lợi nhất cho bạn. Bạn sẽ nhận được trước Mã
+                            đặt chỗ nếu
+                            lựa
+                            chọn phương thức thanh toán tại các điểm của Xtrip hoặc Payoo.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInRight">
+                          <img src="./assets/images/guide/plane-ticket/6.png"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /guild flight -->
+
+              <div class="hotel-guide" *ngIf="selectedGuide.value === 'guide-hotel'">
+                <div class="row justify-content-center">
+                  <div class="col-12 col-md-10">
+                    <div class="row step step-1">
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInLeft">
+                          <img src="./assets/images/guide/hotel/1.png"/>
+                        </div>
+
+                        <div class="hint hint-1 animated zoomIn">
+                          <img src="./assets/images/guide/hotel/1-hint.svg"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInRight">
+                          <h4 class="title">
+                            <strong>1. Tìm khách sạn</strong>
+                          </h4>
+                          <div class="content">
+                            Nhập các thông tin theo nhu cầu đặt khách sạn của bạn và click vào <strong>Tìm
+                            khách
+                            sạn</strong> để bắt đầu tìm kiếm
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-2">
+                      <div class="col-sm-6 intro ">
+                        <div class="animated fadeInLeft">
+                          <h4 class="title">
+                            <strong>2. Chọn khách sạn</strong>
+                          </h4>
+                          <div class="content">
+                            Hiển thị ra tất cả thông tin về khách sạn theo nhu cầu tìm kiếm. Lựa chọn khách sạn
+                            phù hợp để
+                            xem thông tin chi tiết và click vào <strong>Chọn phòng</strong> để xem các tiêu
+                            chuẩn phòng và
+                            tiến hành đặt phòng thích hợp nhất.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInRight">
+                          <img src="./assets/images/guide/hotel/2.png"/>
+                        </div>
+                        <div class="hint hint-2 animated zoomIn">
+                          <img src="./assets/images/guide/hotel/2-hint.svg"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-3">
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInLeft">
+                          <img src="./assets/images/guide/hotel/3.png"/>
+                        </div>
+                        <div class="hint hint-3 animated zoomIn">
+                          <img src="./assets/images/guide/hotel/3-hint.svg"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInRight">
+                          <h4 class="title">
+                            <strong>3. Điền thông tin đặt phòng</strong>
+                          </h4>
+                          <div class="content">
+                            Điền đầy đủ thông tin người liên hệ hoặc người nhận phòng để xác nhận đặt phòng. Có
+                            thể lựa
+                            chọn
+                            sử dụng mã khuyến mãi (nếu có) hoặc điểm thưởng tích lũy để thanh toán.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-4">
+                      <div class="col-sm-6 intro ">
+                        <div class="animated fadeInLeft">
+                          <h4 class="title">
+                            <strong>4. Xem lại và xác nhận thông tin đặt phòng</strong>
+                          </h4>
+                          <div class="content">
+                            Vui lòng kiểm tra để xác nhận lại thông tin đặt phòng trước khi tiến hành bước
+                            Thanh toán ngay
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInRight">
+                          <img src="./assets/images/guide/hotel/4.png"/>
+                        </div>
+                        <div class="hint hint-4 animated zoomIn">
+                          <img src="./assets/images/guide/hotel/4-hint.svg"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-5">
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInLeft">
+                          <img src="./assets/images/guide/hotel/5.png"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInRight">
+                          <h4 class="title">
+                            <strong>5. Lựa chọn phương thức thanh toán</strong>
+                          </h4>
+                          <div class="content">
+                            Lựa chọn phương thức thanh toán tiện lợi nhất cho bạn. Bạn sẽ nhận được trước Mã
+                            đặt chỗ nếu
+                            lựa
+                            chọn phương thức thanh toán tại các điểm của Xtrip hoặc Payoo.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /guide hotel -->
+
+              <div class="tour-guide" *ngIf="selectedGuide.value === 'guide-tour'">
+                <div class="row justify-content-center">
+                  <div class="col-12 col-md-10">
+                    <div class="row step step-1">
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInLeft">
+                          <img src="./assets/images/guide/tour/1.png"/>
+                        </div>
+                        <div class="hint hint-1 animated zoomIn">
+                          <img src="./assets/images/guide/tour/1-hint.svg"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInRight">
+                          <h4 class="title">
+                            <strong>1. Tìm tour</strong>
+                          </h4>
+                          <div class="content">
+                            Click lựa chọn địa điểm bạn muốn tham quan và điểm khởi hành của bạn. Bạn có thể
+                            lựa chọn Tour
+                            cho đoàn riêng (nếu số lượng tham quan từ 15 người) và điền đầy đủ thông tin tìm
+                            tour cho đoàn
+                            của mình.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-2">
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInLeft">
+                          <h4 class="title">
+                            <strong>2. Chọn tour</strong>
+                          </h4>
+                          <div class="content">
+                            Hiển thị danh sách các tour phù hợp với nhu cầu tìm kiếm của bạn. Click để lựa chọn
+                            tour phù
+                            hợp
+                            để xem thông tin chi tiết của tour
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInRight">
+                          <img src="./assets/images/guide/tour/2.png"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-3">
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInLeft">
+                          <img src="./assets/images/guide/tour/3.png"/>
+                        </div>
+                        <div class="hint hint-3 animated zoomIn">
+                          <img src="./assets/images/guide/tour/3-hint.svg"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInRight">
+                          <h4 class="title">
+                            <strong>3. Thông tin chi tiết tour</strong>
+                          </h4>
+                          <div class="content">
+                            Vui lòng xem kĩ thông tin chi tiết của từng tour bao gồm lịch trình, các điều khoản
+                            liên quan,
+                            tiện ích của tour…Click chọn thời gian bạn muốn khởi hành và số lượng hành khách
+                            trước khi
+                            tiến
+                            hành Đặt tour
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-4">
+                      <div class="col-sm-6 intro ">
+                        <div class="animated fadeInLeft">
+                          <h4 class="title">
+                            <strong>4. Thông tin đặt tour</strong>
+                          </h4>
+                          <div class="content">
+                            Cung cấp thông tin người liên hệ và thông tin khách đi tour để tiến hành đặt chỗ.
+                            Bạn có thể
+                            lựa
+                            chọn sử dụng Mã khuyến mãi (nếu có) hoặc điểm thưởng tích lũy để dùng cho thanh
+                            toán.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInRight">
+                          <img src="./assets/images/guide/tour/4.png"/>
+                        </div>
+                        <div class="hint hint-4 animated zoomIn">
+                          <img src="./assets/images/guide/tour/4-hint.svg"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-5">
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInLeft">
+                          <img src="./assets/images/guide/tour/5.png"/>
+                        </div>
+                        <div class="hint hint-5 animated zoomIn">
+                          <img src="./assets/images/guide/tour/5-hint.svg"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 intro">
+                        <div class="animated fadeInRight">
+                          <h4 class="title">
+                            <strong>5. Xem lại & Xác nhận thông tin</strong>
+                          </h4>
+                          <div class="content">
+                            Vui lòng kiểm tra để xác nhận thông tin đã đặt tour và tổng chi phí thanh toán
+                            trước khi tiến
+                            hành lựa chọn phương thức thanh toán
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row step step-6">
+                      <div class="col-sm-6 intro ">
+                        <div class="animated fadeInLeft">
+                          <h4 class="title">
+                            <strong>6. Tiến hành thanh toán</strong>
+                          </h4>
+                          <div class="content">
+                            Lựa chọn phương thức thanh toán tiện lợi nhất cho bạn. Bạn sẽ nhận được trước Mã
+                            đặt chỗ nếu
+                            lựa
+                            chọn phương thức thanh toán tại các điểm của Xtrip hoặc Payoo.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 image">
+                        <div class="animated fadeInRight">
+                          <img src="./assets/images/guide/tour/6.png"/>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /guide hotel -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

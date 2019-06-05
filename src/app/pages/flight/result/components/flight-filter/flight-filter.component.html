@@ -1,0 +1,93 @@
+<div class="flight-filter">
+  <div class="panel card panel-desktop m-b-none">
+    <div class="panel-heading card-header">
+      <div class="panel-title card-title">
+        Bộ lọc
+        <a class=" pull-right"
+           (click)="onReset()">Đặt lại</a>
+      </div>
+
+    </div>
+    <div class="panel-body card-body">
+      <div class="filter-stop-point">
+        <div class="title">Điểm dừng</div>
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-gray-outline"
+                    [class.active]="isStopPointSelected(filter.points, point.index)"
+                    *ngFor="let point of filterOptions.points; trackBy: trackByFn; let i = index"
+                    (click)="onSelectPoint(point.index)">
+              {{ point.name }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-time m-t-20">
+        <div class="title">
+          Giờ cất cánh
+          <div class="pull-right badge-right">
+            {{ labelSlider.depart.start | time }} - {{ labelSlider.depart.end | time }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <nouislider class="nouislider-desktop p-l-10 p-r-10"
+                        [config]="sliderConfig"
+                        [(ngModel)]="filter.depart"
+                        (end)="onTimeSet($event, 'depart')"
+                        (ngModelChange)="onSliderChange($event, 'depart')">
+            </nouislider>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-time m-t-20">
+        <div class="title">
+          Giờ hạ cánh
+          <div class="pull-right badge-right">
+            {{ labelSlider.landing.start | time }} - {{ labelSlider.landing.end | time}}
+          </div>
+        </div>
+        <div class="row p-25-30-5-15">
+          <div class="col-12">
+            <nouislider class="nouislider-desktop p-l-10 p-r-10"
+                        [config]="sliderConfig"
+                        [(ngModel)]="filter.landing"
+                        (end)="onTimeSet($event, 'landing')"
+                        (ngModelChange)="onSliderChange($event, 'landing')">
+            </nouislider>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-carrier m-t-20">
+        <div class="title">Hãng hàng không</div>
+        <div class="row">
+          <div class="col-12">
+            <ul>
+              <li class="pointer carrier" [class.active]="isCarrierSelected(filter.carriers, carrier.code)"
+                  *ngFor="let carrier of filterOptions.carriers; trackBy: trackByFn; let i = index">
+                <a class=""
+                   (click)="onSelectCarrier(carrier.code)">
+                  <img class="m-b-none m-t-n-3 size-16x16"
+                  [src]="isCarrierSelected(filter.carriers, carrier.code) ? 'assets/images/icon/icon-checked-square.svg' : 'assets/images/icon/icon-uncheck-square.svg'"
+                  alt="check"/>
+                  <img class="m-b-none m-t-n-3 size-24x24 m-l-10"
+                  [src]="carrier.icon"
+                  [alt]="carrier.name"/>
+                <span class="font-13 font-medium m-l-10">{{ carrier.name }}</span>
+                <span *ngIf="carrier.price !== 0"
+                      class="pull-right font-13 font-medium d-none d-xl-inline-block">
+                  {{ carrier.price | currencyMoney:'' }} <span class="text-underline">đ</span>
+                </span>
+                </a>
+                
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

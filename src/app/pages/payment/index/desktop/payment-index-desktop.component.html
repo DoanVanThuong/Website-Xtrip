@@ -1,0 +1,46 @@
+<div class="payment-page payment-desktop" [booking-step]="2">
+
+  <section class="main-body p-t-30">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 left-section">
+
+          <!-- phương thức thanh toán -->
+          <payment-method-box (select-method)="onSelectPaymentMethod($event)"
+                              (changes)="onUpdateCOD($event)"
+                              [delay]="1000"
+                              [summaryPrice]="summaryPrice"></payment-method-box>
+
+          <!-- ưu đãi -->
+          <booking-optional-box class="m-t-20 animated fadeInUp"
+                                [coupon]="couponCode"
+                                [points]="points"
+                                *ngIf="!!summaryPrice && !summaryPrice.isVerified"
+                                (applyCoupon)="onSubmitOffer($event, 'coupon')"
+                                (applyPoint)="onSubmitOffer($event, 'point')"></booking-optional-box>
+
+          <!-- hóa đơn VAT -->
+          <booking-bill-info-box [data]="vatInvoice"
+                                 *ngIf="utilityHelper.findInList(module, [MODULE.FLIGHT])"
+                                 [delay]="500"
+                                 (changes)="onVATChange($event)"></booking-bill-info-box>
+        </div>
+
+        <div class="col-lg-4 right-section">
+          <price-detail-box *ngIf="!!summaryPrice"
+                            [totalPrice]="totalPrice"
+                            [point]="point"
+                            [summaryPrice]="summaryPrice"
+                            [pay]="true"
+                            [fee]="selectedPayment"
+                            [disabled]="detectDisableSubmit()"
+                            (pay)="onPayment($event)"></price-detail-box>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- confirm popup -->
+<confirm-popup [message]="messageConfirm" (submit)="onConfirmBack($event)"></confirm-popup>

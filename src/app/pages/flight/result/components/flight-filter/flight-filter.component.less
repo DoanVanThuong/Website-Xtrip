@@ -1,0 +1,123 @@
+@import '_variables.less';
+@import './_mixins.less';
+
+.flight-filter {
+  .panel.panel-desktop {
+
+    .panel-heading, .card-header {
+      padding: 15px;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+      border-bottom: 1px solid @gray-18;
+
+      .card-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 0;
+
+        > a {
+          font-size: 16px;
+          font-weight: 500;
+          color: @orange-2;
+          text-decoration: underline;
+          cursor: pointer;
+          margin-top: 2px;
+        }
+      }
+    }
+
+    .card-body {
+      padding: 30px 15px;
+
+      .title {
+        font-size: 16px;
+        font-weight: 600;
+        color: @gray-2;
+
+        .badge-right {
+          text-align: center;
+          border-radius: 10px;
+          font-size: 13px;
+          color: @black;
+          background-color: @gray-13;
+          padding: 0 10px;
+        }
+      }
+
+      .filter-stop-point {
+        .btn {
+          margin-top: 10px;
+          font-size: 13px;
+          font-weight: 600;
+          padding: 15px;
+          border-radius: 5px;
+          margin-right: 15px;
+
+          border: 1px solid;
+          -webkit-transition: all .25s linear;
+          transition: all .25s linear;
+          font-weight: 500;
+          color: @gray-2;
+          border: 1px solid @gray-3;
+          cursor: pointer;
+          &.btn-gray-outline {
+            &.active {
+              background-color: @white;
+              background-image: -webkit-gradient(linear, left top, right top, from(@green-14), to(@green-2));
+              background-image: linear-gradient(to right, @green-14, @green-2);
+              color: @white;
+              border-color: @white;
+            }
+          }
+          &:hover {
+            border-color: @green-2;
+            color: @green-2;
+          }
+        }
+      }
+
+      .filter-carrier {
+        ul {
+          > li {
+            padding: 15px 0px;
+            &.carrier {
+              -webkit-transition: all .25s linear;
+              transition: all .25s linear;
+              &:hover {
+                color: @green-2;
+                -webkit-transition: all .25s linear;
+                transition: all .25s linear;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .ng2-nouislider {
+    .noUi-target {
+      height: 2px;
+      .noUi-connect {
+        background: @green-2;
+        height: 3px;
+      }
+      .noUi-handle {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: 2px solid @green-2;
+        width: 16px;
+        height: 16px;
+        top: -7px;
+        right: -8px;
+        cursor: pointer;
+        -webkit-transition: all .25s linear;
+        transition: all .25s linear;
+        &:hover {
+          background: @green-2;
+          -webkit-transition: all .25s linear;
+          transition: all .25s linear;
+        }
+      }
+    }
+  }
+}

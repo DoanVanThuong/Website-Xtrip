@@ -1,0 +1,44 @@
+@keyframes fadingin {
+  0% {
+    opacity: 0
+  }
+  50% {
+    opacity: .5
+  }
+  100% {
+    opacity: 1
+  }
+}
+
+.animate-fading-in {
+  animation: fadingin 1s ease-in;
+}
+
+@keyframes fadingout {
+  0% {
+    opacity: 1
+  }
+  50% {
+    opacity: .5
+  }
+  100% {
+    opacity: 0
+  }
+}
+
+.animate-fading-out {
+  animation: fadingout 1s ease-out;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
+}
+
+.animate-zoom {
+  animation: zoom 0.6s;
+}

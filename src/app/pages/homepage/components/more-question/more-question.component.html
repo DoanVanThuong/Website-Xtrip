@@ -1,0 +1,79 @@
+<div class="block block-knowledge {{ class }}">
+
+  <!-- desktop -->
+  <div class="knowledge knowledge-desktop" *ngIf="isDesktop">
+    <div class="container">
+      <div class="row">
+        <div class="container-fluid">
+          <h3 class="block-title">Bạn có biết?</h3>
+          <div class="block-body">
+            <div class="row">
+              <div class="col-lg-4 col-md-6"
+                   *ngFor="let item of knowledges; trackBy: trackByFn">
+                <div class="knowledge-item">
+                  <a class="pointer d-flex justify-content-start align-items-center"
+                     target="_blank"
+                     [href]="item.url">
+                    <div class="knowledge-image">
+                      <img class="img-fix"
+                           [cdn-src]="item.photo.src"
+                           onerror="this.src='assets/images/no-thumbnail.png'"
+                           alt="img"/>
+                    </div>
+                    <div class="knowledge-info">
+                      <div class="title">{{item.name}}</div>
+                      <div class="description">{{item.subtext}}</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="knowledge knowledge-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="block-title m-b-none d-flex justify-content-center align-items-center">
+          <h4 class="m-none">Hướng dẫn</h4>
+          <a class="pointer ml-auto"
+             [routerLink]="['/more/faq']">
+            <img class="size-16x16 scale-one-half"
+                 cdn-src="assets/images/icon/icon-angle-right-green.svg" alt="icon"/>
+          </a>
+        </div>
+        <div class="block-description">
+          Trải nghiệm ứng dụng tốt hơn
+        </div>
+        <div class="block-body m-t-10">
+          <div class="scroll-container hidden-scrollbar">
+            <div class="scroll-area">
+              <div class="scroll-item knowledge-item"
+                   *ngFor="let item of knowledges; trackBy: trackByFn">
+                <a class="pointer"
+                   [href]="item.url">
+                  <div class="d-flex justify-content-start align-items-center">
+                    <div class="knowledge-image">
+                      <img class="img-fix"
+                           [cdn-src]="item.photo.src"
+                           onerror="this.src='assets/images/no-thumbnail.png'"
+                           alt="img"/>
+                    </div>
+                    <div class="knowledge-info">
+                      <div class="title">{{item.name}}</div>
+                      <div class="description">{{item.subtext}}</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

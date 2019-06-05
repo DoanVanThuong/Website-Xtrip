@@ -1,0 +1,59 @@
+<div class="hotel-index">
+
+  <app-hotel-search-bar-desktop></app-hotel-search-bar-desktop>
+
+  <div class="main-body p-t-20"
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <h1 class="invisible h-none m-none">Đặt phòng khách sạn</h1>
+
+    <div class="container">
+
+      <section class="" *ngIf="!!locations.length">
+        <h4 class="title">Địa điểm yêu thích</h4>
+        <div class="panel panel-desktop">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4 col-6"
+                   [class.m-t-10]="i/locationsPerRow >= 1"
+                   [class.p-l-10]="i%locationsPerRow > 0"
+                   [class.p-r-10]="i%locationsPerRow < locationsPerRow - 1"
+                   *ngFor="let location of locations; trackBy: trackByFn; let i = index">
+                <a class="pointer"
+                   (click)="onSelectDestination(location)"
+                   [title]="location.name"
+                   [routerLink]="['/hotel/result']"
+                   [queryParams]="generateLocationParams(location)">
+                  {{ location.name }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="m-t-30">
+        <div class="" *ngIf="!!hotels.length">
+          <h4 class="title">Khách sạn nổi bật</h4>
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-6"
+                 [class.m-t-20]="i/itemsPerRow >= 1"
+                 [class.p-l-10]="i%itemsPerRow > 0"
+                 [class.p-r-10]="i%itemsPerRow < itemsPerRow - 1"
+                 *ngFor="let hotel of hotels; trackBy: trackByFn; let i = index">
+              <hotel-item-desktop [hotel]="hotel" [params]="params"></hotel-item-desktop>
+            </div>
+          </div>
+        </div>
+
+        <loading [show]="isLoading"
+                 [title]="'Đang tải dữ liệu'"
+                 [description]="'Vui lòng đợi trong giây lát'"></loading>
+
+      </section>
+    </div>
+  </div>
+</div>

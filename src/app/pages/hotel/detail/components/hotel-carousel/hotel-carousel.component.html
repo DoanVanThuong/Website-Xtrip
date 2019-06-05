@@ -1,0 +1,35 @@
+<div class="row hotel-carousel animated fadeIn">
+  <div class="col-12 b-r-10 position-relative p-r-none p-l-5">
+    <div class="position-absolute pos-like">
+      <a class="pointer"
+         (click)="onFavourite()"
+         [ngSwitch]="isFavorite">
+        <img class="" cdn-src="assets/images/hotel/desktop/unlike.svg" *ngSwitchDefault/>
+        <img class="" cdn-src="assets/images/hotel/desktop/like.svg" *ngSwitchCase="true"/>
+      </a>
+    </div>
+    <owl-carousel #owlElement [items]="carouselList" [options]="carouselOptions">
+      <div class="row" *ngFor="let item of carouselList" (click)="onOpenPopupImages(carouselList)">
+        <div class="col-12">
+          <img [ngStyle]="{'height.px': imgHeight}"
+               class="img-fix b-r-10 m-b-0"
+               [src]="item.url | size:800"
+               onerror="this.src='assets/images/no-thumbnail.png'"/>
+        </div>
+      </div>
+    </owl-carousel>
+    <div class="position-absolute pos-img-view">
+      <a (click)="onOpenPopupImages(carouselList)">
+        <img class="m-b-0 m-t-n-3 size-24x24" cdn-src="assets/images/hotel/desktop/img-view.svg"/>
+        Hình ảnh ({{carouselList.length}})
+      </a>
+    </div>
+  </div>
+</div>
+
+<app-hotel-gallery-popup #HotelGalleryPopup
+                         [mode]="'hotel'"
+                         [hotel]="hotel"
+                         [code]="code"
+                         [images]="galleryImages">
+</app-hotel-gallery-popup>

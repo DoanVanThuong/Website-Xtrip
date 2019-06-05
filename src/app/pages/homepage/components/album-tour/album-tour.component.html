@@ -1,0 +1,39 @@
+<div class="block block-album-tour" *ngIf="!!albums.length">
+
+  <div class="album-tour album-tour-desktop" *ngIf="isDesktop">
+    <div class="container">
+      <div class="row">
+        <div class="container-fluid">
+          <h3 class="block-title">Hình ảnh đoàn tour</h3>
+          <div class="block-body">
+            <div class="row">
+              <div class="col-xl-3 col-lg-4 col-md-6"
+                   *ngFor="let album of albums; trackBy: trackByFn; let i = index">
+                <home-album-item [album]="album" (select)="onSelectAlbum($event)"></home-album-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="album-tour album-tour-mobile" *ngIf="isMobile">
+    <h3 class="block-title">
+      <img cdn-src="assets/images/home/icon-album.svg" alt="icon" class="m-b-none">
+      Hình ảnh đoàn tour
+    </h3>
+    <div class="block-body">
+      <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-stage-full']"
+                    *ngIf="!isLoading"
+                    [items]="albums"
+                    [options]="carouselOptions">
+        <div class="album-wp" *ngFor="let album of albums; trackBy: trackByFn">
+          <home-album-item [album]="album" (select)="onSelectAlbum($event)"></home-album-item>
+        </div>
+      </owl-carousel>
+    </div>
+  </div>
+</div>
+
+<gallery-popup [images]="images" [name]="album.name"></gallery-popup>

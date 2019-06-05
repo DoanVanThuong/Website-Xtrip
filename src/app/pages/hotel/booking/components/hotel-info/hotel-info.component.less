@@ -1,0 +1,88 @@
+// component css goes here
+@import "_variables.less";
+
+.hotel-info-desktop {
+  .h-120-px {
+    height: 120px;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: @gray-23;
+  }
+  .hotel-info {
+    .title {
+      font-size: 16px;
+      color: @gray-2;
+      font-weight: 700;
+    }
+    .date-info {
+      .title {
+        font-size: 13px;
+        color: @gray-1;
+        font-weight: normal;
+      }
+    }
+    .line {
+      height: 1px;
+      background-color: @gray-3;
+      width: 100%;
+      margin-top: 15px;
+    }
+    .room-name {
+      font-size: 16px;
+      color: @gray-2;
+      font-weight: 600;
+    }
+    .max-people {
+      color: @gray-2;
+    }
+    .bg-fac {
+      background-color: @green-3;
+      padding: 4px 8px;
+      border-radius: 5px;
+      color: @white;
+    }
+  }
+}
+
+.hotel-info-mobile{
+    .img-hotel {
+        // width: 60px;
+        height: 60px;
+        overflow: hidden;
+        border-radius: 10px;
+
+        img {
+            max-width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+               object-fit: cover;
+        }
+    }
+
+    .hotel-name {
+        font-size: 15px;
+        line-height: 20px;
+        color: @black;
+        span {
+            &.hotel-star {
+                background: @green-2;
+                color: @white;
+                font-size: 13px;
+                border-radius: 5px;
+                padding: 1px 5px;
+                margin-right: 5px;
+
+                img {
+                    vertical-align: initial;
+                }
+            }
+        }
+    }
+
+    .address {
+        color: @gray-1;
+        line-height: 15px;
+    }
+}

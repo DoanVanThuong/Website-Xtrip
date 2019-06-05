@@ -1,0 +1,16 @@
+<!--component html goes here -->
+<div class="row coupon-flight-detail-item animated fadeIn">
+  <div class="col-lg-12">
+    <div class="bor-item">
+      <div class="font-16 font-weight-bold">
+        {{flight.departureName}}
+        <span><img class="m-l-5 m-r-5 m-b-none" cdn-src="assets/images/more/coupon/arrow-black{{flight.roundTrip ? '-rt' : ''}}.svg"
+            alt=""></span>
+        {{flight.arrivalName}}
+      </div>
+      <div class="font-15 color-date m-t-5">
+        Loại vé: {{flight.roundTrip ? 'Khứ hồi' : 'Một chiều'}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="block block-propose-tour {{ class }}" *ngIf="!!tours.length">
+
+  <!-- desktop -->
+  <div class="propose-tour propose-tour-desktop" *ngIf="isDesktop">
+    <div class="container">
+      <div class="row">
+        <div class="container-fluid">
+          <h4 class="block-title">{{ heading }}</h4>
+          <div class="block-body">
+            <owl-carousel [carouselClasses]="['owl-theme', 'sliding', 'owl-dots-green', 'owl-nav-black']"
+                          [items]="tours"
+                          [options]="carouselOptions">
+              <div class="propose-tour-item"
+                   *ngFor="let tour of tours; trackBy: trackByFn">
+                <a class="pointer d-block"
+                   [title]="tour.name"
+                   [routerLink]="['/tour/recommend/', tour.code]"
+                   [queryParams]="generateQueryParams(tour)">
+                  <div class="tour-image">
+                    <img class="img-fix"
+                         defaultImage="assets/images/no-thumbnail.png"
+                         [lazyLoad]="tour.photoDesktop.src | size:300"
+                         onerror="this.src='assets/images/no-thumbnail.png'"
+                         [alt]="tour.name">
+                    <div class="tour-price">
+                      Giá từ
+                      <div class="font-bold">{{ tour.priceFrom | priceText }}</div>
+                    </div>
+                    <!--<div class="tour-info">
+                      <div class="tour-name">{{ tour.name }}</div>
+                    </div>-->
+                  </div>
+                </a>
+              </div>
+            </owl-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="propose-tour propose-tour-mobile" *ngIf="isMobile">
+    <div class="row">
+      <div class="container-fluid">
+        <h4 class="block-title">{{ heading }}</h4>
+        <div class="block-body">
+          <div class="scroll-container hidden-scrollbar">
+            <div class="scroll-area">
+              <div class="scroll-item"
+                   *ngFor="let tour of tours; trackBy: trackByFn">
+                <a class="pointer d-block propose-tour-item"
+                   [title]="tour.name"
+                   [routerLink]="['/tour/recommend/', tour.code]"
+                   [queryParams]="generateQueryParams(tour)">
+                  <div class="tour-image">
+                    <img class="img-fix"
+                         defaultImage="assets/images/no-thumbnail.png"
+                         [lazyLoad]="tour.photo.src | size:300"
+                         onerror="this.src='assets/images/no-thumbnail.png'"
+                         [alt]="tour.name">
+                    <div class="tour-price">
+                      Giá từ
+                      <div class=" font-15 font-bold">{{ tour.priceFrom | priceText }}</div>
+                    </div>
+                    <!--<div class="tour-info">
+                      <div class="tour-name">{{ tour.name }}</div>
+                    </div>-->
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<!-- for mobile -->
+<div class="booking-hotel-item booking-hotel-item-mobile animated fadeInUp" *ngIf="isMobile">
+  <a class="pointer" [routerLink]="['/my-booking/hotel', hotel.code]">
+    <div class="hotel-name text-truncate">
+      {{ hotel.hotelName }}
+    </div>
+    <div class="hotel-price">
+      Giá:
+      <app-price [price]="hotel.totalPrice"></app-price>
+    </div>
+
+    <div class="hotel-status d-flex justify-content-center">
+      <div class="mr-auto">
+        Mã đặt chỗ: {{ hotel.code }}
+      </div>
+      <div class="">
+        <booking-status [status]="hotel.status" [fill]="true" [icon]="true"></booking-status>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- for desktop -->
+<div class="booking-hotel-item booking-hotel-item-desktop m-t-20" *ngIf="isDesktop">
+
+  <div class="date">
+    Ngày đặt {{ hotel.bookingDate | moment: 'DD/MM/YYYY' }}
+  </div>
+  <div class="panel card panel-desktop m-t-10">
+    <div class="d-flex">
+      <div class="mn-w-200 w-200 mn-h-170">
+        <a class="pointer d-block h-full w-full" [routerLink]="['/my-booking/hotel', hotel.code]">
+          <img class="m-b-none hotel-item-image"
+               defaultImage="hotel.photo.src | size:300"
+               [lazyLoad]="hotel.photo.src | size: 300"
+               onerror="this.src = 'assets/images/no-thumbnail.png'"
+               [alt]="hotel.hotelName"
+               [title]="hotel.hotelName"/>
+        </a>
+      </div>
+      <div class="w-full">
+        <div class="panel-heading card-header text-black">
+          Mã đặt chỗ: <span class="font-bold">{{ hotel.code }}</span>
+          <booking-status class="pull-right" [status]="hotel.status"></booking-status>
+        </div>
+        <div class="panel-body card-body">
+          <a class="pointer" [routerLink]="['/my-booking/hotel', hotel.code]">
+            <div class="d-flex align-items-center justify-content-center flex-row">
+              <div class="mr-auto">
+                <h4 class="font-16 font-bold m-none">{{ hotel.hotelName }}</h4>
+                <div class="m-t-5">{{ hotel.roomName }}</div>
+                <div class="d-flex m-t-15">
+                  <div class="m-r-20">
+                    <div class="font-13 text-light-gray">Nhận phòng</div>
+                    <div class="font-18 text-black">{{ hotel.checkIn | departDate }}</div>
+                  </div>
+                  <div class="m-r-20">
+                    <div class="font-13 text-light-gray">Trả phòng</div>
+                    <div class="font-18 text-black">{{ hotel.checkOut | departDate }}</div>
+                  </div>
+                  <div class="">
+                    <div class="font-13 text-light-gray">Số đêm</div>
+                    <div class="font-18 text-black">{{ hotel.nights }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="font-18 font-medium mn-w-100 text-right m-l-15">
+                {{ hotel.totalPrice || 0 | currencyMoney:''}} <span class="text-underline">đ</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

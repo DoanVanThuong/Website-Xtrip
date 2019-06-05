@@ -1,0 +1,38 @@
+<div class="booking-detail-comment justify-content-center" *ngIf="!!tour">
+  <app-header [back]="true" [heading]="'Nhận xét của bạn'" [fixed]="true"></app-header>
+  <div class="wrapper booking-detail-comment-body" min-height>
+    <div class="container bg-white">
+      <div class="row ">
+        <div class="col-12">
+          <div class="introduction">
+            Bạn đã có trải nghiệm như thế nào về tour <strong>{{ tour.tourName }}</strong>?
+          </div>
+
+          <ul class="rating-list">
+            <li *ngFor="let label of ratingLabel; let i = index">
+              <div class="row">
+                <div class="col-6">
+                  {{ label }}
+                </div>
+                <div class="col-6 text-right">
+                  <bar-rating [max]="5" [rate]="3" (rateChange)="rating[i] = $event"></bar-rating>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="comment">
+            <mat-form-field>
+              <textarea matInput placeholder="Cảm nhận của bạn" [(ngModel)]="comment"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="action">
+            <button class="btn btn-main w-full" (click)="onSubmit()">
+              Gửi nhận xét
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

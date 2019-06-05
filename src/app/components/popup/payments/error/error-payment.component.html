@@ -1,0 +1,28 @@
+<div bsModal #popup="bs-modal" class="modal fade error-payment-popup" role="dialog" (onHidden)="hide()">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-wrapper">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row mx-auto">
+                                <img class="img-fluid m-auto" cdn-src="assets/images/error-payment.png">
+                            </div>
+                            <div class="row p-t-20">
+                                <div class="col-12 text-center font-20">LỖI THANH TOÁN</div>
+                            </div>
+                            <div class="row p-t-20">
+                                <div class="col-12 text-center font-18">Vé chưa được thanh toán</div>
+                            </div>
+                            <div class="row m-t-10">
+                                <div class="col-12 text-center">
+                                    <button class="btn button-footer" (click)="tryPayment()">Thử lại</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

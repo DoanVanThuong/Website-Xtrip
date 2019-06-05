@@ -1,0 +1,299 @@
+<div class="hotel-detail hotel-detail-mobile">
+  <div class="loading-wrapper" *ngIf="isLoading">
+    <loading [show]="isLoading"></loading>
+  </div>
+  <div class="hotel-heading">
+    <div class="row">
+      <div class="col-2">
+        <a class="d-flex justify-content-center align-items-center" (click)="back()">
+          <img cdn-src="assets/images/hotel/detail/back.svg" alt="" class="m-b-none icon-default">
+          <img cdn-src="assets/images/icon/icon-back-green.svg" alt="" class="m-b-none icon-scroll">
+        </a>
+      </div>
+      <div class="col-7 p-none">
+        <div class="hotel-name text-truncate">{{hotel.name}}</div>
+      </div>
+      <div class="col-3 text-right">
+        <div class="d-flex justify-content-center">
+          <a (click)="onFavourite(hotel.code)" class=" d-flex justify-content-center align-items-center">
+            <img cdn-src="assets/images/hotel/detail/like-hotel.svg" class="m-b-none icon-default" *ngIf="!isFavorite">
+            <img cdn-src="assets/images/hotel/detail/like.svg" class="m-b-none icon-default " *ngIf="isFavorite">
+            <img cdn-src="assets/images/hotel/detail/like.svg" class="m-b-none icon-scroll " *ngIf="isFavorite">
+            <img cdn-src="assets/images/hotel/detail/like-green.svg" class="m-b-none icon-scroll " *ngIf="!isFavorite">
+          </a>
+          <a class="icon m-l-10  d-flex justify-content-center align-items-center" (click)="openPopup('share')">
+            <img src="assets/images/hotel/detail/share.svg" alt="" class="m-b-none icon-default">
+            <img cdn-src="assets/images/icon/icon-share-green.svg" alt="" class="m-b-none icon-scroll size-16x16">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="animated slideIn main-action-hotel hotel-heading-action bg-white m-t-4 font-13 text-black ">
+      <div class="row">
+        <div class="col-12 p-r-none">
+          <div class="d-flex justify-content-between">
+            <a class="bor-r flex-1" (click)="openPopup('calendar')">
+              <div>Nhận - trả phòng <span class="text-green">({{nights}} đêm)</span></div>
+              <div class="font-medium">{{selectedDate.start | departDate: true: 'DD/MM'}} -
+                {{selectedDate.end | departDate: true: 'DD/MM' }} <span class="text-green"><i
+                    class="fa fa-angle-down fa-lg" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a class="bor-r flex-0-5 text-center" (click)="openPopup('room')">
+              <div>Phòng</div>
+              <div>
+                {{rooms}} <span class="text-green"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a class="text-center flex-0-5" (click)="openPopup('room')">
+              <div>Tổng khách</div>
+              <div>
+                {{passengers}} <span class="text-green"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper p-b-60">
+    <section class="hotel-header">
+      <owl-carousel #owlElement [items]="hotel.photos" [carouselClasses]="['owl-theme', 'owl-dots-black', 'sliding']"
+        [options]="carouselOptions">
+        <div class="row" *ngFor="let item of hotel.photos" (click)="openGalleryWith(hotel.photos)">
+          <div class="col-12">
+            <div class="position-relative">
+              <div class="slider-item">
+                <img class="m-b-0 b-r-img-10 pointer img-fix" [cdn-src]="item.src | size:300"
+                  onerror="this.src='assets/images/no-thumbnail.png'" alt="img" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </owl-carousel>
+      <div class="slider-length">{{currentItemImage}}/{{hotel.photos.length}}</div>
+    </section>
+    <!-- /hình ảnh -->
+
+    <section class="basic-detail-hotel bg-white p-t-10 p-b-10">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="hotel-name">
+              <span class="hotel-star">{{hotel.stars}} <img class=""
+                  [cdn-src]="'assets/images/icon/icon-star-white.svg'" alt=""> </span>
+              {{hotel.name}}
+            </div>
+            <div class="address-info d-flex justify-content-between align-items-center m-t-10 ">
+              <div class="font-11 address">
+                <img class="m-b-none m-t-n-3 size-16x16" cdn-src="assets/images/hotel/des-type-pos.svg" alt="icon" />
+                {{hotel.fullAddress}}
+              </div>
+
+              <a class="view-map" (click)="openPopup('map')">
+                <span>
+                  <img class="m-b-none m-t-n-3 size-16x16" cdn-src="assets/images/hotel/des-type-pos-green.svg"
+                    alt="icon" />
+                </span>
+                Bản đồ
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /thông tin cơ bản -->
+
+    <section class="facility-hotel bg-white m-t-4 p-t-10">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="title d-flex justify-content-between align-items-center">Tiện nghi khách sạn
+              <!-- <a class="float-right text-green font-medium font-13">Xem thêm</a> -->
+            </div>
+            <ul class="list-unstyled list-facilities">
+              <li class="text-center m-r-10"
+                *ngFor="let facility of hotel.facilities | slice:0:sliceItemFacility; let i = index; trackBy: trackByFn">
+                <img class="m-b-none img-fix size-28x28" [src]="facility.photo.src" alt=""
+                  onerror="this.src='assets/images/no-thumbnail.png'">
+                <div class="font-11 text-dark-gray m-t-5 name-facility">{{facility.name}}</div>
+              </li>
+              <a *ngIf="hotel.facilities.length > sliceItemFacility" (click)="openPopup('facility')"
+                class="facility-last-item">+{{hotel.facilities.length - sliceItemFacility}}</a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /tiện nghi -->
+
+    <section class="policy-hotel bg-white m-t-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="title d-flex justify-content-between align-items-center">Thông tin khách sạn
+              <a class="float-right text-green font-medium font-13" (click)="openPopup('description')">Xem thêm</a>
+            </div>
+            <p [innerHTML]="hotel.description" class="text-truncate-4lines text-justify m-t-10"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /chính sách -->
+
+    <section class="famous-place-hotel bg-white m-t-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="title d-flex justify-content-between align-items-center">Địa danh phổ biến
+              <div class="float-right text-green font-medium font-13" (click)="openPopup('place')">Xem thêm</div>
+            </div>
+            <ul class="list-unstyled list-place-hotel p-l-10">
+              <li class="d-flex justify-content-between"
+                *ngFor="let place of hotel.popularPoints | slice:0:3; let i = index">
+                <div class="m-l-4">{{place.name}}</div>
+                <div class="distance">{{place.distance}}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /điểm tham quan gần -->
+
+    <section class="main-action-hotel bg-white m-t-4 font-13">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 p-r-none">
+            <div class="d-flex justify-content-between">
+              <a class="bor-r flex-1" (click)="openPopup('calendar')">
+                <div>Nhận - trả phòng <span class="text-green">({{nights}} đêm)</span></div>
+                <div class="font-medium">{{selectedDate.start | departDate: true: 'DD/MM'}} -
+                  {{selectedDate.end | departDate: true: 'DD/MM' }} <span class="text-green"><i
+                      class="fa fa-angle-down fa-lg" aria-hidden="true"></i></span>
+                </div>
+              </a>
+              <a class="bor-r flex-0-5 text-center" (click)="openPopup('room')">
+                <div>Phòng</div>
+                <div>
+                  {{rooms}} <span class="text-green"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></span>
+                </div>
+              </a>
+              <a class="text-center flex-0-5" (click)="openPopup('room')">
+                <div>Tổng khách</div>
+                <div>
+                  {{passengers}} <span class="text-green"><i class="fa fa-angle-down fa-lg"
+                      aria-hidden="true"></i></span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /chọn ngày, phòng, khách -->
+
+    <section class="group-room-hotel-wp" [class.m-t-20]="!!roomGroups.length">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 p-l-8 p-r-8">
+            <ul class="list-unstyled">
+              <li class="group-room-hotel-item m-b-20 "
+                *ngFor="let roomGroup  of roomGroups; let i = index; trackBy: trackByFn">
+                <div class="title-group font-medium font-15">{{roomGroup.name}}</div>
+                <div class="group-room-item-content bg-white m-t-10 b-r-10" [class.b-r-b-0]="!!roomGroup.couponCode">
+                  <ul class="list-unstyled list-group-room-item">
+                    <li class="group-room-item" *ngFor="let room of roomGroup.rooms; let j = index; trackBy: trackByFn">
+                      <div class="heading d-flex align-items-center">
+                        <div class="image-room">
+                          <img cdn-src="assets/images/hotel/number-room-{{j+1}}.svg" class="m-b-none">
+                        </div>
+                        <div class="m-l-5">
+                          <div class="font-medium font-14">{{room.name}}</div>
+                          <div class="font-12">Số người: {{room.numberOfGuests}}</div>
+                        </div>
+                      </div>
+                      <div>
+                        <ul class="list-inline list-room-facilities m-t-10">
+                          <li *ngFor="let roomFacility of room.facilities; let k = index; trackBy: trackByFn"
+                            class="m-r-5">
+                            <img [src]="roomFacility.photo.src" alt="" class="m-b-none size-16x16">
+                          </li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-end">
+                          <ul class="list-inline list-hightlight">
+                            <li *ngFor="let service of room.preferServices; let i = index; trackBy: trackByFn">
+                              {{service}}</li>
+                          </ul>
+                          <div class="text-right">
+                            <div class="font-12">{{room.sellingPriceNote}}:</div>
+                            <div class="text-green font-15 mn-w-100">{{room.sellingPrice | currencyMoney: ''}} <span
+                                class="text-underline">đ</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <div class="group-room-item-foot d-flex align-items-center justify-content-between">
+                      <div>
+                        <button class="btn btn-main-v3 btn-booking-hotel" (click)="onBookHotel(roomGroup)">Đặt
+                          ngay</button>
+                      </div>
+                      <div class="text-right font-13">
+                        Tổng tiền <em class="text-light-gray font-12">({{rooms}} phòng {{passengers}} khách)</em>
+                        <div class="text-green font-20 text-right font-bold">
+                          {{roomGroup.sellingPrice | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+                <div class="font-bold font-12 coupon-info" *ngIf="!!roomGroup.couponCode">
+                  Nhập <span class="text-green">{{roomGroup.couponCode | uppercase}}</span> chỉ còn <span>
+                    {{roomGroup.couponDiscountPrice | currencyMoney: ''}}<span class="text-underline">đ</span></span>
+                </div>
+              </li>
+            </ul>
+            <div *ngIf="!roomGroups.length && !isLoading" class="m-b-20">
+              <img cdn-src="assets/images/hotel/hotel-no-found.png" alt="" class="img-fluid">
+              <div class="text-center">
+                <div class="font-15 font-medium">Khách sạn không còn phòng trống</div>
+                <div>Hãy thử lại với ngày khác</div>
+                <button class="btn btn-main-v3 font-medium m-t-10" (click)="openPopup('calendar')">Đổi ngày</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /group phòng -->
+  </div>
+</div>
+
+<!-- bản đồ -->
+<hotel-detail-map *ngIf="!!hotel.latitude&&hotel.longitude" #FullScreenMap [name]="hotel.name"
+  [latitude]="hotel.latitude" [longitude]="hotel.longitude" [icon]="iconMapUrl" [places]="hotel.popularPoints">
+</hotel-detail-map>
+
+<!-- chọn phòng, khách -->
+<hotel-room-popup (onChange)="onChangeRoomNumber($event)" [roomOccupancies]="roomOccupancies"></hotel-room-popup>
+
+<!-- chọn ngày -->
+<app-hotel-date-picker-popup [date]="selectedDate" (submit)="onChangeDateCheckInCheckOut($event)">
+</app-hotel-date-picker-popup>
+
+<!-- tiện nghi -->
+<hotel-facility-popup [data]="facilities"></hotel-facility-popup>
+
+<!-- hình ảnh khách sạn -->
+<gallery-popup [images]="galleryImages" [name]="hotel.name"></gallery-popup>
+
+<!-- mô tả -->
+<hotel-description-popup [data]="hotel.description"></hotel-description-popup>
+
+<!-- điểm nổi bật gần ks -->
+<hotel-hot-place-popup [data]="hotel.popularPoints"></hotel-hot-place-popup>
+
+<!-- social sharing -->
+<!-- social media -->
+<social-sharing *ngIf="!!hotel.name" #SocialSharing [title]="hotel.name" [image]="hotel.photo.src"
+  [description]="hotel.name"></social-sharing>

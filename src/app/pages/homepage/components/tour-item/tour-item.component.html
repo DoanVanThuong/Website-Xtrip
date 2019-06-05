@@ -1,0 +1,98 @@
+<!-- desktop -->
+<div class="home-tour-item home-tour-item-desktop" *ngIf="isDesktop">
+  <a class="pointer d-block"
+     [title]="tour.name"
+     [routerLink]="[tour.href]"
+     [queryParams]="generateTourParams(tour)">
+    <div class="tour-image">
+      <img class="img-fix"
+           defaultImage="assets/images/no-thumbnail.png"
+           errorImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="tour.photo.src | size:300"
+           [offset]="80"
+           [useSrcset]="true"
+           onerror="this.src='assets/images/no-thumbnail.png'"
+           [alt]="tour.name"/>
+    </div>
+    <div class="tour-info d-flex flex-column justify-content-start">
+
+      <a class="tour-gift" *ngIf="!!tour.highlights">
+        <img class="size-42x42 img-fix" cdn-src="assets/images/icon/icon-gift-circle-white-outline.svg" alt="icon"/>
+        <img class="size-42x42 img-fix active" cdn-src="assets/images/icon/icon-gift-circle-white.svg" alt="icon"/>
+      </a>
+      <div class="tour-gift-description animated fadeIn"
+           *ngIf="!!tour.highlights">
+        Ưu đãi khi đặt tour:
+        <ul class="list-unstyled">
+          <li *ngFor="let highlight of tour.highlights; trackBy: trackByFn">
+            {{ highlight }}
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="tour-highlight" *ngIf="!!tour.highlights">
+          <span class="">
+            <img class="m-t-n-3 size-16x16 m-r-5"
+                 cdn-src="assets/images/icon/icon-fire.svg" alt="icon"/>
+            {{ tour.highlights[0] }}
+          </span>
+        </div>
+        <div class="tour-name text-truncate-2lines">{{tour.name}}</div>
+        <div class="tour-depart-date m-t-10">
+          <img class="m-t-n-3 size-24x24"
+               cdn-src="assets/images/icon/icon-calendar.svg"
+               alt="icon"/>
+          Ngày khởi hành: {{ tour.departDate | moment: 'DD/MM/YYYY' }} ({{tour.days}}N{{tour.nights}}Đ)
+        </div>
+      </div>
+      <div class="mt-auto">
+        <div class="tour-price d-flex justify-content-start align-items-center">
+          <app-price class="font-16 font-medium text-green" [price]="tour.sellingPrice"></app-price>
+          <div class="tour-place m-l-10"
+               [class.text-danger]="tour.available <= 3">
+            {{ !!tour.available ? 'Còn ' + tour.available + ' chỗ' : 'Hết chỗ' }}
+          </div>
+        </div>
+        <div class="tour-coupon">
+        <span class="">
+          Nhập <strong>ĐKTOUR</strong> chỉ còn <app-price class="text-green font-medium" [price]="990000"></app-price>
+        </span>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- mobile -->
+<div class="home-tour-item home-tour-item-mobile"
+     *ngIf="isMobile">
+  <a class="pointer d-block"
+     [title]="tour.name"
+     [routerLink]="[tour.href]"
+     [queryParams]="generateTourParams(tour)">
+    <div class="tour-image">
+      <img class="img-fix"
+           defaultImage="assets/images/no-thumbnail.png"
+           [lazyLoad]="tour.photo.src | size:300"
+           [offset]="80"
+           onerror="this.src='assets/images/no-thumbnail.png'"
+           [alt]="tour.name"/>
+    </div>
+    <div class="tour-info m-t-8 d-flex flex-column">
+      <div>
+        <div class="tour-name text-truncate-2lines">{{tour.name}}</div>
+        <div class="tour-place"
+             [class.text-danger]="tour.available <= 3">
+          <img class="m-t-n-3 size-14x14"
+               cdn-src="assets/images/icon/icon-chair-gray.svg"
+               alt="icon"/>
+          {{ !!tour.available ? 'Còn ' + tour.available + ' chỗ' : 'Hết chỗ' }}
+        </div>
+      </div>
+      <div class="tour-price mt-auto">
+        <app-price [price]="tour.sellingPrice"></app-price>
+      </div>
+    </div>
+  </a>
+</div>

@@ -1,0 +1,113 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade signin-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-6 m-t-20">
+            <div class="row logged-in" *ngIf="isLoggedIn">
+              <div class="container-fluid">
+                <div class="text-center profile-info">
+                  <img class="img-circle avatar"
+                       src="{{ profile.avatar }}"
+                       alt="profile"
+                       onerror="this.src='assets/images/avatar-thumbnail.svg'">
+                  <div class="profile-name">
+                    {{ profile.fullName }}
+                  </div>
+                  <div class="profile-email">
+                    {{ profile.email }}
+                  </div>
+                </div>
+                <div style="width:100%; padding-top: 8px;">
+                  <div class="form-group">
+                    <button class="btn btn-block btn-main" (click)="onSignOut()">
+                      Đăng xuất
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row login-in" *ngIf="!isLoggedIn">
+              <div class="container-fluid" *ngIf="isForgotShow">
+                <div class="p-r-10 p-l-10">
+                  <forgot-password-form (close)="isForgotShow = $event"></forgot-password-form>
+                </div>
+              </div>
+              <div class="container-fluid" *ngIf="!isForgotShow">
+                <div class="row">
+                  <div class="container-fluid">
+                    <div class="btn-group pull-left">
+                      <button class="btn btn-optional"
+                              [class.active]="isSignIn"
+                              (click)="isSignIn = true">Đăng nhập
+                      </button>
+                      <button class="btn btn-optional"
+                              [class.active]="!isSignIn"
+                              (click)="isSignIn = false">Đăng ký
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-r-10 p-l-10">
+                  <div class="row m-t-10" *ngIf="isSignIn">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="container-fluid">
+                          <div class="title-social">Đăng nhập nhanh</div>
+                          <div class="buttons">
+                            <button class="btn btn-fb" (click)="onSignInWithFacebook()">
+                              <img class="size-28x28" src="./assets/images/homepage/fb.svg">
+                              Đăng nhập bằng Facebook
+                            </button>
+                            <button class="btn btn-gg" (click)="onSignInWithGoogle()">
+                              <img class="size-28x28" src="./assets/images/homepage/gg.svg">
+                              Đăng nhập bằng Google
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center">
+                        <div class="col-6">
+                          <span class="line"></span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="container-fluid">
+                          <sign-in-form (forgot)="isForgotShow = $event"
+                                        (callback)="onCallback()"></sign-in-form>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row m-t-40" *ngIf="!isSignIn">
+                    <div class="container-fluid">
+                      <sign-up-form (callback)="onCallback()"></sign-up-form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 d-lg-block d-none">
+            <div class="row bg-promo">
+              <div class="container-fluid">
+                <div class="text-center m-t-60">
+                  <img class="mx-w-full" cdn-src="assets/images/homepage/login-promo.png"/>
+                  <div class="txt-promo-login m-t-20">
+                    Đăng ký liền tay - Săn ngay vé rẻ
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

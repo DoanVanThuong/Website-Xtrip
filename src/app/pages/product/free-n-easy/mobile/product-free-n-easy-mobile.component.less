@@ -1,0 +1,96 @@
+// component css goes here
+@import "_variables.less";
+@import "_mixins.less";
+
+.product-free-and-easy-page, .product-activities-mobile-page {
+  .bg-header {
+    &.bg-free-n-easy {
+      background-image: url('../../../../../assets/images/free-n-easy/bg-free-n-easy.jpg');
+    }
+    &.bg-activities {
+      background-image: url('../../../../../assets/images/free-n-easy/bg-activities.jpg');
+    }
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 100%;
+    .nav-icon {
+      padding: 24px 14px 0;
+    }
+    .title {
+      margin-top: 60px;
+      font-size: 30px;
+      font-weight: 900;
+      color: @white;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    .search-bar {
+      height: 36px;
+      margin: 20px 14px 0;
+      color: @gray-9;
+      background-color: @white;
+      border-radius: 50px;
+      padding-top: 6px;
+      .icon-color {
+        color: @gray-47;
+      }
+    }
+  }
+  .wrapper {
+    .product-item-desktop {
+      .box-shadow(0, 1px, 3px, rgba(0, 0, 0, .2));
+    }
+    .owl-theme {
+      .owl-stage-outer {
+        .owl-stage {
+          margin-bottom: 5px;
+        }
+      }
+      .owl-nav {
+        display: none;
+      }
+    }
+    .favorite-location {
+      padding: 0 14px;
+      .p-0-9 {
+        padding: 0 9px;
+      }
+      .margin-5 {
+        margin: 5px;
+      }
+      .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: @gray-2;
+        margin-top: 10px;
+      }
+      .h-104 {
+        height: 104px;
+      }
+      img {
+        border-radius: 5px;
+      }
+      .pos-bg {
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75));
+        width: 100%;
+        color: @white;
+        padding: 0 7px;
+        padding-bottom: 3px;
+        font-size: 13px;
+        font-weight: 500;
+        bottom: 0;
+        border-radius: 5px;
+      }
+    }
+    .top, .your-suggestion {
+      .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: @gray-2;
+        padding: 30px 14px 0;
+      }
+    }
+  }
+  
+}

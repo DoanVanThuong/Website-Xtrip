@@ -1,0 +1,52 @@
+<div class="about-me">
+  <app-header [back]="true" [heading]="'Về chúng tôi'" [fixed]="true" [version]="3"></app-header>
+
+  <div class="wrapper" min-height>
+    <div class="container p-l-15 p-r-15">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="row text-center">
+            <div class="container-fluid p-l-15 p-r-15 text-center" [ngSwitch]="isVMTravel">
+              <div class="" *ngSwitchCase="true">
+                <img cdn-src="assets/images/logo-by-xtrip.png" class="img-responsive" alt="">
+                <div class="detail p-0-10 m-t-20">
+                  <p>Công ty cổ phần du lịch Vietmap</p>
+                  <p>Địa chỉ: 136 Nguyễn Duy Dương, Phường 9, Quận 5, Thành phố Hồ Chí Minh.</p>
+                  <p>Số ĐKKD: 0313974339. Ngày cấp: 20/08/2016.</p>
+                  <p>Nơi cấp: Phòng đăng ký kinh doanh - Sở Kế hoạch và đầu tư Thành phố Hồ Chí Minh </p>
+                  <p>Điện thoại: <a href="tel:18006782">1800 6782</a></p>
+                </div>
+              </div>
+              <div class="" *ngSwitchDefault>
+                <img cdn-src="assets/images/logo-power-by.png" class="img-responsive" alt="">
+                <div class="detail p-0-10 m-t-20">
+                  <p>Công ty cổ phần du lịch Vietmap</p>
+                  <p>Địa chỉ: 136 Nguyễn Duy Dương, Phường 9, Quận 5, Thành phố Hồ Chí Minh.</p>
+                  <p>Số ĐKKD: 0314518113. Ngày cấp: 14/07/2017.</p>
+                  <p>Nơi cấp: Phòng đăng ký kinh doanh - Sở Kế hoạch và đầu tư Thành phố Hồ Chí Minh </p>
+                  <p>Điện thoại: <a href="tel:18006782">1800 6782</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-t-10 m-b-40">
+            <div class="container-fluid text-center" [ngSwitch]="isVMTravel">
+              <a href="http://online.gov.vn/CustomWebsiteDisplay.aspx?DocId=32312"
+                 target="_blank" *ngSwitchCase="true">
+                <img class="mx-w-150 w-full" cdn-src="assets/images/bct.png">
+              </a>
+              <a href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=44519"
+                 target="_blank" *ngSwitchDefault="">
+                <img class="w-150" cdn-src="assets/images/bct.png"/>
+              </a>
+              <!--<a href="http://online.gov.vn/HomePage/CustomAppDisplay.aspx?DocId=318" target="_blank">
+                <img class="w-150" src="../assets/images/bct.png"/>
+              </a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

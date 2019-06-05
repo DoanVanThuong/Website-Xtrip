@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Xtrip - Ứng dụng đặt phòng khách sạn, vé máy bay giá rẻ và tour du lịch</title>
+  <base href="/">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+  <meta name="theme-color" content="#00bf8f"/>
+
+  <meta name="description"
+        content="Ứng dụng du lịch thông minh giúp săn vé máy bay giá rẻ dễ dàng, đặt phòng khách sạn nhanh chóng và tìm mua tour du lịch hấp dẫn; nhiều ưu đãi mỗi ngày"/>
+  <meta name="keywords"
+        content="ứng dụng du lịch; săn vé máy bay; book khách sạn; book tour; đặt phòng khách sạn; vé máy bay giá rẻ; xtrip; ứng dụng xtrip; du lịch thông minh; ứng dụng du lịch xtrip; ứng dụng đặt phòng khách sạn; ứng dụng đặt vé máy bay; traveloka;"/>
+
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-MPD9HM7');
+  </script>
+
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '147717922421751');
+    fbq('set', 'agent', 'tmgoogletagmanager', '147717922421751');
+    fbq('track', "PageView");
+  </script>
+</head>
+
+<body>
+
+<!-- Google Tag Manager -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPD9HM7"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<app-root>
+  <!--<div class="splashscreen-container">
+    <div class="splashscreen-masker">
+      <div class="splashscreen-wrapper">
+        <div class="earth">
+          <img class="" src="assets/images/splashscreen/earth.png" alt="earth"/>
+        </div>
+        <div class="sky">
+          <div class="cloud">
+            <img class="" src="assets/images/splashscreen/cloud.png" alt="cloud"/>
+          </div>
+          <div class="cloud">
+            <img class="" src="assets/images/splashscreen/cloud.png" alt="cloud"/>
+          </div>
+        </div>
+        <div class="airplane">
+          <div class="fly-top-right">
+            <div class="flying">
+              <img class="" src="../assets/images/splashscreen/airplane.png" alt="airplane"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>-->
+</app-root>
+
+<div id="spinner" class="spinner-container">
+  <div class="spinner-box">
+    <div class="lds-spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="spinner-message"></div>
+  </div>
+</div>
+
+<script src="https://sp.zalo.me/plugins/sdk.js"></script>
+</body>
+
+</html>

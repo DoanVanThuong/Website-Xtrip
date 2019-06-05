@@ -1,0 +1,55 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade atm-popup "
+     role="dialog"
+     *ngIf="payment && payment.code"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content bg-white">
+      <div class="modal-header header">
+        <div class="row">
+          <div class="col-2">
+            <a class="d-block" (click)="hide()">
+              <img class="size-16x16" cdn-src="assets/images/icon/icon-close-green.svg">
+            </a>
+          </div>
+          <div class="col-8 text-center ">
+            <div class="title-heading font-20 font-black">Chọn ngân hàng</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-wrapper">
+          <div class="row">
+            <div class="col-12">
+              <payment-note [time]="payment.holdExpiry"></payment-note>
+            </div>
+            <div class="col-12 m-t-10">
+              <input type="text" class="form-control" [(ngModel)]="keyword" name="keyword"
+                     placeholder="Tìm ngân hàng...">
+              <div class="row">
+                <div class="col-12">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-l-none p-r-none"
+                        *ngFor="let item of payment.options | SearchBank:keyword; trackBy: trackByFn">
+                      <a (click)="selectBank(item)">
+                        <div class="d-flex justify-content-start align-items-center">
+                          <img class="size-60x30 m-r-20 img-contain"
+                               [src]="item.photo"
+                               [alt]="item.name"/>
+                          <span>{{item.name}}</span>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- /wrapper -->
+          </div>
+        </div>
+      </div>
+      <!-- /modal body -->
+    </div>
+  </div>
+</div>

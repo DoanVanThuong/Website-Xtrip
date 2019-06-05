@@ -1,0 +1,44 @@
+@import "./../../../../../less/_variables.less";
+
+.passenger-new-page {
+  margin-bottom: 60px;
+
+  .form {
+    .mat-form-field {
+      margin-top: 0;
+      width: 100%;
+
+      .mat-form-fiel-wrapper {
+        /*padding: 0;
+        margin: 0;*/
+
+        .mat-form-field-placeholder {
+          color: gray;
+        }
+
+        .mat-form-field-underline {
+          border-width: 0;
+        }
+      }
+    }
+  }
+
+  .passenger-info,
+  .passenger-more {
+    .title {
+      padding: 8px 12px;
+      font-size: 13px;
+      color: @gray-5;
+    }
+  }
+
+  .passenger-footer {
+    background-color: @gray-6;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
+  }
+}

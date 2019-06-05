@@ -1,0 +1,58 @@
+@import "_variables.less";
+
+.faq-banner {
+  .bg-banner {
+    background-image: url('../../../../../../assets/images/more/bg-banner.svg');
+    background-size: cover;
+    background-position: center bottom;
+    min-height: 400px;
+    padding: 20px;
+
+    .main-title {
+      font-size: 34px;
+      font-weight: 500;
+      color: @white;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    .sub-text {
+      font-size: 16px;
+      color: @white;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .form-input-search {
+      margin-top: 15px;
+
+      .form {
+        max-width: 601px;
+        margin: 0px auto;
+
+        .form-group {
+          .form-control {
+            padding: 20px 20px;
+            border-color: transparent;
+            font-size: 16px;
+            margin: 0;
+            border-radius: 50px;
+            color: @black;
+          }
+
+          .pos-icon {
+            right: 15px;
+            top: 15px;
+
+          }
+
+          a[type=submit] {
+            -webkit-appearance: unset;
+            -moz-appearance: unset;
+            appearance: unset;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,147 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.hotel-booked-room-detail {
+  color: @gray-2;
+
+  &.hotel-booked-room-detail-desktop {
+    color: @black;
+
+    .title {
+      background-color: @gray-17;
+      padding: 10px;
+      font-size: 15px;
+      font-weight: @font-normal;
+      margin: 0px;
+      color: @black
+    }
+
+    .list-group {
+      &.list-group-flush {
+        .list-group-item {
+          padding: 15px 0;
+        }
+      }
+    }
+
+    .room-description {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid @gray-3;
+
+      .info-label {
+        font-size: 13px;
+        color: @gray-1;
+      }
+
+      .info-value {
+        font-size: 18px;
+
+        color: @black;
+      }
+    }
+
+    .room-detail {
+      .badge {
+        margin-bottom: 10px;
+        margin-right: 10px;
+
+        &.badge-success {
+          background-color: @green-3;
+          font-weight: 400;
+          font-size: 15px;
+          padding: 4px 8px;
+          border-radius: 3px;
+          color: @white;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .hotel-pnr {
+      .sub-label {
+        font-weight: @font-normal;
+      }
+    }
+  }
+
+  &.hotel-booked-room-detail-mobile {
+
+    background-color: @gray-41;
+
+    .title {
+      font-size: 15px;
+      margin: 0;
+      padding: 9px 0;
+      color: @black;
+      font-weight: @font-medium;
+    }
+
+    .panel {
+      .border-radius(10px);
+      .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+      border-width: 0;
+      margin: 0;
+
+      .panel-body {
+        padding: 10px;
+
+        ul.list-group {
+
+          .list-group-item {
+            padding: 15px 0px;
+
+            &:first-child {
+              border-top-width: 0px;
+            }
+          }
+        }
+      }
+    }
+
+    .room-detail {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid @gray-3;
+
+      .badge {
+        padding: 4px 7px;
+        .border-radius(3px);
+        background-color: @gray-3;
+        color: @gray-1;
+        font-weight: @font-normal;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .hotel-pnr {
+    .sub-label {
+      font-style: italic;
+      font-weight: @font-medium;
+      color: @gray-9;
+      font-size: 13px;
+    }
+  }
+
+  .hotel-description {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid @gray-3;
+
+    .info-label {
+      font-size: 13px;
+      color: @gray-1;
+    }
+
+    .info-value {
+      font-size: 18px;
+      font-weight: @font-thin;
+      color: @black;
+    }
+  }
+
+}

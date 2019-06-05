@@ -1,0 +1,46 @@
+<div class="product-booking product-booking-desktop-page" [booking-step]="1">
+
+  <div class="main-body m-t-30">
+    <div class="container">
+      <div class="row">
+        <div class="col-8 left-section">
+          <signin-request-desktop></signin-request-desktop>
+
+          <product-combo-info [combo]="combo"></product-combo-info>
+
+          <contact-info [data]="contact"
+                        class="m-t-30"
+                        [heading]="'Thông tin người đặt'"
+                        [version]="2"
+                        (changes)="onContactChange($event)"
+                        [invalid]="isInvalid"></contact-info>
+
+          <booking-passenger-box class="m-t-30"
+                                  [data]="passengers"
+                                 [adults]="passenger.adults"
+                                 [children]="passenger.children"
+                                 [infants]="passenger.infants"
+                                 [seniors]="passenger.seniors"
+                                 (changes)="onPassengerChange($event)"
+                                 [invalid]="isInvalid"></booking-passenger-box>
+
+          <booking-pickup class="m-t-30"
+                          (changes)="onMessageChange($event)"></booking-pickup>
+
+          <booking-additional-info [delay]="1"
+                                   class="m-t-30"
+                                   [invalid]="isInvalid"
+                                   (changes)="onAdditionalInfoChange($event)"></booking-additional-info>
+        </div>
+        <div class="col-4 right-section">
+
+          <price-detail-box [totalPrice]="totalPrice"
+                            [summaryPrice]="priceSummary"
+                            [point]="point"
+                            [disabled]="onDisabledSubmit()"
+                            (submit)="onPayment()"></price-detail-box>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

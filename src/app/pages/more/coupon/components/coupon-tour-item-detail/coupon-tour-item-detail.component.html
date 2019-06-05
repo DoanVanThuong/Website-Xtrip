@@ -1,0 +1,21 @@
+<!--component html goes here -->
+<div class="coupon-tour-item-detail m-b-20 position-relative animated fadeIn">
+  <img class="m-b-none h-180 w-full img-fix bor-img"
+       defaultImage="assets/images/no-thumbnail.png"
+       [lazyLoad]="tour.photo.src | size: 300"
+       [alt]="tour.name"
+       [title]="tour.name"
+       onerror="this.src='assets/images/no-thumbnail.png'">
+  <div class="bor-detail p-10 h-100">
+    <div class="name">
+      {{tour.name}}
+    </div>
+    <div class="address">
+      {{tour.journey}}
+    </div>
+  </div>
+  <div class="position-absolute days">
+    <app-reviews-rating [rating]="tour.rating" [reviews]="tour.reviews"></app-reviews-rating>
+    <span class="w-days">{{tour.days}}N{{tour.nights}}Đ</span>
+  </div>
+</div>

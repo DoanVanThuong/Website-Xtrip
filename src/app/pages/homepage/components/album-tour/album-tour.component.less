@@ -1,0 +1,43 @@
+@import '_variables.less';
+
+.block.block-album-tour {
+
+  .album-tour {
+    &.album-tour-desktop {
+
+      .album-item {
+        &.album-item-desktop {
+          width: auto;
+        }
+      }
+    }
+
+    &.album-tour-mobile {
+      background-image: url('../../../../../assets/images/home/bg-album.svg');
+      background-color: @white;
+      background-position: center;
+      background-size: cover;
+      margin: -15px;
+      padding: 15px;
+
+      .owl-theme {
+        .owl-dots {
+          .owl-dot {
+            span {
+              background: transparent;
+              border: 1px solid @green-2;
+            }
+            &.active {
+              span {
+                background: @green-2;
+              }
+            }
+          }
+        }
+        .owl-stage-outer {
+          padding: 0px 15px !important;
+        }
+      }
+    }
+  }
+}

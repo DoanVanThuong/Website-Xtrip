@@ -1,0 +1,18 @@
+<div class="xtrip-module">
+
+  <!-- mobile -->
+  <div *ngIf="isMobile">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- desktop -->
+  <div *ngIf="isDesktop">
+    <app-header-desktop [step]="step"></app-header-desktop>
+
+    <div class="main-body-container">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer-desktop></app-footer-desktop>
+  </div>
+</div>

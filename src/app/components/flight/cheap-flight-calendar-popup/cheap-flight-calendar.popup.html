@@ -1,0 +1,49 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade cheap-flight-calendar-popup "
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title">
+          Tháng {{ currentMonth.month() + 1 }}, {{ currentMonth.year() }}
+          <div class="btn-group d-inline-block pull-right">
+            <button class="btn btn-green"
+                    title="Trở về"
+                    [disabled]="isLoading || onDisabledPrevMonth()"
+                    (click)="onSelectNextMonth(-1)">
+              <i class="fa fa-angle-left"></i>
+            </button>
+            <button class="btn btn-green"
+                    title="Kế tiếp"
+                    [disabled]="isLoading || onDisabledNextMonth()"
+                    (click)="onSelectNextMonth(1)">
+              <i class="fa fa-angle-right"></i>
+            </button>
+          </div>
+        </h6>
+      </div>
+      <div class="modal-body p-none">
+        <div class="d-flex justify-content-center align-items-center mn-h-400">
+
+          <loading [show]="isLoading" [title]="'Đang tải dữ liệu'"></loading>
+
+          <app-calendar [data]="flights"
+                        class="w-full"
+                        *ngIf="!isLoading"
+                        [month]="currentMonth.month()"
+                        [year]="currentMonth.year()"
+                        [options]="{startOfWeek: 1}"
+                        (select)="onSelectDate($event)"></app-calendar>
+        </div>
+        <div class="p-10">
+          <ul class="noted">
+            <li class="">Đơn vị tính VNĐ</li>
+            <li class="">Giá tham khảo: dựa trên dữ liệu kết quả tìm kiếm trong vòng 48 tiếng và có thể thay đổi</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

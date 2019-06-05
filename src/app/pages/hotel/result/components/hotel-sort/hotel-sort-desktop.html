@@ -1,0 +1,15 @@
+<div class="hotel-sort-desktop">
+  <div class="row">
+    <div class="col-md-9">
+      <ul class="d-flex">
+        <li *ngFor="let item of data | reverse" class="sort-item m-r-10 pointer" [class.active]="params.sortIndex == item.index">
+            <a (click)="onSelectSort(item.index)">{{item.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-9">
+
+    </div>
+  </div>
+
+</div>

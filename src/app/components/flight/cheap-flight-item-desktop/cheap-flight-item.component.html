@@ -1,0 +1,26 @@
+<div class="cheap-flight-item cheap-flight-item-desktop">
+  <a class="pointer"
+     (click)="onSelect(flight)"
+     [title]="flight.title">
+
+    <div class="cheap-flight-info">
+      <div class="cheap-flight-location text-truncate">
+        {{ flight.originAirport.location }}
+        <img class="size-12x12 m-l-5 m-r-5 m-t-n-3"
+             cdn-src="assets/images/icon/icon-arrow-right.svg" alt="icon"/>
+        {{ flight.destinationAirport.location}}
+      </div>
+      <div class="cheap-flight-airline text-truncate">
+        <span *ngIf="!!flight.carrier">
+          <img class="m-t-n-3 size-16x16"
+               [src]="flight.carrier.icon | size:20:20:true"
+               [alt]="flight.carrier.name"/>
+          {{ flight.carrier.name }}
+        </span>
+      </div>
+      <div class="cheap-flight-price text-truncate">
+        <app-price class="text-green font-bold font-16" [price]="flight.price"></app-price>
+      </div>
+    </div>
+  </a>
+</div>

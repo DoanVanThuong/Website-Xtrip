@@ -1,0 +1,29 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade popup-sync-request"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row text-center">
+          <div class="container-fluid">
+            <div class="title font-medium font-18">Đồng bộ vé đã đặt</div>
+          </div>
+          <div class="container-fluid m-t-10">
+            Bạn có muốn đồng bộ vé đã đặt vào tài khoản này không?
+          </div>
+        </div>
+
+        <div class="row text-center m-t-20">
+          <div class="col-6">
+            <button class="btn btn-cancel-outline btn-block" (click)="onCancel()">Không</button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-main btn-block" (click)="onSubmit()">Đồng bộ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,321 @@
+@import '_variables.less';
+
+.tour-journey-mobile-page {
+  .tour-journey {
+    height: 100%;
+
+    .tour-journey-group {
+      .tour-journey-item {
+        position: relative;
+        clear: both;
+        line-height: 1.25;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
+        .deposit-time {
+          position: relative;
+          float: left;
+          left: 0;
+          top: 0;
+          height: 100%;
+          text-align: right;
+          padding: 15px 20px 0 0;
+          text-align: center;
+
+          .month {
+            &.disabled {
+              color: @gray-9;
+            }
+          }
+
+          .year {
+            color: @gray-1;
+          }
+        }
+
+        .tour-description {
+          float: right;
+          position: relative;
+          text-align: left;
+          background-color: transparent;
+          padding: 15px 0 10px 20px;
+          border-width: 0;
+          color: @gray-2; // line
+          .mn-h-40 {
+            min-height: 40px;
+          }
+
+          .active-title {
+            font-weight: 700;
+            color: @green-2;
+          }
+
+          .disable-title {
+            color: @gray-9;
+          }
+
+          .journey {
+            font-weight: 500;
+            color: @black;
+            margin-top: 13px;
+          }
+
+          .detail-journey {
+            color: @gray-23;
+
+            li {
+              padding: 4px 0;
+            }
+          }
+
+          .detail-btn {
+            color: @orange-2;
+            border: 1px solid @orange-2;
+            font-weight: 500;
+            border-radius: 5px;
+            font-size: 13px;
+            padding: 3px 12px;
+          }
+
+          &:after {
+            content: '';
+            height: 100%;
+            border-left: 2px dashed @gray-3;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+          }
+
+          // dot
+          &.active-dot {
+            &:before {
+              content: url('../../../assets/images/icon/icon-current-location.svg');
+              height: 16px;
+              width: 16px;
+              border-radius: 50%;
+              position: absolute;
+              top: 15px;
+              left: -8px;
+              //   -webkit-transform: translateX(-50%);
+              //           transform: translateX(-50%);
+              z-index: 100;
+            }
+          }
+
+          &.disable-dot {
+            &:before {
+              //content: url('../../../../../../assets/images/icon/icon-deposit-disabled.svg');
+              height: 24px;
+              width: 24px;
+              border-radius: 50%;
+              position: absolute;
+              top: 15px;
+              left: 0;
+              //   -webkit-transform: translateX(-50%);
+              //           transform: translateX(-50%);
+              z-index: 100;
+            }
+          }
+        }
+
+        &:after {
+          clear: both;
+        }
+
+        &.deposit-pending {
+          .tour-description {
+            &:before {
+              top: 50%;
+              -webkit-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
+
+      &:first-child {
+        .tour-journey-item {
+          &:first-child {
+            .deposit-time {
+              padding-top: 0;
+              text-align: center;
+            }
+
+            .tour-description {
+              padding-top: 0;
+              width: 100%;
+
+              &:after {
+                top: 15px;
+                height: 100%;
+              }
+
+              &:before {
+                top: 0px;
+                background-color: @green-2;
+              }
+            }
+          }
+        }
+      }
+
+      &:last-child {
+        .tour-journey-item {
+          &:last-child {
+            .tour-description {
+              width: 100%;
+
+              &:after {
+                content: '';
+                height: 100%;
+                border-left: 2px dashed @gray-3;
+                position: absolute;
+                top: 0;
+                left: 0;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+              }
+
+              &:before {
+                background-color: @green-2;
+              }
+            }
+          }
+        }
+      }
+
+      &:last-child {
+        .end-dot {
+          width: 8px;
+          height: 8px;
+          background-color: @gray-3;
+          border-radius: 50%;
+          position: absolute;
+          left: -4px;
+          z-index: 1;
+          margin-top: 2px;
+        }
+      }
+    }
+
+    .green-title {
+      font-weight: 700;
+      color: @green-2;
+    }
+
+    .small-content {
+      height: 130px;
+      overflow: hidden;
+      text-align: justify;
+
+      p {
+        font-size: 15px;
+      }
+    }
+
+    .bor-more {
+      border: 1px solid @orange-2;
+      padding: 4px 8px;
+      border-radius: 50px;
+      color: @orange-2;;
+      font-size: 13px;
+    }
+  }
+}
+
+.tour-journey-desktop-page {
+  margin-top: 20px;
+
+  .tour-journey-group {
+    border-left: 1px dashed @gray-7;
+    padding: 0 19px 36px;
+    margin: 0px 25px;
+
+    .tour-dot {
+      width: 52px;
+      height: 52px;
+      background-color: @green-2;
+      color: @white;
+      border-radius: 50%;
+      left: -30px;
+      position: absolute;
+      overflow: hidden;
+
+      .text-in-dot {
+        padding: 5px;
+        text-align: center;
+        font-size: 13px;
+      }
+    }
+
+    .title-journey {
+      font-size: 16px;
+      font-weight: 500;
+      color: @black;
+      padding: 0 16px;
+      margin-top: 14px;
+    }
+
+    .btn-showmore {
+      border: 1px solid @orange-2;
+      border-radius: 5px;
+      padding: 6px 12px;
+      font-weight: 500;
+    }
+
+    .content {
+      padding: 0 0 0 18px;
+      margin-right: -45px;
+      width: 100%;
+
+      .sub-item {
+        font-size: 14px;
+        color: @gray-2;
+        line-height: 1.8;
+      }
+
+      .detail-journey {
+        text-align: justify;
+
+        .detail-text {
+          p {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .rotate-180 {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+    }
+
+    &:last-child {
+      padding: 0 19px 0px;
+      margin: 0px 25px -6px;
+
+      &::after {
+        content: url('../../../assets/images/icon/icon-current-location-gray.svg');
+        margin-left: -28px;
+      }
+    }
+  }
+
+  .green-title {
+    font-weight: 700;
+    color: @green-2;
+  }
+
+  .content {
+    p {
+      font-size: 15px;
+    }
+
+    .p-15-0 {
+      padding: 15px 0;
+    }
+  }
+}

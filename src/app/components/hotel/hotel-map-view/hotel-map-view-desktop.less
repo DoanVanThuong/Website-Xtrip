@@ -1,0 +1,82 @@
+@import "_variables.less";
+.map-view {
+  .back-btn {
+    top: 15px;
+    left: 30px;
+    background-color: @green-2;
+    padding: 5px 10px;
+    color: @white;
+    border-radius: 5px;
+  }
+  .info-btn {
+    top: 15px;
+    right: 30px;
+    background-color: @green-2;
+    padding: 5px 10px;
+    color: @white;
+    border-radius: 5px;
+  }
+  .h-map {
+    height: 768px;
+  }
+  .item-maker {
+    background-color: @white;
+    color: @green-2;
+    padding: 6px;
+    border: 1px solid @green-2;
+    min-width: 120px;
+    border-radius: 50px;
+    margin-top: -20px;
+    margin-left: -50px;
+    &.sold-out {
+      background-color: @gray-37;
+      color: @white;
+      border: 1px solid @gray-37;
+    }
+    &.selected {
+      background-color: @orange-2;
+      color: @white;
+      border: 1px solid @orange-2;
+    }
+   }
+  .si-content-wrapper {
+    padding: 10px;
+    .si-content {
+      overflow: unset;
+      min-width: 375px;
+      .img-info-window {
+        object-fit: cover;
+        max-width: 120px;
+        height: 136px;
+        border-radius: 5px;
+      }
+      .prefer {
+        color: @white;
+        background-color: @green-3;
+        padding: 4px;
+        border-radius: 3px;
+      }
+      .points {
+        color: @gray-1;
+      }
+      .p-r-i {
+        padding-right: inherit;
+      }
+      .sold-out-text {
+        color: @red-2;
+      }
+      .bg-rt-info {
+        background-color: @green-2;
+        color: @white;
+        padding: 4px 8px;
+        border-radius: 5px;
+      }
+      .position-rt {
+        top: 10px;
+        left: 10px;
+      }
+    }
+  }
+  
+
+}

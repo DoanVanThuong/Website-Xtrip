@@ -1,0 +1,63 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.cheap-flight-item {
+
+  &.cheap-flight-item-mobile {
+    width: 150px;
+    .border-radius(10px);
+    background-color: @white;
+    .transition(all 0.3s linear 0s);
+    .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+
+    .cheap-flight-image {
+      height: 120px;
+      overflow: hidden;
+      .border-radiuses(10px, 0, 0, 10px);
+      position: relative;
+
+      > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        -o-object-fit: cover;
+        .transition(all 0.5s linear 0s);
+
+      }
+    }
+
+    .cheap-flight-info {
+      padding: 10px;
+
+      .flight-location {
+        width: auto;
+
+        .location {
+          line-height: 1;
+
+          > img {
+            filter: blur(0);
+            -webkit-filter: blur(0);
+            display: inline-block;
+            width: auto;
+          }
+
+          + .location {
+            margin-top: 10px;
+            position: relative;
+
+            &:after {
+              position: absolute;
+              content: '';
+              width: 1px;
+              border-left: 1px dotted @green-2;
+              top: -12px;
+              left: 7px;
+              height: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

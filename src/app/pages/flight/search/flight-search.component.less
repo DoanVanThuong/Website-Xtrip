@@ -1,0 +1,42 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.flight-search {
+
+  .list-group {
+    > .list-group-item {
+      padding-left: 0;
+      padding-right: 0;
+      position: relative;
+
+    }
+  }
+
+  .btn-switch {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    .transform(translateY(50%));
+    z-index: 10;
+  }
+
+  .mat-form-field {
+    .mat-input-infix {
+      color: @gray-20;
+    }
+    .mat-input-element {
+      color: @black;
+    }
+    .mat-input-underline {
+      color: @gray-19;
+    }
+    .mat-input-wrapper {
+      padding-bottom: 0px;
+    }
+    .mat-input-underline {
+      height: 0px;
+    }
+  }
+}
+
+

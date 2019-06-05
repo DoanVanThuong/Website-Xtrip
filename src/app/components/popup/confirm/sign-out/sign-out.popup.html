@@ -1,0 +1,28 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade popup-sign-out-confirm"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="container-fluid text-center">
+            <h3 class="title">Đăng xuất</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container-fluid text-center">
+            <div class="description">Bạn có muốn đăng xuất?</div>
+          </div>
+        </div>
+        <div class="row m-t-15">
+          <div class="container-fluid text-center">
+            <button class="btn btn-cancel-outline mn-h-44" (click)="hide()">Hủy bỏ</button>
+            <button class="btn btn-main" (click)="onAccept()">Đăng xuất</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+@import "_variables.less";
+
+.hotel-full-screen-map {
+    .modal-header {
+        border-bottom: none;
+    }
+
+    .pos-back {
+        left: 20px;
+        top: 20px;
+        color: @white;
+    }
+
+    .bg-back {
+        background-color: @green-2;
+        padding: 4px 8px;
+    }
+
+    .pos-name {
+        z-index: 1;
+        width: 100%;
+    }
+
+    .border-facility {
+        border-top-left-radius: 20px !important;
+        border-top-right-radius: 20px !important;
+        // padding: 0px 14px 10px 14px;
+        background: @white;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        left: 0;
+        overflow: scroll;
+
+        a {
+            padding: 8px 0px;
+
+            &.fixed {
+               
+                position: fixed;
+                width: 100%;
+                background: @white;
+                z-index: 2;
+                left: 0px;
+                top: 49px;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+            }
+
+            .line-header {
+                width: 52px;
+                height: 5px;
+                border-radius: 100px;
+                background-color: rgba(0, 0, 0, 0.3);
+                margin: 0px auto;
+            }
+        }
+
+        .content {
+            .fixed {
+                z-index: 2;
+                position: fixed;
+                background: #fff;
+                top: 70px;
+                width: 100%;
+                left: 7px;
+            }
+        }
+
+        .list-place-hotel {
+            li {
+                font-weight: 400;
+                font-size: 13px;
+                position: relative;
+                letter-spacing: 0;
+                margin-left: 4px;
+                border-bottom: 1px solid @gray-38;
+                padding: 7px 0px;
+
+                &:before {
+                    content: "";
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: @green-2;
+                    position: absolute;
+                    top: 13px;
+                    left: -8px;
+                }
+
+                .distance {
+                    width: 150px;
+                    text-align: right;
+                }
+            }
+
+        }
+
+        &.top-50 {
+            top: 50px;
+            padding: 0px 14px;
+        }
+    }
+}

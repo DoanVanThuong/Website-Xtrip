@@ -1,0 +1,141 @@
+@import "_variables.less";
+
+.inbox-detail {
+
+  margin-bottom: 50px;
+  background-color: @gray-3;
+
+  .chatbox {
+
+    .chat-message {
+      position: relative;
+      padding: 5px;
+      margin-top: 10px;
+      font-size: 14px;
+      min-width: 50%;
+      clear: both;
+
+      &:after {
+        content: '';
+        clear: both;
+      }
+
+      .chat-user {
+        position: absolute;
+        top: 5px;
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      .chat-body {
+
+        .chat-time {
+          font-size: 13px;
+        }
+
+        .chat-content {
+          margin-top: 5px;
+          padding: 10px;
+          background-color: @white;
+          color: @black;
+          border-radius: 5px;
+        }
+      }
+
+      &.outgoing {
+        float: right;
+        .chat-user {
+          right: 5px;
+        }
+
+        .chat-body {
+          margin-right: 50px;
+
+          .chat-time {
+            text-align: right;
+          }
+
+          .chat-content {
+            background-color: @green-13;
+            border-top-right-radius: 0px;
+          }
+        }
+      }
+
+      &.ingoing {
+        float: left;
+
+        .chat-user {
+          left: 5px;
+        }
+        .chat-body {
+          margin-left: 50px;
+
+          .chat-content {
+            border-top-left-radius: 0px;
+          }
+        }
+      }
+    }
+  }
+
+  .message-footer {
+    background-color: @gray-3;
+
+    .message-close {
+      color: @gray-1;
+    }
+
+    .form {
+      background-color: @white;
+      padding: 5px;
+
+      .form-group {
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        > input {
+          font-size: 15px;
+          margin: 0;
+          padding: 10px 8px;
+          border-width: 0;
+          background-color: transparent;
+        }
+
+        &.inner-addon {
+          position: relative;
+
+          .icon-addon {
+            position: absolute;
+            padding: 6px;
+            top: 0;
+            background: transparent;
+            display: block;
+            color: @orange-2;
+          }
+
+          &.left-addon {
+            > input {
+              padding-left: 35px;
+            }
+            .icon-addon {
+              left: 0
+            }
+          }
+          &.right-addon {
+            > input {
+              padding-right: 35px;
+            }
+            .icon-addon {
+              right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

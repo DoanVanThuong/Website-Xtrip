@@ -1,0 +1,51 @@
+// component css goes here
+@import "_variables.less";
+@import "_mixins.less";
+
+.modal.hotel-room-popup-desktop {
+
+  .modal-dialog {
+
+    @media (min-width: 768px) {
+      max-width: 60%;
+    }
+
+    .modal-content {
+      .border-radius(10px);
+
+      .modal-header {
+        background-color: @gray-17;
+        .border-radiuses(10px, 0, 0, 10px);
+      }
+
+      .modal-body {
+        
+        .bo-r {
+          border-right: 1px solid @gray-3;
+        }
+        .mx-h-180 {
+          max-height: 180px;
+        }
+        .fac-item-bg {
+          background-color: @green-3;
+          padding: 4px 8px;
+          border-radius: 3px;
+          color: @white;
+        }
+        .remain-red {
+          color: @c-gg;
+        }
+        .remain-green {
+          color: @green-3;
+        }
+        .w-80-pc {
+          width: 80%;
+        }
+
+        .rotate {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+// component css goes here
+@import "_variables.less";
+@import './_mixins.less';
+
+.product-search-bar {
+  min-height: 100px;
+  background-color: @dark-gray;
+  width: 100%;
+  padding: 20px;
+
+  &.fixed-top {
+    z-index: 1000;
+  }
+
+  .product-search-form {
+    background-color: @white;
+    padding: 6px 20px;
+    border-radius: 10px;
+    min-height: 52px;
+
+    .search-destination {
+      .title-form {
+        font-size: 12px;
+        color: @gray-1;
+      }
+
+      .heading {
+        font-size: 14px;
+        color: @gray-1;
+        background-color: @gray-13;
+        padding: 5px 10px;
+      }
+
+      .list-group-item {
+        padding: 5px 0;
+
+        .main-text {
+          color: @gray-2;
+          font-weight: 500;
+        }
+
+        .sub-text {
+          color: @gray-1;
+        }
+      }
+
+      .result-product-location {
+        height: 500px;
+        // min-width: 600px;
+        width: calc(~"100% + 40px");
+        position: absolute;
+        background-color: @white;
+        margin-top: 20px;
+        margin-left: -10px;
+        overflow-x: hidden;
+        z-index: 1050;
+        border-radius: 10px;
+      }
+
+      .history-item {
+        padding: 2px 8px;
+        border-radius: 3px;
+        transition: all .25s linear;
+
+        &:hover {
+          background-color: @green-2;
+          color: @white;
+          transition: all .25s linear;
+        }
+      }
+
+      .product-activities-item {
+        img {
+          margin-top: 2px;
+        }
+      }
+    }
+
+    .p-5-10 {
+      padding: 5px 10px;
+    }
+  }
+
+  .form.form-desktop {
+    .form-group {
+      margin: 0;
+      line-height: 1;
+
+      .form-control {
+        height: 22px;
+        font-weight: 900;
+      }
+    }
+  }
+
+  .pos-button {
+    position: absolute;
+    right: 15px;
+  }
+
+  .btn-main-v2 {
+    border-radius: 10px;
+    box-shadow: none;
+
+    &.btn-search-product {
+      padding: 14px 17px;
+    }
+  }
+
+  .item-type {
+    color: @white;
+    font-size: 16px;
+    margin-right: 20px;
+  }
+}

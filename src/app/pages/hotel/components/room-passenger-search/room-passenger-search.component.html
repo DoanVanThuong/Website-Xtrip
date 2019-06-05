@@ -1,0 +1,12 @@
+<div class="room-passenger-search-wp">
+  <ul class="list-travel-type  list-unstyled">
+    <li *ngFor="let roomType of roomTypes; let i = index; trackBy:trackByFn" [title]="roomType.title"
+      [class.active]="type === roomType.type" (click)="selectTypeRoom(roomType)">
+      <div class="font-14">{{roomType.title}} </div>
+      <div class="font-12 text-dark-gray" *ngIf="!!roomType.subTitle">{{roomType.subTitle}}</div>
+      <a *ngIf="!roomType.subTitle">
+        <i class="fa fa-angle-right fa-2x text-green" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>

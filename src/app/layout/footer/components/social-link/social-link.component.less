@@ -1,0 +1,59 @@
+@import './_variables.less';
+@import './_mixins.less';
+
+.social-contact-link {
+  .chat-with {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+
+    > a {
+      position: fixed;
+      .transition(all .24s linear 0s);
+      z-index: 1000;
+      right: 0;
+      width: 150px;
+      color: @white;
+
+      &.show-social {
+        right: 180px;
+      }
+
+      &.top-section {
+        padding-top: 5px;
+        bottom: 60px;
+        height: 36px;
+        background-color: @green-17;
+        border-top-left-radius: 8px;
+        line-height: 1.2;
+
+        .phone {
+          font-size: 11px;
+        }
+
+        .phone-number {
+          font-size: 13px;
+          font-weight: 500;
+        }
+      }
+
+      &.bot-section {
+        padding-top: 14px;
+        bottom: 10px;
+        height: 50px;
+        background-color: @green-2;
+        border-bottom-left-radius: 8px;
+      }
+    }
+
+    .social-area {
+      position: fixed;
+      background-color: @green-26;
+      padding: 13px 23px;
+      .transition(all .24s linear 0s);
+      z-index: 1000;
+      right: 0;
+      bottom: 10px;
+    }
+  }
+}

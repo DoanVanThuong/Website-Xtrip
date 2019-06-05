@@ -1,0 +1,44 @@
+<!--component html goes here -->
+<div class="tour-tag-filter-page">
+  <div class="row animated fadeIn">
+    <div class="col-12 tag-filter-area">
+      <div class="d-flex">
+        <img class="m-b-none size-48x48" cdn-src="assets/images/image-date.svg" alt="img" />
+        <div class="clear-filter-text">
+          Không tìm thấy tour phù hợp. Hãy thử lại với ngày khác hoặc điều chỉnh lại bộ lọc
+        </div>
+      </div>
+      <ul class="clear-filter-item-area text-black d-flex flex-wrap" *ngIf="!!originalFilter">
+        <li class="clear-filter-item" *ngIf="!!params.prices">
+          {{params.prices.split(",")[0] | currencyMoney: ''}} - {{params.prices.split(",")[1] | currencyMoney: ''}}
+          <span class="text-underline">đ</span>
+          <span>
+            <a (click)="removeFilter('prices')"><img class="m-b-none m-t-n-2 size-12x12" cdn-src="assets/images/icon/icon-close-2.svg" alt="img" /></a>
+          </span>
+        </li>
+        <li class="clear-filter-item" *ngIf="!!params.days">
+          {{params.days.split(",")[0]}} - {{params.days.split(",")[1]}} ngày
+          <span>
+            <a (click)="removeFilter('days')"><img class="m-b-none m-t-n-2 size-12x12" cdn-src="assets/images/icon/icon-close-2.svg" alt="img" /></a>
+          </span>
+        </li>
+        <li class="clear-filter-item" *ngIf="!!params.time && params.time > 0">
+          {{params.time === '1' ? 'Ban ngày' : 'Ban đêm'}}
+          <span>
+            <a (click)="removeFilter('time')"><img class="m-b-none m-t-n-2 size-12x12" cdn-src="assets/images/icon/icon-close-2.svg" alt="img" /></a>
+          </span>
+        </li>
+
+        <li *ngFor="let item of tagsServiceItem">
+          <span class="d-block clear-filter-item" *ngIf="item != '0'" >
+              {{getNameService(item)}}
+              <span>
+                <a (click)="clearServiceItem(item)"><img class="m-b-none m-t-n-2 size-12x12" cdn-src="assets/images/icon/icon-close-2.svg" alt="img" /></a>
+              </span>
+          </span>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>

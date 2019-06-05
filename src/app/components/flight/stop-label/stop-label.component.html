@@ -1,0 +1,9 @@
+<div class="d-inline-block">
+  <span *ngIf="lock">
+    <img class="m-t-n-6 {{mode === 'list' ? 'size-12x12':'size-14x14'}}" cdn-src="assets/images/icon/icon-clock.svg"
+         alt="lock"/>
+  </span>
+  <span *ngIf="duration">{{ duration | duration }}, </span>
+  <span *ngIf="!isStop">{{ stop == 0 ? 'bay thẳng' : (stop == 1 ? '1 điểm dừng' : '+2 điểm dừng')}}</span>
+  <span *ngIf="isStop">{{stop == 0 ? 'bay thẳng' : (stop == 1 ? '2 chặng' : '3 chặng')}}</span>
+</div>

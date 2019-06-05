@@ -1,0 +1,41 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.cheap-flight-item {
+
+  &.cheap-flight-item-desktop {
+    width: auto;
+    background-color: @gray-17;
+    .border-radius(3px);
+    .box-shadow(0, 0px, 3px, rgba(0, 0, 0, .2));
+    .transition(all .5s linear 0s);
+
+    &:hover {
+      .box-shadow(0, 0px, 10px, rgba(0, 0, 0, .3));
+    }
+
+    .cheap-flight-info {
+      padding: 10px;
+      color: @gray-2;
+
+      .cheap-flight-location {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .cheap-flight-airline {
+        font-size: 13px;
+        min-height: 20px;
+      }
+
+      .cheap-flight-price {
+        line-height: 1;
+        margin-top: 10px;
+        font-size: 16px;
+        font-weight: 500;
+        color: @green-2;
+      }
+    }
+  }
+}

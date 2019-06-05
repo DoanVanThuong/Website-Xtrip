@@ -1,0 +1,54 @@
+@import '_variables.less';
+@import './_mixins.less';
+
+.flight-sortable {
+  .card {
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-width: 0;
+    .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .1));
+
+    .card-header {
+      background-color: @green-2;
+      padding: 15px;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+
+      .card-title {
+        color: @white;
+        font-size: 18px;
+        font-weight: 600;
+
+        > span {
+          color: @white;
+          font-weight: 400;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .card-body {
+      padding: 5px 15px;
+
+      .options {
+        > a {
+          min-width: 120px;
+          padding: 10px;
+          transition: all .25s linear;
+          font-size: 14px;
+          border-radius: 5px;
+          border: 1px solid transparent;
+          display: inline-block;
+          text-align: center;
+
+          &.active, &:hover, &:active, &:focus {
+            border-color: @orange-2;
+            color: @orange-2;
+            font-weight: 500;
+          }
+        }
+
+      }
+    }
+  }
+}

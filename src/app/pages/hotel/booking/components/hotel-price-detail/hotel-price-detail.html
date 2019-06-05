@@ -1,0 +1,40 @@
+<!--component html goes here -->
+<div class="">
+  <div class="hotel-price-detail">
+    <div class="row m-l-none m-r-none">
+      <div class="col-12 p-l-none p-r-none">
+        <div class="title">
+          {{title}}
+        </div>
+      </div>
+      <div class="col-12 b-r-10 shadow bg-white m-t-5">
+        <div class="row p-15-0" *ngFor="let item of priceSummary.detailItems">
+          <div class="col-7">{{item.title}}</div>
+          <div class="col-5 text-right font-medium">{{item.price | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+        </div>
+        <div class="row">
+          <div class="col-12 p-l-none p-r-none">
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="row m-t-15" *ngFor="let item of priceSummary.totalItems">
+          <div class="col-7 font-bold">{{item.title}}</div>
+          <div class="col-5 text-right font-bold text-main">{{item.price | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="bg-point m-t-10">
+              <img class="m-b-0 m-t-n-3" cdn-src="assets/images/hotel/desktop/price-point.svg" alt="img">
+              Nhận được <span class="font-bold">{{room.points | currencyMoney: ''}}</span> điểm
+            </div>
+            <div class="m-t-20 m-b-20">
+              <button class="btn btn-main-v2 w-full font-medium p-10"
+                [ngClass]="{'disabled': disabled }"
+                (click)="bookHotel()">Tiến hành thanh toán</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

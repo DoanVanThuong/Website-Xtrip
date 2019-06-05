@@ -1,0 +1,143 @@
+<div class="select-option-page bg-white">
+  <app-header [fixed]="true" heading="Số khách" [back]="true" [version]="3"></app-header>
+
+  <div class="main-body bg-white" min-height>
+    <div class="container">
+
+      <div class="loading-wrapper" *ngIf="isLoading">
+        <loading [show]="isLoading"></loading>
+      </div>
+
+      <section class="passenger-selector-wp p-t-20">
+        <div class="row">
+          <div class="col-12">
+            <div class="title">Số khách</div>
+            <div class="passenger-content shadow b-r-10">
+              <div class="list-group list-group-flush ">
+                <div class="list-group-item">
+                  <div class="row">
+                    <div class="col-7 p-t-5">
+                      <span class="font-bold">Người lớn</span>
+                      <span class="intro">({{combo.minAdultAge}} - {{combo.maxAdultAge}} tuổi)
+                      </span>
+                    </div>
+                    <div class="col-5 text-right">
+                      <app-counter [min]="combo.minPax" [max]="combo.maxPax" [value]="adults"
+                                   (change)="onPeopleChanges($event, 'adult')" [iconAdd]="iconAdd"
+                                   [iconMinus]="iconMinus">
+                      </app-counter>
+                    </div>
+                  </div>
+                </div>
+                <div class="list-group-item" *ngIf="combo.allowChildren">
+                  <div class="row">
+                    <div class="col-7 p-t-5">
+                      <span class="font-bold">Trẻ em</span>
+                      <span class="intro">({{combo.minChildAge}} - {{combo.maxChildAge}} tuổi)
+                      </span>
+                    </div>
+                    <div class="col-5 text-right">
+                      <app-counter [min]="combo.minChildren" [max]="combo.maxChildren" [value]="childrens"
+                                   (change)="onPeopleChanges($event, 'children')" [iconAdd]="iconAdd"
+                                   [iconMinus]="iconMinus">
+                      </app-counter>
+                    </div>
+                  </div>
+                </div>
+                <div class="list-group-item" *ngIf="combo.allowSeniors">
+                  <div class="row">
+                    <div class="col-7 p-t-5 p-r-none">
+                      <span class="font-bold">Người cao tuổi</span>
+                      <span class="intro">({{combo.minSeniorAge}} - {{combo.maxSeniorAge}} tuổi)
+                      </span>
+                    </div>
+                    <div class="col-5 text-right">
+                      <app-counter [min]="combo.minSeniors" [max]="combo.maxSeniors" [value]="seniors"
+                                   (change)="onPeopleChanges($event, 'senior')" [iconAdd]="iconAdd"
+                                   [iconMinus]="iconMinus">
+                      </app-counter>
+                    </div>
+                  </div>
+                </div>
+                <div class="list-group-item" *ngIf="combo.allowInfant">
+                  <div class="row">
+                    <div class="col-7 p-t-5">
+                      <span class="font-bold">Em bé</span>
+                      <span class="intro">({{combo.minInfantAge}} - {{combo.maxInfantAge}} tuổi)
+                      </span>
+                    </div>
+                    <div class="col-5 text-right">
+                      <app-counter [min]="0" [max]="10" [value]="infants" (change)="onPeopleChanges($event, 'infant')"
+                                   [iconAdd]="iconAdd" [iconMinus]="iconMinus"></app-counter>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /passenger-->
+
+      <section class="time-slot-wp m-t-30" *ngIf="!!timeSlots.length">
+        <div class="row">
+          <div class="col-12">
+            <div class="title">Chọn khung giờ</div>
+            <ul class="list-unstyled list-inline list-time-slot">
+              <li *ngFor="let item of timeSlots; let i = index" (click)="onSelectTimeSlot(item)"
+                  [class.active]="selectedTimeSlot === item">
+                <div class="d-flex justify-content-center align-items-center">{{item.name}}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- /time-slot -->
+
+      <!-- dịch vụ cộng thêm -->
+      <section class="options-wp m-t-30 bg-white" *ngIf="!!perBookings && detectType()">
+        <div class="row">
+          <div class="col-12">
+            <div class="title">Dịch vụ cộng thêm</div>
+            <div class="content-option shadow b-r-10">
+              <ul class="list-unstyled list-group-flush">
+                <li class="list-group-item"
+                    *ngFor="let item of perBookings; trackBy: trackByFn"
+                    [class.p-none]="detectType() === 1">
+                  <product-perbooking-item [item]="item" [options]="perBookings"
+                                           (onChange)="onChangePerbooking($event)"></product-perbooking-item>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /options -->
+
+    </div>
+  </div>
+  <div class="fixed-bottom footer  shadow bg-white">
+    <div class="container">
+      <div class="row">
+        <div class="w-full">
+          <div class="footer-detail-product d-flex justify-content-between align-items-center p-l-15">
+            <div class="price-info">
+              <div class="font-medium">Tổng tiền</div>
+              <div class="price">
+                {{ totalPrice | currencyMoney: '' }}
+                <span class="text-underline font-16">đ</span>
+              </div>
+            </div>
+            <div class="btn-footer" [class.disabled]="detectDisabled()">
+              <button class="btn btn-main font-black font-16 "
+                      (click)="onBooking()"
+                      [disabled]="detectDisabled()">
+                Đặt ngay
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

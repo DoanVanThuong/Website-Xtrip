@@ -1,0 +1,38 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade popup-confirm-back"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row text-center">
+          <div class="container-fluid">
+            <div class="title font-medium font-18">Thông báo</div>
+          </div>
+          <div class="container-fluid m-t-10">
+            Bạn có muốn quay lại trang trước không?
+            <p>
+              Lưu ý: thông tin bạn nhập sẽ được làm mới
+            </p>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          <div class="col-6">
+            <button class="btn btn-cancel-outline btn-block p-10"
+                    (click)="onBack()">
+              {{ labelCancel || 'Quay lại'}}
+            </button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-main btn-block p-10"
+                    (click)="onCancel()">
+              {{ labelOk || 'Tiếp tục' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

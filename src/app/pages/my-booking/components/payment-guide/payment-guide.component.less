@@ -1,0 +1,57 @@
+@import '_variables.less';
+.payment-guide-page {
+  color: @black;
+  font-size: 14px;
+  ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+    &.steps {
+      >li {
+        margin-top: 10px;
+        color: @gray-2;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .bank-info {
+    margin-top: 20px;
+    .title {
+      width: 100%;
+      background-color: @gray-17;
+      font-size: 13px;
+      font-weight: 500;
+      color: @green-2;
+      padding: 10px 30px;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        padding: 10px 30px;
+        color: @black;
+        font-size: 16px;
+        .label {
+          font-size: 13px;
+          font-weight: 400;
+          color: @gray-1 !important;
+          padding: 0;
+          text-transform: unset;
+        }
+        &.line {
+          height: 1px;
+          position: relative;
+          margin: 0 30px;
+          padding: 0;
+          border-top: 1px solid @gray-8;
+        }
+      }
+    }
+  }
+  .m-a {
+    margin: auto;
+  }
+}

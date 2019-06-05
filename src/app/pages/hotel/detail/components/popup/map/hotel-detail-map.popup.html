@@ -1,0 +1,42 @@
+<div bsModal #popup="bs-modal" class="modal fade hotel-full-screen-map" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-body p-0 position-relative">
+        <div class="modal-header header position-absolute pos-name"  (click)="onMapClicked($event)">
+          <div class="row">
+            <div class="col-2">
+              <a (click)="hide()" class="d-block size-24x24 text-center">
+                <img class="size-32x32" cdn-src="assets/images/hotel/detail/close.svg" (click)="hide()">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper" min-height>
+          <agm-map #gm [ngStyle]="{'height.vh': 100}" [latitude]="latitude" [longitude]="longitude" [zoom]="15"
+            [gestureHandling]="'greedy'" [styles]="mapStyles" [disableDefaultUI]="true" [zoomControl]="false">
+            <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="icon">
+              <agm-info-window>
+                <strong class="text-black">{{name}}</strong>
+              </agm-info-window>
+            </agm-marker>
+          </agm-map>
+        </div>
+        <div class="border-facility " [class.top-50]="isShowPlace" (click)="onShowListPlace()">
+          <a class="d-block" [class.fixed]="isShowPlace">
+            <div class="line-header"></div>
+          </a>
+          <div class="content animated slideInUp" [class.hidden]="!isShowPlace">
+            <div class="font-16 font-bold" [class.fixed]="isShowPlace">Địa danh phổ biến</div>
+            <ul class="list-unstyled list-place-hotel m-t-10" [class.m-t-50]="isShowPlace">
+              <li class="d-flex justify-content-between"
+                *ngFor="let place of places; let i = index; trackBy: trackByFn">
+                <div class="m-l-4">{{place.name}}</div>
+                <div class="distance">{{place.distance}}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

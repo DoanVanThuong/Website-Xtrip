@@ -1,0 +1,241 @@
+<div class="booking-detail booking-tour-detail" *ngIf="!!tour">
+  <div class="booking-header" scroll>
+    <div class="row">
+      <div class="col-2">
+        <div class="back" (click)="back()">
+          <img class="m-b-0 m-t-5" cdn-src="assets/images/icon-back.png" alt="back"/>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="tour-name-header font-20 text-white text-center text-truncate">{{tour.tourName}}</div>
+      </div>
+      <div class="col-2"></div>
+    </div>
+  </div>
+  <!-- /tour header -->
+
+  <div class="tour-image">
+    <img class="img-fluid"
+         defaultImage="assets/images/no-thumbnail.png"
+         [lazyLoad]="tour.photo.src | size: 380"
+         onerror="this.src = 'assets/images/no-thumbnail.png'"
+         [title]="tour.tourName"
+         [alt]="tour.tourName"/>
+  </div>
+  <!--/tour image  -->
+
+  <div class="tour-info">
+    <div class="tour-name">
+      <strong>{{ tour.tourName }}</strong>
+    </div>
+    <div class="tour-status">
+      <booking-status-tour [status]="tour.status" [statusName]="tour.statusName" [fill]="true" [icon]="true"></booking-status-tour>
+    </div>
+    <div class="tour-description">
+      <div class="row">
+        <div class="col-5 tour-time">
+          <div class="info-label">Ngày đi</div>
+          <div class="info-value">{{ tour.departDate | departDate:false }}</div>
+        </div>
+        <div class="col-7 tour-from">
+          <div class="info-label">Khởi hành từ</div>
+          <div class="info-value text-truncate">{{ tour.departPlace }}</div>
+        </div>
+        <!-- <div class="col-4 tour-supplier" *ngIf="tour.supplier.logo != null">
+          <div class="info-label">Tổ chức bởi</div>
+          <div class="info-value">
+            <img [src]="tour.supplier.logo.src"
+                 onerror="this.src='assets/images/no-thumbnail.png'"
+                 alt="img"/>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="tour-comment" *ngIf="tour.isReviewable && !tour.isReviewed">
+      <a [routerLink]="['comment']" class="tour-review">
+        <img cdn-src="assets/images/icon/icon-star-outline-orange.svg"/> Nhận xét của bạn
+      </a>
+    </div>
+    <div class="tour-comment" *ngIf="tour.isReviewed">
+      <a class="tour-reviewed">
+        <img cdn-src="assets/images/icon/icon-reviewed.svg"/> Đã nhận xét
+      </a>
+    </div>
+  </div>
+  <!--/tour information-->
+
+  <div class="tour-booking-info">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item pos-deposit-progress-bar">
+        <a [routerLink]="['/my-booking/tour', tour.code, 'deposit-history']" *ngIf="tour.isDeposited && !!tour.payments.length">
+          <app-deposit-progress-bar [data]="tour" [icon]="!!tour.payments.length ? true : false"></app-deposit-progress-bar>
+        </a>
+        <a *ngIf="tour.isDeposited && !tour.payments.length">
+          <app-deposit-progress-bar [data]="tour" [icon]="!!tour.payments.length ? true : false"></app-deposit-progress-bar>
+        </a>
+
+        <div class="row p-0-16" *ngIf="utilityHelper.findInList(tour.status, [STATUS.UNPAID, STATUS.CANCEL, STATUS.PENDING, STATUS.DEPOSIT])">
+          <div class="p-r-none m-t-10 m-b-10" *ngIf="utilityHelper.findNotInList(tour.status, [STATUS.PAID, STATUS.WAITING]) && !!tour.paymentPending"
+            [class.col-6]="tour.paymentDetail.method === METHOD.STORE"
+            [class.col-12]="tour.paymentDetail.method != METHOD.STORE">
+            <div class="tour-keep-place">
+              <div class="title">Thời hạn thanh toán</div>
+              <div class="countdown">
+                <countdown [time]="tour.holdExpiry" (submit)="onExpired()"></countdown>
+              </div>
+              <div class="note">
+                Hết hạn lúc {{ tour.holdExpiry | moment:'HH:mm'}}, ngày {{ tour.holdExpiry | moment:"DD/MM" }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6 m-t-16 m-b-16 text-right" *ngIf="tour.paymentDetail.method === METHOD.STORE && !!tour.paymentPending">
+            <div class="payoo-payment">
+              <div class="title">Mã thanh toán Payoo</div>
+              <div class="transaction-number">{{ tour.paymentDetail.transactionNo }}</div>
+            </div>
+          </div>
+        </div>
+
+      </li>
+      <li class="list-group-item">
+        <a [routerLink]="['qrcode']">
+          <div class="row">
+            <div class="col-6 item">Mã đặt tour</div>
+            <div class="col-6 text-right text-black">
+              {{ tour.code }}
+              <span><img class="qrcode m-b-0 m-l-5" cdn-src="assets/images/icon/qr-code.svg" alt="QRCode"/></span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-5 item">Khách đặt tour</div>
+          <div class="col-7 text-right text-black">
+            {{ tour.contactName }}
+          </div>
+        </div>
+      </li>
+      <li class=" list-group-item">
+        <div class="row">
+          <div class="col-3 item p-r-none">Số người</div>
+          <div class="col-9 text-right text-black">
+            {{ tour | peopleNumber }}
+          </div>
+        </div>
+      </li>
+      <li class=" list-group-item" *ngIf="!!tour.passengers.length">
+        <a [routerLink]="['passenger']">
+          <div class="row">
+            <div class="col-7 item">Thông tin khách hàng</div>
+            <div class="col-5 text-right text-black">
+              Chi tiết
+              <img cdn-src="assets/images/icon/arrow-right.svg"/>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="list-group-item"
+          [routerLink]="['/my-booking/tour', tour.code, 'price']" [queryParams]="tour.status != STATUS.WAITING && tour.status != STATUS.PAID && !!tour.isDeposited ? {title: 'Chi tiết giá'} : {title: 'Tổng tiền'}">
+        <div class="row">
+          <div class="col-6">
+            <strong>{{tour.status != STATUS.WAITING && tour.status != STATUS.PAID && !!tour.isDeposited ? 'Chi tiết giá' : 'Tổng tiền'}}</strong>
+          </div>
+          <div class="col-6 text-right">
+            <strong>{{ tour.totalPrice | currencyMoney: '' }} <span class="text-underline">đ</span></strong>
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+  <!--/tour booking information-->
+
+  <div class="tour-booking-info m-t-10 p-b-10">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"
+          *ngIf="utilityHelper.findNotInList(tour.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING, STATUS.DEPOSIT])">
+        <a class="d-block" [routerLink]="['payment-guide']">
+          Hướng dẫn thanh toán
+          <span class="pull-right">
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </span>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="d-block" (click)="openJourneyPopup()">
+          Lịch trình
+          <a class="pull-right">
+            <img cdn-src="assets/images/icon/arrow-right.svg"/>
+          </a>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="d-block" (click)="openPolicyPopup()">
+          Chính sách
+          <a class="pull-right">
+            <img cdn-src="assets/images/icon/arrow-right.svg" />
+          </a>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="d-block" (click)="openTermPopup()">
+          Điều khoản
+          <a class="pull-right">
+            <img cdn-src="assets/images/icon/arrow-right.svg" />
+          </a>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="d-block" href="tel:{{ CAPP.SUPPORT_CENTER }}">
+          <img class="m-r-10" cdn-src="assets/images/icon/icon-phone.svg"/> Hỗ trợ qua điện thoại
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="d-block" (click)="gotoRequestSupport()">
+          <img class="m-r-10" cdn-src="assets/images/icon/icon-support.svg"/> Yêu cầu hỗ trợ
+        </a>
+      </li>
+      <!-- <li class="list-group-item" *ngIf="tour.status != STATUS.DEPOSIT">
+        <change-payment-method [status]="tour.status"
+                               [module]="'tour'"
+                               [code]="tour.code"></change-payment-method> -->
+      <li class="list-group-item" 
+        *ngIf="utilityHelper.findNotInList(tour.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING]) && tour.paymentPending">
+        <a class="btn btn-main-v2 btn-block p-10 font-18"
+           [routerLink]="['/payment']"
+           [queryParams]="{reservationCode: tour.code, module: 'tour'}">
+          Đổi thanh toán
+        </a>
+      </li>
+      <li class="list-group-item" *ngIf="tour.status === STATUS.DEPOSIT && !tour.paymentPending">
+        <button class="btn btn-main-v2 w-full" (click)="onContinuedDeposit(tour.code)">
+          <span class="text-white font-18">Thanh toán tiếp</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <app-tour-deposit-popup 
+    [data]="tourDepositItems" 
+    (submit)="onSubmitDeposit($event)" 
+    [tips]="'Bạn có thể thanh toán tại văn phòng với số tiền lớn hoặc nhỏ hơn mức xtrip đề xuất.'">
+  </app-tour-deposit-popup>
+  
+</div>
+
+<!-- tour journey detail popup -->
+<app-tour-journey-detail-popup [data]="journey"></app-tour-journey-detail-popup>
+
+<!-- tour policy detail popup -->
+<app-tour-policy-detail-popup 
+  [data]="!!tourDetail.policyContent ? tourDetail.policyContent : tourDetail.policy" 
+  [mode]="!!tourDetail.policyContent ? 'new' : 'old'">
+</app-tour-policy-detail-popup>
+
+<!-- tour term detail popup -->
+<app-tour-term-detail-popup 
+  [data]="!!tourDetail.termsContent ? tourDetail.termsContent : tourDetail.terms" 
+  [mode]="!!tourDetail.termsContent ? 'new' : 'old'">
+</app-tour-term-detail-popup>

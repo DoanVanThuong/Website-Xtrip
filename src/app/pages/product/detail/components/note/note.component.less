@@ -1,0 +1,22 @@
+@import '_variables.less';
+
+.list-note{
+    li {
+        font-size: 15px;
+        font-weight: 500;
+        color:@black;
+        text-align: justify;
+        padding-left: 10px;
+        position: relative;
+        &:before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: @orange-2;
+            position: absolute;
+            top:8px;
+            left:0;
+        }
+    }
+}

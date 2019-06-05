@@ -1,0 +1,40 @@
+<!--component html goes here -->
+<div class="product-activities-mobile-page">
+  <div class="bg-header bg-activities animated fadeInUp">
+    <div class="nav-icon">
+      <a class="d-block" [routerLink]="[ '/' ]">
+        <img class="m-b-none" cdn-src="assets/images/icon/icon-back-white.svg" alt="img"/>
+      </a>
+    </div>
+    <h1 class="title m-none">
+      Vé vui chơi
+    </h1>
+    <div class="search-bar">
+      <a class="d-block" (click)="openSearchPopup()">
+          <span class="m-l-10 font-14"><span class="p-r-8">
+            <i class="fa fa-search icon-color"
+               aria-hidden="true"></i></span>Tìm điểm đến, hoạt động vui chơi…</span>
+      </a>
+    </div>
+  </div>
+  <div class="wrapper animated fadeInUp">
+
+    <section class="favorite-location">
+      <app-product-popular-location [title]="'Điểm đến phổ biến'"
+                                    [type]="PRODUCT_TYPE.ACTIVITIES"></app-product-popular-location>
+    </section>
+
+    <!-- <section class="your-suggestion">
+      <app-product-suggestion [title]="'Gợi ý cho bạn'" [type]="PRODUCT_TYPE.ACTIVITIES" [options]="carouselOptions"></app-product-suggestion>
+    </section> -->
+
+    <!-- <section class="top" >
+      <app-product-top [title]="'Top vé vui chơi'" [type]="PRODUCT_TYPE.ACTIVITIES" [options]="carouselOptions"></app-product-top>
+    </section> -->
+
+  </div>
+</div>
+
+<product-location-selector-popup (select)="onSelectLocation($event)"
+                                 [icon]="'isClose'"
+                                 [type]="PRODUCT_TYPE.ACTIVITIES"></product-location-selector-popup>

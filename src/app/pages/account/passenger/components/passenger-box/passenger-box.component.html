@@ -1,0 +1,98 @@
+<div class="passenger-box animated zoomIn ">
+  <div class="panel card panel-desktop {{ isUpdate ? 'm-b-20 m-t-20':'' }}">
+    <div class="panel-body card-body ">
+      <div class="row">
+        <div class="container-fluid">
+          <form [formGroup]="form"
+                id="form"
+                class="form form-desktop m-t-10"
+                (submit)="onSubmit(form.value)"
+                novalidate>
+            <div class="row">
+              <div class="container-fluid">
+                <div class="form-group">
+                  <div class="control-label">Danh xưng:</div>
+                  <div class="vocatives m-t-10">
+                    <button class="btn btn-main-outline"
+                            type="button"
+                            [class.active]="title === vocative"
+                            *ngFor="let vocative of vocatives; trackBy: trackByFn; let i = index"
+                            (click)="onSelectVocative(vocative)">
+                      {{ vocative }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Họ:</label>
+                  <input type="text"
+                         placeholder="Nhập họ"
+                         class="form-control underline"
+                         [formControl]="lastname"/>
+                  <div class="error" *ngIf="lastname.dirty || isInvalid">
+                    <span *ngIf="lastname.errors | equalError:'required'">Vui lòng không để trống</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Tên đệm & tên:</label>
+                  <input type="text"
+                         placeholder="Nhập tên đệm & tên"
+                         class="form-control underline"
+                         [formControl]="firstname"/>
+                  <div class="error" *ngIf="firstname.dirty || isInvalid">
+                    <span *ngIf="firstname.errors | equalError:'required'">Vui lòng không để trống</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group has-icon">
+                  <label class="control-label">Ngày sinh:</label>
+                  <div class="icon-addon">
+                    <input type="text"
+                           placeholder="Nhập ngày sinh"
+                           class="form-control underline"
+                           [formControl]="dateOfBirth"
+                           bsDatepicker
+                           [bsConfig]="datePickerOptions "
+                           readonly/>
+                    <span class="form-control-icon">
+                      <img class="size-24x24" cdn-src="assets/images/icon/icon-calendar-orange.svg" alt="icon"/>
+                    </span>
+                  </div>
+                  <div class="error" *ngIf="dateOfBirth.dirty || dateOfBirth.invalid">
+                    <span *ngIf="dateOfBirth.errors | equalError:'date'">Ngày sinh không để trống</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container-fluid">
+          <passenger-passport (passportChange)="onPassportChange($event)"
+                              [passenger]="passenger"></passenger-passport>
+        </div>
+      </div>
+
+      <div class="row m-t-30">
+        <div class="container-fluid">
+          <button type="submit"
+                  form="form"
+                  class="btn btn-main-v2 mn-w-150 font-bold p-t-12 p-b-12"
+                  [disabled]="detectDisableButton()">
+            {{ isUpdate ? 'Cập nhật' : 'Lưu thông tin' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

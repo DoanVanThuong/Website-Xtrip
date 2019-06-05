@@ -1,0 +1,22 @@
+@import "_variables.less";
+.hotel-sort-desktop {
+  .sort-item {
+    text-align: center;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid @gray-3;
+    font-size: 14px;
+    transition: all .25s linear;
+    &:hover {
+      border-color: @green-2;
+      transition: all .25s linear;
+    }
+    &.active {
+      color: @white;
+      transition: all .25s linear;
+      background-image: linear-gradient(to right, @green-19, @green-20)
+    }
+  }
+  
+  
+}

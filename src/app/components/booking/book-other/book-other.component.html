@@ -1,0 +1,64 @@
+<div class="book-other m-t-10 bg-white" *ngIf="isMobile">
+  <div class="row">
+    <div class="col-12">
+      <div class="title">
+        <a (click)="onSelectBookTo(!isShow)" class="d-block">
+          <div class="d-table">
+            <div class="d-table-cell align-middle">
+              <img class="m-b-0 m-t-n-3" cdn-src="assets/images/coupon/radio-{{isShow == '' ? 'none' : 'selected'}}.svg"
+                   alt="icon"/>
+            </div>
+            <div class="d-table-cell align-middle p-l-15">
+              Tôi đặt phòng này cho người khác
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-12" *ngIf="isShow">
+      <form class="form" [formGroup]="form" novalidate>
+        <div class="list-group list-group-flush">
+
+          <div class="list-group-item border-none">
+            <div class="row">
+              <div class="col-5">Họ và tên:</div>
+              <div class="col-7">
+                <mat-form-field class="d-block" floatLabel="never">
+                  <input matInput placeholder="* Nhập họ tên" type="text" [formControl]="representer">
+                  <mat-error class="error" align="start" *ngIf="representer.dirty || isInvalid">
+                    <span *ngIf="representer.errors | equalError:'required'">Vui lòng nhập họ tên</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="book-other-desktop animated zoomIn" *ngIf="isDesktop">
+  <div class="row m-l-none m-r-none">
+    <div class="col-12 p-l-none p-r-none">
+      <div class="title pointer" (click)="onSelectBookTo(!isShow)">
+        <span class="switch-{{isShow == '' ? 'off' : 'on'}} m-r-10"><span class="point-switch"></span></span>{{title}}
+      </div>
+    </div>
+    <div class="col-12 b-r-10 shadow bg-white m-t-5" *ngIf="isShow">
+      <div class="row">
+        <div class="col-12 label-name m-t-10">Họ & tên:</div>
+        <div class="col-8 p-b-10">
+          <div class="form form-desktop">
+            <mat-form-field class="d-block" floatLabel="never">
+              <input matInput placeholder="Nhập họ & tên" type="text" [formControl]="representer" class="input-color">
+              <mat-error class="error" align="start" *ngIf="representer.dirty || isInvalid">
+                <span *ngIf="representer.errors | equalError:'required'">Vui lòng không để trống</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

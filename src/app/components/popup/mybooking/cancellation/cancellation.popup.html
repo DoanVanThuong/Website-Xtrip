@@ -1,0 +1,40 @@
+<div bsModal #popup="bs-modal" class="modal popup hotel-cancel-popup" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="container-fluid">
+            <div class="title">
+              Hủy đặt <span>{{type === 'hotel' ? 'phòng' : 'tour'}}</span>
+            </div>
+            <div class="content">
+              <ul>
+                <li>
+                  <i class="dot fa fa-circle"></i>
+                  {{type === 'hotel' ? 'Phòng' : 'Tour'}} bị hủy sẽ không đặt lại được
+                </li>
+                <li *ngIf="type === 'hotel'">
+                  <i class="dot fa fa-circle"></i>
+                  Thông tin hoàn tiền khi hủy phòng sẽ được gởi qua email của bạn
+                </li>
+                <li *ngIf="type === 'tour'">
+                  <i class="dot fa fa-circle"></i>
+                  Bạn hủy tour trước 15 ngày sẽ được hoàn 20% số tiền:
+                  <span class="price font-normal">{{ data * .2 | currencyMoney: ''}}</span>
+                  <span class="text-underline">đ</span>
+                </li>
+                <li class="see-more">
+                  <a class="text-underline">Xem thêm chính sách hoàn/hủy.</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container-fluid m-t-20 text-center">
+            <button class="btn btn-submit-cancel" (click)="onCancel()">Hủy {{type === 'hotel' ? 'hotel' : 'tour'}}</button>
+            <button class="btn btn-cancel" (click)="hide()">Bỏ qua</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

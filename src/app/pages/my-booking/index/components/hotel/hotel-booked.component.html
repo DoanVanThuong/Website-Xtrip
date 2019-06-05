@@ -1,0 +1,47 @@
+<!-- for mobile -->
+<div class="booked-hotel booked-hotel-mobile" *ngIf="isMobile">
+  <div infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <loading [show]="isLoading"></loading>
+
+    <app-booking-empty-screen [show]="isLoading === false && !hotels.length"
+                              [image]="'assets/images/booked-hotel-empty.png'"
+                              [title]="'BẠN CHƯA CÓ THÔNG TIN ĐẶT PHÒNG'"
+                              [description]="'Xem thêm khách sạn với nhiều ưu đãi hấp dẫn'"
+                              (retry)="searchHotel()"></app-booking-empty-screen>
+
+    <ul class="list-unstyled">
+      <li class="booked-flight-item"
+          *ngFor="let hotel of hotels; trackBy: trackByFn">
+        <my-booking-hotel-item [hotel]="hotel"></my-booking-hotel-item>
+      </li>
+
+    </ul>
+  </div>
+</div>
+
+<!-- for desktop -->
+<div class="booked-hotel hooked-hotel-desktop" *ngIf="isDesktop">
+  <div infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="150"
+       (scrolled)="onScrollDown()">
+
+    <booking-empty [show]="!isLoading && !hotels.length"
+                   [heading]="'Không có đặt chỗ'"
+                   [description]="'Mọi chỗ bạn đặt sẽ được hiển thị tại đây.'"></booking-empty>
+
+    <ul class="list-unstyled" *ngIf="hotels.length">
+      <li *ngFor="let hotel of hotels; trackBy: trackByFn; let i = index">
+        <my-booking-hotel-item [hotel]="hotel"></my-booking-hotel-item>
+      </li>
+    </ul>
+
+    <loading [show]="isLoading"
+             [title]="'Đang tải dữ liệu'"
+             [description]="'Vui lòng đợi trong giây lát'"></loading>
+  </div>
+</div>

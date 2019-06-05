@@ -1,0 +1,24 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade qr-code-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row text-center">
+          <div class="container-fluid">
+            Quét mã QRCode dưới đây để tải ứng dụng
+          </div>
+        </div>
+        <div class="row m-t-20">
+          <div class="container-fluid text-center">
+            <a class="pointer bg-white d-block bg-white" target="_blank" [href]="CAPP.APP_LINK">
+              <img class="mx-w-250" src="./assets/images/qrcode.svg" alt="qr code"/>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

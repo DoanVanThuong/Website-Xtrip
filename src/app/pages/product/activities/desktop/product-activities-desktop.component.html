@@ -1,0 +1,33 @@
+<!--component html goes here -->
+<div class="product-activities-desktop-page">
+
+  <div class="main-body">
+    <div class="bg-header bg-activities">
+      <div class="container">
+        <h1 class="title m-none">
+          Vé vui chơi
+        </h1>
+        <div class="search-form">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+              <app-product-search-form [title]="'Tìm điểm đến, hoạt động vui chơi…'"
+                                       [type]="PRODUCT_TYPE.ACTIVITIES"></app-product-search-form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header -->
+
+    <!-- Container -->
+    <div class="container">
+
+      <section class="popular-location">
+        <app-product-popular-location [title]="'Điểm đến phổ biến'"
+                                      [type]="PRODUCT_TYPE.ACTIVITIES"></app-product-popular-location>
+      </section>
+    </div>
+    <!-- Container -->
+
+  </div>
+</div>

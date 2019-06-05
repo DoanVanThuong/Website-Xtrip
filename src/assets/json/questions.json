@@ -1,0 +1,286 @@
+[
+  {
+    "heading": "Câu hỏi chung",
+    "key": "general",
+    "icon": "assets/images/faq/general/title.svg",
+    "groups": [
+      {
+        "title": "Câu hỏi chung",
+        "icon": "assets/images/faq/general/general.svg",
+        "questions": [
+          {
+            "question": "Vì sao tôi chưa nhận được email xác nhận trong khi tôi đã đặt phòng và đã thanh toán đúng thời hạn?",
+            "answer": "Bạn vui lòng kiểm tra lại hộp thư nếu chưa nhận được vui lòng bạn xem thêm mục spam / quảng cáo. Trong trường hợp cần tư vấn thêm bạn vui lòng liên hệ chúng tôi qua email <a href=\"mailto:support@xtrip.vn\">support@xtrip.vn</a> hoặc điện thoại số <a href=\"18006782\">1800 6782</a> nhân viên phục vụ khách hàng sẽ tư vấn nhanh nhất có thể."
+          },
+          {
+            "question": "Đăng ký nhận tin từ Xtrip có phải tốn bất kỳ chi phí nào không?",
+            "answer": "Hoàn toàn miễn phí bạn nhé. Khi đăng ký nhận bản tin, bạn sẽ được cập nhật các thông tin mới nhất của chương trình ưu đãi giảm giá cũng như các thông tin quan trọng khác từ Xtrip qua email."
+          },
+          {
+            "question": "Tôi muốn xem thông tin khuyến mãi và ưu đãi thì xem ở đâu?",
+            "answer": "Bạn có thể xem những thông tin khuyến mãi, ưu đãi mới nhất trên banner website hoặc App của Xtrip. Để cập nhật nội dung của từng chương trình khuyến mãi, bạn vui lòng chọn mục khuyến mãi trên website hoặc trên App."
+          },
+          {
+            "question": "Tôi muốn liên hệ với hỗ trợ khách hàng của Xtrip phải làm sao?",
+            "answer": "Dịch vụ hỗ trợ khách hàng của Xtrip luôn sẵn sàng 24/7 để giải đáp các thắc mắc của bạn. Bạn vui lòng liên hệ với Xtrip qua tổng đài 1800 6782, gửi email về địa chỉ <a href=\"mailto:support@xtrip.vn\">support@xtrip.vn</a> hoặc bạn vui lòng gửi yêu cầu hỗ trợ trên App của Xtrip."
+          }
+        ]
+      },
+      {
+        "title": "Thanh toán",
+        "icon": "assets/images/faq/general/pay.svg",
+        "questions": [
+          {
+            "question": "Xtrip có những hình thức thanh toán nào?",
+            "answer": "Hiện tại Xtrip có 6 hình thức thanh toán như sau: <br />- Thẻ tín dụng (Visa, MasterCard,JCB)<br />- Thẻ ATM nội địa có chức năng thanh toán trực tuyến (Internet Banking)<br />            - Thanh toán trực tiếp tại hơn 2.500 điểm thanh toán trên cả nước (Family Mart, Circle K...).<br />- Thanh toán tại các văn phòng, đại lý của Xtrip.- Thanh toán bằng cách chuyển khoản.<br/>- Thanh toán bằng hình thức thu hộ."
+          },
+          {
+            "question": "Tôi sẽ thanh toán cho chỗ đã đặt như thế nào?",
+            "answer": "Sau khi bạn điền và hoàn tất việc kiểm tra lại các thông tin đặt chỗ, bạn sẽ chuyển đến bước thanh toán.<br />Hiện tại Xtrip có 6 hình thức thanh toán, tùy theo nhu cầu bạn có thể lựa chọn:- thẻ tín dụng quốc tế : visa, master card, JCB.<br />- Thẻ ATM nội địa có chức năng thanh toán trực tuyến (Internet Banking)<br />- Thanh toán trực tiếp tại hơn 2.500 điểm thanh toán trên cả nước (Family Mart, Circle K...).<br />- Thanh toán tại cac văn phòng, đại lý của Xtrip.<br />- Thanh toán chuyển khoản."
+          },
+          {
+            "question": "Tôi có thể thanh toán tiền bằng thẻ tín dụng khác với thẻ tín dụng đã đặt phòng trước đó không?",
+            "answer": "Bạn hoàn toàn có thể thanh toán bằng thẻ tín dụng khác với thẻ bạn đã dùng để đặt phòng trước đó tại Xtrip."
+          },
+          {
+            "question": "Tại sao tôi thanh toán bằng thẻ tín dụng không được? Tôi phải làm gì khi gặp trường hợp này?",
+            "answer": "Trong một số trường hợp tiến trình thanh toán có thể kéo dài hơn bình thường. Nếu giao dịch đầu tiên không thành công, bạn hãy tải lại trang thanh toán. Hãy đảm bảo rằng bạn đã nhập chính xác thông tin thẻ tín dụng trước khi tiến hành thanh toán lại. Nếu cần thêm thông tin, bạn vui lòng liên hệ bộ phận phục vụ Khách hàng của Xtrip số <a href=\"18006782\">1800 6782</a> để được hỗ trợ tốt nhất."
+          },
+          {
+            "question": "Tại sao khi thanh toán tôi phải nhập mã OTP? ",
+            "answer": "Bạn hãy yên tâm vì yêu cầu nhập mã OTP là để đảm bảo tính bảo mật cho các thanh toán của bạn. Đây cũng là hình thức ngân hàng phát hành thẻ tín dụng cần xác thực các giao dịch để đảm bảo bạn là chủ thẻ tín dụng."
+          },
+          {
+            "question": "Tôi sẽ nhận mật khẩu sử dụng một lần (OTP) để hoàn tất thanh toán ra sao?",
+            "answer": "Mật khẩu sử dụng một lần (OTP) sẽ được ngân hàng phát hành thẻ tín dụng của bạn gửi cho bạn qua tin nhắn SMS. Sau khi nhận được mật khẩu, bạn vui lòng nhập ngay lập tức để đảm bảo giao dịch được thành công nhé."
+          },
+          {
+            "question": "",
+            "answer": "Mật khẩu sử dụng một lần (OTP) sẽ được ngân hàng phát hành thẻ tín dụng của bạn gửi cho bạn qua tin nhắn SMS. Sau khi nhận được mật khẩu, bạn vui lòng nhập ngay lập tức để đảm bảo giao dịch được thành công nhé."
+          }
+        ]
+      },
+      {
+        "title": "Mã khuyến mãi / Ưu đãi",
+        "icon": "assets/images/faq/general/campaign.svg",
+        "questions": [
+          {
+            "question": "Mã khuyến mãi của Xtrip là gì?",
+            "answer": "Mã khuyến mãi là những mã số giảm giá, ưu đãi được Xtrip gửi đến email của bạn hoặc App. Khi bạn mua vé máy bay, đặt phòng hoặc tour bạn nhập mã khuyến mãi sẽ có mức giá tốt hơn bình thường."
+          },
+          {
+            "question": "Làm thế nào tôi có thể nhận được mã giảm giá của Xtrip ?",
+            "answer": "Xtrip phân phối các mã giảm giá đặc biệt dành riêng cho người dùng đăng ký nhận tin, vì vậy bạn đừng bỏ lỡ bất kỳ cơ hội nào nhé. Bạn có thể đăng ký nhận tin trên website của Xtrip."
+          },
+          {
+            "question": "Tôi dùng mã giảm giá của Xtrip như thế nào?",
+            "answer": "- Tìm vé máy bay /khách sạn/ tour mong muốn.<br />- Chọn và đặt vé máy bay /phòng khách sạn/ tour.<br />- Nhập mã giảm giá khi thanh toán. Kiểm tra lại thông tin đặt chỗ của bạn.<br />- Hoàn tất giao dịch."
+          }
+        ]
+      },
+      {
+        "title": "Điểm thưởng của tôi",
+        "icon": "",
+        "questions": [
+          {
+            "question": "Điểm thưởng Xtrip là gì?",
+            "answer": "Điểm thưởng Xtrip là số điểm tích lũy vào tài khoản của người dùng sau khi đặt vé máy bay, phòng khách sạn hoặc mua tour. Bạn có thể sử dụng số điểm tích lũy để thanh toán cho các lần đặt vé máy bay, phòng khách sạn, tour tiếp theo."
+          },
+          {
+            "question": "Tôi có thể tích điểm bằng cách nào? ",
+            "answer": "Xtrip sẽ cộng vào tài khoản của bạn ngay sau khi bạn hoàn tất thanh toán các dịch vụ mua vé máy bay, đặt phòng khách sạn, tour trên website hoặc App. "
+          },
+          {
+            "question": "Với mỗi lần đặt tour, khách sạn hoặc vé máy bay thì tôi nhận được bao nhiêu điểm?",
+            "answer": "Với mỗi 10.000VND mà bạn đã thanh toán bạn sẽ tích lũy được:<br />- 4 Điểm khi đặt phòng khách sạn.<br />- 1 Điểm khi đặt vé máy bay.<br />- 2 Điểm khi đặt tour."
+          },
+          {
+            "question": "Tôi có thể tích lũy điểm nếu sử dụng mã khuyến mãi khi thanh toán không?",
+            "answer": "Khi thanh toán có sử dụng mã khuyến mãi thì bạn vẫn tích lũy điểm được nhé. Tuy nhiên khi bạn sử dụng mã khuyến mãi thì số tiền được giảm trừ do khuyến mãi sẽ không được tính điểm tích lũy lần nữa mà chỉ có số tiền bạn thanh toán sau khi đã giảm trừ khuyến mãi mới được cộng vào điểm tích lũy."
+          },
+          {
+            "question": "Làm thế nào để kiểm tra tình trạng điểm thưởng và lịch sử giao dịch của tôi?",
+            "answer": "Để xem điểm thưởng bạn đăng nhập vào tài khoản tại mục điểm thưởng của tôi để kiểm tra điểm thưởng và lịch sử giao dịch của bạn nhé."
+          },
+          {
+            "question": "Điểm khả dụng và điểm chờ duyệt là gì?",
+            "answer": "Sau khi hoàn tất thanh toán, ứng với số tiền thanh toán bạn sẽ nhận được một số điểm nhất định, số điểm này bạn chưa thể dùng quy đổi ngay lập tức.  Sau 3 ngày tính từ khi bạn hoàn thành chuyến đi bạn hãy quy đổi số điểm bạn đang có để được giảm giá vé máy bay và phòng khách sạn hay tour nhé."
+          },
+          {
+            "question": "Điểm của tôi sẽ có hiệu lực trong bao lâu?",
+            "answer": "Điểm tích luỹ sẽ có hiệu lực trong vòng một năm tính từ ngày phát sinh đặt chỗ đầu tiên. Bạn có thể kiểm tra số điểm tích lũy và ngày hết hạn tại trang Điểm thưởng của tôi."
+          },
+          {
+            "question": "Nếu tôi đã thanh toán đặt chỗ xong sau đó tôi gửi yêu cầu hủy và hoàn lại tiền thì chuyện gì sẽ xảy ra với điểm tích lũy của tôi?",
+            "answer": "Nếu bạn yêu cầu hoàn tiền, số điểm đang chờ duyệt mà bạn sẽ nhận được từ lần đặt chỗ này tự động bị trừ khỏi tài khoản. <br />Lưu ý rằng nếu bạn quy đổi điểm sau đó bạn yêu cầu hủy hoàn tiền, số điểm tích lũy bạn sử dụng trong lần thanh toán mua vé máy bay, phòng khách sạn hay tour này sẽ không được hoàn trả lại cho tài khoản của bạn, hệ thống sẽ hủy bỏ số điểm tích lũy bạn đã dùng."
+          },
+          {
+            "question": "Tôi có thể dùng số điểm đã tích lũy được khi đặt chỗ với Xtrip để làm gì?",
+            "answer": "Bạn có thể quy đổi số điểm tích lũy của mình cho lần đặt chỗ tiếp theo để được hưởng giá ưu đãi hơn nữa."
+          },
+          {
+            "question": "Tôi quy đổi điểm như thế nào?",
+            "answer": "Để quy đổi điểm tích lũy bạn đăng nhập vào tài khoản và tiến hành đặt vé máy bay, khách sạn, tour. Tại trang đặt chỗ bạn vui lòng chọn dùng điểm thưởng sau đó bạn có thể tuỳ ý kéo đến số điểm mà mình muốn dùng để quy đổi."
+          },
+          {
+            "question": "Một điểm trị giá bao nhiêu?",
+            "answer": "Một điểm sẽ có giá trị qui đổi tương đương là 100đ."
+          },
+          {
+            "question": "Tôi cần tích luỹ tối thiểu là bao nhiêu điểm thì mới có thể sử dụng để quy đổi ?",
+            "answer": "Hiện nay Xtrip chưa có quy định số điểm tối thiểu cho một lần quy đổi. Vì vậy bạn có thể chọn số điểm muốn quy đổi tùy theo nhu cầu của bạn."
+          },
+          {
+            "question": "Liệu số điểm của tôi có bị trừ khi tôi quy đổi nhưng chưa hoàn thành giao dịch?",
+            "answer": "Bạn hãy yên tâm. Nếu bạn chưa hoàn tất thanh toán, số điểm của bạn sẽ được tự động ghi có lại trong tài khoản của bạn sau khi thời gian đặt chỗ hết hạn."
+          },
+          {
+            "question": "Khi tôi yêu cầu huỷ phòng, vé hoặc tour mà tôi đã thanh toán thì số điểm đã quy đổi cho giao dịch này có được trả lại vào tài khoản của tôi không?",
+            "answer": "Rất tiếc Xtrip không thể hoàn lại số điểm vào tài khoản nếu bạn đã yêu cầu huỷ vé, phòng, hoặc tour mà bạn đã thanh toán trước đó."
+          },
+          {
+            "question": "Tôi có thể quy đổi điểm thành tiền mặt thay vì được giảm giá cho giao dịch lần sau?",
+            "answer": "Rất tiếc Xtrip không có chính sách quy đổi điểm thành tiền mặt."
+          }
+        ]
+      },
+      {
+        "title": "Ứng dụng của Xtrip",
+        "icon": "",
+        "questions": [
+          {
+            "question": "Tôi có thể tải ứng dụng của Xtrip ở đâu?",
+            "answer": "Bạn có thể tải ứng dụng Xtrip từ <a href=\"\" target=\"_blank\">Google Play (đối với thiết bị chạy Android)</a> hoặc <a href=\"\" target=\"_blank\">App Store (đối với thiết bị chạy iOS)</a> HOÀN TOÀN MIỄN PHÍ. Bạn cần nhập từ khoá tìm kiếm là \"Xtrip\" và chọn ứng dụng để cài đặt."
+          },
+          {
+            "question": "Tại sao tôi không thể tải ứng dụng Xtrip trên thiết bị Android?",
+            "answer": "Để cài đặt ứng dụng Xtrip trên Android, thiết bị của bạn tối thiểu phải chạy hệ điều hành Android 5.0. Hãy bảo đảm rằng thiết bị của bạn kết nối với wifi, 3G."
+          },
+          {
+            "question": "Tại sao tôi không thể tải ứng dụng Xtrip trên thiết bị iOS?",
+            "answer": "Để cài đặt ứng dụng Xtrip trên iOS, thiết bị của bạn tối thiểu phải chạy hệ điều hành iOS 8.0. Hãy bảo đảm rằng thiết bị của bạn phải kết nối với Wifi, 3G."
+          },
+          {
+            "question": "Ngoài Android và iOS ra tôi còn có thể tải ứng dụng Xtrip trên hệ điều hành nào?",
+            "answer": "Hiện tại, ứng dụng Xtrip chỉ có sẵn cho hệ điều hành Android và iOS. Đối với các hệ điều hành khác, bạn vui lòng truy cập trang web Xtrip trên phiên bản máy tính hoặc web di động."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "heading": "Vé máy bay",
+    "key": "flight",
+    "icon": "assets/images/faq/flight/title.svg",
+    "groups": [
+      {
+        "title": "Tìm chuyến bay",
+        "icon": "assets/images/faq/flight/find.svg",
+        "questions": [
+          {
+            "question": "Tôi có thể đặt mua vé của những hãng hàng không nào qua Xtrip?	Tôi có thể đặt mua vé của những hãng hàng không nào qua Xtrip?",
+            "answer": "Tính đến hiện tại, bạn có thể đặt vé của hầu hết tất cả các hãng hàng không trên App hay website của Xtrip như: AirAsia, Air France, Asiana, Aviastar, Bangkok Airways, Batik Air, Cathay Pacific, China Southern, Citilink, Etihad, Firefly, Garuda Indonesia, Kalstar, KLM, Lion Air, Lufthansa, Malaysia Airlines, Malindo Air, NAM Air, Singapore Airlines, Sky Aviation, Sriwijaya Air, Thai Airways, Trigana Air, Wings Air, và Xpress Air, Tigerair, VietJet Air, JetStar, Vietnam Airlines..."
+          },
+          {
+            "question": "Giá tiền mà tôi thấy khi tìm vé là cho 1 người lớn hay là tổng số hành khách ?",
+            "answer": "Các giá vé hiển thị trên kết quả tìm kiếm là dành cho 1 hành khách người lớn. Giá tiền tổng cộng sẽ được hiển thị chi tiết trên mẫu phiếu đặt chỗ của bạn."
+          },
+          {
+            "question": "Những biểu tượng trên kết quả tìm kiếm có ý nghĩa gì?",
+            "answer": "Các biểu tượng biểu thị đây là vé cơ bản hay là vé best combo, vé có chặng dừng hay vé bay thẳng."
+          },
+          {
+            "question": "Như thế nào là vé Best combo?",
+            "answer": "Best combo là loại vé được ghép sẵn vé chiều đi và chiều về có giá rẻ hơn so với việc bạn chon riêng lẻ từng vé chiều đi riêng và chiều về riêng."
+          }
+        ]
+      },
+      {
+        "title": "Đặt vé",
+        "icon": "assets/images/faq/flight/book.svg",
+        "questions": [
+          {
+            "question": "Tại sao tôi chưa nhận được vé điện tử sau khi thanh toán?",
+            "answer": "Có thể vé điện tử/phiếu thanh toán của bạn chưa được phát hành vì một số lý do sau: <br/>- Số tiền bạn thanh toán có thể không trùng khớp với số tiền trên biên nhận, bạn vui lòng kiểm tra lại.<br/>- Quá thời hạn giữ chỗ bạn sẽ không thanh toán được.<br/>- Tiến trình xác thực thanh toán của bạn bị chậm do trục trặc trong hệ thống của ngân hàng.<br/>- Tiến trình xuất vé của bạn bị chậm do trục trặc trong hệ thống của hãng hàng không<br/>Nếu bạn đã kiểm tra lại toàn bộ quy trình thanh toán mà vẫn chưa nhận được vé điện tử, bạn vui lòng liên hệ nhân viên bộ phận phục vụ khách hàng của Xtrip số tổng đài 18006782 để được hỗ trợ bạn nhé."
+          },
+          {
+            "question": "Tôi muốn tìm vé điện tử thì xem ở đâu ?",
+            "answer": "Sau khi hoàn tất thanh toán, bạn sẽ nhận được vé điện tử, vé điện tử được gửi qua địa chỉ email mà bạn cung cấp. Ngoài ra, bạn có thể đăng nhập vào tài khoản Xtrip tại mục Đặt chỗ của tôi để xem thông tin đặt vé bạn nhé."
+          },
+          {
+            "question": "Tôi muốn xem thông tin chuyến bay phải làm sao?",
+            "answer": "Nếu bạn đã đăng nhập vào tài khoản hoặc bạn sử dụng điện thoại để đặt vé trước đó, bạn có thể tìm thấy thông tin chuyến bay tại mục Đặt chỗ của tôi. Ngoài ra, bạn có thể xem thông tin chuyến bay trong email xác nhận phát hành vé điện tử. Nếu không thấy thông tin bạn cần tìm, xin vui lòng liên hệ bộ phận Hỗ trợ Khách hàng Xtrip qua số điện thoại 18006782 để được hỗ trợ tốt nhất."
+          },
+          {
+            "question": "Làm sao để biết rằng yêu cầu đặt chỗ của tôi đã được xác nhận hay chưa?",
+            "answer": "Ngay sau khi nhận được số tiền bạn đã thanh toán, Xtrip sẽ gửi cho bạn một email xác nhận đặt chỗ."
+          },
+          {
+            "question": "Tôi có thể đặt vé hoặc đặt phòng trực tiếp tại văn phòng Xtrip không? Tôi tìm văn phòng Xtrip ở đâu?",
+            "answer": "Bạn có thể ghé trực tiếp văn phòng Xtrip để đặt vé hoặc đặt phòng. Hiện tại văn phòng Xtrip ở địa chỉ 136 Nguyễn Duy Dương, Phường 9, Quận 5, Thành phố Hồ Chí Minh."
+          },
+          {
+            "question": "Tại sao đặt vé trên Xtrip lại giá tốt hơn so với hầu hết các trang web khác?",
+            "answer": "Bởi vì Xtrip luôn nỗ lực thương thuyết với các hãng hàng không nhằm cung cấp cho bạn vé giá rẻ hàng ngày. Trên hết, với công nghệ có độ bảo mật cao và ưu việt, Xtrip có thể cung cấp cho bạn giá vé tốt như bạn đã thấy trên trang web."
+          },
+          {
+            "question": "Xtrip có tính phí dịch vụ đặt vé không?",
+            "answer": "Xtrip không tính bất kỳ khoản phí đặt vé đối với bất kể hình thức thanh toán nào. Giá bạn thấy là giá bạn trả. KHÔNG phí dịch vụ. KHÔNG chi phí ẩn."
+          },
+          {
+            "question": "Tôi có thể biết hãng hàng không nào đã tính phí dịch vụ hành khách (PSC) hoặc thuế sân bay vào sẵn trong giá vé không?",
+            "answer": "Hầu hết các hãng hàng không đều đã bao gồm phí dịch vụ hành khách (PSC) hoặc thuế sân bay vào giá vé. Vì vậy, giá bạn thấy trên vé điện tử Xtrip là giá cuối cùng đã bao gồm thuế phí."
+          },
+          {
+            "question": "Tại sao giá vé lại thay đổi theo từng thời điểm?",
+            "answer": "Giá vé có thể thay đổi tùy thuộc vào chính sách giá của các hãng hàng không. Do đó, khi bạn chuyển đến trang thanh toán, bạn thấy giá vé đôi lúc có thể thay đổi là thời điểm Xtrip điều chỉnh theo giá mới cập nhật từ các hãng hàng không. Để có thông tin chi tiết bạn vui lòng liên hệ nhân viên bộ phận Hỗ trợ Khách hàng của Xtrip qua số điện thoại 18006782."
+          },
+          {
+            "question": "Giá vé cho trẻ em và em bé có khác nhau không?",
+            "answer": "Theo quy định bay quốc tế thì có 3 nhóm hành khách: Người lớn (Từ 12 tuổi trở lên), trẻ em (từ 2 đến 12 tuổi) và em bé (dưới 2 tuổi). Giá mỗi nhóm có thể thay đổi tùy theo chính sách của hãng hàng không.<br/>Để biết thông tin chi tiết bạn vui lòng liên hệ bộ phận Hỗ trợ Khách hàng của Xtrip qua số điện thoại <a href=\"call:18006782\">1800 6782</a> nhân viên sẽ tư vấn bạn nhé."
+          },
+          {
+            "question": "Chi phí nâng hạng ghế là bao nhiêu?",
+            "answer": "Điều này tuỳ thuộc vào chặng bay, tình trạng ghế trống và thời điểm nâng hạng so với ngày khởi hành chuyến bay. Thông thường, vé hạng đặt chỗ càng thấp thì chi phí nâng hạng sẽ càng cao. Chi phí nâng hạng đối với các chuyến bay quốc tế liên lục địa cũng sẽ cao hơn nhiều. Để biết thông tin chi tiết, bạn vui lòng liên hệ nhân viên bộ phận Hỗ trợ khách hàng của chúng tôi qua số tổng đài <a href=\"call:18006782\">1800 6782</a>."
+          }
+        ]
+      },
+      {
+        "title": "Huỷ đặt chỗ, đổi lịch bay và Hoàn tiền",
+        "icon": "assets/images/faq/flight/ref.svg",
+        "questions": [
+          {
+            "question": "Tôi có thể thay đổi thông tin đặt chỗ của mình không?",
+            "answer": "Trong trường hợp vé của bạn chưa thanh toán thì khi qua thời hạn đặt chỗ vé sẽ tự hết hạn. Nếu vé của bạn đã thanh toán và bạn có nhu cầu thay đổi thông tin đặt chỗ, bạn vui lòng liên hệ bộ phận Hỗ trợ khách hàng qua tổng đài <a class=\"underline\" href=\"call:18006782\">1800 6782</a> nhân viên sẽ tư vấn cho bạn nhé."
+          },
+          {
+            "question": "Tôi sẽ luôn được hoàn lại tiền vé khi hủy vé phải không?",
+            "answer": "Một số hãng hàng không như AirAsia, Citilink, Firefly, Jetstar và Tiger air chỉ cho phép hoàn lại tiền vé nếu chuyến bay bị hủy bởi chính hãng hàng không. Vé khuyến mãi không được hoàn tiền. Xin bảo đảm rằng bạn đã đọc và hiểu rõ các chính sách của hãng hàng không. Mọi yêu cầu hoàn tiền phải được xử lý thông qua Xtrip, bạn vui lòng liên hệ bộ phận hỗ trợ khách hàng qua tổng đài <a class=\"underline\" href=\"call:18006782\">1800 6782</a> để được hỗ trợ tốt nhất."
+          },
+          {
+            "question": "Tôi có thể thay đổi lịch bay như thế nào?",
+            "answer": "Mỗi hãng hàng không có những chính sách và thủ tục thay đổi lịch bay khác nhau. Để có thêm thông tin về cách thức tiến hành, bạn vui lòng liên hệ bộ phận Hỗ trợ Khách hàng số 18006782 để được hỗ trợ tốt nhất."
+          },
+          {
+            "question": "Làm sao để tôi đổi lại tên đã viết sai?",
+            "answer": "Việc đổi tên sẽ tùy thuộc vào chính sách của từng hãng hàng không. Để có thêm thông tin chi tiết, bạn vui lòng liên hệ bộ phận Hỗ trợ Khách hàng qua số tổng đài 18006782."
+          }
+        ]
+      },
+      {
+        "title": "Check-in Online",
+        "icon": "assets/images/faq/flight/check.svg",
+        "questions": [
+          {
+            "question": "Tôi nên làm thủ tục chuyến bay (check in) khi nào?",
+            "answer": "Nếu không mang theo hành lý ký gửi, bạn nên có mặt và làm thủ tục 90 phút trước giờ khởi hành. Nếu bạn có mang theo hành lý, vui lòng có mặt làm thủ tục ít nhất 2 tiếng trước giờ khởi hành. Đối với các chuyến bay quốc tế, chúng tôi khuyến nghị bạn nên có mặt tại sân bay ít nhất 3 tiếng trước giờ khởi hành.<br/>Xin bảo đảm bạn đã phân bổ đủ thời gian cho thủ tục kiểm tra an ninh và nhập cảnh."
+          },
+          {
+            "question": "Tôi có thể làm thủ tục trực tuyến như thế nào?",
+            "answer": "Bạn hãy vào trang làm thủ tục trực tuyến của hãng hàng không.<br/>Nhập Mã vé (PNR) hoặc Họ của hành khách.<br/>Hoàn tất thông tin thủ tục trực tuyến.<br/>Sau khi hoàn thành thủ tục trực tuyến, bạn hãy in thẻ lên máy bay ra. Nếu bạn cần hỗ trợ thêm thông tin vui lòng liên hệ với nhân viên bộ phận Hỗ trợ khách hàng qua tổng đài 18006782 để được tư vấn."
+          }
+        ]
+      }
+    ]
+  }
+]

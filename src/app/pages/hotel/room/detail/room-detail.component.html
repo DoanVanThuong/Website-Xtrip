@@ -1,0 +1,93 @@
+<div class="room-detail-mobile-page" *ngIf="!!room">
+  <div class="row bg-white m-b-70">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="room-image reset-pos position-relative">
+        <a (click)="openGalleryWith(room.roomImageList)">
+          <img class="w-full h-250 m-b-0 img-fix"
+               defaultImage="assets/images/no-thumbnail.png"
+               [lazyLoad]="room.photo.src | resizeImage: 400"
+               [title]="room.roomName"
+               [alt]="room.roomName"
+               onerror="this.src='assets/images/no-thumbnail.png'"/>
+        </a>
+        <div class="position-absolute t-l-15" (click)="backBtn()">
+          <img class="m-t-10 m-l-10 size-16x16" cdn-src="assets/images/icon-back.png" alt="img"/>
+        </div>
+      </div>
+
+      <div class="p-0-15">
+        <div class="row m-t-10">
+          <div class="col-12 font-bold font-15">
+            {{room.roomName}}
+          </div>
+        </div>
+
+        <div class="d-flex m-t-5">
+          <div>Tối đa:</div>
+          <div class="maximum-people p-0-4">
+            <img class="m-b-0 m-t-n-3" cdn-src="assets/images/hotel/room/man.svg">
+            <span class="text-white"> x {{room.limitedAdults}}</span>
+          </div>
+        </div>
+
+        <div class="row m-t-10">
+          <div class="col-12 title p-8-16">
+            Ưu đãi phòng
+          </div>
+          <div class="col-12">
+            <div *ngFor="let preference of room.roomPreferences" class="breaking-line p-10-5">
+              <span class="p-r-10 text-black">
+                <img class="m-b-0 m-t-n-3 size-24x24" src="{{preference.imageHost}}android/{{preference.imagePath}}"
+                     alt="img"/>
+              </span>{{preference.name}}
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="room.facilityGroups.mainFacilityGroup.facilities.length > 0">
+          <div class="col-12 title p-8-16">
+            Tiện nghi nổi bật
+          </div>
+          <div class="col-6 p-10-15" *ngFor="let mainFac of room.facilityGroups.mainFacilityGroup.facilities">
+            <span class="p-r-10 text-black">
+              <img class="m-b-0 m-t-n-3 size-24x24" src="{{mainFac.imageHost}}android/{{mainFac.imagePath}}"
+                   alt="img"/>
+            </span>{{mainFac.name}}
+          </div>
+        </div>
+        <div class="row" *ngIf="room.facilityGroups.roomFacilityGroup.facilities.length > 0">
+          <div class="col-12 title p-8-16">
+            Tiện nghi trong phòng
+          </div>
+          <div class="col-6 p-10-15" *ngFor="let mainFac of room.facilityGroups.roomFacilityGroup.facilities">
+            <span class="p-r-5 text-black">
+              <img class="m-b-0 m-t-n-3 size-12x12" cdn-src="assets/images/hotel/room/li.svg" alt="img"/>
+            </span>{{mainFac.name}}
+          </div>
+          <div class="col-12 m-t-10 m-b-5">
+            <div class="font-medium text-main">(*) Tiện nghi có phụ thu khi sử dụng</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer bg-green">
+    <div class="p-5-10">
+      <div class="row">
+        <div class="col-7 text-white">
+          <div class="font-13">{{nights}} đêm</div>
+          <div class="font-20"><strong>{{room.sellingPrice | currencyMoney: ''}} <span
+                class="text-underline">đ</span></strong></div>
+        </div>
+        <div class="col-5 p-t-4">
+          <button class="btn btn-main w-full" (click)="goToBookingHotel(room)">Đặt ngay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<gallery-popup [images]="galleryImages"></gallery-popup>

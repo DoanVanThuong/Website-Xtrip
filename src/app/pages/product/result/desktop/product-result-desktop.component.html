@@ -1,0 +1,90 @@
+<!--component html goes here -->
+<div class="product-result-desktop-page">
+
+  <app-product-search-bar></app-product-search-bar>
+
+  <div class="main-body">
+    <div class="container"
+         infinite-scroll
+         [infiniteScrollDistance]="1"
+         [infiniteScrollThrottle]="150"
+         (scrolled)="onScrollDown()">
+      <div class="row">
+        <div class="col-12">
+          <div class="bread-crumb">
+            <app-breadcrumb-desktop [items]="breadItems"></app-breadcrumb-desktop>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-4 left-section">
+          <!-- Filter -->
+          <div class="row">
+            <div class="col-12">
+              <app-product-filter [params]="params" (submit)="onSubmitFilter($event)"
+                                  (originalFilter)="getOriginalFilter($event)"></app-product-filter>
+            </div>
+          </div>
+          <!-- Filter -->
+        </div>
+        <div class="col-xl-9 col-lg-8 right-section">
+
+          <!-- Sort -->
+          <div class="row">
+            <div class="col-lg-12">
+              <app-product-sortable [params]="params" (select)="onSelectSort($event)"></app-product-sortable>
+            </div>
+          </div>
+          <!-- Sort -->
+
+          <!-- Empty list -->
+          <div class="row">
+            <div class="col-lg-12 text-center font-20 m-t-10"
+                 *ngIf="isDone && products.length === 0 && !!checkIsHaveFilter()">
+              <img class="size-82x82" cdn-src="assets/images/logo-activity-empty.svg" alt="img"/>
+              <div class="des-text">
+                Không tìm thấy vé phù hợp hãy điều chỉnh lại bộ lọc.
+              </div>
+              <button class="btn btn-main-v2 font-14 m-t-10" (click)="onRestFilter()">Đặt lại bộ lọc</button>
+            </div>
+
+            <div class="col-lg-12 text-center font-20 m-t-10"
+                 *ngIf="isDone && products.length === 0 && !checkIsHaveFilter()">
+              Không tìm thấy dữ liệu. Vui lòng tìm kiếm với từ khóa khác.
+            </div>
+          </div>
+          <!-- Empty list -->
+
+          <!-- Loading -->
+          <div class="row">
+            <div class="col-lg-12">
+              <loading [show]="!isDone"></loading>
+            </div>
+          </div>
+          <!-- Loading -->
+
+          <!-- Result list -->
+          <ul class="list-unstyled" @list>
+            <li *ngFor="let product of products; trackBy: trackByFn;" @item>
+              <app-product-result-item [product]="product"></app-product-result-item>
+            </li>
+          </ul>
+          <!-- Result list -->
+
+          <!-- Related list -->
+          <div class="m-t-20" *ngIf="isDone && products.length === 0 && relatedProducts.length > 0">
+            <div class="title-related">Có thể bạn quan tâm</div>
+            <ul class="list-unstyled" @list>
+              <li *ngFor="let relatedProduct of relatedProducts; trackBy: trackByFn;" @item>
+                <app-product-result-item [product]="relatedProduct"></app-product-result-item>
+              </li>
+            </ul>
+          </div>
+          <!-- Related list -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,33 @@
+@import '_variables.less';
+@import './_mixins.less';
+
+.passenger-box {
+
+  .vocatives {
+
+    .btn {
+      margin-right: 10px;
+      border-radius: 25px;
+      padding: 10px 20px;
+      min-width: 90px;
+      font-weight: 700;
+      transition: background .5s linear;
+
+      &:last-child {
+        margin: 0;
+      }
+
+      &.active, &:active, &:hover, &:focus {
+        background-color: @orange-2;
+        background-image: linear-gradient(to right, @orange-4, @orange-2);
+        color: @white;
+      }
+    }
+  }
+
+  .form.form-desktop {
+    .form-control {
+      font-weight: 400;
+    }
+  }
+}

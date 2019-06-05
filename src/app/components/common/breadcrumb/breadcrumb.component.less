@@ -1,0 +1,19 @@
+.breadcrumb-desktop {
+  .breadcrumb {
+
+    .breadcrumb-item {
+      a {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      & + .breadcrumb-item {
+        &:before {
+          content: '\f105';
+          font-family: FontAwesome;
+        }
+      }
+    }
+  }
+}

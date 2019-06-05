@@ -1,0 +1,191 @@
+<div class="booking-passport passenger-passport passenger-passport-mobile" *ngIf="isMobile">
+
+  <div class="title-color">Hộ chiếu</div>
+  <div class="row">
+    <div class="col-12">
+      <div class="bg-white">
+        <form [formGroup]="form" class="form" novalidate>
+          <div class="list-group list-group-flush">
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-5">Số hộ chiếu</div>
+                <div class="col-7">
+                  <mat-form-field [floatLabel]="'never'">
+                    <input matInput
+                           placeholder="Nhập số hộ chiếu"
+                           [formControl]="passportNumber"/>
+                    <mat-hint class="text-danger font-12"
+                              *ngIf="passportNumber.dirty || passportNumber.touched || passportNumber.invalid || isInvalid">
+                      <span *ngIf="passportNumber.errors | equalError:'required'">Không để trống</span>
+                      <span *ngIf="passportNumber.errors | equalError:'minlength'">Không hợp lệ</span>
+                      <span *ngIf="passportNumber.errors | equalError:'maxlength'">Không hợp lệ</span>
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row ">
+                <div class="col-5">Quốc gia</div>
+                <div class="col-7">
+                  <mat-form-field [floatLabel]="'never'">
+                    <input [formControl]="passportCountry"
+                           matInput
+                           placeholder="Chọn quốc gia"
+                           mbsc-scroller
+                           [mbsc-options]="scrollerOptions"/>
+                    <i matSuffix class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+                    <mat-error *ngIf="passportCountry.dirty || passportCountry.touched || isInvalid">
+                      <span *ngIf="passportCountry.errors | equalError:'required'">Không hợp lệ</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row ">
+                <div class="col-5">Ngày hết hạn</div>
+                <div class="col-7">
+                  <mat-form-field [floatLabel]="'never'">
+                    <input [textMask]="{mask: mask}"
+                           [formControl]="passportExpiry"
+                           matInput
+                           placeholder="Vd: 01/01/2030">
+                    <mat-hint class="text-danger font-12"
+                              *ngIf="passportExpiry.dirty || passportExpiry.touched || passportExpiry.invalid || isInvalid">
+                      <span *ngIf="passportExpiry.errors | equalError:'required'">Không để trống</span>
+                      <span *ngIf="passportExpiry.errors | equalError:'date_invalid'">Không hợp lệ</span>
+                      <span
+                        *ngIf="passportExpiry.errors | equalError:'passport_less'">Phải >6 tháng từ ngày khởi hành</span>
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row ">
+                <div class="col-5 ">Quốc tịch</div>
+                <div class="col-7">
+                  <mat-form-field [floatLabel]="'never'">
+                    <input [formControl]="national"
+                           matInput
+                           placeholder="Chọn quốc gia"
+                           mbsc-scroller
+                           [mbsc-options]="scrollerOptions"/>
+                    <i matSuffix class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+                    <mat-error *ngIf="national.dirty || national.touched || isInvalid">
+                      <span *ngIf="national.errors | equalError:'required'">Vui lòng không để trống</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="passenger-passport passenger-passport-desktop" *ngIf="isDesktop">
+  <div class="row">
+    <div class="container-fluid">
+      <form [formGroup]="form"
+            class="form form-desktop"
+            novalidate>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Quốc gia</label>
+              <input type="text"
+                     placeholder="Nhập quốc gia"
+                     class="form-control underline"
+                     [formControl]="passportCountry"
+                     (focus)="onSelectInput($event)"
+                     [typeahead]="countries"
+                     [typeaheadItemTemplate]="countryTemplate"
+                     [typeaheadScrollable]="true"
+                     [typeaheadMinLength]="0"
+                     [typeaheadOptionsLimit]="countries.length"
+                     [typeaheadOptionsInScrollableView]="7"/>
+              <div class="error" *ngIf="passportCountry.dirty || passportCountry.touched || isInvalid">
+                <span *ngIf="passportNumber.hasError('required')">Không để trống</span>
+                <span *ngIf="passportNumber.hasError('minlength')">Không hợp lệ</span>
+                <span *ngIf="passportNumber.hasError('maxlength')">Không hợp lệ</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Số hộ chiếu</label>
+              <input type="text"
+                     placeholder="Nhập số hộ chiếu"
+                     class="form-control underline"
+                     [formControl]="passportNumber"/>
+              <div class="error" *ngIf="passportNumber.dirty || passportNumber.touched || passportNumber.invalid || isInvalid">
+                <span *ngIf="passportNumber.errors | equalError:'required'">Vui lòng không để trống</span>
+                <span *ngIf="passportNumber.errors | equalError:'minlength'">Không hợp lệ</span>
+                <span *ngIf="passportNumber.errors | equalError:'maxlength'">Không hợp lệ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group has-icon">
+              <label class="control-label">Ngày hết hạn</label>
+              <div class="icon-addon">
+
+                <input type="text"
+                       placeholder="Nhập ngày hết hạn"
+                       class="form-control underline"
+                       [formControl]="passportExpiry"
+                       bsDatepicker
+                       [bsConfig]="datePickerOptions "
+                       (bsValueChange)="onSelectDate($event)"
+                       readonly/>
+                <span class="form-control-icon">
+                  <img class="size-24x24" cdn-src="assets/images/icon/icon-calendar-orange.svg" alt="icon"/>
+                </span>
+              </div>
+              <div align="left" class="error"
+                   *ngIf="passportExpiry.dirty || passportExpiry.touched || passportExpiry.invalid || isInvalid">
+                <span *ngIf="passportExpiry.errors | equalError:'required'">Vui lòng không để trống</span>
+                <!--<span *ngIf="passportExpiry.errors | equalError:'date'">Không hợp lệ</span>
+                <span *ngIf="passportExpiry.errors | equalError:'less'">Phải >6 tháng từ ngày khởi hành</span>-->
+                <span *ngIf="passportExpiry.errors | equalError:'date_invalid'">Không hợp lệ</span>
+                <span
+                  *ngIf="passportExpiry.errors | equalError:'passport_less'">Phải >6 tháng từ ngày khởi hành</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Quốc tịch</label>
+              <input type="text"
+                     placeholder="Nhập quốc tịch"
+                     class="form-control underline"
+                     [formControl]="national"
+                     (focus)="onSelectInput($event)"
+                     [typeahead]="countries"
+                     [typeaheadItemTemplate]="countryTemplate"
+                     [typeaheadScrollable]="true"
+                     [typeaheadMinLength]="0"
+                     [typeaheadOptionsLimit]="countries.length"
+                     [typeaheadOptionsInScrollableView]="7"/>
+              <div class="error" *ngIf="national.dirty || national.touched  || isInvalid">
+                <span *ngIf="national.errors | equalError:'required'">Vui lòng không để trống</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #countryTemplate let-model="item">
+  <div class="country-item text-truncate">
+    {{ model }}
+  </div>
+</ng-template>

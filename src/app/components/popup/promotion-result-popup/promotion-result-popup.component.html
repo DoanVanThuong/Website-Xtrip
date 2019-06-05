@@ -1,0 +1,70 @@
+<!--component html goes here -->
+<div bsModal #popup="bs-modal" class="modal fade popup-promotion-result" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-body" *ngIf="!!data">
+        <div class="row">
+          <div class="col-12">
+            <div class="banner position-relative">
+              <img class="w-full m-b-0 mx-h-400" cdn-src="assets/images/more/promotion-detail-banner.svg" alt="img" />
+              <a (click)="hide()">
+                <div class="position-absolute t-l-16">
+                  <img class="m-b-0 size-24x24" cdn-src="assets/images/user-profile/close.svg" alt="img" />
+                </div>
+              </a>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-12 col-md-8 col-lg-6">
+                <div class="row">
+                  <div class="col-12 font-18 text-center m-t-20">
+                    Chúc mừng, <span class="font-bold">{{data.fullName}}</span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 font-15 receive-text">
+                    <div class="m-l-20 m-r-20 m-t-20 font-medium">
+                      Bạn đã nhận được {{data.quantity}} mã khuyến mãi tổng trị giá
+                      <span class="price font-bold">{{data.total | currencyMoney: ''}}</span><span class="price font-bold text-underline">đ</span> bao gồm:
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-6" *ngFor="let item of data.list; let i = index">
+                    <div class="{{i%2 === 0 ? 'm-l-20' : 'm-r-20'}} m-t-20 text-center border">
+                      <div class="font-14 m-t-10">x{{item.count}} mã</div>
+                      <div class="font-18 m-t-10 text-white font-bold"><span class="code-bg">{{item.code}}</span></div>
+                      <div class="font-14 m-t-10">Giảm ngay</div>
+                      <div class="font-18 font-black code-price" *ngIf="!item.isPercent">{{item.discount | currencyMoney: ''}}
+                        <span class="text-underline">đ</span>
+                      </div>
+                      <div class="font-18 font-black code-price" *ngIf="item.isPercent">{{item.discount}}
+                        <span>%</span>
+                      </div>
+                      <div class="font-14" *ngIf="item.isPercent">tối đa {{item.maxDiscount | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+                      <div class="font-14">{{item.summary}}</div>
+                      <div class="font-15 m-t-20 code-price m-b-20 font-medium" ngxClipboard [cbContent]="item.code"
+                        (cbOnSuccess)="onClipboardSuccess()">Sao chép
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 p-27-35">
+                    <button class="btn btn-main btn-block font-weight-bold" (click)="openServey()">Trải nghiệm Xtrip</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-promotion-survey-popup></app-promotion-survey-popup>

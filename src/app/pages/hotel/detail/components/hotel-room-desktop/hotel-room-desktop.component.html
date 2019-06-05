@@ -1,0 +1,93 @@
+<div class="hotel-room-desktop animated fadeIn">
+  <div class="row m-b-20 shadow b-r-10 m-l-none m-t-20">
+
+    <div class="col-12 header b-r-l-r-10">
+      <div class="p-18-0">
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="font-18 gray-text font-weight-bold">{{room.roomName}}</div>
+          </div>
+          <div class="col-lg-5 text-right">
+            <span>
+              <img class="m-b-0 m-t-n-3" cdn-src="assets/images/hotel/desktop/people.svg" alt="img"/>
+            </span>
+            <span class="gray-text font-15 font-medium">Sức chứa: {{room.limitedAdults}} người lớn</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 container b-r-b-r-10">
+      <div class="p-20-0 m-b-10">
+        <div class="row">
+          <div class="col-lg-3 bo-r h-full">
+            <a class="pointer" (click)="onOpenGalleryPopup(room.roomImageList)">
+              <img class="m-b-0 img-fix w-full h-full mx-h-180 b-r-10"
+                   defaultImage="assets/images/no-thumbnail.png"
+                   [lazyLoad]="getURLImage(room.roomImage.imageHost, room.roomImage.imageName) | size:300"
+                   [alt]="room.roomName"
+                   [title]="room.roomName"
+                   onerror="this.src='assets/images/no-thumbnail.png'"/>
+            </a>
+            <div class="m-t-10 text-main text-underline font-medium font-16 pointer"
+                 *ngIf="room.roomImageList.length > 0">
+              <a (click)="onOpenGalleryPopup(room.roomImageList)">Xem chi tiết hình ảnh</a>
+            </div>
+            <div class="m-t-10 font-15"
+                 *ngFor="let fac of room.facilityGroups.mainFacilityGroup.facilities | slice:0:5">
+              <img class="m-b-0 m-t-n-3 size-24x24"
+                   src="{{fac.imageHost}}/android/{{fac.imagePath}}"/> {{fac.name}}
+            </div>
+          </div>
+          <div class="col-lg-4 bo-r m-t-10">
+            <div class="font-weight-bold font-15 gray-text">{{ room.facilityGroups.roomFacilityGroup.name}}</div>
+            <ul class="m-t-15 d-flex flex-wrap">
+              <li class="p-r-10 m-b-5" *ngFor="let item of room.facilityGroups.roomFacilityGroup.facilities">
+                <img class="m-b-0 m-t-n-3 size-16x16" cdn-src="assets/images/hotel/desktop/li.svg">
+                <span class="m-l-n-3">{{item.name}}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 bo-r m-t-10">
+            <div class="font-weight-bold font-15 gray-text">Bao gồm</div>
+            <div class="m-t-24">
+              <div class="m-b-15"
+                   *ngFor="let item of room.roomPreferences | slice:0:3; trackBy: trackByFn; let i = index">
+                <span class="fac-item-bg">{{item.name}}</span>
+              </div>
+            </div>
+            <div class="m-t-20" *ngIf="!!room.facilityGroups.refundPolicyGroup.facilities.length">
+              <div class="font-bold">Lưu ý:</div>
+              <ul class="">
+                <li *ngFor="let item of room.facilityGroups.refundPolicyGroup.facilities; trackBy: trackByFn; let i = index">
+                  <img class="m-b-0 m-t-n-3 size-12x12"
+                       cdn-src="assets/images/hotel/desktop/li.svg">
+                  {{ item.name }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="font-13 font-medium text-black">Giá phòng {{nights}} đêm</div>
+            <div class="font-18 font-weight-bold text-main">{{room.sellingPrice | currencyMoney: ''}} <span
+                class="text-underline font-18">đ</span></div>
+            <div class="font-13 {{ room.allotment <= 3 ? 'remain-red' : 'remain-green' }}">
+              Còn lại {{room.allotment}} phòng
+              <span *ngIf="room.allotment <= 3">cuối cùng</span>
+            </div>
+            <div class="m-t-15">
+              <button (click)="goToBookingHotel()" class="btn btn-main-v2 w-80-pc font-medium p-10">Đặt ngay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-hotel-gallery-popup #HotelGalleryPopup
+                         [mode]="'room'"
+                         [room]="room"
+                         [images]="galleryImages">
+</app-hotel-gallery-popup>

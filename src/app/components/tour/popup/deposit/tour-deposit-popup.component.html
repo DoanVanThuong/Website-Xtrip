@@ -1,0 +1,98 @@
+<!-- mobile -->
+<div bsModal #popup="bs-modal" class="modal fade tour-deposit-popup-page animated fadeInUp" role="dialog"
+  (onHidden)="hide()" *ngIf="isMobile">
+  <div class="modal-dialog fullscreen" [class.cal-p-t-380]="!tips" [class.cal-p-t-500]="!!tips">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-12 center-line">
+            <div class="line-header"></div>
+          </div>
+        </div>
+        <div class="row m-t-20">
+          <div class="col-12">
+            <div class="text-center title-popup">Thanh toán
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-0-10 font-13 m-t-22 m-b-20" *ngIf="!!tips">
+        <div class="tip-bg d-flex">
+          <div><img class="m-b-none m-t-6 m-r-10" cdn-src="assets/images/icon/icon-info.svg" alt="img" /></div>
+          <div>{{tips}}</div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <ul class="list-unstyled list-depart">
+          <li class="active" *ngFor="let item of depositItems; trackBy: trackByFn"
+            [class.active]="selectedItem === item">
+            <a class="" (click)="onSelectItem(item)">
+              <div class="content">
+                <div class="title">{{item.title}}</div>
+              </div>
+              <div class="price-info">{{item.amount | currencyMoney: ''}}
+                <span class="text-underline">đ</span>
+              </div>
+              <div class="icon-selected" *ngIf="selectedItem === item">
+                <img cdn-src="assets/images/icon/icon-selected-depart.svg" alt="">
+              </div>
+            </a>
+          </li>
+        </ul>
+        <div *ngIf="!!selectedItem" class="note m-t-28 mn-h-50" [innerHtml]="selectedItem.note"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-main-v2 btn-block font-bold font-16 p-10-20" (click)="onSubmit()">
+          Thanh toán
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- desktop -->
+<div bsModal #popup="bs-modal" class="modal fade tour-deposit-popup-page" role="dialog" (onHidden)="hide()"
+  *ngIf="isDesktop">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content b-r-10 w-385">
+      <div class="modal-header desktop-header">
+        <div class="font-medium font-18 text-black">
+          {{!!headerText ? headerText : 'Bạn có muốn đặt cọc'}}
+        </div>
+        <a class="pull-right pointer" (click)="hide()">
+          <img class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-close-gray.svg" alt="icon" />
+        </a>
+      </div>
+      <div class="col-12 font-13 m-t-20" *ngIf="!!tips">
+          <div class="tip-bg d-flex">
+            <div><img class="m-b-none m-t-6 m-r-10" cdn-src="assets/images/icon/icon-info.svg" alt="img" /></div>
+            <div>{{tips}}</div>
+          </div>
+      </div>
+      <div class="modal-body p-20">
+        <ul class="list-unstyled list-depart">
+          <li class="active" *ngFor="let item of depositItems; trackBy: trackByFn"
+            [class.active]="selectedItem === item">
+            <a class="pointer" (click)="onSelectItem(item)">
+              <div class="content">
+                <div class="title font-15">{{item.title}}</div>
+              </div>
+              <div class="price-info">{{item.amount | currencyMoney: ''}}
+                <span class="text-underline">đ</span>
+              </div>
+              <div class="icon-selected" *ngIf="selectedItem === item">
+                <img cdn-src="assets/images/icon/icon-selected-depart.svg" alt="">
+              </div>
+            </a>
+          </li>
+        </ul>
+        <div *ngIf="!!selectedItem" class="note m-t-28 mn-h-60" [innerHtml]="selectedItem.note"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-main-v2 btn-block font-bold font-16 p-10-20" (click)="onSubmit()">
+          Thanh toán
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

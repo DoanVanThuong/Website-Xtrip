@@ -1,0 +1,35 @@
+<div class="top-hotel">
+
+  <app-header [heading]="'Khách sạn nổi bật'" [fixed]="true" [back]="true"></app-header>
+
+  <div class="wrapper" min-height>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <!-- Loading Screen -->
+        <div *ngIf="isLoading && !hotels.length">
+          <app-hotel-loading></app-hotel-loading>
+          <app-hotel-loading></app-hotel-loading>
+          <app-hotel-loading></app-hotel-loading>
+        </div>
+        <!-- Loading Screen -->
+
+        <!-- Result -->
+        <div *ngIf="!isLoading && !!hotels.length">
+          <div *ngFor="let hotel of hotels; trackBy: trackByFn">
+            <hotel-detail-item [hotel]="hotel"
+                               [nights]="nights"
+                               [viewMode]="2"
+                               (click)="onSelectHotel(hotel)"></hotel-detail-item>
+          </div>
+        </div>
+        <!-- Result -->
+
+        <!-- Empty Screen -->
+        <app-empty-screen [show]="!isLoading && !hotels.length"
+                          (retry)="getHotels()"></app-empty-screen>
+        <!-- Empty Screen -->
+
+      </div>
+    </div>
+  </div>
+</div>

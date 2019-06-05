@@ -1,0 +1,29 @@
+<div class="booking-hotel-note  justify-content-center" *ngIf="!!hotel">
+
+  <!-- <app-header [back]="true" [version]="2" [heading]="'Thông tin lưu ý'" [fixed]="true"></app-header> -->
+  <div class="row">
+    <div class="col-12">
+      <div class="p-15 bg-white">
+        <div class="row">
+          <a class="col-2 m-t-5" (click)="back()">
+            <img alt="img" class="m-b-0 size-16x16" cdn-src="assets/images/icon/icon-close.svg">
+          </a>
+          <div class="col-8 text-center text-black font-20 font-black">Chính sách hoàn hủy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper bg-white p-15" min-height>
+    <div class="container">
+      <div class="row ">
+        <div class="col-12">
+          <div class="text-center font-italic text-light-gray" *ngIf="!policies.length">Không có thông tin lưu ý</div>
+          <ul class="list-unstyled" *ngIf="!!policies.length">
+            <li class="custom-inner-html" *ngFor="let policy of policies; trackBy: trackByFn" [innerHTML]="policy | safeHTML"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

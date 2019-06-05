@@ -1,0 +1,54 @@
+<!--component html goes here -->
+<div bsModal #popup="bs-modal" class="modal fade tour-date-selector-popup" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <div class="row">
+            <div class="col-2">
+              <a (click)="hide()">
+                <img alt="icon" class="size-24x24 m-b-none" cdn-src="assets/images/icon/icon-close-2.svg">
+              </a>
+            </div>
+            <div class="col-10"></div>
+          </div>
+          <div class="row line-bot">
+            <div class="col-6 title-time">
+              Ngày nhận phòng
+            </div>
+            <div class="col-6 text-right title-time">
+              Ngày trả phòng
+            </div>
+            <div class="col-6 time-range">
+              <span *ngIf="!selected.start" class="light-gray">Chọn ngày</span>
+              <span *ngIf="!!selected.start">{{selected.start | departDate: true: 'DD/MM'}}</span>
+            </div>
+            <div class="col-6 time-range text-right">
+              <span *ngIf="!selected.end" class="light-gray">Chọn ngày</span>
+              <span *ngIf="!!selected.end">{{selected.end | departDate: true: 'DD/MM'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6 m-t-n-10">
+            <app-date-picker [options]="options"
+                             [data]="selected"
+                             (change)="onChange($event)"
+                             [theme]="'theme-3'"></app-date-picker>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="shadow-bottom pos-btn">
+          <button class="btn btn-main-v3 btn-block b-r-56"
+                  [disabled]="onDisableSubmit()"
+                  (click)="onSubmit($event)">
+            {{btnText()}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

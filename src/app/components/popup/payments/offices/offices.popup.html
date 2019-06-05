@@ -1,0 +1,55 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade office-popup "
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen"
+       *ngIf="payment && !!payment.code">
+    <div class="modal-content">
+      <div class="modal-header header">
+        <div class="row">
+          <div class="col-2">
+            <a class="d-block" (click)="hide()">
+              <img class="size-16x16" cdn-src="assets/images/icon/icon-close-green.svg">
+            </a>
+          </div>
+          <div class="col-8 title-heading text-center font-20 font-black text-truncate">{{ payment.name }}</div>
+        </div>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <payment-note [time]="payment.holdExpiry"></payment-note>
+          </div>
+
+          <div class="col-12 m-t-10">
+            <p class="font-15 m-b-5">
+              Bạn có thể tiến hành thanh toán tại một trong các địa điểm sau:
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 office-content">
+            <ul class="list-unstyled">
+              <li *ngFor="let item of payment.options; trackBy: trackByFn"
+                  class="item-payment-office">
+                <div class="d-flex justify-content-start align-items-center">
+                  <div>
+                    <img cdn-src="assets/images/icon/icon-company.svg "
+                         class="img-fluid  m-t-5 size-30x30"
+                         alt="icon">
+                  </div>
+                  <div class="address-company">
+                    <div class="title-office ">{{item.name}}</div>
+                    <div class=" font-12">Đ/c: {{item.sub}}</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

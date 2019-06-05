@@ -1,0 +1,71 @@
+<div bsModal #popup="bs-modal" class="modal fade tour-detail-popup" role="dialog" (onHidden)="hide()">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="button-group">
+                    <a *ngFor="let tab of tabs" class="pointer" [class.active]="selectedTab == tab" (click)="onSelectTab(tab)">{{tab.name}}</a>
+                </div>
+                <a class="pull-right pointer" (click)="hide()">
+                    <img class="m-b-none size-24x24" cdn-src="assets/images/icon/icon-close-gray.svg" alt="icon" />
+                </a>
+            </div>
+            <div class="modal-body p-20 p-t-none">
+                <div *ngIf="selectedTab.id === 1">
+                    <tour-journey [journey]="journey"></tour-journey>
+                </div>
+                <div *ngIf="selectedTab.id === 2">
+                    <tour-transport [data]="package"></tour-transport>
+                </div>
+                <div *ngIf="selectedTab.id === 3">
+                    <div *ngIf="!tour.policyContent" [innerHTML]="tour.policy" class="term-policy m-t-10"></div>
+                    <div *ngIf="!!tour.policyContent" class="term-policy m-t-10">
+                        <div class="include" *ngIf="!!tour.policyContent.include">
+                            <div class="title">
+                                Giá bao gồm
+                            </div>
+                            <div [innerHTML]="tour.policyContent.include"></div>
+                        </div>
+                    
+                        <div class="exclude" *ngIf="!!tour.policyContent.exclude">
+                            <div class="title">
+                                Giá không bao gồm
+                            </div>
+                            <div [innerHTML]="tour.policyContent.exclude"></div>
+                        </div>
+                        <div class="surcharge" *ngIf="!!tour.policyContent.surcharges.length">
+                            <div class="title">
+                                Phụ thu
+                            </div>
+                            <ul>
+                                <li *ngFor="let item of tour.policyContent.surcharges">{{item.title}}: {{item.value}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="selectedTab.id === 4">
+                    <div *ngIf="!tour.termsContent" [innerHTML]="tour.terms" class="term-policy m-t-10"></div>
+                    <div *ngIf="!!tour.termsContent" class="term-policy m-t-10">
+                        <div class="include" *ngIf="!!tour.termsContent.refund">
+                            <div class="title">
+                                Hoàn huỷ tour
+                            </div>
+                            <div [innerHTML]="tour.termsContent.refund"></div>
+                        </div>
+                        <div class="exclude" *ngIf="!!tour.termsContent.visa">
+                            <div class="title">
+                                Thủ tục xin visa
+                            </div>
+                            <div [innerHTML]="tour.termsContent.visa"></div>
+                        </div>
+                        <div class="exclude" *ngIf="!!tour.termsContent.notes">
+                            <div class="title">
+                                Lưu ý
+                            </div>
+                            <div [innerHTML]="tour.termsContent.notes"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div bsModal #popup="bs-modal" class="modal fade hotel-room-popup animated fadeInUp" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content tour-detail-desktop">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-12 center-line">
+            <div class="line-header"></div>
+          </div>
+        </div>
+        <div class="row m-t-20">
+          <div class="col-12">
+            <div class="text-center font-17 font-bold">Số phòng & khách
+            </div>
+            <div class="d-flex justify-content-between m-t-30">
+              <div class="fonr-15 font-medium">Số phòng</div>
+              <div>
+                <app-counter (change)="onChangeRoom($event)" [min]="1" [max]="9" [value]="currentRoom"
+                  [iconAdd]="'assets/images/icon/icon-plus-green.svg'"
+                  [iconMinus]="'assets/images/icon/icon-minus-green.svg'"></app-counter>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-body">
+        <ul class="list-rooms m-t-10 m-b-85">
+          <li class="m-b-20" *ngFor="let item of roomOccupancies; let i = index">
+            <div class="font-15 font-medium">{{'Phòng ' + (i + 1)}}</div>
+            <ul class="bg-white b-r-10 m-t-10">
+              <li *ngFor="let passenger of item; let j = index" class="d-flex justify-content-between align-items-center p-10 ">
+                <div>
+                  <div>{{passenger.title}}</div>
+                  <div class="font-12 text-light-gray">{{passenger.description}}</div>
+                </div>
+                <div>
+                  <app-counter (change)="onChangePassenger(i , $event, passenger.type)" [min]="passenger.type === 'adult' ? 1 : 0" 
+                    [value]="passenger.value" [iconAdd]="'assets/images/icon/icon-plus-green.svg'"
+                    [iconMinus]="'assets/images/icon/icon-minus-green.svg'"></app-counter>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="fixed-bottom footer">
+          <div class="btn-footer ">
+            <button class="btn font-black font-16 btn-main-v3 w-full p-10" (click)="confirm()">
+              Đồng ý
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,133 @@
+.policy {
+
+  .policy-content {
+
+    padding: 10px;
+    background-color: @white;
+
+    .panel {
+
+      border-width: 0;
+      border-radius: 0;
+      margin-bottom: 10px;
+      box-shadow: none;
+
+      &.card {
+        margin-bottom: 0;
+
+        .card-header {
+          padding: 15px;
+          border: 1px solid @gray-8;
+          border-radius: 0;
+
+          .panel-title {
+            font-size: 15px;
+            color: @gray-1;
+            text-transform: capitalize;
+
+            img {
+              margin-top: -8px;
+
+              &.icon-collapsed {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+
+      &.panel-open {
+
+        .card {
+          .card-header {
+            background-color: @green-2;
+            border-width: 0px;
+
+            .panel-title {
+              color: @white;
+
+              img {
+                &.icon-collapse {
+                  display: none;
+                }
+
+                &.icon-collapsed {
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .panel-collapse {
+
+        .panel-body {
+          font-size: 15px;
+          padding: 0;
+
+          p {
+            font-size: 15px;
+          }
+
+          .title {
+            font-size: 15px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+          }
+
+          ol {
+            padding-left: 20px;
+          }
+          ul {
+            padding-left: 0px;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+.confirm-policy {
+  &.height15 {
+    height: 15px;
+  }
+  .bg {
+    background-color: #e5e5e5;
+  }
+  .bg-content {
+    padding: 5px;
+    color: #000000;
+    padding-left: 10px;
+  }
+  .hl-policy {
+    color: #f26522;
+    text-decoration: underline;
+  }
+  .p-10 {
+    padding: 10px;
+  }
+}
+
+.rule-fares {
+
+  .text-stl {
+    padding: 15px 10px;
+    font-size: 15px;
+    color: #000000;
+    border-top: 8px solid #EFEFEF;
+    background-color: #fff;
+  }
+  .pos-assb {
+    position: absolute;
+  }
+  .size-16x16 {
+    width: 16px;
+    height: 16px;
+  }
+  .pos-arrow {
+    right: 5px;
+    top: 20px;
+  }
+}

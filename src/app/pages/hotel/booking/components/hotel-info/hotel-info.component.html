@@ -1,0 +1,87 @@
+<!--component html goes here -->
+
+
+<div class="hotel-info hotel-info-desktop" *ngIf="isDesktop">
+  <div class="row  animated zoomIn m-l-none m-r-none">
+    <div class="col-12 title p-l-none p-r-none">
+      Thông tin đặt phòng
+    </div>
+
+    <div class="container-fluid text-center">
+      <loading [show]="isLoading"></loading>
+    </div>
+
+    <div class="col-12 bg-white b-r-10 shadow m-t-10" *ngIf="!isLoading && !!room">
+      <div class="m-t-20 m-b-20">
+        <div class="row">
+          <div class="col-lg-3 p-l-20 p-r-20">
+            <img class="w-full b-r-10 h-120-px text-center img-fix" defaultImage="assets/images/no-thumbnail.png"
+              [lazyLoad]="hotel.photo.url | size:300" [alt]="hotel.name" [title]="hotel.name"
+              onerror="this.src='assets/images/no-thumbnail.png'" />
+          </div>
+          <div class="hotel-info col-lg-6">
+            <div class="title">{{hotel.name}}</div>
+            <div class="font-14 text-black">
+              <img class="m-b-0 m-t-n-3" cdn-src="assets/images/hotel/desktop/icon-location.svg">
+              {{hotel.fullAddress}}
+              <span class="m-l-10 text-main font-14 text-underline pointer">
+                <a (click)="openMapView()">Xem bản đồ</a></span>
+            </div>
+            <div class="date-info d-flex m-t-10">
+              <span class="m-r-20 text-center">
+                <div class="title">Nhận phòng</div>
+                <div class="">{{getDayOfWeek(params.checkIn)}}, {{ params.checkIn | moment: 'DD/MM'}}</div>
+              </span>
+              <span class="m-r-20 text-center">
+                <div class="title">Trả phòng</div>
+                <div class="">{{getDayOfWeek(params.checkOut)}}, {{params.checkOut | moment: 'DD/MM'}}</div>
+              </span>
+              <span class="m-r-20 text-center">
+                <div class="title">Số đêm</div>
+                <div class="">{{night}}</div>
+              </span>
+            </div>
+            <div class="line"></div>
+
+            <div class="room-name m-t-15">{{room.roomName}}</div>
+            <div class="max-people m-t-5">
+              <img class="m-b-0 size-16x16 m-t-n-3" cdn-src="assets/images/hotel/desktop/people-bgw.svg" alt="img">
+              <span>Tối đa: {{room.limitedAdults}} người lớn</span>
+            </div>
+            <div class="m-t-10" *ngIf="!!hotel.preferService"><span class="bg-fac">{{hotel.preferServices}}</span></div>
+          </div>
+          <div class="col-lg-3 text-right font-16 text-main text-underline font-medium pointer"><a
+              (click)="openDetailRoom()">Xem chi tiết</a></div>
+        </div>
+      </div>
+      <app-hotel-room-popup [params]="params" [code]="hotel.code" [nights]="night" [room]="room">
+      </app-hotel-room-popup>
+    </div>
+  </div>
+
+  <app-hotel-mapview-popup [hotel]="hotel"></app-hotel-mapview-popup>
+</div>
+<!-- /desktop -->
+
+<div class="hotel-info hotel-info-mobile " *ngIf="isMobile">
+  <div class="row" *ngIf="!!data">
+    <div class="col-3 p-r-10">
+      <div class="img-hotel">
+        <img [src]="data.photo.src" alt="" onerror="this.src='assets/images/no-thumbnail.png'">
+      </div>
+    </div>
+    <div class="col-9 p-l-none">
+      <div class="hotel-name">
+        <span class="hotel-star">{{data.stars}} <img class="" [cdn-src]="'assets/images/icon/icon-star-white.svg'"
+            alt="">
+        </span>
+        {{data.name}}
+      </div>
+      <div class="font-11 address d-flex m-t-5">
+        <img class="size-16x16 m-r-5" cdn-src="assets/images/hotel/des-type-pos.svg" alt="icon" />
+        {{data.fullAddress}}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /mobile -->

@@ -1,0 +1,338 @@
+.btn {
+  text-transform: inherit;
+  padding: 8px 15px;
+  .border-radius(0);
+  .transition(all .3s linear);
+
+  i {
+    margin-right: 0;
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+
+  &.btn-link {
+    padding: 0;
+  }
+
+  &.btn-sign-in-up-header {
+    border-radius: 30px;
+    border: solid 1px @gray-7;
+    padding: 5px 12px 5px 5px;
+    background-color: transparent;
+    color: @gray-1;
+    line-height: 1.5;
+
+    > img {
+      margin-bottom: 0;
+      margin-top: -3px;
+    }
+
+    &:hover {
+      /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease-in-out; */
+    }
+  }
+
+  &.btn-signin-outline {
+    border-radius: 5px;
+    border: 1px solid @orange-2;
+    padding: 7px 10px;
+    background-color: @white;
+    color: @orange-2;
+    line-height: 1.5;
+    font-size: 16px;
+    font-weight: 500;
+
+    > img {
+      margin-bottom: 0;
+      margin-top: -3px;
+    }
+
+    &:hover, &:active, &:focus {
+      .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .1));
+    }
+  }
+
+  &.btn-sign-in-up {
+    min-width: 180px;
+    padding: 9px 20px;
+    border-color: @orange-2;
+    color: @orange-2;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  &.btn-accept {
+    min-width: 120px;
+    background-color: @orange-2;
+    color: @white;
+    font-size: 18px;
+    padding: 10px 15px;
+    text-align: center;
+  }
+
+  &.btn-cancel {
+    min-width: 120px;
+    background-color: @gray-7;
+    color: @white;
+    border-color: transparent;
+    font-size: 18px;
+    padding: 10px 15px;
+    text-align: center;
+    text-transform: inherit;
+    height: auto;
+  }
+
+  &.btn-cancel-outline {
+    background-color: @white;
+    color: @orange-2;
+    border: 1px solid @orange-2;
+    border-radius: 0px;
+    font-weight: 500;
+  }
+
+  &.btn-white-outline {
+    background-color: @white;
+    color: @gray-2;
+    border-color: @gray-2;
+
+    &.active {
+      color: @orange-2;
+    }
+  }
+
+  &.btn-white-outline-v2 {
+    background-color: @white;
+    color: @gray-2;
+    .border-radius(25px);
+    .box-shadow(0, 0, 3px, rgba(0, 0, 0, .2));
+
+    &.active, &:hover, &:active {
+      color: @orange-2;
+      .box-shadow(0, 1px, 10px, rgba(0, 0, 0, 0.3));
+    }
+  }
+
+  &.btn-white {
+    background-color: @white;
+  }
+
+  &.btn-main {
+    background-color: @orange-2;
+    color: @white;
+    border-color: @orange-2;
+    // min-height: 44px;
+  }
+
+  &.btn-main-v2 {
+    background-color: @orange-2;
+    background-image: linear-gradient(to right, @orange-4, @orange-5);
+    color: @white;
+    border-width: 0;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 400;
+    .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+    transition: all .5s linear;
+
+    &:hover, &:active, &:focus {
+      background-image: linear-gradient(to right, @orange-4, @orange-5);
+      .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .3));
+    }
+  }
+
+  &.btn-main-v3 {
+    background-color: @green-19;
+    background-image: linear-gradient(to right, @green-19, @green-20);
+    color: @white;
+    border-width: 0;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 400;
+    .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .2));
+    transition: all .5s linear;
+
+    &:hover, &:active, &:focus {
+      background-image: linear-gradient(to right, green-19, @green-20);
+      .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .3));
+    }
+  }
+
+  &.btn-main-outline {
+    background-color: @white;
+    border: 1px solid @orange-2;
+    color: @orange-2;
+    transition: all .5s linear;
+  }
+
+  &.btn-gray-outline {
+    background-color: @white;
+    border: 1px solid @gray-3;
+    color: @gray-2;
+    border-radius: 5px;
+
+    &:hover, &:active, &:focus {
+      color: @gray-2;
+    }
+  }
+
+  &.btn-blue {
+    background-color: @green-2;
+    color: @white;
+    border-color: @green-2;
+  }
+
+  &.btn-gray {
+    background-color: @gray-7;
+    color: @white;
+  }
+
+  &.btn-green {
+    background-color: @green-2;
+    color: @white;
+  }
+
+  &.btn-transparent {
+    background-color: transparent;
+    padding: 12px 15px;
+    color: @red;
+    font-size: 18px;
+    font-weight: 400;
+    min-width: 120px;
+    text-transform: inherit;
+  }
+
+  &.btn-change-payment {
+    background-color: @orange-2;
+    border-color: @orange-2;
+    color: @white;
+    font-size: 18px;
+    font-weight: 400;
+    min-width: 150px;
+    text-transform: inherit;
+  }
+
+  &.btn-sync {
+    background-color: @orange-2;
+    border-color: @orange-2;
+    color: @white;
+    font-size: 18px;
+    font-weight: 400;
+    min-width: 120px;
+    text-transform: inherit;
+  }
+
+  &.btn-submit-comment {
+    background-color: @orange-1;
+    color: @white;
+    font-size: 15px;
+  }
+
+  &.btn-submit-cancel {
+    background-color: @white;
+    border-color: @orange-2;
+    color: @orange-2;
+  }
+
+  &.btn-see-more {
+    border: 1px solid @orange-2;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: transparent;
+    color: @orange-2;
+    padding: 6px 15px;
+    .border-radius(5px);
+
+    &:not(href), :not(tabindex) {
+      color: @orange-2;
+      &:active, &:hover {
+        color: @orange-2;
+        // background-color: @orange-2;
+        .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .3));
+      }
+    }
+
+    &:active, &:hover {
+      color: @green-2;
+    }
+  }
+
+  &.btn-comment-cancel, &.btn-phone-cancel {
+    background-color: @white;
+    color: @orange-2;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &.btn-select-month {
+    font-size: 18px;
+    border-radius: 25px;
+    padding: 5px 15px;
+    color: white;
+    background-color: @green-9;
+
+    > img {
+      margin-top: -8px;
+    }
+
+    > i {
+      margin-left: 5px;
+    }
+  }
+
+  &.btn-fb, &.btn-gg {
+    text-align: left;
+    width: 100%;
+    .border-radius(0);
+    color: @white;
+    font-size: 15px;
+    padding: 8px 15px;
+
+    > img {
+      margin-bottom: 0;
+      margin-top: -3px;
+      margin-right: 25px;
+    }
+
+    & + .btn {
+      margin-top: 5px;
+    }
+  }
+
+  &.btn-fb {
+    background-color: @c-fb;
+  }
+
+  &.btn-gg {
+    background-color: @c-gg;
+  }
+
+  &.btn-login-outline {
+    width: 100%;
+    font-size: 15px;
+    padding: 8px 15px;
+    border: 1px solid @white;
+    color: @white;
+    background-color: transparent;
+  }
+
+  &.btn-register-link {
+    color: @white;
+    text-decoration: underline;
+  }
+
+  &.btn-white-link {
+    color: @white;
+    text-decoration: underline;
+    padding: 0;
+  }
+}
+
+.btn-group {
+  .btn-sign-in-selector, .btn-sign-up-selector {
+
+  }
+}

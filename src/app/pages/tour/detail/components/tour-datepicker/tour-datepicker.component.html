@@ -1,0 +1,5 @@
+<app-datepicker [data]="data"
+                [date]="date"
+                [options]="{startOfWeek: 1, isNextButtonShow:true}"
+                (select)="onSelectDate($event)"
+                (change)="onChangeMonth($event)"></app-datepicker>

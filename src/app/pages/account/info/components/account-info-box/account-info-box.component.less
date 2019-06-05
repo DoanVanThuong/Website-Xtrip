@@ -1,0 +1,44 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.account-info-box {
+
+  .list-group {
+
+    &.list-group-flush {
+      .list-group-item {
+
+        padding: 15px 0px;
+        border-color: @gray-33 !important;
+
+        &.border-bottom {
+          border-bottom: 1px solid @gray-33 !important;
+        }
+      }
+    }
+  }
+
+  .form {
+    &.form-desktop {
+      .form-group {
+        margin-bottom: 0;
+        position: relative;
+
+        .form-control {
+          padding: 0;
+          text-align: right;
+          font-weight: 400;
+          height: auto;
+
+          & + .error {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            font-size: 13px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}

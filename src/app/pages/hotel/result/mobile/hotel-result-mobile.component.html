@@ -1,0 +1,132 @@
+<div class="hotel-result hotel-result-mobile">
+
+  <!-- Header -->
+  <div class="header header-mobile">
+    <div class="bg-green-gradient">
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex">
+            <span class="pos-arrow">
+              <a class="d-block" (click)="back()">
+                <img class="m-b-none" cdn-src="assets/images/icon/icon-back-white.svg" alt="img"/>
+              </a>
+            </span>
+            <span class="w-full m-t-6 p-r-16">
+              <a (click)="changeArrival()">
+                <div class="input-style">
+                  <span class="m-r-10 float-right">
+                    <img class="m-b-none" cdn-src="assets/images/icon/icon-arrow-down-gray.svg" alt="img"/></span>
+                  <span class="m-l-10">{{ header.name }}</span>
+                </div>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Filter navigator -->
+      <div class="filter-navigator position-relative">
+        <div class="row">
+          <div class="col-4 text-center bor-r-item position-relative p-l-none p-r-none font-14 text-white">
+            <a (click)="openFilter()">
+              <img class="m-b-none m-t-n-3 m-r-8 size-14x14" cdn-src="assets/images/icon/icon-filter-white.svg" alt="img"/> Bộ lọc
+            </a>
+            <!-- <span class="position-absolute red-point" *ngIf="!!filterCounter"></span> -->
+          </div>
+          <div class="col-4 text-center bor-r-item p-l-none p-r-none font-14 text-white">
+            <a (click)="openChangeDatePopup()">
+              <img class="m-b-none m-t-n-3 m-r-8 size-14x14"
+                    cdn-src="assets/images/icon/icon-date-white.svg" alt="img"/>
+              Đổi ngày
+            </a>
+          </div>
+          <div class="col-4 text-center position-static p-l-none p-r-none font-14 text-white">
+            <div class="dropdown" dropdown>
+              <a dropdownToggle>
+                <img class="m-b-none m-t-n-3 m-r-8 size-14x14" cdn-src="assets/images/icon/icon-sort-white.svg" alt="img"/> Sắp xếp
+              </a>
+              <ul class="dropdown-menu pos-dropdown" *dropdownMenu id="dropdown-basic" role="menu" aria-labelledby="button-basic">
+                <li class="" *ngFor="let sort of sorts; trackBy: trackByFn">
+                  <a [class.active]="header.sortIndex === sort.index.toString()" (click)="onSelectSort(sort.index)">
+                    <div class="row">
+                      <div class="col-10">{{sort.name}}</div>
+                      <div class="col-2 text-right" *ngIf="header.sortIndex === sort.index.toString()">
+                        <img class="m-b-none m-t-n-5" cdn-src="assets/images/product/result/check.svg" alt="img"/>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Filter nagivator -->
+    </div>
+
+    <!-- checkIn/checkOut -->
+    <div class="font-13 check-days d-flex">
+      <span>Nhận - trả phòng: {{header.checkIn | moment: 'DD/MM'}} - {{header.checkOut | moment: 'DD/MM'}} ({{nights}} đêm) </span>
+      <div class="point"></div>
+      <span>{{header.adults}} người</span>
+    </div>
+    <!-- /checkIn/checkOut -->
+
+  </div>
+  <!-- /Header -->
+
+  <div class="wrapper" min-height infinite-scroll
+    [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="100"
+    (scrolled)="onScrollDown()">
+
+    <!-- Loading Screen -->
+    <div *ngIf="loadingScreen">
+      <app-hotel-loading></app-hotel-loading>
+      <app-hotel-loading></app-hotel-loading>
+      <app-hotel-loading></app-hotel-loading>
+    </div>
+    <!-- Loading Screen -->
+
+    <!-- List View -->
+    <div class="list-view">
+      <div *ngIf="!loadingScreen">
+        <div *ngFor="let hotel of hotels; trackBy: trackByFn">
+          <hotel-detail-item [hotel]="hotel"
+                             [nights]="nights"
+                             [viewMode]="1"
+                             (click)="onSelectHotel(hotel)"></hotel-detail-item>
+        </div>
+      </div>
+
+      <app-empty-screen [show]="!loadingScreen && !hotels.length"
+                        (retry)="getHotels()"></app-empty-screen>
+    </div>
+    <!-- List View -->
+
+    <!-- Switch View Button -->
+    <div class="switch-mode-view text-center" [@scrollAnimation]="stateIconMap" *ngIf="!(!loadingScreen && !hotels.length)">
+      <a (click)="onChangeView()">
+        <img class="m-b-0 m-t-n-4 p-r-5" cdn-src="assets/images/icon/icon-map.svg">
+      </a>
+    </div>
+    <!-- Switch View Button -->
+  </div>
+</div>
+
+<!-- Filter -->
+<hotel-filter-popup 
+  [data]="filter" *ngIf="!!isGetFilter"
+  [params]="hotelSearch"
+  (sortData)="sortsData($event)"
+  (updateCounter)="onUpdateFilterCounter($event)"
+  (submit)="onSubmitFilter($event)">
+</hotel-filter-popup>
+<!-- /Filter -->
+
+<!-- Location Popup -->
+<hotel-location-selector-popup (select)="selectLocation($event)"></hotel-location-selector-popup>
+<!-- /Location Popup -->
+
+<app-hotel-date-picker-popup [date]="selectedDate"
+                            (submit)="onSelectDate($event)"></app-hotel-date-picker-popup>

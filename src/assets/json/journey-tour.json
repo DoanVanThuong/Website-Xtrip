@@ -1,0 +1,329 @@
+{
+  "errors": [],
+  "code": "Success",
+  "data": {
+    "title": "Du lịch tự túc",
+    "depart": "2019-06-10T13:23+07:00",
+    "return": "2019-06-12T13:23+07:00",
+    "place": {
+      "items": [
+        {
+          "code": "TPE",
+          "name": "Đài Bắc",
+          "photo": {
+            "name": "Đài Bắc",
+            "src": "http://devmedia.xtrip.vn/TourJourneys/Places/TPE.png"
+          }
+        },
+        {
+          "code": "ITM",
+          "name": "Osaka",
+          "photo": {
+            "name": "Osaka",
+            "src": "http://devmedia.xtrip.vn/TourJourneys/Places/ITM.png"
+          }
+        },
+        {
+          "code": "SIN",
+          "name": "Singapore",
+          "photo": {
+            "name": "Singapore",
+            "src": "http://devmedia.xtrip.vn/TourJourneys/Places/SIN.png"
+          }
+        },
+        {
+          "code": "KUL",
+          "name": "Kuala Lumpur",
+          "photo": {
+            "name": "Kuala Lumpur",
+            "src": "http://devmedia.xtrip.vn/TourJourneys/Places/KUL.png"
+          }
+        },
+        {
+          "code": "BKK",
+          "name": "Bangkok",
+          "photo": {
+            "name": "Bangkok",
+            "src": "http://devmedia.xtrip.vn/TourJourneys/Places/BKK.png"
+          }
+        },
+        {
+          "code": "INC",
+          "name": "Seoul",
+          "photo": {
+            "name": "Seoul",
+            "src": "http://devmedia.xtrip.vn/TourJourneys/Places/INC.png"
+          }
+        }
+      ],
+      "title": "Điểm đến phổ biến",
+      "subText": "Điểm đến phổ biến"
+    },
+    "flight": {
+      "items": [
+        {
+          "name": "VietJetAir",
+          "photo": {
+            "name": "VietJetAir",
+            "src": "http://devstatic.xtrip.vn/Image/Airline/Logo/70px/VJ.png"
+          },
+          "origin": "SGN",
+          "destination": "TSA",
+          "originName": "Sân bay Tân Sơn Nhất",
+          "destinationName": "Sân bay Tùng Sơn Đài Bắc",
+          "price": 12300000
+        },
+        {
+          "name": "Jetstar",
+          "photo": {
+            "name": "Jetstar",
+            "src": "http://devstatic.xtrip.vn/Image/Airline/Logo/70px/3K.png"
+          },
+          "origin": "SGN",
+          "destination": "TPE",
+          "originName": "Sân bay Tân Sơn Nhất",
+          "destinationName": "Sân bay Quốc tế Đào Viên",
+          "price": 12300000
+        },
+        {
+          "name": "Vietnam Airlines",
+          "photo": {
+            "name": "Vietnam Airlines",
+            "src": "http://devstatic.xtrip.vn/Image/Airline/Logo/70px/VN.png"
+          },
+          "origin": "SGN",
+          "destination": "TPE",
+          "originName": "Sân bay Tân Sơn Nhất",
+          "destinationName": "Sân bay Quốc tế Đào Viên",
+          "price": 12300000
+        }
+      ],
+      "title": "Vé máy bay từ Hồ Chí Minh",
+      "subText": "Khởi hành: 10/06/2019"
+    },
+    "hotel": {
+      "items": [
+        {
+          "code": "VMTS2-TW-46405DF7",
+          "name": "Taipei Livepal Hostel",
+          "type": "Khách sạn",
+          "highlight": "Bao gồm bữa sáng",
+          "photo": {
+            "name": "Taipei Livepal Hostel",
+            "src": "http://devmedia.xtrip.vn/hotel/TW/VMTS2-TW-E7E184C0/vmts2-tw-e7e184c0-db64b4bb.jpg"
+          },
+          "address": "No.205-1, Songlong Rd., Xinyi Dist., Taipei",
+          "stars": 2,
+          "price": 420552,
+          "discount": 5,
+          "nearby": "Gần nhà thi đấu Đài Bắc",
+          "facilities": [
+            {
+              "code": "wifi",
+              "name": "Wifi",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/wifi.png"
+            },
+            {
+              "code": "air_condition",
+              "name": "Máy lạnh",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/air_condition.png"
+            },
+            {
+              "code": "24hreception",
+              "name": "Tiếp tân 24h",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/24hreception.png"
+            }
+          ]
+        },
+        {
+          "code": "VMTS2-TW-E7E184C0",
+          "name": "Mandarin Oriental Taipei",
+          "type": "Biệt Thự",
+          "highlight": "Bao gồm bữa sáng",
+          "photo": {
+            "name": "Mandarin Oriental Taipei",
+            "src": "http://devmedia.xtrip.vn/hotel/TW/VMTS2-TW-E7E184C0/vmts2-tw-e7e184c0-1b81e0e2.jpg"
+          },
+          "address": "158 Dunhua North Road, Taipei",
+          "stars": 5,
+          "price": 59077128,
+          "discount": 0,
+          "nearby": "Gần nhà thi đấu Đài Bắc",
+          "facilities": [
+            {
+              "code": "wifi",
+              "name": "Wifi",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/wifi.png"
+            },
+            {
+              "code": "air_condition",
+              "name": "Máy lạnh",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/air_condition.png"
+            },
+            {
+              "code": "24hreception",
+              "name": "Tiếp tân 24h",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/24hreception.png"
+            }
+          ]
+        },
+        {
+          "code": "VMTS2-TW-75A71CE6",
+          "name": "U Hotel (XIMEN)",
+          "type": "Biệt Thự",
+          "highlight": "Bao gồm bữa sáng",
+          "photo": {
+            "name": "U Hotel",
+            "src": "http://devmedia.xtrip.vn/hotel/TW/VMTS2-TW-75A71CE6/vmts2-tw-75a71ce6-c908f0dd.jpg?width=800"
+          },
+          "address": "2nd Floor, No 67, Sie Ning South Road Wan Hwa Dist, Taipei",
+          "stars": 2,
+          "price": 17049300,
+          "discount": 0,
+          "nearby": "Gần nhà thi đấu Đài Bắc",
+          "facilities": [
+            {
+              "code": "wifi",
+              "name": "Wifi",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/wifi.png"
+            },
+            {
+              "code": "air_condition",
+              "name": "Máy lạnh",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/air_condition.png"
+            },
+            {
+              "code": "24hreception",
+              "name": "Tiếp tân 24h",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/24hreception.png"
+            }
+          ]
+        },
+        {
+          "code": "VMTS2-TW-8BFAFB62",
+          "name": "Grand View Resort Beitou",
+          "type": "Resort",
+          "highlight": null,
+          "photo": {
+            "name": "Grand View Resort Beitou",
+            "src": "http://devmedia.xtrip.vn/hotel/TW/VMTS2-TW-8BFAFB62/vmts2-tw-8bfafb62-32dc929e.jpg"
+          },
+          "address": "No. 30, Youya Rd., Beitou Dist., Taipei",
+          "stars": 5,
+          "price": 12903000,
+          "discount": 0,
+          "nearby": "Gần nhà thi đấu Đài Bắc",
+          "facilities": [
+            {
+              "code": "wifi",
+              "name": "Wifi",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/wifi.png"
+            },
+            {
+              "code": "air_condition",
+              "name": "Máy lạnh",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/air_condition.png"
+            },
+            {
+              "code": "24hreception",
+              "name": "Tiếp tân 24h",
+              "icon": "http://devstatic.xtrip.vn/hotel/facilities/24hreception.png"
+            }
+          ]
+        }
+      ],
+      "title": "Đặt phòng cho kỳ nghỉ ở Đài Bắc",
+      "subText": "Trải nghiệm kỳ nghỉ vào Tháng 06"
+    },
+    "activity": {
+      "items": [
+        {
+          "code": "5bcea6aadeedd16588492a70",
+          "name": "Vé tham quan công viên địa chất Yehliu (Yehliu Geopark)",
+          "photo": {
+            "name": "5bcea6aadeedd16588492a70",
+            "src": "http://devmedia.xtrip.vn/product/images/5c8afe1451596484d4124a05/50638i6bfb1176e47b68801a322abb5a502c01.jpg"
+          },
+          "price": 230000,
+          "originalPrice": 460000,
+          "instantConfirmation": true,
+          "dateNotice": "2019-05-10T13:23+07:00",
+          "notes": [
+            "Thời gian tham quan: 5h",
+            "Có vé điện tử"
+          ],
+          "tags": [
+            {
+              "text": "Đề xuất",
+              "type": 1
+            },
+            {
+              "text": "Giảm giá 50%",
+              "type": 3
+            }
+          ]
+        },
+        {
+          "code": "5bcea58edeedd16588492a3e",
+          "name": "Vé điện tử vào Vườn Chim Jurong và Đi Xe điện",
+          "photo": {
+            "name": "5bcea58edeedd16588492a3e",
+            "src": "http://devmedia.xtrip.vn/product/images/5bcea58edeedd16588492a3e/db48ada2-8129-4552-bb3b-83f95e06c434.jpg"
+          },
+          "price": 230000,
+          "originalPrice": 230000,
+          "instantConfirmation": true,
+          "dateNotice": "2019-05-11T13:23+07:00",
+          "notes": [
+            "Thời gian tham quan: 5h",
+            "Có vé điện tử"
+          ],
+          "tags": [
+            {
+              "text": "Bán chạy",
+              "type": 2
+            }
+          ]
+        },
+        {
+          "code": "5cd43463194e404f08234e2f",
+          "name": "Universal Studios Admission with One-way Transfer",
+          "photo": {
+            "name": "5cd43463194e404f08234e2f",
+            "src": "http://devmedia.xtrip.vn/product/images/5cd43463194e404f08234e2f/73505i747293c8ff3d9831290fe6aa92297830.jpg"
+          },
+          "price": 460000,
+          "originalPrice": 460000,
+          "instantConfirmation": true,
+          "dateNotice": "2019-05-20T13:23+07:00",
+          "notes": [
+            "Thời gian tham quan: 5h",
+            "Có vé điện tử"
+          ],
+          "tags": null
+        },
+        {
+          "code": "5bcea609deedd16588492a54",
+          "name": "Admission to Night Safari with Multi Language Tram Ride",
+          "photo": {
+            "name": "5bcea609deedd16588492a54",
+            "src": "http://devmedia.xtrip.vn/product/images/5bcea609deedd16588492a54/51670bf2-44e6-405f-9c66-1e0842e2ecc7.jpg"
+          },
+          "price": 215000,
+          "originalPrice": 215000,
+          "instantConfirmation": true,
+          "dateNotice": "2019-05-17T13:23+07:00",
+          "notes": [
+            "Thời gian tham quan: 5h",
+            "Có vé điện tử"
+          ],
+          "tags": null
+        }
+      ],
+      "title": "Tham quan và giải trí ở Đài Bắc",
+      "subText": "Khám phá các hoạt động nổi bật"
+    }
+  },
+  "message": null,
+  "status": true
+}

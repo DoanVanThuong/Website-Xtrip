@@ -1,0 +1,38 @@
+<div class="row hotel-detail-basic animated fadeIn">
+  <div class="col-12">
+    <div class="bg-white b-r-10 h-450 position-relative {{shadow ? 'shadow' : ''}} p-12">
+      <div class="row">
+
+        <div class="col-12 p-l-20 p-r-20">
+          <span class="font-18 text-white rating">
+            <img class="m-b-0 m-t-n-3 p-r-5" cdn-src="assets/images/hotel/desktop/rating.svg" alt="img" />{{hotel.rating}}
+          </span>
+          <span class="review font-14 m-l-10">{{hotel.reviews}} khách đã đánh giá</span>
+        </div>
+
+        <div class="col-12 m-t-20 font-14 p-l-20 p-r-20">
+          <img class="m-b-0 m-t-n-2" cdn-src="assets/images/hotel/desktop/icon-location.svg" alt="img" />
+          <span class="text-black">{{hotel.fullAddress}} </span>
+          <span class="map-view pointer" (click)="onClickMapview()">Xem bản đồ</span>
+        </div>
+
+        <div class="col-12 m-t-20 font-28 font-medium text-black p-l-20 p-r-20">{{hotel.name}}</div>
+        <div class="col-12 m-t-10 p-l-20">
+          <hotel-star [stars]="hotel.stars" [isDesktop]="true"></hotel-star>
+        </div>
+
+        <div class="col-12 p-l-20 p-r-20 position-absolute b-10">
+          <div class="facilities title font-15 font-bold">Tiện nghi được ưa chuộng</div>
+          <ul class="fac-item m-t-10 d-flex flex-wrap">
+            <li class="bg-fac m-r-5 p-r-10 m-b-5" *ngFor="let item of mainFacility.facilities">
+              <img class="size-16x16 m-b-0 m-t-n-2 m-r-5" src="{{item.imageHost}}/android/{{item.imagePath}}" />{{item.name}}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-hotel-mapview-popup [hotel]="hotel"></app-hotel-mapview-popup>

@@ -1,0 +1,43 @@
+@import '_variables.less';
+@import '_mixins.less';
+
+.album-item {
+  width: 325px;
+
+  .album-image {
+    height: 180px;
+    overflow: hidden;
+    border-radius: 10px;
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      .transition(all 0.5s linear 0s);
+    }
+  }
+
+  &.album-item-desktop {
+    width: 285px;
+    background-color: @white;
+    color: @black;
+
+    .album-image {
+      height: 200px;
+      .border-radius(10px);
+      .box-shadow(0, 0, 3px, rgba(0, 0, 0, .15));
+
+      > img:hover {
+        .transform(scale(1.1));
+      }
+    }
+
+    .album-name {
+      font-weight: 500;
+      font-size: 15px;
+      padding: 10px;
+      height: 40px;
+      text-align: center;
+      line-height: 1.33;
+    }
+  }
+}

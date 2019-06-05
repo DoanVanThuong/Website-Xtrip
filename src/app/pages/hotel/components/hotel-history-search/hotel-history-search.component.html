@@ -1,0 +1,26 @@
+<div class="hotel-history-search-page" *ngIf="!!history && history.length">
+  <div class="title">
+    {{title}}
+  </div>
+
+  <div class="history-data">
+    <ul>
+      <li *ngFor="let item of history">
+        <a class="d-block" (click)="selectLocation(item.query.destination, item.checkIn, item.checkOut)">
+          <div class="name">
+            {{item.hotelName}}
+          </div>
+          <div class="rooms">
+            {{item.rooms}} phòng, {{item.adults + item.children}} người
+          </div>
+          <div class="date m-t-5">
+            <img class="m-b-none m-t-n-2" src="assets/images/icon/icon-calendar-gray.svg" alt="img" />
+            <span class="m-l-4">{{item.checkIn | moment: 'DD/MM'}}</span> -
+            <span>{{item.checkOut | moment: 'DD/MM'}}</span>
+          </div>
+        </a>
+
+      </li>
+    </ul>
+  </div>
+</div>

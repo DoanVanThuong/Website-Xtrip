@@ -1,0 +1,75 @@
+<div class="optional checkbox-coupon optional-mobile">
+
+  <div class="title-header p-10 font-13">Tùy chọn khác</div>
+
+  <div class="bg-white">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <a class="d-block">
+          <div class="d-table">
+            <div class="d-table-cell">
+              <a (click)="openCouponPopup(couponCode)">
+                <img class="m-b-0 m-t-n-3"
+                     cdn-src="assets/images/coupon/radio-{{!couponCode ? 'none' : 'selected'}}.svg" alt="icon"/>
+              </a>
+            </div>
+            <div class="d-table-cell p-l-15 w-full">
+              <div class="d-inline-block">
+                <a class="d-block" (click)="openCouponPopup(couponCode)">
+                  <div *ngIf="!couponCode">Mã khuyến mãi</div>
+                  <div *ngIf="couponCode">
+                    Áp dụng mã <span class="applied-cp">”{{couponCode}}”</span>
+                  </div>
+                </a>
+              </div>
+              <div class="d-inline-block pull-right">
+                <a *ngIf="!couponCode" (click)="openCouponPopup(couponCode)">
+                  <img class="m-b-0 size-15x15 m-t-3" cdn-src="assets/images/dropdown.svg" alt="icon"/>
+                </a>
+                <a (click)="clearCoupon()" *ngIf="couponCode">
+                  <img class="m-b-0 size-24x24" cdn-src="assets/images/coupon/clear-coupon.svg" alt="icon"/>
+                </a>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="list-group-item">
+        <a class="d-block" (click)="openSelectRewardPoint()">
+          <div class="d-table">
+            <div class="d-table-cell">
+              <img class="m-t-n-3"
+                   *ngIf="!!selectedPoint"
+                   cdn-src="assets/images/coupon/radio-selected.svg" alt="icon"/>
+              <img class="m-t-n-3"
+                   *ngIf="!selectedPoint"
+                   cdn-src="assets/images/coupon/radio-none.svg" alt="icon"/>
+            </div>
+            <div class="d-table-cell p-l-15 w-full">
+              <div class="d-inline-block">
+                <div *ngIf="!selectedPoint">Dùng điểm để thanh toán</div>
+                <div *ngIf="selectedPoint">
+                  Dùng <span class="point">{{ selectedPoint | currencyMoney:'' }} </span> điểm để thanh toán
+                </div>
+              </div>
+              <div class="d-inline-block pull-right">
+                <img class="size-15x15 m-b-0 m-t-3" cdn-src="assets/images/dropdown.svg" alt="icon"/>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<apply-coupon-popup #couponPopup
+                    [error]="error?.coupon"
+                    (submit)="onSubmitCoupon($event)">
+</apply-coupon-popup>
+
+<point-selector-popup #pointPopup
+                      [error]="error?.point"
+                      (submit)="onSubmitPoint($event)">
+</point-selector-popup>

@@ -1,0 +1,38 @@
+@import "_variables.less";
+
+.room-detail-mobile-page {
+  .maximum-people {
+    background-color: @green-3;
+    color: @white;
+  }
+  .room-image {
+    object-fit: cover;
+    .h-250 {
+      height: 250px;
+    }
+    &.reset-pos {
+      margin-left: -10px;
+      margin-right: -10px;
+      margin-top: -5px;
+    }
+    .t-l-15 {
+      top: 15px;
+      left: 15px;
+    }
+  }
+  .title {
+    color: @gray-1;
+    background-color: @gray-17;
+  }
+  .breaking-line {
+    border-bottom: 1px solid @gray-8;
+    &:last-child {
+      border: none;
+    }
+  }
+  .footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+}

@@ -1,0 +1,122 @@
+<!--component html goes here -->
+<div class="coupon-desktop-page">
+
+  <!-- Banner -->
+  <app-coupon-banner></app-coupon-banner>
+  <!-- Banner -->
+
+  <div class="container">
+
+    <!-- for mkt -->
+    <h1 class="invisible h-none m-none">Mã khuyến mãi</h1>
+
+    <!-- Breadcrumb -->
+    <div class="row">
+      <div class="col-12 font-13 coupon-breadcrumb m-t-10">
+        Trang chủ <span><img class="m-b-0" cdn-src="assets/images/hotel/desktop/stepper.svg"/></span> Khuyến mãi
+      </div>
+    </div>
+    <!-- Breadcrumb -->
+
+    <!-- Coupon Item -->
+    <div infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="200" (scrolled)="onScrollDown()"
+         class="row"
+         *ngIf="coupons.length > 0">
+      <div class="col-lg-4 p-l-10 p-r-10 pointer"
+           [ngClass]="selectedCouponItem=='' || selectedCouponItem === coupon.code ? '' : 'opacity-50'"
+           *ngFor="let coupon of coupons | slice: 0: breakPoint; let i = index">
+        <app-coupon-item [coupon]="coupon" (select)="onSelectCoupon(coupon, i)"></app-coupon-item>
+      </div>
+
+      <!-- Detail -->
+      <div id="detail"
+           class="col-12 detail-item animated fadeIn m-b-10 m-t-5"
+           *ngIf="showDetail">
+        <div class="b-r-10 bg-white p-20 shadow position-relative">
+
+          <!-- Arrow -->
+          <div class="row">
+            <div class="col-4 text-center m-t-n-36">
+              <img *ngIf="posArrow === 0"
+                   cdn-src="assets/images/more/coupon/arrow.svg"></div>
+            <div class="col-4 text-center m-t-n-36">
+              <img *ngIf="posArrow === 1"
+                   cdn-src="assets/images/more/coupon/arrow.svg"></div>
+            <div class="col-4 text-center m-t-n-36">
+              <img *ngIf="posArrow === 2"
+                   cdn-src="assets/images/more/coupon/arrow.svg"></div>
+          </div>
+          <!-- Arrow -->
+
+          <div class="title">{{couponDetail.name}}</div>
+          <div class="d-flex m-t-25">
+            <div class="tab pointer"
+                 *ngFor="let tab of tabs"
+                 [ngClass]="selectedTab === tab ? '' : 'unactive'">
+              <a (click)="onSelectTab(tab)">{{tab.display}}</a>
+            </div>
+          </div>
+          <div class="line" *ngIf="selectedTab.value === 'policies'">
+            <ul class="m-t-25 animated fadeIn">
+              <li *ngFor="let item of couponDetail.rules">{{item}}</li>
+            </ul>
+          </div>
+          <div class="line" *ngIf="selectedTab.value === 'flight'">
+            <div class="row m-t-30">
+              <div class="col-4" *ngFor="let flight of service.flight; trackBy: trackByFn">
+                <app-coupon-flight-item-detail [flight]="flight"></app-coupon-flight-item-detail>
+              </div>
+            </div>
+          </div>
+          <div class="line" *ngIf="selectedTab.value === 'tour'">
+            <div class="row m-t-30">
+              <div class="col-3" *ngFor="let tour of service.tour; trackBy: trackByFn">
+                <app-coupon-tour-item-detail [tour]="tour"></app-coupon-tour-item-detail>
+              </div>
+            </div>
+          </div>
+          <div class="line" *ngIf="selectedTab.value === 'hotel'">
+            <div class="row m-t-30">
+              <div class="col-3" *ngFor="let hotel of service.hotel; trackBy: trackByFn">
+                <app-coupon-hotel-item-detail [hotel]="hotel"></app-coupon-hotel-item-detail>
+              </div>
+            </div>
+          </div>
+          <div class="position-absolute pos-close-detail">
+            <a (click)="onClickedCloseDetail()">
+              <img class="m-b-none size-16x16 pointer" cdn-src="assets/images/icon/icon-close.svg" alt="img"/>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Detail -->
+
+      <div class="col-lg-4 p-l-10 p-r-10 pointer"
+           [ngClass]="selectedCouponItem=='' || selectedCouponItem === coupon.code ? '' : 'opacity-50'"
+           *ngFor="let coupon of coupons | slice: breakPoint: coupons.length; let i = index">
+        <app-coupon-item [coupon]="coupon" (select)="onSelectCoupon(coupon, i + breakPoint)"></app-coupon-item>
+      </div>
+
+    </div>
+    <!-- Coupon Item -->
+
+    <!-- Empty Screen -->
+    <div class="row m-l-none m-r-none" *ngIf="!isLoading&&coupons.length === 0">
+      <div class="col-12 bg-white b-r-10 p-10 text-center p-30">
+        <img class="m-b-none" cdn-src="assets/images/more/coupon/empty-screen.svg" alt="img"/>
+        <div class="font-weight-bold color-gray-23 m-t-15">Xtrip rất tiếc, Hiện không có mã khuyến mãi.</div>
+      </div>
+    </div>
+    <!-- Empty Screen -->
+
+    <!-- Loading -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <loading [show]="isLoading"></loading>
+      </div>
+    </div>
+    <!-- Loading -->
+
+  </div>
+
+</div>

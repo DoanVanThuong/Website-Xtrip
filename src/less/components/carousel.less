@@ -1,0 +1,129 @@
+.owl-carousel {
+
+  .owl-stage-outer {
+    &.owl-height {
+      .transition(height .3s linear 0s);
+    }
+  }
+
+  .owl-nav {
+
+    .transition(all .5s linear 0s);
+    height: 0px;
+    margin: 0;
+
+    &.disabled {
+      opacity: .9;
+    }
+
+    button {
+      &.owl-next,
+      &.owl-prev {
+        border-radius: 5px;
+        padding: 8px 6px !important;
+        text-align: center;
+        font-size: 32px;
+        line-height: 1;
+        font-weight: 400;
+        color: @white;
+        position: absolute;
+        top: 50%;
+        outline: none;
+        margin: 0;
+      }
+    }
+
+    .owl-next {
+      right: -20px;
+      transform: translate(50%, -50%);
+    }
+
+    .owl-prev {
+      left: -20px;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &.owl-stage-full {
+    .owl-stage-outer {
+      padding: 15px;
+      margin: -15px;
+    }
+  }
+
+  &.owl-nav-hover {
+
+    .owl-nav {
+      opacity: 0;
+    }
+
+    &:hover {
+      .owl-nav {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.owl-nav-black {
+    .owl-nav {
+
+      &.disabled {
+        opacity: .9;
+      }
+
+      button {
+        &.owl-next,
+        &.owl-prev {
+          .rgba(@dark-gray, 1) !important;
+        }
+      }
+    }
+  }
+
+  &.owl-dots-black {
+    .owl-dots {
+
+      .owl-dot {
+        width: 16px;
+        height: 16px;
+        border: 2px solid @white;
+        border-radius: 50%;
+        background-color: hsla(hue(@black), saturation(@black), lightness(@black), .6);
+        margin-right: 10px;
+
+        span {
+          background-color: transparent;
+          margin: 0;
+        }
+
+        &.active {
+          background-color: @white;
+        }
+      }
+    }
+  }
+
+  &.owl-dots-green {
+    .owl-dots {
+
+      .owl-dot {
+
+        > span {
+          background-color: @green-22;
+          .transition(all .3s linear);
+        }
+
+        &.active, &:hover, &:active {
+          outline-width: 0;
+
+          > span {
+            background-color: @green-2;
+            width: 15px;
+            height: 15px;
+            margin: 3px 4px;
+          }
+        }
+      }
+    }
+  }
+}

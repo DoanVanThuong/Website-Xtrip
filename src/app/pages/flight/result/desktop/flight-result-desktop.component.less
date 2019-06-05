@@ -1,0 +1,27 @@
+@import '_variables.less';
+
+.flight-result {
+
+  &.flight-search-desktop {
+
+    .flight-list {
+      > li {
+        margin-top: 10px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+
+    @media (min-width: 992px) {
+      .flight-filter-section {
+        padding-right: 10px;
+      }
+
+      .flight-content-section {
+        padding-left: 10px;
+      }
+    }
+  }
+}

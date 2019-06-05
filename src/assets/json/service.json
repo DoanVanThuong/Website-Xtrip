@@ -1,0 +1,26 @@
+[
+  {
+    "url": "assets/images/homepage/payment-service/transfer.png",
+    "name": "Chuyển khoản"
+  },
+  {
+    "url": "assets/images/homepage/payment-service/office.png",
+    "name": "Tại văn phòng"
+  },
+  {
+    "url": "assets/images/homepage/payment-service/payoo.png",
+    "name": "Payoo"
+  },
+  {
+    "url": "assets/images/homepage/payment-service/napas.png",
+    "name": "Cổng thanh toán"
+  },
+  {
+    "url": "assets/images/homepage/payment-service/visa-master.png",
+    "name": "Thẻ tín dụng"
+  },
+  {
+    "url": "assets/images/homepage/payment-service/cod.png",
+    "name": "Thu hộ"
+  }
+]

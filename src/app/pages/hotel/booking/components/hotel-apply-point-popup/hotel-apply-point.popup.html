@@ -1,0 +1,55 @@
+<div bsModal #popup="bs-modal" class="modal fade hotel-apply-point-popup animated fadeInUp" role="dialog"
+  (onHidden)="hide()" (onShown)="onShowPointPopup()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center font-15 font-medium">Điểm thưởng
+              <div class="float-right">
+                <a class="d-block icon-close">
+                  <img alt="" cdn-src="assets/images/hotel/desktop/close.svg" src="assets/images/icon/icon-close.svg"
+                    class="size-16x16">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 m-t-15">
+              <div class="switch-small-mobile d-flex align-items-center justify-content-between">
+                <div>
+                  <ui-switch size="medium" class="" [(ngModel)]="isApply" (ngModelChange)="onChangeApplyPoint($event)">
+                    <span class="switch switch-medium">
+                    </span>
+                  </ui-switch>
+                  <span class="p-l-10 font-15 align-middle">Dùng {{pointAvailable | number:'.0-2'}} điểm
+                  </span>
+                </div>
+                <div class="point-number" [class.active]="isApply">
+                  [{{maxPriceToUsing | currencyMoney: ''}}<span class="text-underline">đ</span>]
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="fixed-bottom footer">
+          <div class="btn-footer ">
+            <button class="btn font-16 btn-main-v3 w-full p-10 text-white" (click)="confirm()">
+              <span class="font-bold">Đồng ý</span>
+              <span>
+                ({{price | currencyMoney: ''}}
+                <span class="text-underline">đ</span>)
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

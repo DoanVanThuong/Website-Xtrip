@@ -1,0 +1,136 @@
+<!-- for mobile -->
+<div class="booking-optional booking-optional-mobile {{ class }}" *ngIf="isMobile">
+  <h4 class="title">Ưu đãi</h4>
+  <div class="">
+    <ul class="optionals">
+      <li>
+        <a class="pointer"
+           (click)="onSelectOptional('coupon')">
+          <div class="d-flex align-items-start">
+            <img class="m-b-none m-t-n-3 size-24x24 m-r-10"
+                 [src]="selectedOptional === 'coupon' ?  'assets/images/icon/icon-checked-circle.svg' : 'assets/images/icon/icon-uncheck-circle.svg'"
+                 align="img"/>
+            <div class="">
+              <div *ngIf="!isAppliedCouponCode">Sử dụng mã giảm giá</div>
+              <div *ngIf="isAppliedCouponCode">
+                Áp dụng mã <span class="applied-cp">”{{ couponCode  }}”</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="pointer"
+           (click)="onSelectOptional('point')">
+          <div class="d-flex align-items-start">
+            <img class="m-b-none m-t-n-3 size-24x24 m-r-10"
+                 [src]="selectedOptional === 'point' ?  'assets/images/icon/icon-checked-circle.svg' : 'assets/images/icon/icon-uncheck-circle.svg'"
+                 align="img"/>
+            <div class="">
+              <div *ngIf="!isAppliedPoint">Dùng điểm để thanh toán</div>
+              <div *ngIf="isAppliedPoint">
+                Dùng <span class="point">{{ selectedPoint | currencyMoney:' điểm' }} </span> để thanh toán
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <apply-coupon-popup [error]="error?.coupon"
+                      (submit)="onApplyCoupon($event)"></apply-coupon-popup>
+  <point-selector-popup [error]="error?.point"
+                        (submit)="onApplyPoint($event)"></point-selector-popup>
+</div>
+
+<!-- for desktop -->
+<div class="booking-optional booking-optional-desktop {{ class }}" *ngIf="isDesktop">
+  <h4 class="title">Ưu đãi</h4>
+  <div class="panel panel-desktop card">
+    <div class="card-body panel-body">
+      <ul class="optionals">
+        <li>
+          <a class="pointer"
+             (click)="onSelectOptional('coupon')">
+            <img class="m-b-none m-t-n-3 size-24x24 m-r-10"
+                 [src]="selectedOptional === 'coupon' ?  'assets/images/icon/icon-checked-circle.svg' : 'assets/images/icon/icon-uncheck-circle.svg'"
+                 align="img"/>
+            <span class="font-bold">Sử dụng mã giảm giá</span>
+          </a>
+          <div class="m-l-35 m-t-10"
+               *ngIf="selectedOptional === 'coupon'">
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="tag tag-applied" *ngIf="isAppliedCouponCode">
+                  {{ couponCode }}
+                  <a class="pointer close" (click)="onUnsetCoupon()">&times;</a>
+                </div>
+
+                <form class="row form form-desktop"
+                      *ngIf="!isAppliedCouponCode"
+                      (submit)="onApplyCoupon(couponCode)" novalidate>
+                  <div class="col-md-8 d-flex align-items-center h-full">
+                    <div class="form-group w-full">
+                      <input type="text"
+                             class="form-control underline font-normal"
+                             [(ngModel)]="couponCode"
+                             name="coupon-code"
+                             placeholder="Nhập mã giảm giá"/>
+                    </div>
+                  </div>
+                  <div class="col-md-4 d-flex align-items-start h-full">
+                    <button type="submit"
+                            class="btn btn-main-v2 font-bold">
+                      Áp dụng
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a class="pointer"
+             (click)="onSelectOptional('point')">
+            <img class="m-b-none m-t-n-3 size-24x24 m-r-10"
+                 [src]="selectedOptional === 'point' ?  'assets/images/icon/icon-checked-circle.svg' : 'assets/images/icon/icon-uncheck-circle.svg'"
+                 align="img"/>
+            <span class="font-bold">Dùng điểm để thanh toán</span>
+          </a>
+          <div class="m-l-35"
+               *ngIf="selectedOptional === 'point'">
+            <div class="row">
+              <div class="col-lg-10 font-13 font-bold">
+                <div class="" *ngIf="min < max">
+                  <nouislider class="nouislider-desktop "
+                              [min]="min"
+                              [max]="max"
+                              [config]="sliderConfig"
+                              [(ngModel)]="selectedPoint"
+                              (end)="onApplyPoint($event)"
+                              (ngModelChange)="onPointChange($event)"></nouislider>
+                </div>
+
+                <div class="row ">
+                  <div class="col-6">
+                    Bạn có: <span class="text-main">{{ max | currencyMoney: ' điểm' }}</span>
+                  </div>
+                  <div class="col-6 text-right">
+                    <div class="point-selected font-14">
+                      {{ selectedPoint | currencyMoney:' điểm' }} = {{ convertPoint2Money(selectedPoint) |
+                      currencyMoney:'' }} <span
+                      class="text-underline">đ</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <sign-in-popup></sign-in-popup>
+</div>

@@ -1,0 +1,165 @@
+<div class="coupon-detail-mobile-page">
+  <div class="fixed-top coupon-detail-header"
+       [class.yellow]="coupon.type == 0"
+       [class.green]="coupon.type == 1"
+       [class.blue]="coupon.type > 1">
+    <div class="position-relative">
+      <div class="heading">
+        <div class="row">
+          <div class="col-1">
+            <a (click)="backTo()">
+              <img class="size-16x16" cdn-src="assets/images/icon-back.png" alt="icon"/>
+            </a>
+          </div>
+          <div class="col-10 text-center">
+            <span class="text"> Dịch vụ được giảm</span>
+            <span class="code">{{ coupon.code }}</span>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </div>
+      <div class="icon-detail">
+        <img cdn-src="assets/images/coupon/detail-coupon.svg">
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="coupon-intro">
+      <div class="row heading">
+        <div class="col-12 text-center">
+          <div class=" title font-bold">Nhập mã:</div>
+          <div class="m-t-15">
+            <span class="coupon-code font-bold">{{coupon.code}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row m-t-20">
+        <div class="col-12 font-18 font-thin">
+          <span
+              class="text-main font-bold">Giảm {{coupon.discount | number }} {{coupon.isPercent == true ? '%' : ''}}</span>,
+          tối đa <span class="text-main font-bold">{{coupon.maxDiscount | currencyMoney}}</span>, {{coupon.name}}
+        </div>
+      </div>
+    </div>
+    <div class="coupon-rule">
+      <div class="row">
+        <div class="col-12">
+          <div class="title">
+            Điều kiện & điều khoản sử dụng
+          </div>
+          <div class="coupon-rule-content">
+            <ul class="coupon-rule-list">
+              <li class="" *ngFor="let rule of coupon.rules; trackBy: trackByFn">
+                {{ rule }}
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="coupon-service">
+      <accordion [closeOthers]="true">
+        <accordion-group *ngIf="service.tour">
+          <div accordion-heading>
+            <span class="">Tour</span>
+            <div class="pull-right">
+              <i class="fa fa-lg fa-angle-down unactive"></i>
+              <i class="fa fa-lg fa-angle-up active"></i>
+            </div>
+          </div>
+          <ul class="list" *ngFor="let tour of service.tour; trackBy: trackByFn">
+            <li class="list-item">
+              <div class="d-table">
+                <div class="d-table-cell align-middle mn-w-50">
+                  <img class="size-40x40" src="{{tour.photo.src}}"
+                       onerror="this.src='assets/images/no-thumbnail.png'" alt="icon"/>
+                </div>
+                <div class="d-table-cell">
+                  <div class="coupon-service-content">
+                    <div class="heading">{{tour.name}}</div>
+                    <div class="intro">
+                      <div class="d-inline-block">
+                        <img class="size-16x16" cdn-src="assets/images/tour/search/date.svg" alt="icon"/>
+                        {{ getTourDates(tour) }}
+                      </div>
+                      <div class="d-inline-block">
+                        <img cdn-src="assets/images/tour/search/clock.svg" alt="icon"/>
+                        {{tour.days}}N{{tour.nights}}Đ
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </accordion-group>
+        <accordion-group *ngIf="service.hotel">
+          <div accordion-heading>
+            <span class="">Khách sạn</span>
+            <div class="pull-right">
+              <i class="fa fa-lg fa-angle-down unactive"></i>
+              <i class="fa fa-lg fa-angle-up active"></i>
+            </div>
+          </div>
+
+          <ul class="list" *ngFor="let hotel of service.hotel; trackBy: trackByFn">
+            <li class="list-item">
+              <div class="d-table">
+                <div class="d-table-cell align-middle mn-w-50">
+                  <img class="size-48x48" src="{{hotel.photo.src}}" alt="icon"
+                       onerror="this.src='assets/images/no-thumbnail.png'"/>
+                </div>
+                <div class="d-table-cell">
+                  <div class="coupon-service-content">
+                    <div class="heading">{{hotel.name}}</div>
+                    <div style="margin-top: -3px">
+                      <hotel-star [stars]="hotel.star"></hotel-star>
+                    </div>
+                    <div class="intro">
+                      <img class="size-16x16" cdn-src="assets/images/hotel/pos.svg" alt="icon"/>
+                      {{hotel.address}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </accordion-group>
+        <accordion-group *ngIf="service.flight">
+          <div accordion-heading>
+            <span class="">Vé máy bay</span>
+            <div class="pull-right">
+              <i class="fa fa-lg fa-angle-down unactive"></i>
+              <i class="fa fa-lg fa-angle-up active"></i>
+            </div>
+          </div>
+
+          <ul class="list">
+            <li class="list-item" *ngFor="let flight of service.flight; trackBy: trackByFn; let i = index">
+              <div class="d-table">
+                <div class="d-table-cell align-middle mn-w-50">
+                  <img class="size-48x48"
+                       src="{{ flight.roundTrip ? 'assets/images/roundtrip.svg' : 'assets/images/oneway.svg'}}"
+                       alt="icon"
+                       onerror="this.src='assets/images/no-thumbnail.png'"/>
+                </div>
+                <div class="d-table-cell">
+                  <div class="coupon-service-content">
+                    <div class="heading">{{flight.name}}</div>
+                    <div class="intro">
+                      {{ flight.roundTrip ? 'Áp dụng cho vé khứ hồi' : 'Áp dụng cho vé một chiều'}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </accordion-group>
+      </accordion>
+    </div>
+  </div>
+</div>

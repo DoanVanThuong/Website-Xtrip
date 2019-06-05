@@ -1,0 +1,80 @@
+<div class="tour-result-desktop-wrapper">
+  
+  <app-tour-search-bar-desktop [params]="tourSearch"
+                               [arrival]="tourQuery.arrivalPlace"
+                               [arrival-alias]="tourQuery.arrivalAlias"></app-tour-search-bar-desktop>
+
+  <div class="main-body">
+
+    <div class="container" infinite-scroll
+         [infiniteScrollDistance]="1"
+         [infiniteScrollThrottle]="150"
+         (scrolled)="onScrollDown()">
+
+      <app-breadcrumb-desktop [items]="breadcrumbs"></app-breadcrumb-desktop>
+
+      <div class="row">
+        <!-- left section -->
+        <div class="col-xl-3 col-lg-4 left-section">
+          <tour-filter-desktop *ngIf="!!isFiltered"
+                               [params]="params"
+                               (onChange)="onUpdateFilter($event)"
+                               [filterOptions]="filterOption"
+                               [params]="params"></tour-filter-desktop>
+        </div>
+
+        <!-- right-section -->
+        <div class="col-xl-9 col-lg-8 right-section">
+          <div class="row ">
+            <div class="container-fluid">
+              <sort-tour-desktop [sorts]="filterOption.sorts"
+                                 (select)="onSelectSort($event)"
+                                 [keyword]="keyword"
+                                 [params]="tourSearch"></sort-tour-desktop>
+
+              <div class="text-center m-t-10"
+                   *ngIf="!tours.length && !isLoading">
+                <img class="size-82x82"
+                     cdn-src="assets/images/hotel/desktop/empty-room.svg"
+                     alt="img"/>
+                <div class="font-14 empty-text-des m-t-10">Không tìm thấy tour phù hợp trong khoảng ngày bạn chọn.</div>
+                <div class="font-14 empty-text-des">Hãy thử lại với ngày khác hoặc điều chỉnh lại bộ lọc.</div>
+                <div class="m-t-10">
+                  <button class="btn btn-main-v2" (click)="onResetFilter()">Đặt lại bộ lọc</button>
+                </div>
+              </div>
+              <ul class="list-unstyled list-tour"
+                  @list
+                  *ngIf="!isHaveRelatedTour" data-toogle="tooltip">
+                <li class="tour-item pointer"
+                    @item
+                    *ngFor="let tour of tours; trackBy: trackByFn;">
+                  <tour-item-desktop [tour]="tour"></tour-item-desktop>
+                </li>
+              </ul>
+
+              <div class="m-t-20"
+                   *ngIf="!!relatedTours.length">
+                <div class="related-title">Có thể bạn quan tâm</div>
+                <ul class="list-unstyled list-tour"
+                    @list
+                    data-toogle="tootip">
+                  <li class="tour-item pointer"
+                      @item
+                      *ngFor="let tour of relatedTours; trackBy: trackByFn;">
+                    <tour-item-desktop [tour]="tour"></tour-item-desktop>
+                  </li>
+                </ul>
+              </div>
+
+              <div class=" text-center">
+                <loading [show]="isLoading"></loading>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,74 @@
+<div class="block block-category p-b-15">
+
+  <div class="sub-category fixed-top">
+    <div class="d-flex justify-content-center align-items-center">
+      <a [routerLink]="['/tour/arrival', 'international']">
+        <img class="size-32x32"
+             cdn-src="assets/images/icon/icon-international-outline.svg"
+             alt="Tour trong ngày"/>
+      </a>
+      <a [routerLink]="['/tour/arrival', 'domestic']">
+        <img class="size-32x32"
+             cdn-src="assets/images/icon/icon-domestic-outline.svg"
+             alt="Tour trong nước"/>
+      </a>
+      <a [routerLink]="['/product' , PRODUCT_TYPE.FREE_AND_EASY ]">
+        <img class="size-32x32" cdn-src="assets/images/icon/icon-free-n-easy-outline.svg" alt="Free & easy"/>
+      </a>
+      <a [routerLink]="['/flight/search']">
+        <img class="size-36x36" cdn-src="assets/images/icon/icon-flight-outline.svg" alt="Vé máy bay"/>
+      </a>
+      <a [routerLink]="['/hotel/search']">
+        <img class="size-32x32" cdn-src="assets/images/icon/icon-hotel-outline.svg" alt="Khách sạn"/>
+      </a>
+      <a [routerLink]="['/product', PRODUCT_TYPE.ACTIVITIES ]">
+        <img class="size-32x32" cdn-src="assets/images/icon/icon-activities-outline.svg" alt="Vé vui chơi"/>
+      </a>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="category-row d-flex justify-content-center align-items-center">
+      <div class="category-item">
+        <a [routerLink]="['/tour/arrival/international']">
+          <img class="size-32x32"
+               cdn-src="assets/images/icon/icon-international-outline.svg"
+               alt="Tour nước ngoài"/>
+          <div class="category-title">Tour nước ngoài</div>
+        </a>
+      </div>
+      <div class="category-item">
+        <a [routerLink]="['/tour/arrival/domestic']">
+          <img class="size-32x32" cdn-src="assets/images/icon/icon-domestic-outline.svg" alt="Tour trong nước"/>
+          <div class="category-title">Tour trong nước</div>
+        </a>
+      </div>
+      <div class="category-item">
+        <a [routerLink]="['/product' , PRODUCT_TYPE.FREE_AND_EASY ]">
+          <img class="size-32x32" cdn-src="assets/images/icon/icon-free-n-easy-outline.svg" alt="Free & Easy"/>
+          <div class="category-title">Tour Free & Easy</div>
+        </a>
+      </div>
+    </div>
+    <div class="category-row d-flex justify-content-center align-items-center">
+      <div class="category-item">
+        <a [routerLink]="['/flight/search']">
+          <img class="size-32x32" cdn-src="assets/images/icon/icon-flight-outline.svg" alt="Vé máy bay"/>
+          <div class="category-title">Chuyến bay</div>
+        </a>
+      </div>
+      <div class="category-item">
+        <a [routerLink]="['/hotel/search']">
+          <img class="size-32x32" cdn-src="assets/images/icon/icon-hotel-outline.svg" alt="Khách sạn"/>
+          <div class="category-title">Khách sạn</div>
+        </a>
+      </div>
+      <div class="category-item">
+        <a [routerLink]="['/product', PRODUCT_TYPE.ACTIVITIES ]">
+          <img class="size-32x32" cdn-src="assets/images/icon/icon-activities-outline.svg" alt="Vé vui chơi"/>
+          <div class="category-title">Vé vui chơi</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

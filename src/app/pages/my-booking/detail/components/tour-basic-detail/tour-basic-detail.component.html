@@ -1,0 +1,76 @@
+<!--component html goes here -->
+<div class="booking-tour-detail-basic">
+  <div class="row" *ngIf="!!tour">
+    <div class="col-lg-12">
+      <div class="d-flex flex-column h-full {{mode === 1 ? 'm-l-20 m-r-20' : ''}}">
+        <h4 class="font-17 font-bold text-black m-none">
+          {{ tour.tourName }}
+        </h4>
+      </div>
+    </div>
+  </div>
+
+  <ul class="list-group list-group-flush m-t-20" *ngIf="!!tour">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Tình trạng</div>
+        <div class="col-8">
+          <!-- <booking-status [status]="tour.status" [border]="true"></booking-status> -->
+          <booking-status-tour [status]="tour.status" [statusName]="tour.statusName" [border]="true" [fill]="true" [icon]="true"></booking-status-tour>
+          <span *ngIf="tour.isReviewed" class="status status-box status-success mn-w-110">Đã nhận xét</span>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Nơi khởi hành</div>
+        <div class="col-8">
+          {{ tour.departPlace }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Ngày khởi hành</div>
+        <div class="col-8">
+          {{ tour.departDate | moment:'HH:mm, DD/MM/YYYY' }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">Thời gian tour</div>
+        <div class="col-8">
+          {{ tour.days }}N{{ tour.nights }}Đ
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item" >
+      <div class="row">
+        <div class="col-4 font-bold">Số người</div>
+        <div class="col-8">
+          {{ tour | peopleNumber }}
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4 font-bold">{{!!tour.isDeposited && tour.status != STATUS.WAITING && tour.status != STATUS.PAID ? 'Chi tiết giá' : 'Tổng tiền'}}</div>
+        <div class="col-8">
+          {{ tour.totalPrice | currencyMoney: '' }} <span class="text-underline">đ</span> 
+          <span class="text-main m-l-20 pointer text-underline" *ngIf="mode === 0">
+            <a (click)="showDetailPrice()">Chi tiết</a>
+          </span>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item" *ngIf="mode === 1">
+      <div class="row">
+        <div class="col-4 font-bold">Hình thức thanh toán</div>
+        <div class="col-8">
+          {{ currentPayment }}
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

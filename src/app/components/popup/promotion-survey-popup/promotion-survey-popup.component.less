@@ -1,0 +1,81 @@
+// component css goes here
+@import "_variables.less";
+.promotion-survey-popup {
+  .modal-body {
+    padding-top: 0px;
+    padding: 0;
+  }
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    color: @black;
+    text-align: center;
+    margin-top: 15px;
+  }
+  .img-cnt {
+    margin-top: 20px;
+    .p-0-46 {
+      padding: 0 46px;
+    }
+  }
+  .h-100-vh {
+    height: 100vh;
+  }
+  .bg-item {
+    background-image: url('../../../../assets/images/more/promotion-survey/bg-step.png');
+    width: 100%;
+    background-size: cover;
+    height: 286px;
+    position: absolute;
+    bottom: 0;
+    .cnt-title {
+      color: @white;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 64px 20px 0 20px;
+    }
+    .description {
+      color: @white;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 9px 20px;
+    }
+    .btn-main-v2 {
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .close-btn {
+      background-color: @green-16;
+      color: #ffffff;
+      border-width: 0;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    .des {
+      .w-auto {
+        width: auto;
+      }
+    }
+  }
+  .owl-theme {
+    &.owl-dots-black {
+      .owl-dots {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        .owl-dot {
+          span {
+            width: 8px;
+            height: 8px;
+            margin: 5px 4px;
+          }
+          &.active {
+            span {
+              background: @white  !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

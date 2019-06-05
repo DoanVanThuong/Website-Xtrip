@@ -1,0 +1,55 @@
+<div class="block block-partner m-t-none">
+  <!-- desktop -->
+  <div *ngIf="isDesktop">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="block-title">Hỗ trợ thanh toán</h3>
+            <div class="block-description">
+              Thanh toán đa dạng bằng nhiều hình thức với hệ thống ngân hàng trong nước và quốc tế
+            </div>
+            <div class="block-body m-t-10">
+            <div class="row payment-partner">
+              <div class="col-8-cus col-md-3 col-sm-4 col-6"
+                   *ngFor="let payment of payments | slice:0:8; trackBy: trackByFn">
+                <img class="img-fix" [cdn-src]="payment" alt="logo"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row m-t-40">
+        <div class="col-12">
+          <h3 class="block-title">Hãng bay liên kết</h3>
+          <div class="block-description">
+            Liên kết với hầu hết các hãng bay trên thế giới, mang lại cho khách hàng thêm nhiều ưu đãi và lựa chọn
+          </div>
+          <div class="block-body m-t-10">
+            <div class="row airline-partner">
+              <div class="col-8-cus col-md-3 col-sm-4 col-6 text-center"
+                   *ngFor="let partner of partners | slice:0:8; trackBy: trackByFn">
+                <img class="img-contain" [cdn-src]="partner "/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div *ngIf="isMobile">
+    <div class="row">
+      <div class="col-12 f-15">
+        <div class="f-16 font-medium">Đối tác thanh toán</div>
+      </div>
+      <div class="scroll-container">
+        <div class="scroll-area">
+          <div class="scroll-item" *ngFor="let payment of mPayments; trackBy: trackByFn">
+            <img class="img-fix mx-w-110" [cdn-src]="payment" alt="image"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

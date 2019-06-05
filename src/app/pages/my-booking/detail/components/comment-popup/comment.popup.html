@@ -1,0 +1,56 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade booking-comment-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Trải nghiệm của bạn
+          <a class="pull-right pointer" (click)="hide()">
+            <img alt="close"
+                 class="m-b-none size-24x24"
+                 cdn-src="assets/images/icon/icon-close-gray.svg">
+          </a>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <ul class="rating-list">
+              <li *ngFor="let label of ratingLabel; trackBy: trackByFn; let i = index">
+                <div class="row">
+                  <div class="col-4 font-bold">
+                    {{ label }}
+                  </div>
+                  <div class="col-8 text-right">
+                    <bar-rating [max]="5" [rate]="3" (rateChange)="rating[i] = $event"></bar-rating>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-12 m-t-20">
+            <div class="form form-desktop">
+              <div class="form-group">
+                <label class="control-label">Cảm nhận và đánh giá tổng quan của bạn</label>
+                <textarea class="form-control underline text-black font-normal"
+                          rows="1"
+                          placeholder="Cảm nhận của bạn"
+                          [(ngModel)]="comment"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 m-t-20 text-center">
+            <button class="btn btn-main-v2 mn-w-150 font-16"
+                    (click)="onSubmit()">
+              Gửi nhận xét
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

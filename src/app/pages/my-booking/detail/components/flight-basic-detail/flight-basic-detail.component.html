@@ -1,0 +1,124 @@
+<!--component html goes here -->
+<div class="row" *ngIf="!!flight">
+  <div class="col-lg-{{mode === 0 ? 6 : 12}}">
+    <div class="d-flex align-items-center h-full {{mode === 1 ? 'm-l-20 m-r-20' : ''}}">
+      <div>
+        <div class="font-13 text-light-gray font-medium">
+          {{ getAirportWith(flight.segments[0].origin, 'location') }}
+        </div>
+        <div class="font-34 font-black text-green">
+          {{ flight.segments[0].origin }}
+        </div>
+      </div>
+      <img class="m-b-none m-t-n-3 size-32x32 m-l-20 m-r-20 m-t-15"
+           *ngIf="flight.segments.length === 1"
+           cdn-src="assets/images/icon/icon-way-green.svg"
+           alt="icon"/>
+      <img class="m-b-none m-t-n-3 size-32x32 m-l-20 m-r-20 m-t-15"
+           *ngIf="flight.segments.length > 1"
+           cdn-src="assets/images/icon/icon-return-green.svg"
+           alt="icon"/>
+      <div class="">
+        <div class="font-13 text-light-gray font-medium">
+          {{ getAirportWith(flight.segments[0].destination, 'location') }}
+        </div>
+        <div class="font-34 font-black text-green">{{ flight.segments[0].destination }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6" *ngIf="mode === 0">
+    <div class="booking-time-box">
+      <div class="row">
+        <div class="col-6">
+          <div *ngIf="utilityHelper.findInList(flight.status, [STATUS.PENDING, STATUS.UNPAID, STATUS.CANCEL])">
+            <div class="text-light-gray font-13">Thời gian giữ chỗ còn:</div>
+            <div class="font-20 text-green font-bold">
+              <countdown [time]="flight.holdExpiry" (submit)="onExpired()"></countdown>
+            </div>
+            <div class="font-13 text-light-gray">
+              Hết hạn {{ flight.holdExpiry | moment:'HH:mm, DD/MM' }}
+            </div>
+          </div>
+          <div *ngIf="utilityHelper.findInList(flight.status, [STATUS.PAID, STATUS.WAITING])">
+            <div class="text-light-gray font-13">Mã vé (PNR)</div>
+            <div class="font-20 text-green font-bold">
+              {{ getPNR(flight.pnr) }}
+            </div>
+            <div class="font-13 text-light-gray">
+              (Mã dùng tại Sân bay)
+            </div>
+          </div>
+        </div>
+        <div class="col-6 b-l text-right">
+          <div *ngIf="flight.paymentDetail.method === METHOD.STORE">
+            <div class="text-light-gray font-medium font-13">Mã thanh toán Payoo:</div>
+            <div class="font-20 text-green font-bold">{{ flight.paymentDetail.transactionNo }}</div>
+            <div class="font-12 font-medium text-light-gray">
+              Mã đặt chỗ: <span class="text-green">{{ flight.code }}</span>
+            </div>
+          </div>
+          <div *ngIf="flight.paymentDetail.method !== METHOD.STORE">
+            <div class="text-light-gray font-13">Mã đặt chỗ</div>
+            <div class="font-20 text-green font-bold">
+              {{ flight.code }}
+            </div>
+            <div class="font-13 text-light-gray">
+              (Mã dùng tại Xtrip)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class="list-group list-group-flush m-t-20" *ngIf="!!flight">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-4 font-bold">Tình trạng</div>
+      <div class="col-8">
+        <booking-status [status]="flight.status" [border]="true"></booking-status>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-4 font-bold">Ngày đi</div>
+      <div class="col-8">
+        {{ flight.segments[0].departTime | moment:'HH:mm, DD/MM/YYYY' }}
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item" *ngIf="flight.segments.length > 1">
+    <div class="row">
+      <div class="col-4 font-bold">Ngày về</div>
+      <div class="col-8">
+        {{ flight.segments[1].departTime | moment:'HH:mm, DD/MM/YYYY' }}
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item" *ngIf="!!flight.passengers.length">
+    <div class="row">
+      <div class="col-4 font-bold">Số hành khách</div>
+      <div class="col-8">
+        {{ flight.passengers.length }} người
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-4 font-bold">Tổng tiền</div>
+      <div class="col-8">
+        {{ flight.totalPrice | currencyMoney: '' }} <span class="text-underline">đ</span>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item" *ngIf="mode === 1">
+    <div class="row">
+      <div class="col-4 font-bold">Hình thức thanh toán</div>
+      <div class="col-8">
+        {{ currentPayment }}
+      </div>
+    </div>
+  </li>
+</ul>

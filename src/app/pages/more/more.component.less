@@ -1,0 +1,40 @@
+@import "../../../less/_variables.less";
+
+.load-more-menu {
+
+  .load-more-item {
+    background-color: @white;
+
+    > .title {
+      background-color: @gray-17;
+      color: @gray-5;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    .list {
+      .list-item {
+        > a {
+          padding: 7px 15px;
+
+          > img {
+            margin-right: 18px;
+          }
+        }
+
+        &:first-child {
+          > a {
+            padding-top: 12px;
+          }
+        }
+
+        &:last-child {
+          > a {
+            padding-bottom: 12px;
+          }
+        }
+      }
+    }
+
+  }
+}

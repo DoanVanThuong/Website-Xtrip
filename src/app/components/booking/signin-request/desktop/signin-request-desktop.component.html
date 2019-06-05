@@ -1,0 +1,16 @@
+<div class="signin-request signin-request-desktop m-b-30 animated zoomIn" *ngIf="isShow">
+  <div class="d-flex justify-content-end align-items-center">
+    <div class="text-white">
+      <div class="font-18 font-medium"> Đăng nhập ngay và tận hưởng ưu đãi thành viên!</div>
+      <div>Đặt chỗ nhanh hơn &amp; được tích điểm thưởng khi đăng nhập</div>
+    </div>
+    <div class="m-l-20">
+      <a class="btn btn-white-outline" (click)="onOpenSignInPopup()">
+        Đăng nhập /Đăng ký
+      </a>
+    </div>
+  </div>
+
+  <sign-in-popup (callback)="onCallback($event)"></sign-in-popup>
+</div>
+

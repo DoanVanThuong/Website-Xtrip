@@ -1,0 +1,195 @@
+@import "_variables.less";
+
+.product-result-mobile-page {
+  .header {
+    &.header-mobile {
+      position: relative;
+      padding: 0;
+      z-index: 4;
+      &.fixed-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        border-bottom: 1px solid @gray-13;
+      }
+    }
+    .filter-panel {
+      border-bottom: 1px solid @gray-3;
+      color: @black;
+      .b-r-filter {
+        border-right: 1px solid @gray-3;
+      }
+      .dropdown {
+        &.open {
+          position: static;
+        }
+        > .dropdown-menu {
+          left: 0 !important;
+          right: 0 !important;
+          top: 84px !important;
+          border-radius: 0;
+          padding: 0;
+          > li {
+            font-weight: 400;
+            font-size: 15px;
+            padding: 11px 14px;
+            border-bottom: 1px solid @gray-13;
+            > a {
+              &.active {
+                color: @green-2;
+              }
+            }
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+      .sort-item {
+        &.active {
+          color: @green-2;
+        }
+      }
+    }
+    .quick-pickup {
+      .title {
+        padding: 10px 14px 4px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+    }
+    .quick-pickup-item, .quick-pickup-drop {
+      background-color: @white;
+      .over-item {
+        overflow-x: auto;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+      }
+      li {
+        &.item {
+          padding: 4px 8px;
+          background: @gray-41;
+          color: @gray-23;
+          border: 1px solid transparent;
+          border-radius: 50px;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          -webkit-transition: all .25s linear;
+          transition: all .25s linear;
+          -webkit-box-flex: 0;
+              -ms-flex: 0 0 auto;
+                  flex: 0 0 auto;
+          &.active {
+            background: @white;
+            color: @green-2;
+            border-color: @green-2;
+            -webkit-transition: all .25s linear;
+            transition: all .25s linear;
+          }
+        }
+      }
+      .pos-arrow {
+        width: 40px;
+        height: 48px;
+        right: 0;
+        background-color: @white;
+        margin-top: 0px;
+      }
+      .title {
+        font-size: 13px;
+        font-weight: 700;
+        color: @gray-2;
+      }
+      .r-180 {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
+        -moz-transform: rotate(180deg);        /* FF */
+        -o-transform: rotate(180deg);          /* Opera */
+        -ms-transform: rotate(180deg);    
+      }
+      &.p-15-0 {
+        padding: 15px 0;
+      }
+      .over-drop-item {
+        position: absolute;
+        z-index: 3;
+        background-color: @white;
+        top: 120px;
+      }
+    }
+  }
+  .container {
+    .focused {
+      position: relative;
+      &::before {
+        content: '';
+        background-color: hsla(0, 0%, 0%, 0.6);
+        zoom: 1;
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+    .pos-container {
+      &.m-t-110 {
+        margin-top: 110px;
+      }
+    }
+    .filter-btn {
+      bottom: 5px;
+      left: 50%;
+      position: fixed;
+      z-index: 1;
+      .bg-filter {
+        background-color: @green-2;
+        padding: 9px 15px;
+        color: @white;
+        border-radius: 50px;
+      }
+    }
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
+  .bg-location {
+    background-color: @white;
+    color: @black;
+    padding: 7px 10px;
+    border-radius: 20px;
+    font-size: 15px;
+    width: calc(~"100%");
+    margin-right: 14px;
+    font-weight: 500;
+    margin-top: 14px;
+  }
+  .empty-screen {
+    .pos-empty {
+      margin-top: 15vh;
+    }
+    .label-empty {
+      font-weight: 700;
+      color: @black;
+      font-size: 13px;
+      text-align: center;
+    }
+  }
+  .pos-arrow {
+    margin: 20px 10px 0 0;
+  }
+  .related-product {
+    .title {
+      color: @gray-2;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 16px 0;
+    }
+  }
+}

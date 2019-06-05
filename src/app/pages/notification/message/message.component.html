@@ -1,0 +1,52 @@
+<div class="inbox-detail">
+
+  <app-header [back]="true" [heading]="'Tin nhắn'" [fixed]="true"></app-header>
+
+  <div class="wrapper" min-height>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="chatbox">
+          <div class="chat-message"
+               [class.ingoing]="!message.isCustomer"
+               [class.outgoing]="message.isCustomer"
+               *ngFor="let message of messages; trackBy: trackByFn; let i=index">
+            <div class="chat-user">
+              <img class="m-b-none img-fix img-circle"
+                   [src]="mediaPath + message.avatar.src"
+                   onerror="this.src = 'assets/images/avatar-thumbnail.svg'"
+                   alt="avatar"/>
+            </div>
+            <div class="chat-body">
+              <div class="chat-time">
+                {{ message.fullName}}, {{ message.createdDate | moment:'DD/MM/YYYY HH:mm'}}
+              </div>
+              <div class="chat-content" [innerHTML]="handleComment(message.comment)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="message-footer fixed-bottom">
+    <div class="chat-input" *ngIf="!isClosed">
+      <form class="form"
+            [formGroup]="form">
+        <div class="form-group inner-addon right-addon">
+          <input class="form-control"
+                 [formControl]="comment"
+                 placeholder="Nhập tin nhắn..."/>
+          <a class="icon-addon"
+             (click)="sendCommentTo(form.value)">
+            <i class="fa fa-send fa-2x"></i>
+          </a>
+        </div>
+      </form>
+    </div>
+    <div class="text-center p-15 f-14 font-italic message-close" *ngIf="isClosed">
+      Hỗ trợ này đã được đóng
+    </div>
+  </div>
+</div>

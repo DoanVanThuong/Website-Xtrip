@@ -1,0 +1,63 @@
+@import '_variables.less';
+
+.modal.passenger-popup {
+
+  z-index: 2003;
+
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        .modal-title {
+
+        }
+      }
+
+      .modal-body {
+        padding: 0 !important;
+        background-color: @gray-6;
+
+        .title-color {
+          color: @gray-5;
+          background-color: @gray-6;
+          font-size: 13px;
+          padding: 8px 12px;
+        }
+        .weight-color {
+          color: @gray-5;
+        }
+
+        //----start material style
+        .mat-form-field {
+          .mat-input-infix {
+            color: @gray-20;
+          }
+          .mat-input-element {
+            color: @black;
+          }
+          .mat-input-underline {
+            color: @gray-19;
+          }
+          .mat-input-wrapper {
+            padding-bottom: 0px;
+          }
+          .mat-input-underline {
+            border-top-width: 0px;
+          }
+        }
+        //----end material style
+        .vocative {
+          &.list-group-item {
+            z-index: 2;
+          }
+        }
+        
+      }
+
+      .modal-footer {
+        background-color: @gray-6;
+        padding: 8px;
+      }
+    }
+  }
+
+}

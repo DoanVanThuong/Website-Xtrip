@@ -1,0 +1,208 @@
+<div class="booking-flight-detail booking-flight-detail-desktop"
+     *ngIf="flight && !!flight.segments.length">
+
+  <div class="row">
+    <div class="container-fluid">
+      <div class="d-flex mr-auto flex-column flex-md-row justify-content-center align-items-center">
+        <a class="pointer font-medium" (click)="back()">
+          <img class="m-b-none m-t-n-3 size-16x16"
+               cdn-src="assets/images/icon/icon-angle-left.svg"
+               alt="icon"/>
+          <span class="m-l-5">Quay lại danh sách</span>
+        </a>
+        <div class="font-medium ml-auto flight-setting">
+          Mã dùng tại Xtrip: {{ flight.code }}
+
+          <button class="btn btn-main-v2 m-l-20"
+                  *ngIf="utilityHelper.findNotInList(flight.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])"
+                  (click)="onShowChangePopup()">
+            Đổi thanh toán
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <!-- countdown -->
+      <div class="panel panel-desktop m-t-15"
+           *ngIf="utilityHelper.findInList(flight.status, [STATUS.PENDING, STATUS.UNPAID])">
+        <div class="panel-body p-10-20">
+          <div class="d-flex justify-content-start align-items-start">
+            <div
+                *ngIf="utilityHelper.findInList(flight.status, [STATUS.PENDING, STATUS.UNPAID, STATUS.CANCEL])">
+              <div class="font-medium text-light-gray font-13">Thời gian giữ chỗ:</div>
+              <countdown class="font-20 font-bold text-green"
+                         [time]="flight.holdExpiry"></countdown>
+              <div class="d-inline-block m-l-10 font-13 font-italic text-light-gray">
+                Hết hạn {{flight.holdExpiry | moment: 'HH:mm'}}, {{flight.holdExpiry | moment : 'DD/MM'}}
+              </div>
+            </div>
+            <div class="m-l-20 p-l-20 border-left" *ngIf="flight.paymentDetail.method === METHOD.STORE">
+              <div class="font-medium text-light-gray font-13">Mã Payoo:</div>
+              <div class="font-20 font-bold text-green">
+                {{ flight.paymentDetail.transactionNo }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- chi tiết giá -->
+      <div class="panel panel-desktop m-t-20">
+        <div class="panel-body">
+          <div class="">
+            <booking-status class="font-15" [status]="flight.status" [fill]="true" [icon]="true"></booking-status>
+          </div>
+          <div class="m-t-10 d-flex justify-content-center align-items-center">
+            <div class="text-dark-gray mr-auto">Hình thức</div>
+            <div class="font-medium">{{ flight.paymentDetail.paymentMethodName || 'Thanh toán tại văn phòng' }}
+            </div>
+          </div>
+          <div class="line"></div>
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="text-dark-gray font-18 font-bold mr-auto">Tổng tiền</div>
+            <a class="pointer font-bold font-18"
+               (click)="isPriceCollapse = !isPriceCollapse"
+               [attr.aria-expanded]="!isPriceCollapse" aria-controls="priceCollapse">
+              {{ flight.totalPrice | currencyMoney:'' }} <span class="text-underline">đ</span>
+              <img class="m-l-10 m-t-n-3 size-24x24 rotate"
+                   [class.rotate-180]="!isPriceCollapse"
+                   cdn-src="assets/images/icon/icon-angle-down-green.svg"
+                   alt="icon"/>
+            </a>
+          </div>
+
+          <div class="flight-price-detail animated fadeIn m-t-10"
+               id="priceCollapse"
+               [collapse]="isPriceCollapse">
+            <div class="row"
+                 [class.m-t-20]="i > 0"
+                 *ngFor="let group of flight.basicPriceSummaries.summaries; trackBy: trackByFn; let i = index">
+              <div class="container-fluid">
+                <div class="title text-green font-bold">{{ group.name }}</div>
+                <div class="row m-t-10" *ngFor="let item of group.groupItem.detailItems">
+                  <div class="col-7 font-medium">
+                    {{ item.title }}
+                  </div>
+                  <div class="col-5 font-medium text-right">
+                    {{ item.price | currencyMoney:'' }} <span class="text-underline">đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- thông tin vé -->
+      <div class="panel panel-desktop m-t-20">
+        <div class="panel-body">
+          <div class="d-flex justify-content-center align-items-start">
+            <div class="">
+              <div class="font-bold text-truncate">
+                {{ getAirportWith(flight.segments[0].origin, 'location') }}
+                <img class="size-12x12"
+                     [src]="flight.segments.length > 1 ? 'assets/images/icon/icon-arrow-round.svg' : 'assets/images/icon/icon-arrow-right.svg'"
+                     alt="icon"/>
+                {{ getAirportWith(flight.segments[0].destination, 'location') }}
+              </div>
+              <div class="text-truncate">
+                Ngày đi <span *ngIf="flight.segments.length > 1"> - về</span>:
+                <div class="d-inline-block"
+                     *ngFor="let segment of flight.segments; trackBy: trackByFn; let i = index">
+                  <span class="m-l-5 m-r-5" *ngIf="i > 0">|</span>
+                  {{ segment.departTime | moment:'HH:mm DD/MM' }}
+                </div>
+              </div>
+              <div class="">
+                <ul>
+                  <li class="m-t-5"
+                      *ngFor="let segment of flight.segments | slice:0:1; trackBy: trackByFn">
+                    <img class="m-t-n-3 size-16x16 m-r-5"
+                         [src]="getAirlineWith(segment.carrier, 'icon')"
+                         [alt]="getAirlineWith(segment.carrier, 'name')"
+                         onerror="this.src = 'assets/images/no-thumbnail.png'"/>
+                    {{ getAirlineWith(segment.carrier, 'name') }} - {{ segment.flightNumber }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="ml-auto">
+              <a class="pointer font-bold text-green" [routerLink]="['/my-booking/flight', flight.code, 'ticket']">
+                Chi tiết vé
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flight-support">
+        <h4 class="title font-medium font-15 text-black p-t-25 p-b-10 m-none">Thông tin hỗ trợ</h4>
+
+        <div class="panel panel-desktop">
+          <div class="panel-body">
+            <div class="">
+              Mã đặt chỗ:
+              <a class="flight-code m-l-5">
+                {{ flight.code }}
+                <!--<img class="size-16x16" cdn-src="assets/images/icon/icon-copy-green.svg" alt="icon"/>-->
+              </a>
+            </div>
+            <div class="m-t-10">
+              Để tiện cho việc hỗ trợ, bạn vui lòng cung cấp thêm thông tin mã đặt chỗ khi liên hệ với nhân viên hỗ
+              trợ
+            </div>
+            <div class="m-t-10">
+              <ul class="list-group list-group-flush">
+                <!--<li class="list-group-item">
+                  <a class="" href="tel:{{ CAPP.SUPPORT_CENTER }}">
+                    <img class="size-24x24 m-t-n-3" cdn-src="assets/images/icon/icon-phone-green.svg" alt="icon"/>
+                    Gọi tổng đài
+                  </a>
+                </li>-->
+                <li class="list-group-item p-15-0">
+                  <a class="" [routerLink]="['/more/request-support']"
+                     [queryParams]="{type: 'flight', code: flight.code}">
+                    <img class="size-24x24 m-t-n-3" cdn-src="assets/images/icon/icon-mail-green.svg" alt="icon"/>
+                    Gửi yêu cầu hỗ trợ
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <accordion>
+        <!-- payment guide -->
+        <accordion-group panelClass="panel-desktop m-t-20"
+                         *ngIf="utilityHelper.findNotInList(flight.status, [STATUS.CANCEL, STATUS.WAITING, STATUS.PAID])">
+          <div class="pointer" accordion-heading>
+            Hướng dẫn thanh toán
+            <span class="pull-right">
+              <img class="m-b-none m-t-n-3 size-24x24 icon-collapse"
+                   cdn-src="assets/images/icon/icon-angle-down-green.svg"
+                   alt="icon"/>
+              <img class="m-b-none m-t-n-3 size-24x24 icon-expand"
+                   cdn-src="assets/images/icon/icon-angle-up-green.svg"
+                   alt="icon"/>
+            </span>
+
+          </div>
+          <payment-guide-detail [module]="'flight'"
+                                [data]="flight"
+                                [code]="code"></payment-guide-detail>
+        </accordion-group>
+      </accordion>
+    </div>
+  </div>
+</div>
+
+<app-change-payment-popup
+    *ngIf="!!flight && utilityHelper.findNotInList(flight.status, [STATUS.PAID, STATUS.CANCEL, STATUS.WAITING])"
+    [module]="'flight'"
+    [reservationCode]="code"
+    [airports]="airports"
+    [data]="flight"
+    (submit)="submitChangePayment()"></app-change-payment-popup>

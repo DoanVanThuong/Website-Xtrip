@@ -1,0 +1,47 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade tour-more-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title text-truncate">
+          <a class="close float-left" (click)="hide()">&times;</a>
+          {{ title }}
+          <div class="clearfix"></div>
+        </div>
+        <div class="modal-sub-title">
+          <tabset [justified]="true" [type]="'tabs'" class="tab-mobile-white">
+            <tab [heading]="'Lịch trình'" [active]="tab === 'journey'" (selectTab)="onSelectTab($event, 'journey')"></tab>
+            <tab [heading]="'Điều khoản'" [active]="tab ==='term'" (selectTab)="onSelectTab($event, 'term')"></tab>
+            <tab [heading]="'Chính sách'" [active]="tab === 'policy'" (selectTab)="onSelectTab($event, 'policy')"></tab>
+          </tabset>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="content">
+          <div class="tour-journey" *ngIf="tab === 'journey'">
+            <div class="m-t-10 custom-inner-html" [innerHTML]="journey.summary | newline"></div>
+            <div class="m-t-10"
+                 *ngFor="let journeyItem of journey.details; trackBy: trackByFn; let i = index">
+              <div class="font-medium text-green"> {{ journeyItem.name }}</div>
+              <div *ngFor="let item of journeyItem.items">
+                <div class="m-t-10" *ngIf="item.image.src">
+                  <img class="img-fix mx-w-full m-b-none"
+                       [src]="item.image.src"
+                       alt="{{ item.image.name }}"/>
+                </div>
+                <div class="m-t-10">
+                  <div class="custom-inner-html" [innerHTML]="item.text | newline"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tour-term custom-inner-html" *ngIf="tab === 'term'" [innerHTML]="term | newline"></div>
+          <div class="tour-policy custom-inner-html" *ngIf="tab === 'policy'" [innerHTML]="policy | newline"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

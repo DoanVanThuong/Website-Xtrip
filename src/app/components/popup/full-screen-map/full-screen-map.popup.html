@@ -1,0 +1,44 @@
+<div bsModal #popup="bs-modal" class="modal fade full-screen-map" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-body p-0 position-relative">
+
+        <div class="modal-header header bg-green position-absolute pos-name" *ngIf="isMobile && headerVersion === 1">
+          <div class="row">
+            <div class="col-2">
+              <img class="size-16x16" cdn-src="assets/images/icon-back.png" (click)="hide()">
+            </div>
+            <div class="col-8 text-white text-center">
+              <p class="title-heading font-20 m-b-0">Bản đồ</p>
+            </div>
+            <div class="col-2"></div>
+          </div>
+        </div>
+        <div class="modal-header header position-absolute pos-name" *ngIf="isMobile && headerVersion === 2">
+          <div class="row">
+            <div class="col-2">
+              <a class="d-block">
+                <img class="size-32x32" cdn-src="assets/images/hotel/detail/close.svg" (click)="hide()">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 position-absolute z-index pos-back" *ngIf="isDesktop">
+          <span class="bg-back pointer" (click)="hide()">Quay lại</span>
+        </div>
+        <div class="wrapper" min-height>
+          <agm-map #gm [ngStyle]="{'height.vh': 100}" [latitude]="latitude" [longitude]="longitude" [zoom]="16"
+            [gestureHandling]="'greedy'" [styles]="mapStyles" [disableDefaultUI]="true" [zoomControl]="false">
+            <agm-marker [latitude]="latitude" [longitude]="longitude"
+              [iconUrl]="icon">
+              <agm-info-window>
+                <strong class="text-black">{{name}}</strong>
+              </agm-info-window>
+            </agm-marker>
+          </agm-map>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

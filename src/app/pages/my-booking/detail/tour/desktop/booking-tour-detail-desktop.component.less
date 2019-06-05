@@ -1,0 +1,211 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.booking-tour-detail {
+  &.booking-tour-detail-desktop {
+
+    .tour-detail {
+      display: block;
+      visibility: visible;
+
+      .panel.panel-desktop {
+        .panel-body, .card-body {
+          padding: 20px 30px;
+
+          .list-group.list-group-flush {
+            .list-group-item {
+              padding-left: 0;
+              padding-right: 0;
+
+              &:first-child {
+                border-top-width: 0;
+              }
+            }
+          }
+        }
+      }
+
+      .booking-time-box {
+        .border-radius(10px);
+        background-color: @white;
+        .box-shadow(0, 1px, 8px, rgba(0, 0, 0, 0.1));
+        padding: 15px;
+
+        .b-l {
+          border-left: 1px solid @gray-29;
+        }
+      }
+    }
+
+    .panel-group {
+      .panel {
+        margin: 0;
+        box-shadow: none;
+        background-color: transparent;
+
+        .panel.panel-desktop {
+          margin-top: 10px;
+          color: @gray-2;
+          background-color: @white;
+          .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .1));
+          .span-price{
+            margin-top:2px;
+          }
+          .panel-heading,
+          .card-header {
+            padding: 15px 20px;
+            background-color: @white;
+            color: @gray-2;
+            .border-radius(10px);
+
+            > span {
+              color: @green-2;
+              margin: 0;
+              display: inline-block;
+            }
+
+            .panel-title,
+            .card-title {
+              font-size: 18px;
+              font-weight: 700;
+            }
+
+            .icon-collapse {
+              display: inline-block;
+            }
+            .icon-expand {
+              display: none;
+            }
+          }
+
+          .panel-body,
+          .card-body {
+            padding: 20px;
+            transition: height .5s linear;
+
+            .list-group.list-group-flush {
+              .list-group-item {
+                padding-left: 0;
+                padding-right: 0;
+
+                &:first-child {
+                  border-top-width: 0;
+                }
+              }
+            }
+          }
+        }
+
+        &.panel-open {
+
+          .panel.panel-desktop {
+
+            .panel-heading,
+            .card-header {
+              background-color: @gray-17;
+              .border-radiuses(10px, 0, 0, 10px);
+
+              .icon-collapse {
+                display: none;
+              }
+              .icon-expand {
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+
+      .transport-box {
+        .panel.panel-desktop {
+          .box-shadow(0, 0, 3px, rgba(0, 0, 0, .2));
+        }
+
+        .b-l {
+          border-left: 1px solid @gray-7;
+        }
+      }
+    
+      .price-box {
+        .panel-body, .card-body {
+          padding: 20px 30px !important;
+          line-height: 2;
+        }
+
+        .line {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          height: 1px;
+          width: 100%;
+          border-top: 1px solid @gray-8;
+        }
+      }
+
+      .passenger-box {
+        .panel-body, .card-body {
+          padding: 10px 20px !important;
+        }
+
+        .passengers {
+          .list-group-item {
+            padding: 13px 0;
+          }
+        }
+
+        .passenger-info {
+          .panel-body, .card-body {
+            padding: 20px;
+
+            ul {
+              margin-left: 20px;
+
+              > li {
+                position: relative;
+                padding: 5px;
+                line-height: 1;
+
+                &:before {
+                  content: '';
+                  position: absolute;
+                  top: 10px;
+                  left: -5px;
+                  width: 5px;
+                  height: 5px;
+                  border-radius: 50%;
+                  background: @green-1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .continue-pay {
+      .btn {
+        font-size: 16px;
+        padding: 2px 6px;
+        border-radius: 5px;
+      }
+      .booking-code {
+        color: @gray-2;
+        font-weight: 500;
+      }
+    }
+    .title {
+    font-size: 20;
+    color: @gray-2;
+    font-weight: 700;
+    }
+    .p-html {
+      p {
+        font-size: 15px;
+      }
+    }
+    .count-down {
+      color: @gray-1;
+      &.b-r {
+        border-right: 1px solid @gray-3;
+      }
+    }
+  }
+}

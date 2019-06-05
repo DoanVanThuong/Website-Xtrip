@@ -1,0 +1,28 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade popup-social-sharing"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title font-18 text-truncate">
+          {{ title }}
+        </div>
+      </div>
+      <div class="modal-body p-t-none">
+
+        <div class="row">
+          <div class="container-fluid">
+            <share-buttons [title]="title" [description]="description" [url]="url" [image]="image"></share-buttons>
+            <div class="zalo-share-button"
+                 data-href="https://xtrip.vn"
+                 data-oaid="2041168274103126034"
+                 data-layout="2"
+                 data-color="blue" data-customize=false></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

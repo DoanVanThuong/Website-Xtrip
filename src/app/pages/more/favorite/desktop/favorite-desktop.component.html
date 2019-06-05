@@ -1,0 +1,39 @@
+<div class="favorite-desktop-page">
+
+  <div class="main-body p-t-20">
+    <div class="container">
+      <div class="row">
+
+        <section class="col-xl-3 col-lg-4 left-section">
+          <app-navigator></app-navigator>
+        </section>
+
+        <section class="col-xl-9 col-lg-8 right-section">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="favorite favorite-tabs-selector-desktop">
+                <section>
+                  <div class="button-group">
+                    <button class="btn btn-white" [class.active]="tab ==='hotel'" (click)="onSelectTab('hotel')">Khách
+                      sạn
+                    </button>
+                    <button class="btn btn-white" [class.active]="tab ==='tour'" (click)="onSelectTab('tour')">Tour
+                    </button>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <app-hotel-favorite-desktop *ngIf="tab === 'hotel'"></app-hotel-favorite-desktop>
+              <app-tour-favorite-desktop *ngIf="tab === 'tour'"></app-tour-favorite-desktop>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>

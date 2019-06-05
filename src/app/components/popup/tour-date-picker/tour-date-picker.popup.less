@@ -1,0 +1,51 @@
+// component css goes here
+@import '_variables.less';
+
+.tour-date-selector-popup {
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        .modal-title {
+          .title-time {
+            color: @gray-1;
+            font-weight: 700;
+            font-size: 12px;
+            margin-top: 21px;
+          }
+          .time-range {
+            color: @gray-2;
+            font-size: 20px;
+            font-weight: 700;
+            padding-bottom: 11px;
+          }
+          .shadow-header {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+      .modal-body {
+        background-color: @white;
+        padding: 0px !important;
+        .b-r-56 {
+          border-radius: 56px;
+        }
+      }
+      .modal-footer {
+        padding: 8px;
+        background-color: @white;
+        .btn {
+          padding: 10px 15px;
+        }
+        .shadow-bottom {
+          box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.1);
+          &.pos-btn {
+            margin: 0 -8px;
+            height: 72px;
+            padding: 0 15px;
+            padding-top: 18px;
+          }
+        }
+      }
+    }
+  }
+}

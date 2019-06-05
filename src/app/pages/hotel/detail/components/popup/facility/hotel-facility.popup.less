@@ -1,0 +1,98 @@
+@import '_variables.less';
+@import "_mixins.less";
+
+.hotel-facility-popup {
+    .modal-body {
+        background: @gray-41;
+        padding:5px;
+        .panel-group {
+            .panel {
+                box-shadow: none;
+                background-color: transparent;
+
+                .panel-desktop {
+                    margin-top: 10px;
+                    color: @gray-2;
+                    background-color: @white;
+                    padding:10px 15px;
+                    .panel-heading,
+                    .card-header {
+                        padding: 0;
+                        background-color: @white;
+                        color: @gray-2;
+                        .border-radius(10px);
+
+                        >span {
+                            color: @green-2;
+                            margin: 0;
+                            display: inline-block;
+                        }
+
+                        .panel-title,
+                        .card-title {
+                            font-size: 18px;
+                            font-weight: 700;
+                        }
+
+                        .icon-collapse {
+                            display: inline-block;
+                        }
+
+                        .icon-expand {
+                            display: none;
+                        }
+                    }
+
+                    .panel-body,
+                    .card-body {
+                        padding: 0px 20px;
+                        transition: height .5s linear;
+                    }
+                }
+
+                &.panel-open {
+
+                    .panel.panel-desktop {
+
+                        .panel-heading,
+                        .card-header {
+                            .icon-collapse {
+                                display: none;
+                            }
+
+                            .icon-expand {
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .list-facilities{
+            li {
+                font-weight: 400;
+                font-size: 12px;
+                position: relative;
+                line-height: 2;
+                letter-spacing: 0;
+                margin-left: 4px;
+
+                &:before {
+                    content: "";
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: @green-2;
+                    position: absolute;
+                    top: 10px;
+                    left: -8px;
+                }
+                .distance{
+                    width:100px;
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

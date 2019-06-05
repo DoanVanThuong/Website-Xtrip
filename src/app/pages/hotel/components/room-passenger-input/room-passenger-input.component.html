@@ -1,0 +1,47 @@
+<div class="room-passenger-input-wp">
+  <ul class="list-rooms">
+    <li class="list-room-item" *ngFor="let item of roomOccupancies; let i = index; trackBy: trackByFn; let odd = odd"
+      [class.border-b]="odd">
+      <div class="room-item-expand" *ngIf="item.view === 1">
+        <div class="font-16 font-medium">{{'Phòng ' + (i + 1)}}</div>
+        <ul class="bg-white">
+          <li *ngFor="let passenger of item.data; let j = index; trackBy: trackByFn"
+            class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="font-14">{{passenger.title}}</div>
+              <div class="font-12 text-light-gray">{{passenger.description}}</div>
+            </div>
+            <div>
+              <app-counter (change)="onChangePassenger(i , $event, passenger.type)"
+                [min]="passenger.type === 'adult' ? 1 : 0" [value]="passenger.value"
+                [iconAdd]="'assets/images/icon/icon-plus-green.svg'"
+                [iconMinus]="'assets/images/icon/icon-minus-green.svg'"></app-counter>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- /view expand -->
+
+      <div class="room-item-collapse" *ngIf="item.view === 2">
+        <div class="d-flex justify-content-between p-10">
+          <div class="font-16 font-medium">{{'Phòng ' + (i + 1)}}</div>
+          <div class="font-13">
+            <span class="font-medium font-16">{{getPassenger(item, 'adult')}}</span> người lớn,
+            <span class="font-medium font-16">{{getPassenger(item, 'children')}}</span> trẻ em
+          </div>
+          <div class="pointer">
+            <a class="text-green text-underline font-14" (click)="onEditRoom(item)">Sửa</a>
+            <a class="text-green text-underline font-14 m-l-15" (click)="onRemoveRoom(i)">Xoá</a>
+          </div>
+        </div>
+      </div>
+      <!-- /view collapse -->
+    </li>
+  </ul>
+  <div class="button-more pointer" (click)="addRoom()">
+    <div class="d-flex justify-content-end align-items-center">
+      <img src="assets/images/hotel/icon-plus-medium.svg" alt="">
+      <div class="font-15 text-green m-l-5">Thêm phòng khác</div>
+    </div>
+  </div>
+</div>

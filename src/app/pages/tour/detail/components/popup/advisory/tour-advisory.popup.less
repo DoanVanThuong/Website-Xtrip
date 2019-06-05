@@ -1,0 +1,59 @@
+@import "_variables.less";
+
+.modal.tour-advisory-popup {
+
+  .modal-dialog {
+
+    @media (min-width: 575px) {
+      max-width: 490px;
+    }
+
+    .modal-content {
+      .modal-header {
+        .modal-title {
+          font-size: 24px;
+          font-weight: @font-black;
+
+          @media (max-width: 575px) {
+            font-size: 22px;
+            font-weight: @font-bold;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  .form {
+    .mat-form-field {
+      margin-top: 5px;
+
+      .mat-form-field-wrapper {
+
+        .mat-form-field-infix {
+          color: @gray-9;
+
+          .mat-form-field-label {
+
+            color: rgba(0, 0, 0, .75);
+
+            @media (max-width: 767px) {
+              color: @orange-2;
+            }
+
+            font-size: 16px;
+            font-weight: @font-medium;
+          }
+
+          .mat-input-element {
+            color: @black;
+          }
+        }
+
+        .mat-form-field-underline {
+          background-color: @gray-10;
+        }
+      }
+    }
+  }
+}

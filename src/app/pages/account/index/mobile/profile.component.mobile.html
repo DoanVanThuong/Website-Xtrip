@@ -1,0 +1,99 @@
+<div class="profile profile-mobile">
+
+  <div class="profile-cover">
+    <div class="profile-cover-mask-1"></div>
+    <div class="profile-cover-mask-2"></div>
+
+    <div class="profile-information profile-info">
+      <div class="row">
+        <div class="col-12">
+          <div class="title">Tài khoản</div>
+        </div>
+        <div class="col-12 m-t-n-10">
+          <div>
+            <a class="profile-image text-center">
+              <img class="user-img img-circle"
+                   defaultImage="assets/images/avatar-thumbnail.svg"
+                   [lazyLoad]="profile.avatar"
+                   title="profile"
+                   alt="profile"
+                   onerror="this.src='assets/images/avatar-thumbnail.svg'"
+              />
+            </a>
+          </div>
+          <div class="media-body row m-t-20">
+            <div class="container-fluid">
+              <div class=" user-title">
+                <div class="my-info">
+                  <div class="my-email">
+                    {{ profile.email }}
+                  </div>
+                  <div class="my-point">{{ profile.rewardPoints.available | currencyMoney:'điểm'}}</div>
+                </div>
+                <span class="f-15 font-medium text-black text-center my-point"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-options">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="list">
+          <div class="list-item">
+            <a [routerLink]="['/account/information']">
+              <img class="icon pre-icon" cdn-src="assets/images/profile/1.png"/>
+              <span class="list-item-label">Quản lý tài khoản</span>
+            </a>
+          </div>
+          <div class="list-item" *ngIf="!isProduction">
+            <a (click)="openPromotionPopup()">
+              <img class="icon pre-icon" cdn-src="assets/images/more/icon-promotion.svg"/>
+              <span class="list-item-label">Mã quà tặng</span>
+            </a>
+          </div>
+          <div class="list-item">
+            <a [routerLink]="['/account/reward']">
+              <img class="icon pre-icon" cdn-src="assets/images/icon/icon-my-point.png"/>
+              <span class="list-item-label">Điểm thưởng của tôi</span>
+            </a>
+          </div>
+          <div class="list-item">
+            <a [routerLink]="['/account/passenger']">
+              <img class="icon pre-icon" cdn-src="assets/images/profile/2.png"/>
+              <span class="list-item-label">Thông tin hành khách</span>
+            </a>
+          </div>
+
+          <!-- <div  class="row padding-row">
+            <div class="col-2">
+              <img class="img-icon" cdn-src="assets/images/account/3.png">
+            </div>
+            <span (click)="clickNotificationSetting()" class="img-title col-10 font-stl" style="font-size: 15px">Cài đặt thông báo</span>
+          </div>
+          <div  class="row padding-row">
+            <div class="col-2">
+              <img class="img-icon" cdn-src="assets/images/account/4.png">
+            </div>
+            <span class="img-title col-10 " style="font-size: 15px">Thông báo vé giá rẻ</span>
+          </div> -->
+          <div class="list-item">
+            <a (click)="openConfirmSignOut()">
+              <img class="icon pre-icon" cdn-src="assets/images/profile/5.png" alt="icon"/>
+              <span class="list-item-label">Đăng xuất</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer-mobile></app-footer-mobile>
+</div>
+
+<signout-confirm-popup (accept)="onSignOut($event)"></signout-confirm-popup>
+
+<promotion-popup #PromotionPopup></promotion-popup>

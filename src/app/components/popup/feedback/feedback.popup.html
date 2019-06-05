@@ -1,0 +1,43 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade popup-feedback-app"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="feedback-rating" *ngIf="!isComment">
+          <div class="feedback title ">
+            Ứng dụng đặt vé có dễ sử dụng hay không
+          </div>
+          <div class="feedback">
+            <img *ngFor="let icon of emoticons; trackBy: trackByFn; let i = index"
+                 (click)="onRating(i)"
+                 class="feedback-image"
+                 cdn-src="assets/feedback/{{ icon }}{{ i === selected ? 'active' : '' }}.png"/>
+          </div>
+          <div (click)="hide()">
+            <button class="btn btn-block btn-comment-cancel text-uppercase">
+              Bỏ qua
+            </button>
+          </div>
+        </div>
+        <div class="feedback-comment" *ngIf="isComment">
+          <div class="content">
+            <mat-form-field>
+              <textarea [(ngModel)]="feedback.Comment"
+                        placeholder="Nhập cảm nhận của bạn (không bắt buộc)"
+                        rows="3"
+                        matInput></textarea>
+            </mat-form-field>
+          </div>
+          <div class="feedback ">
+            <button class="btn btn-block btn-comment-cancel text-uppercase"
+                    (click)="onFeedback()">Xong
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

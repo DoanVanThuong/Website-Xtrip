@@ -1,0 +1,116 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal popup-tour-filter animated fadeInUp"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-12 center-line">
+            <div class="line-header"></div>
+          </div>
+        </div>
+        <div class="row m-t-23">
+          <div class="col-3 m-t-5">
+            <a class="text-main font-medium" (click)="onReset()" [class.disabled]="checkDisableReset()">Đặt lại</a>
+          </div>
+          <div class="col-6 text-center font-20 font-weight-bold p-none">Bộ lọc</div>
+          <div class="col-3 m-t-5 text-right">
+            <a class="text-main font-medium" (click)="onFilter()">Xong</a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body p-none">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="filter-price">
+              <div class="row">
+                <div class="col-5 p-r-none title">
+                  Khoảng giá
+                </div>
+                <div class="col-7 p-l-none text-right m-t-4">
+                  <span class="font-13 font-medium bg-price-range">
+                    {{labelSlider.price.min | currencyMoney: ''}} <span class="text-underline">đ</span> -
+                    {{labelSlider.price.max | currencyMoney: ''}} <span class="text-underline">đ</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 range-slider">
+                  <nouislider [config]="sliderPriceConfig" class="p-0-12"
+                              [min]="sliderPriceConfig.range.min"
+                              [max]="sliderPriceConfig.range.max"
+                              (change)="onPriceChange($event)"
+                              (update)="onChangePrice($event)"
+                              [(ngModel)]="filter.prices">
+                  </nouislider>
+                </div>
+              </div>
+            </div>
+            <div class="filter-day m-t-14">
+              <div class="row">
+                <div class="col-5 p-r-none title">
+                  Thời gian
+                </div>
+                <div class="col-7 p-l-none text-right m-t-4">
+                  <span class="font-13 font-medium bg-price-range">
+                    {{labelSlider.day.min}} -
+                    {{labelSlider.day.max}} <span class="">ngày</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 range-slider">
+                  <nouislider [config]="sliderDayConfig" class="p-0-12"
+                              [min]="sliderDayConfig.range.min"
+                              [max]="sliderDayConfig.range.max"
+                              (change)="onDayChange($event)"
+                              (update)="onChangeDay($event)"
+                              [(ngModel)]="filter.days">
+                  </nouislider>
+                </div>
+              </div>
+            </div>
+            <div class="filter-time m-t-14">
+              <div class="title">Khởi hành vào</div>
+              <div class="btn-group">
+                <button class="btn m-t-10"
+                        [class.active]="filter.time === time"
+                        *ngFor="let time of filterOptions.time; trackBy: trackByFn; let i = index"
+                        (click)="onSelectTime(time)">
+                  {{ times[time]}}
+                </button>
+              </div>
+            </div>
+            <div class="filter-option m-t-20">
+              <div class="title">Lọc tùy chọn</div>
+              <div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"
+                      *ngFor="let option of filterOptions.options; trackBy: trackByFn; let i = index">
+                    <a class="d-block"
+                       (click)="openSelectOptions(option)">
+                      {{ option.name }}
+                      <span class="pull-right">
+                        <span class="show-option-stl">
+                          {{ filter.options[option.code].length ? (filter.options[option.code].length + ' mục') : 'Tất cả' }}
+                        </span>
+                        <img class="m-l-5 m-b-none m-t-n-3 size-24x24"
+                             cdn-src="assets/images/icon/icon-angle-right-gray.svg" alt="img"/>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<tour-filter-option-popup [data]="filter.options[optionCode] || []"
+                          (submit)="onSubmitOptions($event)"></tour-filter-option-popup>

@@ -1,0 +1,124 @@
+<div class="deposit-progress-bar-session">
+
+	<div class="p-0-15 mobile" *ngIf="isMobile && !!data">
+		<div class="row position-relative">
+			<div class="col-11 font-13 font-weight-bold">
+				Đã thanh toán: <span class="text-main">{{ data.totalAmountPaid | currencyMoney: '' }} <span class="text-underline">đ</span></span>
+			</div>
+			<div class="col-11 font-11" *ngIf="data.totalAmountUnPaid > 0">
+				<em>(Còn lại: {{data.totalAmountUnPaid | currencyMoney: '' }} <span class="text-underline">đ</span>)</em>
+			</div>
+			<div class="col-11">
+				<div class="progress m-t-10">
+					<div class="progress-bar" role="progressbar" [ngStyle]="{'width.%': data.totalPercentPaid}" [attr.aria-valuenow]="data.totalPercentPaid" aria-valuemin="0"
+						aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div class="col-12">
+				<ul>
+					<li *ngFor="let item of data.nextPayments">
+						<div [innerHTML]="item | safeHTML"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="arrow-right position-absolute" *ngIf="!!icon">
+				<img class="m-b-none size-24x24" cdn-src="assets/images/icon/arrow-right-thin.svg" alt="">
+			</div>
+		</div>
+	</div>
+
+	<div class="desktop desktop-style" *ngIf="isDesktop && !!data">
+		<div class="row">
+			<div class="col-md-12 font-16 font-medium">
+				Đã thanh toán <span class="text-main font-weight-bold">{{ data.totalAmountPaid | currencyMoney: '' }} <span class="text-underline">đ</span></span>
+				<span class="font-13 price-remain font-weight-normal"><em> (Còn lại: {{ data.totalAmountUnPaid | currencyMoney: '' }} <span class="text-underline">đ</span>)</em></span>
+			</div>
+			<div class="col-md-12">
+				<div class="progress m-t-16">
+					<div class="progress-bar" role="progressbar" [ngStyle]="{'width.%': data.totalPercentPaid}" [attr.aria-valuenow]="data.totalPercentPaid" aria-valuemin="0"
+						aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div class="col-md-12 m-t-16">
+				<ul>
+					<li *ngFor="let item of data.nextPayments">
+						<div [innerHTML]="item | safeHTML"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Timer count down/Payoo code -->
+		<div class="row m-t-25" *ngIf="utilityHelper.findInList(data.status, [STATUS.UNPAID, STATUS.CANCEL, STATUS.PENDING, STATUS.DEPOSIT]) && data.paymentDetail.method != METHOD.STORE">
+			<div class="col-md-12 count-down" *ngIf="!!data.paymentPending">
+				Thời hạn thanh toán: <span class="font-23 text-green font-weight-bold">
+					<countdown [time]="data.holdExpiry" (submit)="onExpired()"></countdown>
+				</span>
+				<span> (Hết hạn lúc: {{ data.holdExpiry | moment:'HH:mm, DD/MM' }})</span>
+			</div>
+		</div>
+
+		<!-- HAVE PAYOO -->
+		<div class="row m-t-25" *ngIf="utilityHelper.findInList(data.status, [STATUS.UNPAID, STATUS.CANCEL, STATUS.PENDING, STATUS.DEPOSIT]) && data.paymentDetail.method === METHOD.STORE">
+			<div class="col-md-6 count-down b-r" *ngIf="!!data.paymentPending">
+				<div>Thời hạn thanh toán:</div>
+				<div>
+					<countdown class="font-23 text-green font-weight-bold" [time]="data.holdExpiry" (submit)="onExpired()"></countdown>
+					<span> (Hết hạn lúc: {{ data.holdExpiry | moment:'HH:mm, DD/MM' }})</span>
+				</div>
+			</div>
+			<div class="col-md-6 p-l-20 p-r-20 count-down" *ngIf="!!data.paymentPending">
+				<div>Mã thanh toán Payoo:</div>
+				<div class="font-23 text-green font-weight-bold">
+					{{ data.paymentDetail.transactionNo }}
+				</div>
+			</div>
+		</div>
+		<!-- /HAVE PAYOO -->
+
+		<div class="row deposit-history" *ngIf="!!data.payments.length">
+			<div class="col-md-12">
+				<mat-accordion>
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								Lịch sử thanh toán
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<ul class="font-15">
+							<li class="m-t-15" *ngFor="let item of data.payments">
+								<div class="row">
+									<div class="col-md-2"><span><img class="m-b-none size-10x10" cdn-src="assets/images/icon/icon-dot-green.svg" alt="img" /></span> {{item.createdDate | moment: 'DD/MM/YYYY'}}</div>
+									<div class="col-md-6">
+										<div class="p-5-0 m-t-n-5 font-weight-bold">
+											Đã thanh toán: <span class="text-main">{{item.amountPaid | currencyMoney: ''}} <span class="text-underline">đ</span></span>
+											<span class="font-13 price-remain font-weight-normal"><em> (Còn lại: {{ item.amountUnPaid | currencyMoney: '' }} <span class="text-underline">đ</span>)</em></span>
+										</div>
+										<ul>
+											<li class="p-5-0">
+												<div class="row">
+													<div class="col-md-5">Số tiền thanh toán</div>
+													<div class="col-md-5 text-right">{{item.amount | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+												</div>
+											</li>
+											<li class="p-5-0">
+												<div class="row">
+													<div class="col-md-5">Phí thanh toán</div>
+													<div class="col-md-5 text-right">{{item.paymentFee | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+						</ul>
+
+					</mat-expansion-panel>
+				</mat-accordion>
+			</div>
+		</div>
+
+	</div>
+
+</div>

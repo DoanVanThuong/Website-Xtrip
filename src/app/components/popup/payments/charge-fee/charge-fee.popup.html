@@ -1,0 +1,31 @@
+<!--component html goes here -->
+<div bsModal #popup="bs-modal" class="modal popup-charge-fee animated fadeInUp" role="dialog" (onHidden)="hide()">
+  <div class="modal-dialog fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="title">
+          Chi tiết tổng tiền
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row p-5-0">
+          <div class="col-6">Tổng tiền</div>
+          <div class="col-6 text-right">{{ !!data.detail && data.detail.totalPrice  ? (data.detail.totalPrice | currencyMoney: '') : 0}} <span class="text-underline">đ</span></div>
+        </div>
+        <div class="row p-5-0">
+          <div class="col-6">Phí thanh toán</div>
+          <div class="col-6 text-right">{{ !!data.detail && data.detail.paymentFee ? (data.detail.paymentFee | currencyMoney: '') : 0}} <span class="text-underline">đ</span></div>
+        </div>
+        <div class="line"></div>
+        <div class="row m-t-15">
+          <div class="col-7 font-medium p-r-none">Tổng tiền cần thanh toán
+          </div>
+          <div class="col-5 font-medium text-right text-main p-l-none">{{ !!data.detail && data.detail.totalPayment ? (data.detail.totalPayment | currencyMoney: '') : 0}} <span class="text-underline">đ</span></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-main-v2 btn-block" (click)="pay()">Thanh toán</button>
+      </div>
+    </div>
+  </div>
+</div>

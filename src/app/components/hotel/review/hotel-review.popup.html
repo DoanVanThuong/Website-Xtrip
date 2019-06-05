@@ -1,0 +1,115 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade hotel-review-popup"
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-green">
+        <div class="row">
+          <div class="col-2">
+            <a class="back-to pointer"
+               (click)="hide()">
+              <img class="size-16x16 m-b-none m-t-n-30" cdn-src="assets/images/icon-back.png" alt="icon"/>
+            </a>
+          </div>
+          <div class="col-10 p-l-none">
+            <div class="font-20 text-truncate text-white"> {{ hotel.name }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="title font-medium">Đánh giá</div>
+          </div>
+        </div>
+        <div class="row m-t-10">
+          <div class="col-12">
+            <div class="d-table">
+              <div class="d-table-cell align-middle">
+                <div class="circle-score-reviews">
+                  {{ generalReview.finalScore }}
+                </div>
+              </div>
+              <div class="d-table-cell w-full">
+                <div class="m-l-10">
+                  <strong>{{ generalReview.title }}</strong>
+                  <div class="">{{ generalReview.description }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row m-t-10">
+          <div class="col-12">
+            <ul class="list-unstyled">
+              <li *ngFor="let rating of generalReview.ratedCategories">
+                <div class="row">
+                  <div class="col-4">{{rating.categoryName}}</div>
+                  <div class="col-8">
+                    <bar-rating rate="{{rating.stars}}" [max]="5" [readOnly]="true"></bar-rating>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row m-t-10">
+          <div class="col-12">
+            <div class="row"
+                 [class.m-t-10]="i > 0"
+                 *ngFor="let comment of moreReview.customerComments; trackBy: trackByFn; let i = index">
+              <div class="col-12">
+                <div class="d-table">
+                  <div class="d-table-cell align-middle">
+                    <div class="hotel-detail-review">
+                      <img class="size-40x40 img-fix m-b-none" src="{{comment.custAvatarHost}}/{{comment.custAvatar}}"
+                           alt="avatar"
+                           style="border-radius: 50%;"
+                           onerror="this.src='assets/images/hotel/avatar-default-icon.png'"/>
+                    </div>
+                  </div>
+                  <div class="d-table-cell w-full">
+                    <div class="m-l-10">
+                      <strong>{{comment.custName}}</strong>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="d-inline-block review-rating"
+                               [class.review-danger]="comment.ratingScore < 6">
+                            {{ comment.ratingScore }} {{ comment.ratingTitle }}
+                          </div>
+                        </div>
+                        <div class="col-6">{{ comment.createdDate | moment: 'DD/MM/YYYY'}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 m-t-5 text-justify">
+                {{ comment.comment }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer bg-green">
+        <div class="row">
+          <div class="col-5">
+            <div class="text-white font-13">
+              {{ utilityHelper.calcDay(params.checkIn, params.checkOut)}} đêm từ
+            </div>
+            <div class="font-20 text-white m-t-5">
+              <strong>{{ hotel.salePrice | currencyMoney:'' }} <span class="text-underline">đ</span></strong>
+            </div>
+          </div>
+          <div class="col-7">
+            <a class="btn btn-main btn-block font-medium"
+               [routerLink]="['/hotel', code, 'room']"
+               [queryParams]="generateQueryParams()">Chọn phòng</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

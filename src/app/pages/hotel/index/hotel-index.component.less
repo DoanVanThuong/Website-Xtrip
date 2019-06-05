@@ -1,0 +1,53 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.hotel-index {
+
+  .title {
+    font-size: 24px;
+    color: @gray-23;
+    font-weight: 900;
+  }
+
+  .panel.panel-desktop {
+    .panel-body {
+      a {
+        display: inline-block;
+        padding-left: 15px;
+        position: relative;
+        color: @gray-2;
+        font-weight: 500;
+        .transition(all .3s linear 0s);
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          width: 7px;
+          height: 7px;
+          .border-radius(50%);
+          background-color: @green-2;
+        }
+        &:hover {
+          color: @orange-2;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .hotel-item {
+    &.hotel-item-desktop {
+      width: auto;
+      border-width: 0;
+      .box-shadow(0, 0, 3px, rgba(0, 0, 0, .15));
+
+      &:hover {
+        .box-shadow(0, 1px, 8px, rgba(0, 0, 0, .3));
+      }
+    }
+  }
+
+}

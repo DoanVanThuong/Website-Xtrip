@@ -1,0 +1,57 @@
+<div bsModal
+     #popup="bs-modal"
+     class="modal fade store-popup "
+     role="dialog"
+     (onHidden)="hide()">
+  <div class="modal-dialog fullscreen"
+       *ngIf="payment && payment.code">
+    <div class="modal-content bg-white">
+      <div class="modal-header header">
+        <div class="row">
+          <div class="col-2">
+            <a class="d-block" (click)="hide()">
+              <img class="size-16x16" cdn-src="assets/images/icon/icon-close-green.svg">
+            </a>
+          </div>
+          <div class="col-8 title-heading text-center font-20 font-black">Cửa hàng payoo</div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <payment-note [time]="payment.holdExpiry"></payment-note>
+          </div>
+        </div>
+        <div class="row m-t-10">
+          <div class="col-12">
+            <div class="title">Cửa hàng công nghệ, điện máy</div>
+            <div class="row">
+              <div class="col-12 p-b-20">
+                <div class="d-flex flex-wrap m-l-n-3 m-r-n-7">
+                  <div class="img-store" *ngFor="let item of eStores; trackBy: trackByFn">
+                    <img class="img-fluid" [src]="item.photo" [alt]="item.name"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="title">Siêu thị và cửa hàng tiện lợi</div>
+            <div class="row">
+              <div class="col-12 p-b-20">
+                <div class="d-flex flex-wrap m-l-n-7 m-r-n-7">
+                  <div class="img-store" *ngFor="let item of stores; trackBy: trackByFn">
+                    <img class="img-fluid" [src]="item.photo" [alt]="item.name"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer p-10">
+        <button class="btn btn-main-v2 btn-block" (click)="hide()">Thanh toán</button>
+      </div> -->
+    </div>
+  </div>
+</div>

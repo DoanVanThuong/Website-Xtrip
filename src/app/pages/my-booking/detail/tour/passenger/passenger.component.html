@@ -1,0 +1,47 @@
+<div class="booking-detail-passenger justify-content-center"  *ngIf="!!tour">
+    <app-header [back]="true" [heading]="'Thông tin khách hàng'" [fixed]="true"></app-header>
+    <div class="wrapper booking-detail-passenger-body" min-height>
+      <div class="container bg-white">
+          <div class="row ">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="passenger-information" *ngFor="let passenger of tour.passengers; let i = index">
+                    <div class="passenger-name">
+                      {{ passenger.title}} {{ passenger.lastName }} {{ passenger.firstName}}
+                    </div>
+            
+                    <div class="passenger-detail international-tour" *ngIf="!tour.isInternational">
+                      <div class="row" *ngIf="passenger.passengerType !== 'ADT'">
+                        <div class="col-5">Ngày sinh</div>
+                        <div class="col-7 text-right">{{ passenger.dateOfBirth | moment:'DD/MM/YYYY' }}</div>
+                      </div>
+                    </div>
+            
+                    <div class="passenger-detail international-tour" *ngIf="tour.isInternational">
+                      <div class="row" *ngIf="passenger.passengerType !== 'ADT'">
+                        <div class="col-5">Ngày sinh</div>
+                        <div class="col-7 text-right">{{ passenger.dateOfBirth | moment:'DD/MM/YYYY' }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-5">Số hộ chiếu</div>
+                        <div class="col-7 text-right">{{ passenger.passportNumber }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-5">Quốc gia</div>
+                        <div class="col-7 text-right">{{ passenger.national }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-5">Ngày hết hạn</div>
+                        <div class="col-7 text-right">{{ passenger.passportExpiry | moment: 'DD/MM/YYYY' }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-5">Quốc tịch</div>
+                        <div class="col-7 text-right">{{ passenger.passportCountry }}</div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>  
+      </div>
+      
+    </div>
+  </div>

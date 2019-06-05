@@ -1,0 +1,77 @@
+// component css goes here
+@import "_variables.less";
+.product-location-selector-popup {
+  &.modal {
+    .modal-header {
+      color: @white;
+      padding: 8px 14px 0;
+      .form-group {
+        margin-bottom: 0;
+      }
+      .input-style {
+        background-color: @gray-13;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+        border: none;
+        font-weight: 500;
+        font-size: 15px;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+      }
+      .pos-icon {
+        top: 8px;
+      }
+      .icon-color {
+        color: rgb(142, 142, 147);
+      }
+      .bg-icon {
+        background-color: @gray-13;
+        padding: 10px;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+      }
+    }
+    .modal-body {
+      padding-top: 8px !important;
+      .gray-color {
+        color: @gray-13;;
+      }
+      
+      .large-label {
+        background-color: #eeeeee;
+        color: #6d6d72;
+        height: 30px;
+        padding-top: 6px;
+        font-size: 13px;
+      }
+      .large-title {
+        font-size: 15px;
+        font-weight: 700;
+      }
+      .b-r-3 {
+        border-radius: 3px;
+      }
+      .w-text-truncate {
+        width: calc(~"100vw - 75px")
+      }
+      li {
+        &.line-item {
+          border-bottom: 1px solid @gray-8;
+          padding: 10px 0;
+        }
+        &:last-child {
+          border-bottom: none;
+        }
+        .sub-history {
+          font-size: 13px;
+          color: @gray-1;
+        }
+      }
+      
+    }
+  }
+  .line {
+    height: 5px;
+    background-color: #eeeeee;
+  }
+}

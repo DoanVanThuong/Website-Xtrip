@@ -1,0 +1,38 @@
+<div class="deposit-history-page">
+  <app-header [theme]="'white'" [heading]="'Lịch sử thanh toán'" [type]="'close'" [version]="2"></app-header>
+
+  <div class="deposit-history-body" *ngIf="!!tour">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let item of tour.payments">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="date-remaining position-absolute">
+              {{item.createdDate | moment: 'DD/MM/YYYY'}}
+            </div>
+            <div>Đã thanh toán: <span class="text-main font-weight-bold">{{item.amountPaid | currencyMoney: ''}} <span
+                  class="text-underline">đ</span></span></div>
+            <div class="price-remaining">Còn lại: <span class="">{{item.amountUnPaid | currencyMoney: ''}} <span
+                  class="text-underline">đ</span></span></div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+          <li>
+            <div class="row text-black">
+              <div class="col-6">Số tiền thanh toán</div>
+              <div class="col-6 text-right">
+                {{item.amount | currencyMoney: ''}} <span class="text-underline">đ</span>
+              </div>
+            </div>
+          </li>
+        <li>
+          <div class="row">
+            <div class="col-6">Phí thanh toán</div>
+            <div class="col-6 text-right">{{item.paymentFee | currencyMoney: ''}} <span class="text-underline">đ</span></div>
+          </div>
+        </li>
+        </ul>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+</div>
