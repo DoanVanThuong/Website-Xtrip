@@ -120,7 +120,7 @@
     "ngx-youtube-player": "^6.0.0",
     "node-sass": "^4.11.0",
     "nouislider": "^12.1.0",
-    "npm": "^5.7.1",
+    "npm": "^6.13.4",
     "preboot": "^7.0.0",
     "regexp-replace-loader": "^1.0.1",
     "rxjs": "^6.5.1",
