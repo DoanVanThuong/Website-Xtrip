@@ -136,7 +136,7 @@
     "web-animations-js": "^2.3.1",
     "webpack-angular-externals": "^1.0.2",
     "webpack-rxjs-externals": "^1.1.0",
-    "ws": "^6.2.1",
+    "ws": "^7.4.6",
     "xmlhttprequest": "^1.8.0",
     "zalo-sdk": "^2.0.4",
     "zone.js": "^0.8.14"
